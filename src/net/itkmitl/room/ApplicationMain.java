@@ -20,10 +20,10 @@ public class ApplicationMain {
 
         while (query.nextBind()) {
             System.out.println("=========================");
-            System.out.println(query.getValue("uid"));
-            System.out.println(query.getValue("uprefix"));
-            System.out.println(query.getValue("ufirstname"));
-            System.out.println(query.getValue("ulastname"));
+            System.out.println(query.getValue("uid").asInt());
+            System.out.println(query.getValue("uprefix").asString());
+            System.out.println(query.getValue("ufirstname").asString());
+            System.out.println(query.getValue("ulastname").asString());
             System.out.println("=========================");
         }
     }

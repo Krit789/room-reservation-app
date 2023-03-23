@@ -2,14 +2,30 @@ package net.itkmitl.room.libs.peeranat.query;
 
 public class FewMySQLValue {
 
-    private String val;
+    private Object val;
 
-    public String getValue() {
-        return this.val;
+    public FewMySQLValue(Object val) {
+        this.val = val;
     }
 
-    public void setValue(String val) {
-        this.val = val;
+    public String asString() {
+        return this.val.toString();
+    }
+
+    public int asInt() {
+        return Integer.parseInt(asString());
+    }
+
+    public double asDouble() {
+        return Double.parseDouble(asString());
+    }
+
+    public boolean asBoolean() {
+        return Boolean.parseBoolean(asString());
+    }
+
+    public Object getRaw() {
+        return this.val;
     }
 
 }

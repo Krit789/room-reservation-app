@@ -26,8 +26,7 @@ public class FewDeleteMySQL extends FewMySQLBuilder {
 
     @Override
     public String builder() {
-        StringBuilder sb = new StringBuilder(32);
-        sb.append("DELETE FROM ");
+        StringBuilder sb = new StringBuilder("DELETE FROM ");
         sb.append('`');
         sb.append(this.table);
         sb.append('`');
@@ -44,7 +43,6 @@ public class FewDeleteMySQL extends FewMySQLBuilder {
                 isAlreadyWhere = true;
             }
         }
-
         if(limit > 0) {
             sb.append(" LIMIT ");
             sb.append(limit);

@@ -96,9 +96,9 @@ public class FewQuery {
         }
     }
 
-    public String getValue(String fieldName) {
+    public FewMySQLValue getValue(String fieldName) {
         if (this.fields.containsKey(fieldName)) {
-            return fields.get(fieldName).getValue();
+            return fields.get(fieldName);
         } else {
             System.out.println("ERROR: Unable to bind \"" + fieldName + "\" (Field not exists)");
         }
@@ -112,9 +112,7 @@ public class FewQuery {
 
             for (int col = 1; col <= this.resultMeta.getColumnCount(); col++) {
                 String fieldName = this.resultMeta.getColumnName(col);
-                FewMySQLValue value = new FewMySQLValue();
-                value.setValue(result.getString(col));
-                this.fields.put(fieldName, value);
+                this.fields.put(fieldName, new FewMySQLValue(result.getObject(col)));
             }
         } catch (Exception e) {
             System.out.println("ERROR: Unable to fetch (" + e.getMessage() + ")");
