@@ -10,6 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="room-reservation-app" target="18" />
       <module name="template" target="1.5" />
     </bytecodeTargetLevel>
   </component>
