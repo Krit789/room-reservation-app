@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
-import java.util.HashMap;
+import java.util.*;
 
 public class FewConfig {
 
@@ -26,8 +26,14 @@ public class FewConfig {
         }
     }
 
+    public void dumpInfo() {
+        for (Map.Entry<String, Object> values : data.entrySet()) {
+            System.out.println(values.getKey() + ": " + values.getValue());
+        }
+    }
+
     public String asString(String key) {
-        return this.data.getOrDefault(key, null).toString();
+        return this.data.get(key).toString();
     }
 
     public double asDouble(String key) {
