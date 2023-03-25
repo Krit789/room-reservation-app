@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="room-reservation-app" />
         <module name="RoomReservationApp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="room-reservation-app" target="18" />
       <module name="template" target="1.5" />
     </bytecodeTargetLevel>
   </component>

@@ -8,16 +8,23 @@ import net.itkmitl.room.libs.phatsanphon.entity.UserEntity;
 import net.itkmitl.room.libs.phatsanphon.model.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ApplicationMain {
 
     public static void main(String[] args) throws SQLException {
-
         UserEntity userEntity = new UserEntity(RVDB.getDB());
+        ArrayList<User> users = userEntity.getUsers();
 
-        User user = userEntity.getUserById(1);
+        for (User u : users) {
+            System.out.println(u.getFirstname() + " " + u.getLastname());
+        }
 
-        System.out.println(user.getId() + " " + user.getFirstname() + " " + user.getLastname());
+        User user = new User();
+
+        user.setEmail("phats@gmail.com");
+        user.setFirstname("Phatsanphon");
+        user.setLastname("Nakaranurak");
+        user.setTelephoneNumber("0968936153");
     }
-
 }

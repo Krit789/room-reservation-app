@@ -1,8 +1,9 @@
 package net.itkmitl.room.libs.phatsanphon.model;
 
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class User {
     private int id;
@@ -21,10 +22,12 @@ public class User {
         this.setLastname(query.getValue("lastname").asString());
         this.setTelephoneNumber(query.getValue("tel_num").asString());
         this.setActive(query.getValue("is_active").asBoolean());
-        this.setCreatedOn(
-                new Date(query.getValue("created_on").asString())
-        );
+        this.setCreatedOn(query.getValue("created_on").asString());
         this.setRole(query.getValue("role").asInt());
+    }
+
+    public User() {
+
     }
 
     public int getId() {
@@ -89,5 +92,10 @@ public class User {
 
     public void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
+    }
+
+    public void setCreatedOn(String rawCreatedOn) {
+        DateTime createdOn = new DateTime(rawCreatedOn);
+        this.createdOn = createdOn.getDateTime();
     }
 }
