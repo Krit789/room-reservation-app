@@ -1,23 +1,19 @@
 package net.itkmitl.room.libs.phatsanphon.model;
 
+import net.itkmitl.room.enums.*;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 
 public class Room {
+
     private int id;
     private String name;
     private int capacity;
     private String floor;
     private String building;
+    private EnumRoomState state;
 
     public Room(FewQuery query) {
-        this.setId(query.getValue("id").asInt());
-        this.setName(query.getValue("name").asString());
-        this.setCapacity(query.getValue("capacity").asInt());
-        this.setFloor(query.getValue("floor").asString());
-        this.setBuilding(query.getValue("building").asString());
-    }
-
-    public Room() {
+        processObject(query);
     }
 
     public int getId() {
@@ -58,5 +54,22 @@ public class Room {
 
     public void setBuilding(String building) {
         this.building = building;
+    }
+
+    public EnumRoomState getState() {
+        return state;
+    }
+
+    public void setState(EnumRoomState state) {
+        this.state = state;
+    }
+
+    private void processObject(FewQuery query) {
+        this.setId(query.getValue("id").asInt());
+        this.setName(query.getValue("name").asString());
+        this.setCapacity(query.getValue("capacity").asInt());
+        this.setFloor(query.getValue("floor").asString());
+        this.setBuilding(query.getValue("building").asString());
+        this.setState(EnumRoomState.valueOf(query.getValue("state").asString()));
     }
 }

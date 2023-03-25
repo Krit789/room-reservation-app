@@ -9,12 +9,12 @@ public class FewDB {
 
     private static Connection connection;
 
-    public static Connection getConnection(String server, String table, String username, String password) {
+    public static Connection getConnection(String server, String database, String username, String password) {
         if (connection != null) return connection;
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(
-                    "jdbc:mysql://" + server + "/" + table,
+                    "jdbc:mysql://" + server + "/" + database,
                     username,
                     password
             );

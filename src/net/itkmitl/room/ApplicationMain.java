@@ -1,21 +1,13 @@
 package net.itkmitl.room;
 
-import net.itkmitl.room.db.RVDB;
-import net.itkmitl.room.libs.phatsanphon.entity.UserEntity;
-import net.itkmitl.room.libs.phatsanphon.model.User;
+import net.itkmitl.room.libs.peeranat.config.*;
 
-import java.util.ArrayList;
+import java.io.*;
 
 public class ApplicationMain {
 
     public static void main(String[] args) {
-        UserEntity userEntity = new UserEntity(RVDB.getDB());
-        ArrayList<User> users = userEntity.getUsers();
-
-        for (User u : users) {
-            System.out.println(u.getFirstname() + " " + u.getLastname());
-        }
-
-        userEntity.deleteUserById(4);
+        FewConfig config = new FewConfig(new File("test.yml"));
+        config.dumpInfo();
     }
 }
