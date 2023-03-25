@@ -25,15 +25,15 @@ public class FewSelectMySQL extends FewMySQLBuilder {
         selects.addAll(Arrays.asList(vars));
         return this;
     }
-    public FewSelectMySQL where(String column, String value) {
+    public FewSelectMySQL where(String column, Object value) {
         this.wheres.add(new FewMySQLWhere(column, FewMySQLCompare.EQUAL, value, FewMySQLOperator.AND));
         return this;
     }
-    public FewSelectMySQL where(String column, FewMySQLCompare compare, String value) {
+    public FewSelectMySQL where(String column, FewMySQLCompare compare, Object value) {
         this.wheres.add(new FewMySQLWhere(column, compare, value, FewMySQLOperator.AND));
         return this;
     }
-    public FewSelectMySQL where(String column, FewMySQLCompare compare, String value, FewMySQLOperator operator) {
+    public FewSelectMySQL where(String column, FewMySQLCompare compare, Object value, FewMySQLOperator operator) {
         this.wheres.add(new FewMySQLWhere(column, compare, value, operator));
         return this;
     }

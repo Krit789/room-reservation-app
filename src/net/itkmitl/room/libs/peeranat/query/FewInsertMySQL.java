@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class FewInsertMySQL extends FewMySQLBuilder {
 
-    private Map<String, String> inserts = new HashMap<>();
+    private Map<String, Object> inserts;
 
     public FewInsertMySQL() {
         this.inserts = new HashMap<>();
     }
 
-    public FewInsertMySQL insert(String key, String value) {
+    public FewInsertMySQL insert(String key, Object value) {
         this.inserts.put(key, value);
         return this;
     }
@@ -28,7 +28,7 @@ public class FewInsertMySQL extends FewMySQLBuilder {
         output.delete(output.length() - 2, output.length());
         output.append(") VALUES (");
 
-        for (String value : this.inserts.values()) {
+        for (Object value : this.inserts.values()) {
             output.append("\"").append(value).append("\", ");
         }
         output.delete(output.length() - 2, output.length());
