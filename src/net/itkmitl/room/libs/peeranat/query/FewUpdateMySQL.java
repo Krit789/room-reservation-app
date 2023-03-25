@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class FewUpdateMySQL extends FewMySQLBuilder {
 
-    private Map<String, String> toUpdate;
+    private Map<String, Object> toUpdate;
     private ArrayList<FewMySQLWhere> wheres;
 
     private int limit;
@@ -16,19 +16,19 @@ public class FewUpdateMySQL extends FewMySQLBuilder {
         wheres = new ArrayList<>();
     }
 
-    public FewUpdateMySQL set(String key, String value) {
+    public FewUpdateMySQL set(String key, Object value) {
         this.toUpdate.put(key, value);
         return this;
     }
-    public FewUpdateMySQL where(String column, String value) {
+    public FewUpdateMySQL where(String column, Object value) {
         this.wheres.add(new FewMySQLWhere(column, FewMySQLCompare.EQUAL, value, FewMySQLOperator.AND));
         return this;
     }
-    public FewUpdateMySQL where(String column, FewMySQLCompare compare, String value) {
+    public FewUpdateMySQL where(String column, FewMySQLCompare compare, Object value) {
         this.wheres.add(new FewMySQLWhere(column, compare, value, FewMySQLOperator.AND));
         return this;
     }
-    public FewUpdateMySQL where(String column, FewMySQLCompare compare, String value, FewMySQLOperator operator) {
+    public FewUpdateMySQL where(String column, FewMySQLCompare compare, Object value, FewMySQLOperator operator) {
         this.wheres.add(new FewMySQLWhere(column, compare, value, operator));
         return this;
     }

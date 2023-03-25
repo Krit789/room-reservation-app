@@ -5,9 +5,9 @@ public class FewMySQLWhere {
     private FewMySQLCompare compare;
     private FewMySQLOperator operator;
     private String column;
-    private String value;
+    private Object value;
 
-    public FewMySQLWhere(String column, FewMySQLCompare compare, String value, FewMySQLOperator operator) {
+    public FewMySQLWhere(String column, FewMySQLCompare compare, Object value, FewMySQLOperator operator) {
         this.column = column;
         this.value = value;
         this.compare = compare;
@@ -36,7 +36,7 @@ public class FewMySQLWhere {
     public String getColumn() {
         return column;
     }
-    public String getValue() {
+    public Object getValue() {
         return value;
     }
 
