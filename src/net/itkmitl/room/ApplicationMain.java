@@ -1,22 +1,21 @@
 package net.itkmitl.room;
 
-import net.itkmitl.room.libs.peeranat.config.*;
+import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.libs.phatsanphon.entity.UserEntity;
+import net.itkmitl.room.libs.phatsanphon.model.User;
 
-import net.itkmitl.room.libs.jarukrit.records.Feedback;
-
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 public class ApplicationMain {
 
     public static void main(String[] args) {
-//        FewConfig config = new FewConfig(new File("test.yml"));
-//        System.out.println(config.asString("name"));
-//        System.out.println(config.asInt("phone"));
-//        System.out.println(config.asDouble("point"));
-//        System.out.println(config.asDouble("kuy", 0.0));
-//        List<String> list = config.asList("x", String.class);
-//        list.stream().forEach(System.out::println);
-//        new Feedback(2, 2, 9.8).submit();
+        UserEntity userEntity = new UserEntity(RVDB.getDB());
+        ArrayList<User> users = userEntity.getUsers();
+
+        for (User u : users) {
+            System.out.println(u.getFirstname() + " " + u.getLastname());
+        }
+
+        userEntity.deleteUserById(4);
     }
 }

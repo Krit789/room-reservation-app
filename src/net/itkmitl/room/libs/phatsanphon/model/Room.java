@@ -16,6 +16,9 @@ public class Room {
         processObject(query);
     }
 
+    public Room() {
+
+    }
     public int getId() {
         return id;
     }
