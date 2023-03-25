@@ -92,7 +92,7 @@ public class FewQuery {
         if (this.fields.containsKey(fieldName)) {
             this.fields.replace(fieldName, ref);
         } else {
-            System.out.println("ERROR: Unable to bind \"" + fieldName + "\" (Field not exists)");
+            System.out.println("ERROR: Unable to bind \"" + fieldName + "\" (Field does not exists)");
         }
     }
 
@@ -100,7 +100,7 @@ public class FewQuery {
         if (this.fields.containsKey(fieldName)) {
             return fields.get(fieldName);
         } else {
-            System.out.println("ERROR: Unable to bind \"" + fieldName + "\" (Field not exists)");
+            System.out.println("ERROR: Unable to bind \"" + fieldName + "\" (Field does not exists)");
         }
         return null;
     }
