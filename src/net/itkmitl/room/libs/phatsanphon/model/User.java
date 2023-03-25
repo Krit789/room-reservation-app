@@ -1,11 +1,13 @@
 package net.itkmitl.room.libs.phatsanphon.model;
 
+import net.itkmitl.room.enums.*;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 
 import java.sql.Date;
 
 public class User {
+
     private int id;
     private String email;
     private String firstname;
@@ -13,21 +15,10 @@ public class User {
     private String telephoneNumber;
     private boolean isActive;
     private Date createdOn;
-    private int role;
+    private EnumUserRole role;
 
     public User(FewQuery query) {
-        this.setId(query.getValue("id").asInt());
-        this.setEmail(query.getValue("email").asString());
-        this.setFirstname(query.getValue("firstname").asString());
-        this.setLastname(query.getValue("lastname").asString());
-        this.setTelephoneNumber(query.getValue("tel_num").asString());
-        this.setActive(query.getValue("is_active").asBoolean());
-        this.setCreatedOn(query.getValue("created_on").asString());
-        this.setRole(query.getValue("role").asInt());
-    }
-
-    public User() {
-
+        processObject(query);
     }
 
     public int getId() {
@@ -78,11 +69,16 @@ public class User {
         isActive = active;
     }
 
-    public int getRole() {
+    public EnumUserRole getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public boolean isStaff() {
+        //Because staff level is then more 10
+        return role.getLevel() >= 10;
+    }
+
+    public void setRole(EnumUserRole role) {
         this.role = role;
     }
 
@@ -95,7 +91,17 @@ public class User {
     }
 
     private void setCreatedOn(String rawCreatedOn) {
-        DateTime createdOn = new DateTime(rawCreatedOn);
-        this.createdOn = createdOn.getDateTime();
+        this.createdOn = new DateTime(rawCreatedOn).getDateTime();
+    }
+
+    private void processObject(FewQuery query) {
+        this.setId(query.getValue("id").asInt());
+        this.setEmail(query.getValue("email").asString());
+        this.setFirstname(query.getValue("firstname").asString());
+        this.setLastname(query.getValue("lastname").asString());
+        this.setTelephoneNumber(query.getValue("tel_num").asString());
+        this.setActive(query.getValue("is_active").asBoolean());
+        this.setCreatedOn(query.getValue("created_on").asString());
+        this.setRole(EnumUserRole.searchRoleByLevel(query.getValue("role").asInt()));
     }
 }
