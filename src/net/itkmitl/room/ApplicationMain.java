@@ -7,7 +7,10 @@ import java.io.*;
 public class ApplicationMain {
 
     public static void main(String[] args) {
-        FewConfig config = new FewConfig(new File("test.yml"));
-        config.dumpInfo();
+//        FewConfig config = new FewConfig(new File("test.yml"));
+//        config.dumpInfo();
+
     }
+
+
 }
