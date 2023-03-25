@@ -7,6 +7,10 @@ public class FewDeleteMySQL extends FewMySQLBuilder {
     private ArrayList<FewMySQLWhere> wheres;
     private int limit;
 
+    public FewDeleteMySQL(){
+        wheres = new ArrayList<>();
+    }
+
     public FewDeleteMySQL where(String column, Object value) {
         this.wheres.add(new FewMySQLWhere(column, FewMySQLCompare.EQUAL, value, FewMySQLOperator.AND));
         return this;
