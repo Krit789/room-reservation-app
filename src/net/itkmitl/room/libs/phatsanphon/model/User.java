@@ -21,6 +21,10 @@ public class User {
         processObject(query);
     }
 
+    public User() {
+
+    }
+
     public int getId() {
         return id;
     }

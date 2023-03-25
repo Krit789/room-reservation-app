@@ -92,7 +92,6 @@ public class UserEntity implements Entity<User> {
         insert.table("user");
 
         query.query(insert);
-
     }
 
     public void deleteUserById(int id) {
@@ -124,9 +123,6 @@ public class UserEntity implements Entity<User> {
         update.set("role", user.getRole());
         update.table("user");
 
-        System.out.println("OK");
-
-        System.out.println(update);
         query.query(update);
     }
 }
