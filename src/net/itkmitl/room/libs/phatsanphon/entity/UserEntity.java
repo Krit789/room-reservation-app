@@ -4,13 +4,20 @@ import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.model.User;
 
 public class UserEntity {
-    final private FewQuery query;
+    private final FewQuery query;
 
     public UserEntity(FewQuery query) {
         this.query = query;
     }
 
-    public void getUserById(int id) {
-        FewInsertMySQL insert = new FewInsertMySQL();
+    public User getUserById(int id) {
+        FewSelectMySQL select = new FewSelectMySQL();
+
+        select.select("*");
+        select.where("id", id);
+
+        FewQuery result = query.query(select);
+
+        return new User(result);
     }
 }
