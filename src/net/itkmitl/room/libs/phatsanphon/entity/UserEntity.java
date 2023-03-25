@@ -6,14 +6,15 @@ import net.itkmitl.room.libs.phatsanphon.model.User;
 import java.sql.Array;
 import java.util.ArrayList;
 
-public class UserEntity {
+public class UserEntity implements Entity<User> {
     private final FewQuery query;
 
     public UserEntity(FewQuery query) {
         this.query = query;
     }
 
-    private User mapUser(FewQuery result) {
+    @Override
+    public User map(FewQuery result) {
         User user = null;
 
         while (result.nextBind()) {
@@ -23,7 +24,8 @@ public class UserEntity {
         return user;
     }
 
-    private ArrayList<User> mapUsers(FewQuery result) {
+    @Override
+    public ArrayList<User> maps(FewQuery result) {
         ArrayList<User> users = new ArrayList();
 
         while (result.nextBind()) {
@@ -33,9 +35,10 @@ public class UserEntity {
         return users;
     }
 
+
     /*
-    * Get all users
-    */
+     * Get all users
+     */
     public ArrayList<User> getUsers() {
         FewSelectMySQL select = new FewSelectMySQL();
 
@@ -44,7 +47,7 @@ public class UserEntity {
 
         FewQuery result = query.query(select);
 
-        return this.mapUsers(result);
+        return this.maps(result);
     }
 
     /*
@@ -59,7 +62,7 @@ public class UserEntity {
 
         FewQuery result = query.query(select);
 
-        return this.mapUsers(result);
+        return this.maps(result);
     }
 
     /*
@@ -75,13 +78,13 @@ public class UserEntity {
 
         FewQuery result = query.query(select);
 
-        return this.mapUser(result);
+        return this.map(result);
     }
 
     /*
      * Create user
      */
-    public User createUser(User user) {
+    public void createUser(User user) {
         FewInsertMySQL insert = new FewInsertMySQL();
 
         insert.insert("firstname", user.getFirstname());
@@ -90,8 +93,42 @@ public class UserEntity {
         insert.insert("email", user.getEmail());
         insert.table("user");
 
-        FewQuery result = query.query(insert);
+        query.query(insert);
 
-        return this.mapUser(result);
+    }
+
+    public void deleteUserById(int id) {
+        FewDeleteMySQL delete = new FewDeleteMySQL();
+
+        delete.where("id", id);
+        delete.table("user");
+
+        query.query(delete);
+    }
+
+    public void updateUser(User user) {
+        FewUpdateMySQL update = new FewUpdateMySQL();
+
+        if (user.getId() == 0) {
+            try {
+                throw new Exception("Please provided an id to update user");
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        update.where("id", user.getId());
+        update.set("email", user.getEmail());
+        update.set("firstname", user.getFirstname());
+        update.set("lastname", user.getLastname());
+        update.set("tel_num", user.getTelephoneNumber());
+        update.set("is_active", user.isActive());
+        update.set("role", user.getRole());
+        update.table("user");
+
+        System.out.println("OK");
+
+        System.out.println(update);
+        query.query(update);
     }
 }

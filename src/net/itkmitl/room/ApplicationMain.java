@@ -19,12 +19,5 @@ public class ApplicationMain {
         for (User u : users) {
             System.out.println(u.getFirstname() + " " + u.getLastname());
         }
-
-        User user = new User();
-
-        user.setEmail("phats@gmail.com");
-        user.setFirstname("Phatsanphon");
-        user.setLastname("Nakaranurak");
-        user.setTelephoneNumber("0968936153");
     }
 }

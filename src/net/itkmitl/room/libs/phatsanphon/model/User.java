@@ -90,11 +90,11 @@ public class User {
         return createdOn;
     }
 
-    public void setCreatedOn(Date createdOn) {
+    private void setCreatedOn(Date createdOn) {
         this.createdOn = createdOn;
     }
 
-    public void setCreatedOn(String rawCreatedOn) {
+    private void setCreatedOn(String rawCreatedOn) {
         DateTime createdOn = new DateTime(rawCreatedOn);
         this.createdOn = createdOn.getDateTime();
     }
