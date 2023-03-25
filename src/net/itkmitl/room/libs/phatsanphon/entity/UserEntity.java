@@ -2,8 +2,6 @@ package net.itkmitl.room.libs.phatsanphon.entity;
 
 import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.model.User;
-
-import java.sql.Array;
 import java.util.ArrayList;
 
 public class UserEntity implements Entity<User> {
@@ -15,24 +13,24 @@ public class UserEntity implements Entity<User> {
 
     @Override
     public User map(FewQuery result) {
-        User user = null;
+        User object = null;
 
         while (result.nextBind()) {
-            user = new User(result);
+            object = new User(result);
         }
 
-        return user;
+        return object;
     }
 
     @Override
     public ArrayList<User> maps(FewQuery result) {
-        ArrayList<User> users = new ArrayList();
+        ArrayList<User> objects = new ArrayList();
 
         while (result.nextBind()) {
-            users.add(new User(result));
+            objects.add(new User(result));
         }
 
-        return users;
+        return objects;
     }
 
 
@@ -100,8 +98,8 @@ public class UserEntity implements Entity<User> {
     public void deleteUserById(int id) {
         FewDeleteMySQL delete = new FewDeleteMySQL();
 
-        delete.where("id", id);
         delete.table("user");
+        delete.where("id", id);
 
         query.query(delete);
     }

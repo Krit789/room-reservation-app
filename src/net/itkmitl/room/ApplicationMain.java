@@ -19,5 +19,7 @@ public class ApplicationMain {
         for (User u : users) {
             System.out.println(u.getFirstname() + " " + u.getLastname());
         }
+
+        userEntity.deleteUserById(4);
     }
 }
