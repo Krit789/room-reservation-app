@@ -4,17 +4,16 @@ import net.itkmitl.room.db.RVDB;
 import net.itkmitl.room.libs.jarukrit.records.Feedback;
 import net.itkmitl.room.libs.peeranat.query.FewInsertMySQL;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
-import net.itkmitl.room.libs.peeranat.query.FewSelectMySQL;
+import net.itkmitl.room.libs.jarukrit.KritSQL;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class FeedbackActions {
     private Feedback feedback;
     private static FewQuery query = RVDB.getDB();
+
     public boolean submit(Feedback feedback) {
         if (this.feedback.getRating() >= 0 && this.feedback.getRating() <= 10) {
-            FewQuery query = RVDB.getDB();
             FewInsertMySQL insertMySQL = new FewInsertMySQL();
             insertMySQL.table("feedback");
             insertMySQL.insert("room_id", this.feedback.getRoom_id());
@@ -26,14 +25,11 @@ public class FeedbackActions {
         }
         return false;
     }
-    public static ArrayList<Feedback> getFromUserID(int id){
+
+    public static ArrayList<Feedback> getByUserID(int id) {
         ArrayList<Feedback> queryData = new ArrayList<Feedback>();
-        FewSelectMySQL select = new FewSelectMySQL();
-        select.table("feedback");
-        select.select("*");
-        select.where("user_id", id);
-        FewQuery result = query.query(select);
-        while (result.nextBind()){
+        FewQuery result = KritSQL.kritSelect("feedback", "user_id", id);
+        while (result.nextBind()) {
             queryData.add(new Feedback(
                     result.getValue("id").asInt(),
                     result.getValue("room_id").asInt(),
@@ -45,6 +41,23 @@ public class FeedbackActions {
         }
         return queryData;
     }
+
+    public static ArrayList<Feedback> getByRoomID(int room_id) {
+        ArrayList<Feedback> queryData = new ArrayList<Feedback>();
+        FewQuery result = KritSQL.kritSelect("feedback", "room_id", room_id);
+        while (result.nextBind()) {
+            queryData.add(new Feedback(
+                    result.getValue("id").asInt(),
+                    result.getValue("room_id").asInt(),
+                    result.getValue("user_id").asInt(),
+                    result.getValue("created_on").asString(),
+                    result.getValue("comment").asString(),
+                    result.getValue("rating").asDouble()
+            ));
+        }
+        return queryData;
+    }
+
 
     public Feedback getFeedback() {
         return feedback;
