@@ -25,10 +25,6 @@ public class Feedback {
         if (getRating() >= 0 && getRating() <= 10) {
             FewQuery query = RVDB.getDB();
             FewInsertMySQL insertMySQL = new FewInsertMySQL();
-//            query.unsafeQuery(
-//                    String.format("INSERT INTO `feedback` (room_id, user_id, comment, rating) VALUES ('%d', '%d', '%s', '%f')",
-//                            getRoom_id(), getUser_id(), getComment(), getRating()
-//                    ));
             insertMySQL.table("feedback");
             insertMySQL.insert("room_id", getRoom_id());
             insertMySQL.insert("user_id", getUser_id());
@@ -38,7 +34,6 @@ public class Feedback {
             return true;
         }
         return false;
-
     }
 
     public int getRoom_id() {
