@@ -1,9 +1,7 @@
 package net.itkmitl.room;
 
 import javafx.application.Application;
-import javafx.embed.swing.SwingNode;
 import javafx.scene.Scene;
-//import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -22,10 +20,10 @@ public class SwingNodeExample extends Application {
 
     @Override
     public void start(Stage stage) {
-        SwingNode swingNode = new SwingNode();
-        swingNode.setContent(table);
+        //SwingNode swingNode = new SwingNode();
+        //swingNode.setContent(table);
 
-        StackPane pane = new StackPane(swingNode);
+        StackPane pane = new StackPane();
         Scene scene = new Scene(pane, 400, 400);
 
         stage.setScene(scene);
