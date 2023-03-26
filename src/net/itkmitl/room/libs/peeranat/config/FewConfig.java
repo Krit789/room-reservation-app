@@ -1,5 +1,6 @@
 package net.itkmitl.room.libs.peeranat.config;
 
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
@@ -16,13 +17,16 @@ public class FewConfig {
 
     public FewConfig(File file) {
         this.file = file;
-        this.data = new HashMap<>();
         try {
             InputStream inputStream = new FileInputStream(file);
             this.yaml = new Yaml();
             this.data = this.yaml.load(inputStream);
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
+        }
+        //If could load default config
+        if (this.data == null) {
+            this.data = new HashMap<>();
         }
     }
 
@@ -170,8 +174,8 @@ public class FewConfig {
 
     public FewConfig saveConfig() {
         try {
-            FileWriter writer = new FileWriter(file);
-            yaml.dump(this.data, writer);
+            FileWriter writer = new FileWriter(this.file);
+            this.yaml.dump(this.data, writer);
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
         }
@@ -179,4 +183,7 @@ public class FewConfig {
         return this;
     }
 
+    public File getFile() {
+        return file;
+    }
 }
