@@ -7,5 +7,4 @@ import java.util.ArrayList;
 public interface Entity<T> {
     <T> ArrayList<T> maps(FewQuery result);
     <T> T map(FewQuery result);
-
 }
