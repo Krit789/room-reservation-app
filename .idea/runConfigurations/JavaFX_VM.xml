@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="JavaFX_VM" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="net.itkmitl.room.ApplicationMain" />
+    <module name="room-reservation-app" />
+    <option name="PROGRAM_PARAMETERS" value="--module-path $PROJECT_DIR$/../../../../../../Java/JavaVirtualMachines/javafx-sdk-18.0.2/lib --add-modules javafx.controls,javafx.fxml" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
