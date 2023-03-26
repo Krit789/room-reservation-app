@@ -1,5 +1,7 @@
 package net.itkmitl.room.libs.phatsanphon.entity;
 
+import net.itkmitl.room.libs.peeranat.query.FewDeleteMySQL;
+import net.itkmitl.room.libs.peeranat.query.FewInsertMySQL;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.query.FewSelectMySQL;
 import net.itkmitl.room.libs.phatsanphon.model.Reservation;
@@ -80,5 +82,32 @@ public class ReservationEntity implements Entity<Reservation> {
         FewQuery result = query.query(select);
 
         return this.map(result);
+    }
+
+    public void deleteReservationById(int id) {
+        FewDeleteMySQL delete = new FewDeleteMySQL();
+
+        delete.table("reservation");
+        delete.where("id", id);
+
+        query.query(delete);
+    }
+
+    public boolean createReservation(Reservation reservation) {
+        FewInsertMySQL insert = new FewInsertMySQL();
+
+        if (reservation.getUser() == null && reservation.getRoom() == null) {
+            System.out.println("User or Room must include.");
+            return false;
+        }
+
+        insert.insert("user_id", reservation.getUser().getId());
+        insert.insert("room_id", reservation.getRoom().getId());
+        insert.insert("reason", reservation.getReason());
+        insert.table("reservation");
+
+        query.query(insert);
+
+        return true;
     }
 }

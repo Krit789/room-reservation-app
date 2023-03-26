@@ -2,10 +2,8 @@ package net.itkmitl.room;
 
 import net.itkmitl.room.db.RVDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
-import net.itkmitl.room.libs.phatsanphon.entity.RoomEntity;
-import net.itkmitl.room.libs.phatsanphon.entity.UserEntity;
-import net.itkmitl.room.libs.phatsanphon.model.Room;
-import net.itkmitl.room.libs.phatsanphon.model.User;
+import net.itkmitl.room.libs.phatsanphon.entity.*;
+import net.itkmitl.room.libs.phatsanphon.model.*;
 
 import java.util.ArrayList;
 
@@ -18,7 +16,7 @@ public class ApplicationMain {
         ArrayList<User> users = userEntity.getUsers();
 
         for (User u : users) {
-            System.out.println(u.getFirstname() + " " + u.getLastname());
+            System.out.println(u.getFirstname() + " " + u.getLastname() + " " + u.getCreatedOn().toString());
         }
 
         Room room = new Room();
