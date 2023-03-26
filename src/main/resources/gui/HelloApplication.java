@@ -1,4 +1,4 @@
-package net.itkmitl.room.gui;
+package main.resources.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
