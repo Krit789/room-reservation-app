@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class KritMainApplication {
     public static void main(String[] args) {
-        ArrayList<Feedback> MyFeedback = new FeedbackActions().getFromUserID(2);
+        ArrayList<Feedback> MyFeedback = FeedbackActions.getFromUserID(2);
         for (int i = 0; i < MyFeedback.size(); i++){
             System.out.println(MyFeedback.get(i).getCreated_on().toLocalDateTime());
         }

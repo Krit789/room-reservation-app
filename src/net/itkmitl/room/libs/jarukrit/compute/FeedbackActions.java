@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public class FeedbackActions {
     private Feedback feedback;
-    private FewQuery query = RVDB.getDB();
+    private static FewQuery query = RVDB.getDB();
     public boolean submit(Feedback feedback) {
         if (this.feedback.getRating() >= 0 && this.feedback.getRating() <= 10) {
             FewQuery query = RVDB.getDB();
@@ -26,7 +26,7 @@ public class FeedbackActions {
         }
         return false;
     }
-    public ArrayList<Feedback> getFromUserID(int id){
+    public static ArrayList<Feedback> getFromUserID(int id){
         ArrayList<Feedback> queryData = new ArrayList<Feedback>();
         FewSelectMySQL select = new FewSelectMySQL();
         select.table("feedback");

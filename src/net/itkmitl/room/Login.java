@@ -1,4 +1,4 @@
-package main.resources.account;
+package net.itkmitl.room;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import net.itkmitl.room.libs.peeranat.util.*;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -15,7 +16,7 @@ public class Login extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 //        Parent root = FXMLLoader.load(getClass().getResource("/hello-view.fxml"));
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("account/hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(FewFile.getResource("account/hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Image icon = new Image("icon.png");
         stage.getIcons().add(icon);
