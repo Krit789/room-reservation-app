@@ -2,8 +2,6 @@ package net.itkmitl.room.libs.phatsanphon.entity;
 
 import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.model.Room;
-import net.itkmitl.room.libs.phatsanphon.model.User;
-
 import java.util.ArrayList;
 
 public class RoomEntity implements Entity<Room> {

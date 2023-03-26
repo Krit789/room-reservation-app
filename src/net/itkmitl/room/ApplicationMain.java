@@ -1,21 +1,18 @@
 package net.itkmitl.room;
 
 import net.itkmitl.room.db.RVDB;
-import net.itkmitl.room.libs.phatsanphon.entity.UserEntity;
-import net.itkmitl.room.libs.phatsanphon.model.User;
-
+import net.itkmitl.room.libs.phatsanphon.entity.*;
+import net.itkmitl.room.libs.phatsanphon.model.*;
 import java.util.ArrayList;
 
 public class ApplicationMain {
 
     public static void main(String[] args) {
-        UserEntity userEntity = new UserEntity(RVDB.getDB());
-        ArrayList<User> users = userEntity.getUsers();
+        ReservationEntity reservationEntity = new ReservationEntity(RVDB.getDB());
+        Reservation reservation = reservationEntity.getReservationById(1);
 
-        for (User u : users) {
-            System.out.println(u.getFirstname() + " " + u.getLastname());
-        }
-
-        userEntity.deleteUserById(4);
+//        for (Reservation r : reservations) {
+//            System.out.println(r.getId() + " " + r.getReason());
+//        }
     }
 }
