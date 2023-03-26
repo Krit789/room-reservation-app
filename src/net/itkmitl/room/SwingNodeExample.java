@@ -1,7 +1,7 @@
 package net.itkmitl.room;
 
 import javafx.application.Application;
-import javafx.embed.swing.SwingNode;
+import javafx.embed.swing.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
