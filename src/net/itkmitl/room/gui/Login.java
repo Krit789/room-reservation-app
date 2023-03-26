@@ -17,6 +17,18 @@ public class Login extends Application {
     }
 
     protected Image createImage(String path) throws FileNotFoundException {
+        for (int i = 0; i < path.length(); i++) {
+            if (path.charAt(i) == '.') {
+                path = path.substring(0, i) + "/" + path.substring(i + 1);
+            }
+        }
+        for (int i = path.length() - 1; i >= 0; i--) {
+            if (path.charAt(i) == '/') {
+                path = path.substring(0, i) + "." + path.substring(i + 1);
+                break;
+            }
+        }
+
         String file = new File(path).toURI().toString().replace(path, "src/" + path);
         Image image = new Image(file);
         return image;
@@ -31,7 +43,7 @@ public class Login extends Application {
         stage.setWidth(1280);
         stage.setHeight(720);
         stage.setResizable(false);
-        stage.getIcons().add(createImage("main/resources/gui/icon.png"));
+        stage.getIcons().add(createImage("main.resources.gui.icon.png"));
         stage.setScene(scene);
         stage.show();
     }
