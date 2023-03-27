@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.sql.Date;
 
 public class DateTime {
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private String rawDateTime;
     private Date dateTime;
 
@@ -18,11 +19,10 @@ public class DateTime {
     }
 
     private void format() {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         java.util.Date utilDate = null;
         try {
             String dateTime = this.replaceText();
-            utilDate = format.parse(dateTime);
+            utilDate = sdf.parse(dateTime);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

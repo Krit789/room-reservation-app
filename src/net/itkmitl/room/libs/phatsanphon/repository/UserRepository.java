@@ -1,13 +1,13 @@
-package net.itkmitl.room.libs.phatsanphon.entity;
+package net.itkmitl.room.libs.phatsanphon.repository;
 
 import net.itkmitl.room.libs.peeranat.query.*;
-import net.itkmitl.room.libs.phatsanphon.model.User;
+import net.itkmitl.room.libs.phatsanphon.entity.User;
 import java.util.ArrayList;
 
-public class UserEntity implements Entity<User> {
+public class UserRepository implements Repository<User> {
     private final FewQuery query;
 
-    public UserEntity(FewQuery query) {
+    public UserRepository(FewQuery query) {
         this.query = query;
     }
 

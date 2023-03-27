@@ -1,10 +1,10 @@
-package net.itkmitl.room.libs.phatsanphon.model;
+package net.itkmitl.room.libs.phatsanphon.entity;
 
 import net.itkmitl.room.db.RVDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
-import net.itkmitl.room.libs.phatsanphon.entity.RoomEntity;
-import net.itkmitl.room.libs.phatsanphon.entity.UserEntity;
+import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
+import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 
 import java.sql.Date;
 
@@ -27,7 +27,11 @@ public class Reservation {
     }
 
     private void processQuery(FewQuery query) {
-
+        this.setId(query.getValue("id").asInt());
+        this.setUser(query.getValue("user_id").asInt());
+        this.setRoom(query.getValue("room_id").asInt());
+        this.setReason(query.getValue("reason").asString());
+        this.setCancelled(query.getValue("is_cancelled").asBoolean());
     }
 
     public int getId() {
@@ -47,7 +51,7 @@ public class Reservation {
     }
 
     public void setUser(int userId) {
-        User user = new UserEntity(RVDB.getDB()).getUserById(userId);
+        User user = new UserRepository(RVDB.getDB()).getUserById(userId);
         this.setUser(user);
     }
 
@@ -60,7 +64,7 @@ public class Reservation {
     }
 
     public void setRoom(int roomId) {
-        Room room = new RoomEntity(RVDB.getDB()).getRoomById(roomId);
+        Room room = new RoomRepository(RVDB.getDB()).getRoomById(roomId);
         this.setRoom(room);
     }
 

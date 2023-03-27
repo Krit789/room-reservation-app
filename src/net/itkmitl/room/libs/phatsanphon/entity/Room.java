@@ -1,4 +1,4 @@
-package net.itkmitl.room.libs.phatsanphon.model;
+package net.itkmitl.room.libs.phatsanphon.entity;
 
 import net.itkmitl.room.enums.*;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
