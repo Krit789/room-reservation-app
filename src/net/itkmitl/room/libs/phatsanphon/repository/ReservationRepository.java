@@ -8,15 +8,12 @@ import java.util.ArrayList;
  * ReservationRepository
  */
 public class ReservationRepository extends Repository<Reservation> {
-    private final FewQuery query;
-
     /**
      * Constructor
      * @param query FewQuery
      */
     public ReservationRepository(final FewQuery query) {
-        super(Reservation.class);
-        this.query = query;
+        super(Reservation.class, query);
     }
 
     /**
@@ -28,9 +25,7 @@ public class ReservationRepository extends Repository<Reservation> {
         select.select("*");
         select.table("reservation");
 
-        FewQuery result = query.query(select);
-
-        return this.maps(result);
+        return this.maps(this.getQuery().query(select));
     }
 
     /**
@@ -44,9 +39,7 @@ public class ReservationRepository extends Repository<Reservation> {
         select.select("*");
         select.table("reservation");
 
-        FewQuery result = query.query(select);
-
-        return this.map(result);
+        return this.map(this.getQuery().query(select));
     }
 
     /**
@@ -60,9 +53,7 @@ public class ReservationRepository extends Repository<Reservation> {
         select.select("*");
         select.table("reservation");
 
-        FewQuery result = query.query(select);
-
-        return this.maps(result);
+        return this.maps(this.getQuery().query(select));
     }
 
     /**
@@ -76,9 +67,7 @@ public class ReservationRepository extends Repository<Reservation> {
         select.select("*");
         select.table("reservation");
 
-        FewQuery result = query.query(select);
-
-        return this.maps(result);
+        return this.maps(this.getQuery().query(select));
     }
 
     /**
@@ -90,7 +79,7 @@ public class ReservationRepository extends Repository<Reservation> {
         delete.table("reservation");
         delete.where("id", id);
 
-        query.query(delete);
+        this.getQuery().query(delete);
     }
 
     /**
@@ -110,7 +99,7 @@ public class ReservationRepository extends Repository<Reservation> {
         insert.insert("reason", reservation.getReason());
         insert.table("reservation");
 
-        query.query(insert);
+        this.getQuery().query(insert);
 
         return true;
     }

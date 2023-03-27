@@ -9,9 +9,16 @@ import java.util.ArrayList;
 
 public class Repository<T extends Entity> {
     private final Class<T> c;
+    private final FewQuery query;
 
-    protected Repository(Class<T> c) {
+    protected Repository(Class<T> c, FewQuery query) {
+
         this.c = c;
+        this.query = query;
+    }
+
+    protected FewQuery getQuery() {
+        return this.query;
     }
 
     protected ArrayList<T> maps(FewQuery result) {

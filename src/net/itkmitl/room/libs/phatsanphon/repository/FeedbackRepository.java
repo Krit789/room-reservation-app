@@ -6,11 +6,9 @@ import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
 import java.util.ArrayList;
 
 public class FeedbackRepository extends Repository<Feedback> {
-    private final FewQuery query;
 
     public FeedbackRepository(FewQuery query) {
-        super(Feedback.class);
-        this.query = query;
+        super(Feedback.class, query);
     }
 
     public ArrayList<Feedback> getFeedbacks() {
@@ -19,7 +17,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         select.select("*");
         select.table("feedback");
 
-        return this.maps(query.query(select));
+        return this.maps(this.getQuery().query(select));
     }
 
     public ArrayList<Feedback> getFeedbacks(int limit) {
@@ -29,7 +27,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         select.limit(limit);
         select.table("feedback");
 
-        return this.maps(query.query(select));
+        return this.maps(this.getQuery().query(select));
     }
 
     public Feedback getFeedbackById(int id) {
@@ -39,7 +37,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         select.select("*");
         select.table("feedback");
 
-        return this.map(query.query(select));
+        return this.map(this.getQuery().query(select));
     }
 
     public ArrayList<Feedback> getFeedbackByUserId(int userId) {
@@ -49,7 +47,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         select.select("*");
         select.table("feedback");
 
-        return this.maps(query.query(select));
+        return this.maps(this.getQuery().query(select));
     }
 
     public ArrayList<Feedback> getFeedbackByRoomId(int roomId) {
@@ -59,7 +57,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         select.select("*");
         select.table("feedback");
 
-        return this.maps(query.query(select));
+        return this.maps(this.getQuery().query(select));
     }
 
     public void createFeedback(Feedback feedback) {
@@ -71,7 +69,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         insert.insert("rating", feedback.getRating());
         insert.table("feedback");
 
-        query.query(insert);
+        this.getQuery().query(insert);
     }
 
     public void updateFeedback(Feedback feedback) {
@@ -92,7 +90,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         update.set("rating", feedback.getRating());
         update.table("feedback");
 
-        query.query(update);
+        this.getQuery().query(update);
     }
 
     public void deleteFeedbackById(int id) {
@@ -101,6 +99,6 @@ public class FeedbackRepository extends Repository<Feedback> {
         delete.table("feedback");
         delete.where("id", id);
 
-        query.query(delete);
+        this.getQuery().query(delete);
     }
 }

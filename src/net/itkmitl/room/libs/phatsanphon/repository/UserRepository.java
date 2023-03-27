@@ -5,11 +5,8 @@ import net.itkmitl.room.libs.phatsanphon.entity.User;
 import java.util.ArrayList;
 
 public class UserRepository extends Repository<User> {
-    private final FewQuery query;
-
     public UserRepository(final FewQuery query) {
-        super(User.class);
-        this.query = query;
+        super(User.class, query);
     }
 
     /*
@@ -21,9 +18,7 @@ public class UserRepository extends Repository<User> {
         select.select("*");
         select.table("user");
 
-        FewQuery result = query.query(select);
-
-        return this.maps(result);
+        return this.maps(this.getQuery().query(select));
     }
 
     /*
@@ -36,9 +31,7 @@ public class UserRepository extends Repository<User> {
         select.table("user");
         select.limit(limit);
 
-        FewQuery result = query.query(select);
-
-        return this.maps(result);
+        return this.maps(this.getQuery().query(select));
     }
 
     /*
@@ -49,12 +42,9 @@ public class UserRepository extends Repository<User> {
 
         select.select("*");
         select.where("id", id);
-        select.limit(1);
         select.table("user");
 
-        FewQuery result = query.query(select);
-
-        return this.map(result);
+        return this.map(this.getQuery().query(select));
     }
 
     /*
@@ -69,7 +59,7 @@ public class UserRepository extends Repository<User> {
         insert.insert("email", user.getEmail());
         insert.table("user");
 
-        query.query(insert);
+        this.getQuery().query(insert);
     }
 
     public void deleteUserById(int id) {
@@ -78,7 +68,7 @@ public class UserRepository extends Repository<User> {
         delete.table("user");
         delete.where("id", id);
 
-        query.query(delete);
+        this.getQuery().query(delete);
     }
 
     public void updateUser(User user) {
@@ -101,6 +91,6 @@ public class UserRepository extends Repository<User> {
         update.set("role", user.getRole());
         update.table("user");
 
-        query.query(update);
+        this.getQuery().query(update);
     }
 }
