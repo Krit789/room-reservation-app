@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.util.*;
 
 public class FewConfig {
-
     private File file;
     private Yaml yaml;
     private HashMap<String, Object> data;

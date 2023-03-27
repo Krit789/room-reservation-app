@@ -4,35 +4,13 @@ import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import java.util.ArrayList;
 
-public class UserRepository implements Repository<User> {
+public class UserRepository extends Repository<User> {
     private final FewQuery query;
 
-    public UserRepository(FewQuery query) {
+    public UserRepository(final FewQuery query) {
+        super(User.class);
         this.query = query;
     }
-
-    @Override
-    public User map(FewQuery result) {
-        User object = null;
-
-        while (result.nextBind()) {
-            object = new User(result);
-        }
-
-        return object;
-    }
-
-    @Override
-    public ArrayList<User> maps(FewQuery result) {
-        ArrayList<User> objects = new ArrayList();
-
-        while (result.nextBind()) {
-            objects.add(new User(result));
-        }
-
-        return objects;
-    }
-
 
     /*
      * Get all users

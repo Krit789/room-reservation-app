@@ -4,21 +4,18 @@ import net.itkmitl.room.enums.*;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 
-import java.sql.Date;
-
-public class User {
-
+public class User extends Entity {
     private int id;
     private String email;
     private String firstname;
     private String lastname;
     private String telephoneNumber;
     private boolean isActive;
-    private Date createdOn;
+    private DateTime createdOn;
     private EnumUserRole role;
 
     public User(FewQuery query) {
-        processObject(query);
+        super(query);
     }
 
     public User() {
@@ -86,19 +83,20 @@ public class User {
         this.role = role;
     }
 
-    public Date getCreatedOn() {
+    public DateTime getCreatedOn() {
         return createdOn;
     }
 
-    private void setCreatedOn(Date createdOn) {
+    private void setCreatedOn(DateTime createdOn) {
         this.createdOn = createdOn;
     }
 
     private void setCreatedOn(String rawCreatedOn) {
-        this.createdOn = new DateTime(rawCreatedOn).getDateTime();
+        this.createdOn = new DateTime(rawCreatedOn);
     }
 
-    private void processObject(FewQuery query) {
+    @Override
+    public void processQuery(FewQuery query) {
         this.setId(query.getValue("id").asInt());
         this.setEmail(query.getValue("email").asString());
         this.setFirstname(query.getValue("firstname").asString());

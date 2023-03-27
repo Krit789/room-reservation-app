@@ -4,10 +4,11 @@ import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import java.util.ArrayList;
 
-public class RoomRepository implements Repository<Room> {
+public class RoomRepository extends Repository<Room> {
     private final FewQuery query;
 
-    public RoomRepository(FewQuery query) {
+    public RoomRepository(final FewQuery query) {
+        super(Room.class);
         this.query = query;
     }
 
@@ -23,7 +24,7 @@ public class RoomRepository implements Repository<Room> {
 
     @Override
     public ArrayList<Room> maps(FewQuery result) {
-        ArrayList<Room> objects = new ArrayList();
+        ArrayList<Room> objects = new ArrayList<>();
 
         while (result.nextBind()) {
             objects.add(new Room(result));
