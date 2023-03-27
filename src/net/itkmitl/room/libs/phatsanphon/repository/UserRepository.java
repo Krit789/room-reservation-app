@@ -1,38 +1,16 @@
-package net.itkmitl.room.libs.phatsanphon.entity;
+package net.itkmitl.room.libs.phatsanphon.repository;
 
 import net.itkmitl.room.libs.peeranat.query.*;
-import net.itkmitl.room.libs.phatsanphon.model.User;
+import net.itkmitl.room.libs.phatsanphon.entity.User;
 import java.util.ArrayList;
 
-public class UserEntity implements Entity<User> {
+public class UserRepository extends Repository<User> {
     private final FewQuery query;
 
-    public UserEntity(FewQuery query) {
+    public UserRepository(final FewQuery query) {
+        super(User.class);
         this.query = query;
     }
-
-    @Override
-    public User map(FewQuery result) {
-        User object = null;
-
-        while (result.nextBind()) {
-            object = new User(result);
-        }
-
-        return object;
-    }
-
-    @Override
-    public ArrayList<User> maps(FewQuery result) {
-        ArrayList<User> objects = new ArrayList();
-
-        while (result.nextBind()) {
-            objects.add(new User(result));
-        }
-
-        return objects;
-    }
-
 
     /*
      * Get all users

@@ -1,10 +1,23 @@
 package net.itkmitl.room.libs.phatsanphon.entity;
 
+import net.itkmitl.room.db.RVDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 
-import java.util.ArrayList;
+/**
+ * Entity
+ */
+public abstract class Entity {
+    private final FewQuery db = RVDB.getDB();
 
-public interface Entity<T> {
-    <T> ArrayList<T> maps(FewQuery result);
-    <T> T map(FewQuery result);
+    public Entity(FewQuery query) {
+        this.processQuery(query);
+    };
+
+    public Entity() {}
+
+    protected FewQuery getDB() {
+        return this.db;
+    }
+
+    public abstract void processQuery(FewQuery query);
 }

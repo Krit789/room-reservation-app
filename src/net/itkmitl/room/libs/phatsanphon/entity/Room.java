@@ -1,9 +1,9 @@
-package net.itkmitl.room.libs.phatsanphon.model;
+package net.itkmitl.room.libs.phatsanphon.entity;
 
 import net.itkmitl.room.enums.*;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 
-public class Room {
+public class Room extends Entity {
 
     private int id;
     private String name;
@@ -13,12 +13,13 @@ public class Room {
     private EnumRoomState state;
 
     public Room(FewQuery query) {
-        processObject(query);
+        super(query);
     }
 
     public Room() {
 
     }
+
     public int getId() {
         return id;
     }
@@ -67,7 +68,8 @@ public class Room {
         this.state = state;
     }
 
-    private void processObject(FewQuery query) {
+    @Override
+    public void processQuery(FewQuery query) {
         this.setId(query.getValue("id").asInt());
         this.setName(query.getValue("name").asString());
         this.setCapacity(query.getValue("capacity").asInt());

@@ -1,13 +1,14 @@
-package net.itkmitl.room.libs.phatsanphon.entity;
+package net.itkmitl.room.libs.phatsanphon.repository;
 
 import net.itkmitl.room.libs.peeranat.query.*;
-import net.itkmitl.room.libs.phatsanphon.model.Room;
+import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import java.util.ArrayList;
 
-public class RoomEntity implements Entity<Room> {
+public class RoomRepository extends Repository<Room> {
     private final FewQuery query;
 
-    public RoomEntity(FewQuery query) {
+    public RoomRepository(final FewQuery query) {
+        super(Room.class);
         this.query = query;
     }
 
@@ -23,7 +24,7 @@ public class RoomEntity implements Entity<Room> {
 
     @Override
     public ArrayList<Room> maps(FewQuery result) {
-        ArrayList<Room> objects = new ArrayList();
+        ArrayList<Room> objects = new ArrayList<>();
 
         while (result.nextBind()) {
             objects.add(new Room(result));

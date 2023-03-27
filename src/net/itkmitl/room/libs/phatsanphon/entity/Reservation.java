@@ -1,33 +1,33 @@
-package net.itkmitl.room.libs.phatsanphon.model;
+package net.itkmitl.room.libs.phatsanphon.entity;
 
 import net.itkmitl.room.db.RVDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
-import net.itkmitl.room.libs.phatsanphon.entity.RoomEntity;
-import net.itkmitl.room.libs.phatsanphon.entity.UserEntity;
+import net.itkmitl.room.libs.phatsanphon.repository.*;
 
-import java.sql.Date;
-
-public class Reservation {
+public class Reservation extends Entity {
     private int id;
     private User user;
     private Room room;
     private String reason;
-    private Date startTime;
-    private Date endTime;
-    private Date reservationTime;
+    private DateTime startTime;
+    private DateTime endTime;
+    private DateTime reservationTime;
     private boolean isCancelled;
 
     public Reservation(FewQuery query) {
-        this.processQuery(query);
+        super(query);
     }
 
-    public Reservation() {
+    public Reservation() {}
 
-    }
-
-    private void processQuery(FewQuery query) {
-
+    @Override
+    public void processQuery(FewQuery query) {
+        this.setId(query.getValue("id").asInt());
+        this.setUser(query.getValue("user_id").asInt());
+        this.setRoom(query.getValue("room_id").asInt());
+        this.setReason(query.getValue("reason").asString());
+        this.setCancelled(query.getValue("is_cancelled").asBoolean());
     }
 
     public int getId() {
@@ -47,7 +47,7 @@ public class Reservation {
     }
 
     public void setUser(int userId) {
-        User user = new UserEntity(RVDB.getDB()).getUserById(userId);
+        User user = new UserRepository(RVDB.getDB()).getUserById(userId);
         this.setUser(user);
     }
 
@@ -60,7 +60,7 @@ public class Reservation {
     }
 
     public void setRoom(int roomId) {
-        Room room = new RoomEntity(RVDB.getDB()).getRoomById(roomId);
+        Room room = new RoomRepository(this.getDB()).getRoomById(roomId);
         this.setRoom(room);
     }
 
@@ -72,40 +72,40 @@ public class Reservation {
         this.reason = reason;
     }
 
-    public Date getStartTime() {
+    public DateTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(DateTime startTime) {
         this.startTime = startTime;
     }
 
     private void setStartTime(String rawStartTime) {
-        this.setStartTime(new DateTime(rawStartTime).getDateTime());
+        this.setStartTime(new DateTime(rawStartTime));
     }
 
-    public Date getEndTime() {
+    public DateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(DateTime endTime) {
         this.endTime = endTime;
     }
 
     private void setEndTime(String rawEndTime) {
-        this.setEndTime(new DateTime(rawEndTime).getDateTime());
+        this.setEndTime(new DateTime(rawEndTime));
     }
 
-    public Date getReservationTime() {
+    public DateTime getReservationTime() {
         return reservationTime;
     }
 
-    public void setReservationTime(Date reservationTime) {
+    public void setReservationTime(DateTime reservationTime) {
         this.reservationTime = reservationTime;
     }
 
     private void setReservationTime(String rawReservationTime) {
-        this.setReservationTime(new DateTime(rawReservationTime).getDateTime());
+        this.setReservationTime(new DateTime(rawReservationTime));
     }
 
     public boolean isCancelled() {
