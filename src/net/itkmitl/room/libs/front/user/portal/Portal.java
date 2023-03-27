@@ -5,7 +5,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.scene.effect.Effect;
 import net.itkmitl.room.libs.peeranat.util.*;
+
 
 import java.io.IOException;
 
@@ -16,7 +18,6 @@ public class Portal extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(FewFile.getResource("account/Portal.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
-
 //        String css = getClass().getResource("styles/portal.css").toExternalForm();
 //        scene.getStylesheets().add(css);
 
@@ -25,7 +26,7 @@ public class Portal extends Application {
 
         stage.setWidth(1280);
         stage.setHeight(720);
-        stage.setResizable(false);
+        stage.setResizable(true);
         stage.setTitle("Laew Tae Hong");
         stage.setScene(scene);
         stage.show();

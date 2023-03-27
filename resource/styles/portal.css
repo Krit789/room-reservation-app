@@ -3,9 +3,17 @@
     /*-fx-background-color: yellow;*/
 }
 
-.pane {
+.panel {
     -fx-background-color: white;
-    -fx-border-radius: 25px;
+}
+
+.rectangle{
+    -fx-arc-width: 30px;
+    -fx-arc-height: 30px;
+    -fx-fill: white;
+    /*-fx-effect: gaussianBlur(10);*/
+    -fx-background-color: transparent;
+
 }
 
 #titlelable{
