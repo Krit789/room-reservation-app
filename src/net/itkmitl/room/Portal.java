@@ -2,22 +2,24 @@ package net.itkmitl.room;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import net.itkmitl.room.libs.peeranat.util.*;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
-public class Login extends Application {
+public class Portal extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 //        Parent root = FXMLLoader.load(getClass().getResource("/hello-view.fxml"));
-        FXMLLoader fxmlLoader = new FXMLLoader(FewFile.getResource("account/hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(FewFile.getResource("account/Portal.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+
+
+//        String css = getClass().getResource("styles/portal.css").toExternalForm();
+//        scene.getStylesheets().add(css);
+
         Image icon = new Image("icon.png");
         stage.getIcons().add(icon);
 

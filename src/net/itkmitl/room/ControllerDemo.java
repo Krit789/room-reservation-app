@@ -12,8 +12,10 @@ public class ControllerDemo {
         double w = 594;
         if (saul.getFitWidth() == w) {
             saul.setFitWidth(1280);
+//            saul.setFitHeight(500);
         } else {
             saul.setFitWidth(w);
+//            saul.setFitHeight(w);
         }
     }
 }

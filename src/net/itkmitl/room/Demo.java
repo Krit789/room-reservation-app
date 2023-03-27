@@ -14,10 +14,10 @@ public class Demo extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(FewFile.getResource("account/hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(FewFile.getResource("account/demo.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-//        Image icon = new Image("icon.png");
-//        stage.getIcons().add(icon);
+        Image icon = new Image("icon.png");
+        stage.getIcons().add(icon);
 
         stage.setWidth(1280);
         stage.setHeight(720);
