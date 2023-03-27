@@ -1,4 +1,4 @@
-package net.itkmitl.room.front.user.portal;
+package net.itkmitl.room.libs.front.user.portal;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
