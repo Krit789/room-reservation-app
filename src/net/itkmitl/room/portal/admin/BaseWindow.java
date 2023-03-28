@@ -1,7 +1,8 @@
-package net.itkmitl.room.front.admin;
+package net.itkmitl.room.portal.admin;
 
 import javax.swing.*;
 import java.awt.*;
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 
 public class BaseWindow {
     private JFrame baseFrame;
@@ -21,7 +22,7 @@ public class BaseWindow {
 
     public BaseWindow(){
         baseFrame = new JFrame("Laew Tae Hong");
-        baseFrame.setIconImage(new ImageIcon("resource/icon.png").getImage());
+        baseFrame.setIconImage(FewFile.getImage("icon.png"));
 
         menuPanel = new JPanel();
         menuBar = new JMenuBar();
@@ -59,7 +60,6 @@ public class BaseWindow {
         baseFrame.setSize(1280, 720);
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         baseFrame.setVisible(true);
-
     }
 
     public static void main(String[] args) {

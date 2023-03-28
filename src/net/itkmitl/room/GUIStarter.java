@@ -1,6 +1,6 @@
 package net.itkmitl.room;
 
-import net.itkmitl.room.libs.front.user.portal.Portal;
+import net.itkmitl.room.portal.Portal;
 
 public class GUIStarter {
 
