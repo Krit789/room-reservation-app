@@ -76,11 +76,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         FewUpdateMySQL update = new FewUpdateMySQL();
 
         if (feedback.getId() == 0) {
-            try {
-                throw new Exception("Please provided an id to update user");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            throw new RuntimeException("Please provided an id to update user");
         }
 
         update.where("id", feedback.getId());

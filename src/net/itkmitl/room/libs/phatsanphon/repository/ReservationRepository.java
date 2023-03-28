@@ -37,6 +37,7 @@ public class ReservationRepository extends Repository<Reservation> {
 
         select.where("id", id);
         select.select("*");
+        select.limit(1);
         select.table("reservation");
 
         return this.map(this.getQuery().query(select));
@@ -102,5 +103,23 @@ public class ReservationRepository extends Repository<Reservation> {
         this.getQuery().query(insert);
 
         return true;
+    }
+
+    public void updateReservation(Reservation reservation) {
+        FewUpdateMySQL update = new FewUpdateMySQL();
+
+        if (reservation.getId() == 0) {
+            throw new RuntimeException("Please provided an id to update user");
+        }
+
+        update.where("id", reservation.getId());
+        update.set("user_id", reservation.getUser().getId());
+        update.set("room_id", reservation.getRoom().getId());
+        update.set("reason", reservation.getReason());
+        update.set("start_time", reservation.getStartTime().toString());
+        update.set("end_time", reservation.getEndTime().toString());
+        update.table("reservation");
+
+        this.getQuery().query(update);
     }
 }

@@ -11,9 +11,9 @@ public class Repository<T extends Entity> {
     private final Class<T> c;
     private final FewQuery query;
 
-    protected Repository(Class<T> c, FewQuery query) {
+    protected Repository(Class<T> clazz, FewQuery query) {
 
-        this.c = c;
+        this.c = clazz;
         this.query = query;
     }
 
@@ -44,8 +44,7 @@ public class Repository<T extends Entity> {
             try {
                 object = this.c.getDeclaredConstructor().newInstance();
                 object.processQuery(result);
-            } catch (InstantiationException | InvocationTargetException | IllegalAccessException |
-                     NoSuchMethodException e) {
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         }

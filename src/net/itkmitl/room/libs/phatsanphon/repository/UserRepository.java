@@ -2,6 +2,7 @@ package net.itkmitl.room.libs.phatsanphon.repository;
 
 import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
+
 import java.util.ArrayList;
 
 public class UserRepository extends Repository<User> {
@@ -42,6 +43,7 @@ public class UserRepository extends Repository<User> {
 
         select.select("*");
         select.where("id", id);
+        select.limit(1);
         select.table("user");
 
         return this.map(this.getQuery().query(select));
@@ -75,11 +77,7 @@ public class UserRepository extends Repository<User> {
         FewUpdateMySQL update = new FewUpdateMySQL();
 
         if (user.getId() == 0) {
-            try {
-                throw new Exception("Please provided an id to update user");
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            throw new RuntimeException("Please provided an id to update user");
         }
 
         update.where("id", user.getId());
