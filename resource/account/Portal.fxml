@@ -4,18 +4,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.effect.Effect?>
 
-<AnchorPane disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
             prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/portal.css"
-            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml">
     <children>
         <Pane layoutX="472.0" layoutY="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
               AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Rectangle id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="532.0"
-                           layoutX="403.0" layoutY="79.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangle"
-                           width="479.0"/>
+                           layoutX="403.0" layoutY="79.0" stroke="BLACK" strokeType="INSIDE"
+                           styleClass="rectangle" width="479.0"/>
             </children>
         </Pane>
     </children>

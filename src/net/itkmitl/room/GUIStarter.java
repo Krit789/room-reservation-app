@@ -1,12 +1,11 @@
 package net.itkmitl.room;
 
-import net.itkmitl.room.portal.Portal;
+import net.itkmitl.room.portal.*;
 
 public class GUIStarter {
 
     public static void main(final String[] args) {
-
-        Portal.main(args);
+        Login.main(args);
     }
 
 }
