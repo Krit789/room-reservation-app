@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 
-<fx:root type="AnchorPane" xmlns:fx="http://javafx.com/fxml">
-    <Button text="Click me!"/>
-</fx:root>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/portal.css"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="net.itkmitl.room.portal.ControllerPortal">
+    <children>
+        <BorderPane layoutX="540.0" layoutY="260.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <ImageView fitHeight="450.0" fitWidth="728.0" pickOnBounds="true" preserveRatio="true"
+                           styleClass="it-img" BorderPane.alignment="CENTER"/>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

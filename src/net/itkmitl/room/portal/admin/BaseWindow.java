@@ -105,8 +105,11 @@ public class BaseWindow {
     }
     public static void main(String[] args) {
         try {
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
+            System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
+            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
         } catch (Exception ignored) {
         }
 

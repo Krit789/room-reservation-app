@@ -20,7 +20,7 @@ public abstract class Portal extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 //        Parent root = FXMLLoader.load(getClass().getResource("/hello-view.fxml"));
-        fxmlLoader = new FXMLLoader(FewFile.getResource("account/Portal.fxml"));
+        fxmlLoader = new FXMLLoader(FewFile.getResource("account/Login.fxml"));
         scene = new Scene(fxmlLoader.load());
 
 //        String css = getClass().getResource("styles/portal.css").toExternalForm();

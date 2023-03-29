@@ -8,7 +8,20 @@
     -fx-background-color: white;
 }
 
-.rectangle{
+.it-img {
+    position: absolute;
+    -fx-arc-height: 30px;
+    -fx-arc-width: 30px;
+    /*width: 253px;*/
+    /*height: 539px;*/
+    /*left: 530px;*/
+    /*top: 237px;*/
+
+    -fx-image: url("../account/img/it_building.png");
+    border-radius: 10px;
+}
+
+.rectangle {
     -fx-arc-width: 30px;
     -fx-arc-height: 30px;
     -fx-fill: white;
@@ -17,6 +30,6 @@
 
 }
 
-#titlelable{
+#titlelable {
 
 }
