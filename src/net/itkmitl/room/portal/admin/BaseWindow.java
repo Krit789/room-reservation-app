@@ -15,7 +15,8 @@ public class BaseWindow {
     private JMenu fileMenu, windowMenu, optionMenu, aboutMenu;
     private JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
     private JMenuItem optionMenuItem1, optionMenuItem2, optionMenuItem3, optionMenuItem4;
-    private JMenuItem windowMenuItem1;
+    private JMenu newWindowMenu;
+    private JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
     private JMenuItem aboutMenuItem1;
     private JDesktopPane desktop;
 
@@ -29,7 +30,6 @@ public class BaseWindow {
         fileMenu = new JMenu("File");
         optionMenu = new JMenu("Options");
         windowMenu = new JMenu("Window");
-
         aboutMenu = new JMenu("About");
 
         // 'File' Menu Components declaration
@@ -48,6 +48,9 @@ public class BaseWindow {
         optionMenuItem3 = new JMenuItem("Settings");
         optionMenuItem4 = new JMenuItem("Switch to User Mode");
 
+        windowMenuItem2 = new JMenuItem("Cascade Window");
+        windowMenuItem3 = new JMenuItem("Close all Window");
+        newWindowMenu = new JMenu("New");
         windowMenuItem1 = new JMenuItem("Operation Window");
         windowMenuItem1.addActionListener(new ActionListener() {
             @Override
@@ -66,16 +69,22 @@ public class BaseWindow {
         menuBar.add(fileMenu);
         fileMenu.add(fileMenuItem1);
         fileMenu.add(fileMenuItem2);
+        fileMenu.add(new JSeparator());
         fileMenu.add(fileMenuItem3);
 
         menuBar.add(optionMenu);
         optionMenu.add(optionMenuItem4);
+        optionMenu.add(new JSeparator());
         optionMenu.add(optionMenuItem1);
         optionMenu.add(optionMenuItem2);
         optionMenu.add(optionMenuItem3);
 
         menuBar.add(windowMenu);
-        windowMenu.add(windowMenuItem1);
+        windowMenu.add(newWindowMenu);
+        newWindowMenu.add(windowMenuItem1);
+        windowMenu.add(new JSeparator());
+        windowMenu.add(windowMenuItem2);
+        windowMenu.add(windowMenuItem3);
 
         menuBar.add(aboutMenu);
         aboutMenu.add(aboutMenuItem1);
@@ -105,8 +114,8 @@ public class BaseWindow {
     }
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
