@@ -23,6 +23,7 @@ public class BaseWindow {
     private final JDesktopPane desktop;
     private final JProgressBar progressBar;
     private final JLabel statusLabel;
+    private GridBagConstraints gbc;
 
     public BaseWindow() {
         baseFrame = new JFrame("Laew Tae Hong Management");
@@ -113,31 +114,43 @@ public class BaseWindow {
         baseFrame.add(statusBar, BorderLayout.SOUTH);
         statusBar.setPreferredSize(new Dimension(baseFrame.getWidth(), 24));
 
-//        statusBar.setLayout(new BoxLayout(statusBar, BoxLayout.X_AXIS));
         statusBar.setLayout(new GridBagLayout());
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.anchor = GridBagConstraints.EAST;
+        gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.anchor = GridBagConstraints.WEST;
         gbc.weightx = 0.3;
         gbc.insets = new Insets(0,10,0,0);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        statusLabel = new JLabel("Status status");
-//        statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        statusLabel.setBorder(new EmptyBorder(0, 5, 0, 5));
-
-
-
-        statusBar.add(statusLabel);
+        statusLabel = new JLabel("You want to use GridBagConsraints#anchor to define the position within the cell that you want to align the component to.");
+        statusBar.add(statusLabel, gbc);
 //        Dimension minSize = new Dimension(100, 24);
 //        Dimension prefSize = new Dimension(1600, 24);
 //        Dimension maxSize = new Dimension(Short.MAX_VALUE, 24);
 //        statusBar.add(new Box.Filler(minSize, prefSize, maxSize));
+
+        gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 0.5;
+//        gbc.insets = new Insets(0,10,0,0);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        statusBar.add(new JPanel(), gbc);
+
+
+        gbc = new GridBagConstraints();
+
+        gbc.fill = GridBagConstraints.NONE;
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.weightx = 0.2;
+        gbc.insets = new Insets(0,10,0,10);
+        gbc.gridx = 2;
+        gbc.gridy = 0;
         progressBar = new JProgressBar();
+        progressBar.setBorder(new BevelBorder(BevelBorder.LOWERED));
         progressBar.setIndeterminate(true);
-        progressBar.setSize(new Dimension(256, 24));
-        statusBar.add(progressBar);
+        statusBar.add(progressBar, gbc);
 
 
         // Setting Window size and boilerplate code
@@ -161,8 +174,8 @@ public class BaseWindow {
 
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");Î
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
