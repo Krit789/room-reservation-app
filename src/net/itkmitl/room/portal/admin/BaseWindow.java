@@ -22,8 +22,11 @@ public class BaseWindow {
 
     public BaseWindow() {
         baseFrame = new JFrame("Laew Tae Hong Management");
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         baseFrame.setIconImage(FewFile.getImage("icon.png"));
-        baseFrame.setSize(1280, 720);
+        baseFrame.setSize(screenSize);
+        baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        baseFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // Menu Components declaration
         menuBar = new JMenuBar();
@@ -96,26 +99,27 @@ public class BaseWindow {
         baseFrame.add(desktop, BorderLayout.CENTER);
 
         // Setting Window size and boilerplate code
-        baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         baseFrame.setVisible(true);
         spawnMainMenu();
 
 
     }
-    private void spawnMainMenu(){
+
+    private void spawnMainMenu() {
         OperationWindow oper = new OperationWindow();
         Dimension desktopSize = desktop.getSize();
         Dimension jInternalFrameSize = oper.getFrame().getSize();
-        oper.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width)/2,
-                (desktopSize.height- jInternalFrameSize.height)/2);
+        oper.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
         oper.getFrame().setVisible(true);
         desktop.add(oper.getFrame());
         oper.getFrame().moveToFront();
     }
+
     public static void main(String[] args) {
         try {
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
