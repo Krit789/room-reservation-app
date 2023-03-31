@@ -12,7 +12,7 @@ public class BaseWindow {
     private JFrame baseFrame;
     private JPanel menuPanel;
     private JMenuBar menuBar;
-    private JMenu fileMenu, windowMenu, optionMenu, aboutMenu;
+    private JMenu fileMenu, windowMenu, optionMenu, aboutMenu, helpMenu;
     private JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
     private JMenuItem optionMenuItem1, optionMenuItem2, optionMenuItem3, optionMenuItem4;
     private JMenu newWindowMenu;
@@ -34,6 +34,7 @@ public class BaseWindow {
         optionMenu = new JMenu("Options");
         windowMenu = new JMenu("Window");
         aboutMenu = new JMenu("About");
+        helpMenu = new JMenu("Help");
 
         // 'File' Menu Components declaration
         fileMenuItem1 = new JMenuItem("Status");
@@ -92,6 +93,8 @@ public class BaseWindow {
         menuBar.add(aboutMenu);
         aboutMenu.add(aboutMenuItem1);
 
+        menuBar.add(helpMenu);
+
         baseFrame.setJMenuBar(menuBar);
 
 
@@ -118,11 +121,12 @@ public class BaseWindow {
 
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
         } catch (Exception ignored) {
         }
 
