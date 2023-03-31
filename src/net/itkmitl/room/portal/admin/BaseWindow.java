@@ -23,8 +23,11 @@ public class BaseWindow {
 
     public BaseWindow() {
         baseFrame = new JFrame("Laew Tae Hong Management");
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         baseFrame.setIconImage(FewFile.getImage("icon.png"));
-        baseFrame.setSize(1280, 720);
+        baseFrame.setSize(screenSize);
+        baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        baseFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // Menu Components declaration
         menuBar = new JMenuBar();
@@ -113,16 +116,18 @@ public class BaseWindow {
 
 
     }
-    private void spawnMainMenu(){
+
+    private void spawnMainMenu() {
         OperationWindow oper = new OperationWindow();
         Dimension desktopSize = desktop.getSize();
         Dimension jInternalFrameSize = oper.getFrame().getSize();
-        oper.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width)/2,
-                (desktopSize.height- jInternalFrameSize.height)/2);
+        oper.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
         oper.getFrame().setVisible(true);
         desktop.add(oper.getFrame());
         oper.getFrame().moveToFront();
     }
+
     public static void main(String[] args) {
         try {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
