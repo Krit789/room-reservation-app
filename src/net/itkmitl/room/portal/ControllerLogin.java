@@ -1,37 +1,64 @@
+
 package net.itkmitl.room.portal;
 
+import com.sun.javafx.stage.StageHelper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-
+import javafx.stage.Stage;
 import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ControllerLogin implements Initializable {
     @FXML
-    private Pane pane, root;
+    private MenuBar menuBar;
     @FXML
-    private Rectangle login_background;
+    private Rectangle loginBackground;
     @FXML
-    private BorderPane borderPane;
-    @FXML
-    private AnchorPane anchorPane;
+    private BorderPane outerPane;
+
     @FXML
     private Scene scene;
+
+    private Stage stage;
+
+
+    @FXML
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setSize(double width, double height) {
+        stage.setWidth(width);
+        stage.setHeight(height);
+    }
+
+    public void setSizeToRectangle() {
+//        stage.setMinHeight(loginBackground.getHeight());
+//        stage.setMinWidth(loginBackground.getWidth());
+        stage.setMinHeight(700);
+        stage.setMinWidth(700);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 //        root.prefHeightProperty().bind(scene.heightProperty());
-//        login_background.widthProperty().bind(new Pane());
-//        login_background.heightProperty().bind(pane.heightProperty());
-//        login_background.setX((screenSize.getWidth() - borderPane.getWidth()) / 2);
-//        login_background.setY((screenSize.getHeight() - borderPane.getHeight()) / 2);
+//        loginBackground.widthProperty().bind(new Pane());
+//        loginBackground.heightProperty().bind(pane.heightProperty());
+//        loginBackground.setX((screenSize.getWidth() - borderPane.getWidth()) / 2);
+//        loginBackground.setY((screenSize.getHeight() - borderPane.getHeight()) / 2);
+//        stage.setMinHeight(loginBackground.getHeight());
+//        stage.setMinWidth(loginBackground.getWidth());
+//        scene = menuBar.getScene();
+//        stage = (Stage) scene.getWindow();
+        menuBar.useSystemMenuBarProperty().set(true);
 
     }
 }

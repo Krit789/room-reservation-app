@@ -1,46 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/Login.css" xmlns="http://javafx.com/javafx/19"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="net.itkmitl.room.portal.ControllerLogin">
-    <children>
-        <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<BorderPane fx:id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.itkmitl.room.portal.ControllerLogin">
+    <top>
+        <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Option">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Window">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <BorderPane minHeight="10.0" minWidth="10.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <center>
-                <Pane fx:id="pane" BorderPane.alignment="CENTER">
-                    <children>
-                        <Rectangle id="rectangle" fx:id="login_background" arcHeight="5.0" arcWidth="5.0"
-                                   fill="DODGERBLUE" height="532.0" layoutX="403.0" layoutY="79.0" stroke="BLACK"
-                                   strokeType="INSIDE" styleClass="rectangle" width="479.0"/>
-                        <Label layoutX="606.0" layoutY="125.0" text="Login">
-                            <font>
-                                <Font name="System Font" size="30.0"/>
-                            </font>
-                        </Label>
-                        <ImageView fitHeight="397.0" fitWidth="211.0" layoutX="424.0" layoutY="182.0"
-                                   pickOnBounds="true" preserveRatio="true">
-                            <styleClass>
-                                <String fx:value="rectangle"/>
-                                <String fx:value="it-img"/>
-                            </styleClass>
-                        </ImageView>
-                    </children>
-                </Pane>
+                <Rectangle fx:id="loginBackground" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="566.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangle" width="566.0" BorderPane.alignment="CENTER" />
             </center>
         </BorderPane>
-    </children>
-    <opaqueInsets>
-        <Insets/>
-    </opaqueInsets>
-</AnchorPane>
+    </center>
+</BorderPane>

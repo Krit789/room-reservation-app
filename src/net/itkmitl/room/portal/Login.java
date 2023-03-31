@@ -25,6 +25,10 @@ public class Login extends Application {
 //        String css = getClass().getResource("styles/Login.css").toExternalForm();
 //        scene.getStylesheets().add(css);
 
+        ControllerLogin controllerLogin = new ControllerLogin();
+        controllerLogin.setStage(stage);
+        controllerLogin.setSizeToRectangle();
+
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 //        stage.setSize(screenSize);
         Image icon = new Image("icon.png");
@@ -46,8 +50,8 @@ public class Login extends Application {
 
         Image icon = new Image("icon.png");
         stage.getIcons().add(icon);
-        stage.setWidth(1280);
-        stage.setHeight(720);
+//        stage.setWidth(1280);
+//        stage.setHeight(720);
         stage.setResizable(true);
         stage.setTitle("Laew Tae Hong");
         stage.setScene(scene);
