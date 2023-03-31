@@ -2,6 +2,7 @@ package net.itkmitl.room.portal.admin;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,16 +11,18 @@ import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.portal.admin.components.OperationWindow;
 
 public class BaseWindow {
-    private JFrame baseFrame;
-    private JPanel menuPanel;
-    private JMenuBar menuBar;
-    private JMenu fileMenu, windowMenu, optionMenu, aboutMenu, helpMenu;
-    private JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
-    private JMenuItem optionMenuItem1, optionMenuItem2, optionMenuItem3, optionMenuItem4;
-    private JMenu newWindowMenu;
-    private JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
-    private JMenuItem aboutMenuItem1;
-    private JDesktopPane desktop;
+    private final JFrame baseFrame;
+    private final JPanel statusBar;
+    private final JMenuBar menuBar;
+    private final JMenu fileMenu, windowMenu, optionMenu, aboutMenu, helpMenu;
+    private final JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
+    private final JMenuItem optionMenuItem1, optionMenuItem2, optionMenuItem3, optionMenuItem4;
+    private final JMenu newWindowMenu;
+    private final JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
+    private final JMenuItem aboutMenuItem1;
+    private final JDesktopPane desktop;
+    private final JProgressBar progressBar;
+    private final JLabel statusLabel;
 
     public BaseWindow() {
         baseFrame = new JFrame("Laew Tae Hong Management");
@@ -102,15 +105,39 @@ public class BaseWindow {
         desktop = new JDesktopPane();
         baseFrame.add(desktop, BorderLayout.CENTER);
 
-        // create the status bar panel and shove it down the bottom of the frame
-        JPanel statusPanel = new JPanel();
-        statusPanel.setBorder(new BevelBorder(BevelBorder.LOWERED));
-        baseFrame.add(statusPanel, BorderLayout.SOUTH);
-        statusPanel.setPreferredSize(new Dimension(baseFrame.getWidth(), 24));
-        statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.X_AXIS));
-        JLabel statusLabel = new JLabel("Status status");
-        statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        statusPanel.add(statusLabel);
+        // create the status bar panel
+        statusBar = new JPanel();
+        statusBar.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        // set itself to the bottom of the page
+        baseFrame.add(statusBar, BorderLayout.SOUTH);
+        statusBar.setPreferredSize(new Dimension(baseFrame.getWidth(), 24));
+
+//        statusBar.setLayout(new BoxLayout(statusBar, BoxLayout.X_AXIS));
+        statusBar.setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.EAST;
+        gbc.weightx = 0.3;
+        gbc.insets = new Insets(0,10,0,0);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        statusLabel = new JLabel("Status status");
+//        statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        statusLabel.setBorder(new EmptyBorder(0, 5, 0, 5));
+
+
+
+        statusBar.add(statusLabel);
+//        Dimension minSize = new Dimension(100, 24);
+//        Dimension prefSize = new Dimension(1600, 24);
+//        Dimension maxSize = new Dimension(Short.MAX_VALUE, 24);
+//        statusBar.add(new Box.Filler(minSize, prefSize, maxSize));
+        progressBar = new JProgressBar();
+        progressBar.setIndeterminate(true);
+        progressBar.setSize(new Dimension(256, 24));
+        statusBar.add(progressBar);
+
 
         // Setting Window size and boilerplate code
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
