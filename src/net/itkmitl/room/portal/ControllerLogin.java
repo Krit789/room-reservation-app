@@ -19,7 +19,7 @@ public class ControllerLogin implements Initializable {
     @FXML
     private MenuBar menuBar;
     @FXML
-    private Rectangle loginBackground;
+    private Pane loginBackground;
     @FXML
     private BorderPane outerPane;
 

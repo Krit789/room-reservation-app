@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.itkmitl.room.portal.ControllerLogin">
     <top>
@@ -35,9 +38,18 @@
     </top>
     <center>
         <BorderPane minHeight="10.0" minWidth="10.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <center>
-                <Rectangle fx:id="loginBackground" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="566.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangle" width="566.0" BorderPane.alignment="CENTER" />
-            </center>
+         <center>
+            <Pane fx:id="loginBackground" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="566.0" prefWidth="580.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;" styleClass="rectangle" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="247.0" layoutY="39.0" text="Login">
+                     <font>
+                        <Font name="SukhumvitSet-Thin" size="38.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="405.0" fitWidth="234.0" layoutX="31.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" styleClass="it-img" />
+               </children>
+            </Pane>
+         </center>
         </BorderPane>
     </center>
 </BorderPane>
