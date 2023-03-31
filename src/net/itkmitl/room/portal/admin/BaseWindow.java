@@ -4,13 +4,15 @@ import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 import net.itkmitl.room.libs.peeranat.util.FewFile;
+import net.itkmitl.room.portal.admin.components.AboutDialog;
+import net.itkmitl.room.portal.admin.components.GBCBuilder;
 import net.itkmitl.room.portal.admin.components.OperationWindow;
 
 public class BaseWindow {
+    private OperationWindow mainMenu;
     private final JFrame baseFrame;
     private final JPanel statusBar;
     private final JMenuBar menuBar;
@@ -19,11 +21,13 @@ public class BaseWindow {
     private final JMenuItem optionMenuItem1, optionMenuItem2, optionMenuItem3, optionMenuItem4;
     private final JMenu newWindowMenu;
     private final JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
+    private final JCheckBoxMenuItem windowCheckBoxMenuItem1;
     private final JMenuItem aboutMenuItem1;
     private final JDesktopPane desktop;
     private final JProgressBar progressBar;
     private final JLabel statusLabel;
     private GridBagConstraints gbc;
+    private boolean autoCenterMainMenu = true;
 
     public BaseWindow() {
         baseFrame = new JFrame("Laew Tae Hong Management");
@@ -31,7 +35,10 @@ public class BaseWindow {
         baseFrame.setIconImage(FewFile.getImage("icon.png"));
         baseFrame.setSize(screenSize);
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        baseFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        baseFrame.setMinimumSize(new Dimension(640, 480));
+        baseFrame.setSize(new Dimension(1280, 720));
+        baseFrame.addComponentListener(new CustomComponentListener());
+        baseFrame.setExtendedState(baseFrame.getExtendedState() | baseFrame.MAXIMIZED_BOTH);
 
         // Menu Components declaration
         menuBar = new JMenuBar();
@@ -57,10 +64,27 @@ public class BaseWindow {
         optionMenuItem3 = new JMenuItem("Settings");
         optionMenuItem4 = new JMenuItem("Switch to User Mode");
 
+        windowCheckBoxMenuItem1 = new JCheckBoxMenuItem("Auto Center Main Menu");
+        windowCheckBoxMenuItem1.setState(autoCenterMainMenu);
+        windowCheckBoxMenuItem1.setToolTipText("Automatically center Main Menu when Main Window is resized");
+        windowCheckBoxMenuItem1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                windowCheckBoxMenuItem1.setState(!autoCenterMainMenu);
+                autoCenterMainMenu = !autoCenterMainMenu;
+                if (autoCenterMainMenu) {
+                    Dimension desktopSize = desktop.getSize();
+                    Dimension jInternalFrameSize = mainMenu.getFrame().getSize();
+                    mainMenu.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                            (desktopSize.height - jInternalFrameSize.height) / 2);
+                }
+            }
+        });
         windowMenuItem2 = new JMenuItem("Cascade Window");
         windowMenuItem3 = new JMenuItem("Close all Window");
         newWindowMenu = new JMenu("New");
-        windowMenuItem1 = new JMenuItem("Operation Window");
+        windowMenuItem1 = new JMenuItem("Main Menu");
+        windowMenuItem1.setEnabled(false);
         windowMenuItem1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,6 +116,7 @@ public class BaseWindow {
         windowMenu.add(newWindowMenu);
         newWindowMenu.add(windowMenuItem1);
         windowMenu.add(new JSeparator());
+        windowMenu.add(windowCheckBoxMenuItem1);
         windowMenu.add(windowMenuItem2);
         windowMenu.add(windowMenuItem3);
 
@@ -99,12 +124,19 @@ public class BaseWindow {
 //        aboutMenu.add(aboutMenuItem1);
 
         menuBar.add(helpMenu);
+        aboutMenuItem1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AboutDialog(baseFrame);
+            }
+        });
         helpMenu.add(aboutMenuItem1);
 
         baseFrame.setJMenuBar(menuBar);
 
 
         desktop = new JDesktopPane();
+        desktop.setBackground(new Color(44, 102, 188));
         baseFrame.add(desktop, BorderLayout.CENTER);
 
         // create the status bar panel
@@ -114,54 +146,31 @@ public class BaseWindow {
         baseFrame.add(statusBar, BorderLayout.SOUTH);
         statusBar.setPreferredSize(new Dimension(baseFrame.getWidth(), 24));
 
+        // Status bar
         statusBar.setLayout(new GridBagLayout());
-
-        gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.weightx = 0.3;
-        gbc.insets = new Insets(0,10,0,0);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
         statusLabel = new JLabel("You want to use GridBagConsraints#anchor to define the position within the cell that you want to align the component to.");
-        statusBar.add(statusLabel, gbc);
-//        Dimension minSize = new Dimension(100, 24);
-//        Dimension prefSize = new Dimension(1600, 24);
-//        Dimension maxSize = new Dimension(Short.MAX_VALUE, 24);
-//        statusBar.add(new Box.Filler(minSize, prefSize, maxSize));
+        statusLabel.setMinimumSize(new Dimension(128, statusBar.getHeight()));
 
-        gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 0.5;
-//        gbc.insets = new Insets(0,10,0,0);
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        statusBar.add(new JPanel(), gbc);
+        // Adding JLabel to the left of statusBar
+        statusBar.add(statusLabel, new GBCBuilder(GridBagConstraints.BOTH, 0.3, 0, 0, new Insets(0, 10, 0, 0)).setAnchor(GridBagConstraints.WEST));
 
+        // Adding JPanel next to the JLabel as a filler
+        statusBar.add(new JPanel(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 1, 0).getGBC());
 
-        gbc = new GridBagConstraints();
-
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.anchor = GridBagConstraints.EAST;
-        gbc.weightx = 0.2;
-        gbc.insets = new Insets(0,10,0,10);
-        gbc.gridx = 2;
-        gbc.gridy = 0;
+        // Adding JProgressBar to the right of statusBar
         progressBar = new JProgressBar();
         progressBar.setBorder(new BevelBorder(BevelBorder.LOWERED));
         progressBar.setIndeterminate(true);
-        statusBar.add(progressBar, gbc);
+        statusBar.add(progressBar, new GBCBuilder(GridBagConstraints.NONE, 0.2, 2, 0, new Insets(0, 10, 0, 10)).setAnchor(GridBagConstraints.EAST));
 
 
         // Setting Window size and boilerplate code
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        mainMenu = spawnMainMenu();
         baseFrame.setVisible(true);
-        spawnMainMenu();
-
-
     }
 
-    private void spawnMainMenu() {
+    private OperationWindow spawnMainMenu() {
         OperationWindow oper = new OperationWindow();
         Dimension desktopSize = desktop.getSize();
         Dimension jInternalFrameSize = oper.getFrame().getSize();
@@ -170,6 +179,7 @@ public class BaseWindow {
         oper.getFrame().setVisible(true);
         desktop.add(oper.getFrame());
         oper.getFrame().moveToFront();
+        return oper;
     }
 
     public static void main(String[] args) {
@@ -181,8 +191,31 @@ public class BaseWindow {
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
         } catch (Exception ignored) {
         }
-
-        new BaseWindow();//start your application
+        new BaseWindow(); //start your application
     }
 
+    class CustomComponentListener implements ComponentListener {
+        public void componentResized(ComponentEvent e) {
+            try {
+                if ((mainMenu != null) && (autoCenterMainMenu) && (!mainMenu.getFrame().isIcon())) {
+                    Dimension desktopSize = desktop.getSize();
+                    Dimension jInternalFrameSize = mainMenu.getFrame().getSize();
+                    mainMenu.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                            (desktopSize.height - jInternalFrameSize.height) / 2);
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
+
+        public void componentMoved(ComponentEvent e) {
+        }
+
+        public void componentShown(ComponentEvent e) {
+        }
+
+        public void componentHidden(ComponentEvent e) {
+        }
+    }
 }
+
