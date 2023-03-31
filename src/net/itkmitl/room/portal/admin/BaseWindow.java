@@ -1,6 +1,7 @@
 package net.itkmitl.room.portal.admin;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,11 +23,8 @@ public class BaseWindow {
 
     public BaseWindow() {
         baseFrame = new JFrame("Laew Tae Hong Management");
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         baseFrame.setIconImage(FewFile.getImage("icon.png"));
-        baseFrame.setSize(screenSize);
-        baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        baseFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        baseFrame.setSize(1280, 720);
 
         // Menu Components declaration
         menuBar = new JMenuBar();
@@ -98,28 +96,37 @@ public class BaseWindow {
         desktop = new JDesktopPane();
         baseFrame.add(desktop, BorderLayout.CENTER);
 
+        // create the status bar panel and shove it down the bottom of the frame
+        JPanel statusPanel = new JPanel();
+        statusPanel.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        baseFrame.add(statusPanel, BorderLayout.SOUTH);
+        statusPanel.setPreferredSize(new Dimension(baseFrame.getWidth(), 24));
+        statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.X_AXIS));
+        JLabel statusLabel = new JLabel("Status status");
+        statusLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        statusPanel.add(statusLabel);
+
         // Setting Window size and boilerplate code
+        baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         baseFrame.setVisible(true);
         spawnMainMenu();
 
 
     }
-
-    private void spawnMainMenu() {
+    private void spawnMainMenu(){
         OperationWindow oper = new OperationWindow();
         Dimension desktopSize = desktop.getSize();
         Dimension jInternalFrameSize = oper.getFrame().getSize();
-        oper.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
-                (desktopSize.height - jInternalFrameSize.height) / 2);
+        oper.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width)/2,
+                (desktopSize.height- jInternalFrameSize.height)/2);
         oper.getFrame().setVisible(true);
         desktop.add(oper.getFrame());
         oper.getFrame().moveToFront();
     }
-
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
