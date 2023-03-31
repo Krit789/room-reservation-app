@@ -14,4 +14,9 @@
       <module name="template" target="1.5" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="RoomReservationApp" options="--add-exports java.desktop/com.apple.eawt=ALL-UNNAMED" />
+    </option>
+  </component>
 </project>
