@@ -5,29 +5,42 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/Login.css" xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="net.itkmitl.room.portal.ControllerLogin">
     <children>
-        <Pane layoutX="472.0" layoutY="225.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <children>
-                <Rectangle id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="532.0" layoutX="403.0" layoutY="79.0" stroke="BLACK" strokeType="INSIDE" styleClass="rectangle" width="479.0" />
-            <Label layoutX="606.0" layoutY="125.0" text="Login">
-               <font>
-                  <Font name="System Font" size="30.0" />
-               </font></Label>
-            <ImageView fitHeight="397.0" fitWidth="211.0" layoutX="424.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
-               <styleClass>
-                  <String fx:value="rectangle" />
-                  <String fx:value="it-img" />
-               </styleClass>
-            </ImageView>
-            </children>
-        </Pane>
+        <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <center>
+                <Pane fx:id="pane" BorderPane.alignment="CENTER">
+                    <children>
+                        <Rectangle id="rectangle" fx:id="login_background" arcHeight="5.0" arcWidth="5.0"
+                                   fill="DODGERBLUE" height="532.0" layoutX="403.0" layoutY="79.0" stroke="BLACK"
+                                   strokeType="INSIDE" styleClass="rectangle" width="479.0"/>
+                        <Label layoutX="606.0" layoutY="125.0" text="Login">
+                            <font>
+                                <Font name="System Font" size="30.0"/>
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="397.0" fitWidth="211.0" layoutX="424.0" layoutY="182.0"
+                                   pickOnBounds="true" preserveRatio="true">
+                            <styleClass>
+                                <String fx:value="rectangle"/>
+                                <String fx:value="it-img"/>
+                            </styleClass>
+                        </ImageView>
+                    </children>
+                </Pane>
+            </center>
+        </BorderPane>
     </children>
     <opaqueInsets>
-        <Insets />
+        <Insets/>
     </opaqueInsets>
 </AnchorPane>

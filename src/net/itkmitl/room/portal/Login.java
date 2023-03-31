@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import net.itkmitl.room.libs.peeranat.util.*;
 
 
+import java.awt.*;
 import java.io.IOException;
 
 public class Login extends Application {
@@ -19,14 +20,17 @@ public class Login extends Application {
 //        Parent root = FXMLLoader.load(getClass().getResource("/hello-view.fxml"));
         fxmlLoader = new FXMLLoader(FewFile.getResource("account/Login.fxml"));
         scene = new Scene(fxmlLoader.load());
+        stage.setMaximized(true);
 
 //        String css = getClass().getResource("styles/Login.css").toExternalForm();
 //        scene.getStylesheets().add(css);
 
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        stage.setSize(screenSize);
         Image icon = new Image("icon.png");
         stage.getIcons().add(icon);
-        stage.setWidth(1280);
-        stage.setHeight(720);
+        stage.setWidth(screenSize.getWidth());
+        stage.setHeight(screenSize.getHeight());
         stage.setResizable(true);
         stage.setTitle("Laew Tae Hong");
         stage.setScene(scene);
@@ -37,7 +41,6 @@ public class Login extends Application {
 //        Parent root = FXMLLoader.load(getClass().getResource("/hello-view.fxml"));
         fxmlLoader = new FXMLLoader(FewFile.getResource("account/Login.fxml"));
         scene = new Scene(fxmlLoader.load());
-
 //        String css = getClass().getResource("styles/Login.css").toExternalForm();
 //        scene.getStylesheets().add(css);
 
