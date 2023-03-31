@@ -13,7 +13,7 @@ public class BaseWindow {
     private JFrame baseFrame;
     private JPanel menuPanel;
     private JMenuBar menuBar;
-    private JMenu fileMenu, windowMenu, optionMenu, aboutMenu;
+    private JMenu fileMenu, windowMenu, optionMenu, aboutMenu, helpMenu;
     private JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
     private JMenuItem optionMenuItem1, optionMenuItem2, optionMenuItem3, optionMenuItem4;
     private JMenu newWindowMenu;
@@ -35,6 +35,7 @@ public class BaseWindow {
         optionMenu = new JMenu("Options");
         windowMenu = new JMenu("Window");
         aboutMenu = new JMenu("About");
+        helpMenu = new JMenu("Help");
 
         // 'File' Menu Components declaration
         fileMenuItem1 = new JMenuItem("Status");
@@ -92,6 +93,8 @@ public class BaseWindow {
 
         menuBar.add(aboutMenu);
         aboutMenu.add(aboutMenuItem1);
+
+        menuBar.add(helpMenu);
 
         baseFrame.setJMenuBar(menuBar);
 
