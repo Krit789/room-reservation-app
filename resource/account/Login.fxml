@@ -51,7 +51,7 @@
                         <Font name="SukhumvitSet-Thin" size="38.0" />
                      </font>
                   </Label>
-                  <ImageView fitHeight="405.0" fitWidth="234.0" layoutX="31.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" styleClass="it-img" />
+                  <ImageView fitHeight="426.0" fitWidth="235.0" layoutX="27.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" styleClass="it-img" />
                    <VBox layoutX="250.0" layoutY="130.0" spacing="5">
                        <TextField fx:id="usernameField" promptText="Username" maxWidth="-Infinity" prefWidth="300.0" />
                        <TextField fx:id="passwordField" promptText="Password" maxWidth="-Infinity" prefWidth="300.0" />

@@ -94,10 +94,11 @@ public class BaseWindow {
         windowMenu.add(windowMenuItem2);
         windowMenu.add(windowMenuItem3);
 
-        menuBar.add(aboutMenu);
-        aboutMenu.add(aboutMenuItem1);
+//        menuBar.add(aboutMenu);
+//        aboutMenu.add(aboutMenuItem1);
 
         menuBar.add(helpMenu);
+        helpMenu.add(aboutMenuItem1);
 
         baseFrame.setJMenuBar(menuBar);
 
