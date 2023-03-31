@@ -13,7 +13,7 @@ public class BaseWindow {
     private JFrame baseFrame;
     private JPanel menuPanel;
     private JMenuBar menuBar;
-    private JMenu fileMenu, windowMenu, optionMenu, aboutMenu, helpMenu;
+    private JMenu fileMenu, windowMenu, optionMenu, helpMenu;
     private JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
     private JMenuItem optionMenuItem1, optionMenuItem2, optionMenuItem3, optionMenuItem4;
     private JMenu newWindowMenu;
@@ -34,7 +34,7 @@ public class BaseWindow {
         fileMenu = new JMenu("File");
         optionMenu = new JMenu("Options");
         windowMenu = new JMenu("Window");
-        aboutMenu = new JMenu("About");
+//        aboutMenu = new JMenu("About");
         helpMenu = new JMenu("Help");
 
         // 'File' Menu Components declaration
@@ -91,10 +91,11 @@ public class BaseWindow {
         windowMenu.add(windowMenuItem2);
         windowMenu.add(windowMenuItem3);
 
-        menuBar.add(aboutMenu);
-        aboutMenu.add(aboutMenuItem1);
+//        menuBar.add(aboutMenu);
+//        aboutMenu.add(aboutMenuItem1);
 
         menuBar.add(helpMenu);
+        helpMenu.add(aboutMenuItem1);
 
         baseFrame.setJMenuBar(menuBar);
 
@@ -133,11 +134,10 @@ public class BaseWindow {
 
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");Î
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
         } catch (Exception ignored) {
         }
 
