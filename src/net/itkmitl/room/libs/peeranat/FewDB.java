@@ -1,11 +1,14 @@
 package net.itkmitl.room.libs.peeranat;
 
+import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.enums.EnumDBSchema;
 import net.itkmitl.room.libs.jarukrit.ConfigManager;
 import net.itkmitl.room.libs.peeranat.query.FewMySQLBuilder;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
+import net.itkmitl.room.libs.peeranat.query.FewQuery;
 
 public class FewDB {
 
@@ -34,5 +37,8 @@ public class FewDB {
         return null;
     }
 
+    public static void createTable(EnumDBSchema schema) {
+        RVDB.getDB().unsafeQuery(schema.getRaw());
+    }
     
 }
