@@ -5,7 +5,9 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.portal.admin.components.AboutDialog;
 import net.itkmitl.room.portal.admin.components.GBCBuilder;
@@ -27,12 +29,23 @@ public class BaseWindow {
     private final JProgressBar progressBar;
     private final JLabel statusLabel;
     private GridBagConstraints gbc;
+    private ArrayList<Image> multiIcon;
+
     private boolean autoCenterMainMenu = true;
 
     public BaseWindow() {
         baseFrame = new JFrame("Laew Tae Hong Management");
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        baseFrame.setIconImage(FewFile.getImage("icon.png"));
+        multiIcon = new ArrayList<>();
+        multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-128px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-64px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-56px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-48px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-40px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-20px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-16px.png").getImage());
+        baseFrame.setIconImages(multiIcon);
         baseFrame.setSize(screenSize);
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         baseFrame.setMinimumSize(new Dimension(640, 480));
@@ -184,12 +197,17 @@ public class BaseWindow {
 
     public static void main(String[] args) {
         try {
+            try {
+                UIManager.setLookAndFeel( new FlatIntelliJLaf());
+            } catch (Exception ignored){
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+            }
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
             System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
         } catch (Exception ignored) {
+
         }
         new BaseWindow(); //start your application
     }
