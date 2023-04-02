@@ -8,10 +8,13 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import net.itkmitl.room.GUIStarter;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
+import net.itkmitl.room.portal.Login;
 import net.itkmitl.room.portal.admin.components.AboutDialog;
 import net.itkmitl.room.portal.admin.components.GBCBuilder;
 import net.itkmitl.room.portal.admin.components.OperationWindow;
+import net.itkmitl.room.portal.admin.components.PreferenceWindow;
 
 public class BaseWindow {
     private OperationWindow mainMenu;
@@ -28,7 +31,6 @@ public class BaseWindow {
     private final JDesktopPane desktop;
     private final JProgressBar progressBar;
     private final JLabel statusLabel;
-    private GridBagConstraints gbc;
     private ArrayList<Image> multiIcon;
 
     private boolean autoCenterMainMenu = true;
@@ -75,7 +77,21 @@ public class BaseWindow {
         optionMenuItem1 = new JMenuItem("Connect");
         optionMenuItem2 = new JMenuItem("Disconnect");
         optionMenuItem3 = new JMenuItem("Settings");
+        optionMenuItem3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                spawnPreference();
+            }
+        });
         optionMenuItem4 = new JMenuItem("Switch to User Mode");
+        optionMenuItem4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                baseFrame.dispose();
+                String[] arguments = new String[] {""};
+                GUIStarter.main(arguments);
+            }
+        });
 
         windowCheckBoxMenuItem1 = new JCheckBoxMenuItem("Auto Center Main Menu");
         windowCheckBoxMenuItem1.setState(autoCenterMainMenu);
@@ -193,6 +209,18 @@ public class BaseWindow {
         desktop.add(oper.getFrame());
         oper.getFrame().moveToFront();
         return oper;
+    }
+
+    private PreferenceWindow spawnPreference() {
+        PreferenceWindow pref = new PreferenceWindow();
+        Dimension desktopSize = desktop.getSize();
+        Dimension jInternalFrameSize = pref.getFrame().getSize();
+        pref.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+        pref.getFrame().setVisible(true);
+        desktop.add(pref.getFrame());
+        pref.getFrame().moveToFront();
+        return pref;
     }
 
     public static void main(String[] args) {
