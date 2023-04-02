@@ -88,7 +88,7 @@ public class BaseWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 baseFrame.dispose();
-                String[] arguments = new String[] {""};
+                String[] arguments = new String[]{""};
                 GUIStarter.main(arguments);
             }
         });
@@ -223,17 +223,36 @@ public class BaseWindow {
         return pref;
     }
 
+//    public void macResetMenuBar() {
+//        try {
+//            String os = System.getProperty("os.name").toLowerCase();
+//            if (os.contains("mac")) {
+////                System.setProperty("apple.laf.useScreenMenuBar", "false");
+////                baseFrame.setJMenuBar(null);
+//                Application application = Application.getApplication();
+//                application.setDefaultMenuBar(null);
+//            }
+//
+//        } catch (Exception ignored) {
+//
+//        }
+//    }
+
     public static void main(String[] args) {
         try {
+            String os = System.getProperty("os.name").toLowerCase();
+            if (os.contains("mac")) {
+                System.setProperty("apple.laf.useScreenMenuBar", "true");
+                System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
+                System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
+            }
             try {
-                UIManager.setLookAndFeel( new FlatIntelliJLaf());
-            } catch (Exception ignored){
+                UIManager.setLookAndFeel(new FlatIntelliJLaf());
+            } catch (Exception ignored) {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
             }
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
+
         } catch (Exception ignored) {
 
         }
