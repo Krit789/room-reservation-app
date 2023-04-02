@@ -3,6 +3,7 @@ package net.itkmitl.room.portal.admin.components;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class OperationWindow extends InternalFrame{
     private final JInternalFrame frame;
@@ -27,7 +28,8 @@ public class OperationWindow extends InternalFrame{
     private final JLabel viewFeedbackLabel, manageFeedbackLabel, lookupFeedbackLabel;
     public OperationWindow(){
         frame = new JInternalFrame(("Main Menu"), false, false, false, true);
-        frame.setFrameIcon(new ImageIcon("resource/icon.png"));
+
+        frame.setFrameIcon(new ImageIcon("resource/icons/icon-16px.png"));
         frame.setSize(512, 300);
         frame.setLayout(new BorderLayout());
 
