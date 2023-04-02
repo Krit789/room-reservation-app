@@ -31,7 +31,7 @@ public class AboutDialog{
         titlePanel.setBorder(new EmptyBorder(20,20,20,20));
         aboutPanel.add(titlePanel);
 
-        okButton = new JButton("Ok");
+        okButton = new JButton("OK");
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -42,7 +42,7 @@ public class AboutDialog{
         okPanel.add(okButton);
         aboutPanel.add(okPanel);
 
-        aboutDialog.setSize(320, 140);
+        aboutDialog.setSize(320, 240);
         aboutDialog.setResizable(false);
         aboutDialog.setVisible(true);
 
