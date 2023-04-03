@@ -8,57 +8,44 @@ import javafx.stage.Stage;
 import net.itkmitl.room.libs.peeranat.util.*;
 
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class Login extends Application {
-    protected FXMLLoader fxmlLoader;
-    protected Scene scene;
+public class Login implements ActionListener {
 
-    @Override
-    public void start(Stage stage) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/hello-view.fxml"));
-        fxmlLoader = new FXMLLoader(FewFile.getResource("account/Login.fxml"));
-        scene = new Scene(fxmlLoader.load());
-        stage.setMaximized(true);
+    private JFrame outerPane, innerPane;
+    private JTextField usernameField, passwordField;
+    private JLabel usernameText, passwordText, loginHeader;
+    private ImageIcon img_itbuilding;
 
-//        String css = getClass().getResource("styles/Login.css").toExternalForm();
-//        scene.getStylesheets().add(css);
+    public Login() {
+        outerPane = new JFrame("Login Page");
+        outerPane.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        outerPane.setExtendedState(outerPane.getExtendedState() | outerPane.MAXIMIZED_BOTH);
 
-        ControllerLogin controllerLogin = new ControllerLogin();
-        controllerLogin.setStage(stage);
-        controllerLogin.setSizeToRectangle();
+        innerPane = new JFrame();
+        usernameField = new JTextField();
+        passwordField = new JTextField();
+        usernameText = new JLabel("Username : ");
+        passwordText = new JLabel("Password : ");
+        loginHeader = new JLabel("Login");
+        img_itbuilding = new ImageIcon(FewFile.getImage("account/img/it_building.png"));
 
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-//        stage.setSize(screenSize);
-        Image icon = new Image("icon.png");
-        stage.getIcons().add(icon);
-        stage.setWidth(screenSize.getWidth());
-        stage.setHeight(screenSize.getHeight());
-        stage.setResizable(true);
-        stage.setTitle("Laew Tae Hong");
-        stage.setScene(scene);
-        stage.show();
+
+        outerPane.setLayout(new BorderLayout());
+        outerPane.setVisible(true);
     }
 
-    protected void runFX(Stage stage) throws IOException {
-//        Parent root = FXMLLoader.load(getClass().getResource("/hello-view.fxml"));
-        fxmlLoader = new FXMLLoader(FewFile.getResource("account/Login.fxml"));
-        scene = new Scene(fxmlLoader.load());
-//        String css = getClass().getResource("styles/Login.css").toExternalForm();
-//        scene.getStylesheets().add(css);
 
-        Image icon = new Image("icon.png");
-        stage.getIcons().add(icon);
-//        stage.setWidth(1280);
-//        stage.setHeight(720);
-        stage.setResizable(true);
-        stage.setTitle("Laew Tae Hong");
-        stage.setScene(scene);
-        stage.show();
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 
     public static void main(String[] args) {
-        launch(args);
+        new Login();
     }
 }
