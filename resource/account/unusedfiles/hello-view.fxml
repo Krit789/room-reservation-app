@@ -12,7 +12,7 @@
         <Button layoutX="609.0" layoutY="637.0" mnemonicParsing="false" onAction="#onHelloButtonClick" text="CallMe"/>
         <ImageView fx:id="saul" fitHeight="594.0" fitWidth="1288.0" layoutX="-6.0">
             <image>
-                <Image url="@img/saul.gif"/>
+                <Image url="@../img/saul.gif"/>
             </image>
         </ImageView>
     </children>

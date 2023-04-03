@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.paint.LinearGradient?>
 
-<BorderPane fx:id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../styles/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.itkmitl.room.portal.ControllerLogin">
+<BorderPane fx:id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../styles/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.itkmitl.room.portal.ControllerLogin">
     <top>
         <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
             <menus>
