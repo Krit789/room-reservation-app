@@ -19,6 +19,25 @@ public class GBCBuilder{
         gbc.gridy = gridy;
         gbc.insets = insets;
     }
+
+
+    public GBCBuilder(int fill, double weightx, double weighty, int gridx, int gridy){
+        gbc = new GridBagConstraints();
+        gbc.fill = fill;
+        gbc.weighty = weighty;
+        gbc.weightx = weightx;
+        gbc.gridx = gridx;
+        gbc.gridy = gridy;
+    }
+    public GBCBuilder(int fill, double weightx, double weighty,int gridx, int gridy, Insets insets){
+        gbc = new GridBagConstraints();
+        gbc.fill = fill;
+        gbc.weighty = weighty;
+        gbc.weightx = weightx;
+        gbc.gridx = gridx;
+        gbc.gridy = gridy;
+        gbc.insets = insets;
+    }
     public GBCBuilder(){
         gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -35,6 +54,12 @@ public class GBCBuilder{
     public GridBagConstraints setPadding(int ipady, int ipadx){
         gbc.ipady = ipady;
         gbc.ipadx = ipadx;
+        return gbc;
+    }
+
+    public GridBagConstraints setColumnSpan(int gridwidth, int gridheight){
+        gbc.gridwidth = gridwidth;
+        gbc.gridheight = gridheight;
         return gbc;
     }
 

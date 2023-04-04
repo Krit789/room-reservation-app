@@ -14,7 +14,7 @@ public class AboutDialog{
     private final JLabel title, menuDesc;
     private final JButton okButton;
     public AboutDialog(JFrame baseFrame){
-        aboutDialog = new JDialog(baseFrame, "About", true);
+        aboutDialog = new JDialog(baseFrame, "About", false);
         aboutPanel = new JPanel();
         aboutPanel.setLayout(new FlowLayout());
         aboutDialog.add(aboutPanel);

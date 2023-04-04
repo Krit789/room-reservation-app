@@ -16,7 +16,7 @@ import net.itkmitl.room.portal.admin.components.GBCBuilder;
 import net.itkmitl.room.portal.admin.components.OperationWindow;
 import net.itkmitl.room.portal.admin.components.PreferenceWindow;
 
-public class BaseWindow {
+public class BaseWindow extends ComponentAdapter {
     private OperationWindow mainMenu;
     private final JFrame baseFrame;
     private final JPanel statusBar;
@@ -37,7 +37,7 @@ public class BaseWindow {
 
     public BaseWindow() {
         baseFrame = new JFrame("Laew Tae Hong Management");
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         multiIcon = new ArrayList<>();
         multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
         multiIcon.add(new ImageIcon("resource/icons/icon-128px.png").getImage());
@@ -48,11 +48,11 @@ public class BaseWindow {
         multiIcon.add(new ImageIcon("resource/icons/icon-20px.png").getImage());
         multiIcon.add(new ImageIcon("resource/icons/icon-16px.png").getImage());
         baseFrame.setIconImages(multiIcon);
-        baseFrame.setSize(screenSize);
+//        baseFrame.setSize(screenSize);
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         baseFrame.setMinimumSize(new Dimension(640, 480));
         baseFrame.setSize(new Dimension(1280, 720));
-        baseFrame.addComponentListener(new CustomComponentListener());
+        baseFrame.addComponentListener(this);
         baseFrame.setExtendedState(baseFrame.getExtendedState() | baseFrame.MAXIMIZED_BOTH);
 
         // Menu Components declaration
@@ -165,7 +165,7 @@ public class BaseWindow {
 
 
         desktop = new JDesktopPane();
-        desktop.setBackground(new Color(44, 102, 188));
+        desktop.setBackground(new Color(51, 126, 185));
         baseFrame.add(desktop, BorderLayout.CENTER);
 
         // create the status bar panel
@@ -188,8 +188,8 @@ public class BaseWindow {
 
         // Adding JProgressBar to the right of statusBar
         progressBar = new JProgressBar();
-        progressBar.setBorder(new BevelBorder(BevelBorder.LOWERED));
-        progressBar.setIndeterminate(true);
+//        progressBar.setBorder(new BevelBorder(BevelBorder.LOWERED));
+        progressBar.setIndeterminate(false);
         statusBar.add(progressBar, new GBCBuilder(GridBagConstraints.NONE, 0.2, 2, 0, new Insets(0, 10, 0, 10)).setAnchor(GridBagConstraints.EAST));
 
 
@@ -238,6 +238,20 @@ public class BaseWindow {
 //        }
 //    }
 
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+            try {
+                if ((mainMenu != null) && (autoCenterMainMenu) && (!mainMenu.getFrame().isIcon())) {
+                    Dimension desktopSize = desktop.getSize();
+                    Dimension jInternalFrameSize = mainMenu.getFrame().getSize();
+                    mainMenu.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                            (desktopSize.height - jInternalFrameSize.height) / 2);
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }
     public static void main(String[] args) {
         try {
             String os = System.getProperty("os.name").toLowerCase();
@@ -259,28 +273,5 @@ public class BaseWindow {
         new BaseWindow(); //start your application
     }
 
-    class CustomComponentListener implements ComponentListener {
-        public void componentResized(ComponentEvent e) {
-            try {
-                if ((mainMenu != null) && (autoCenterMainMenu) && (!mainMenu.getFrame().isIcon())) {
-                    Dimension desktopSize = desktop.getSize();
-                    Dimension jInternalFrameSize = mainMenu.getFrame().getSize();
-                    mainMenu.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
-                            (desktopSize.height - jInternalFrameSize.height) / 2);
-                }
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
-
-        public void componentMoved(ComponentEvent e) {
-        }
-
-        public void componentShown(ComponentEvent e) {
-        }
-
-        public void componentHidden(ComponentEvent e) {
-        }
-    }
 }
 
