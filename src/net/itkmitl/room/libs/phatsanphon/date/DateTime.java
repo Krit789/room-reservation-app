@@ -100,7 +100,7 @@ public class DateTime {
         return this.getDateTime().getMonth() + 1;
     }
 
-    public int setMonth(int month) {
+    public void setMonth(int month) {
         this.getDateTime().setMonth(month - 1);
     }
 
