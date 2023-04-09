@@ -2,9 +2,6 @@ package net.itkmitl.room.libs.phatsanphon.repository;
 
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Entity;
-import net.itkmitl.room.libs.phatsanphon.entity.User;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class Repository<T extends Entity> {

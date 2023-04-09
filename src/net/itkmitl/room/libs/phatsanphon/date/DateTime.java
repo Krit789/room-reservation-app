@@ -8,7 +8,6 @@ public class DateTime {
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private final String rawDateTime;
     private Date dateTime;
-
     private static int timezone = 7;
 
     public DateTime(String rawDateTime) {
@@ -21,14 +20,12 @@ public class DateTime {
     }
 
     private void format() {
-        Date utilDate = null;
         try {
             String dateTime = this.replaceText();
-            utilDate = sdf.parse(dateTime);
+            this.setDateTime(sdf.parse(dateTime));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        this.setDateTime(utilDate);
     }
 
     private Date getDateTime() {
@@ -47,6 +44,9 @@ public class DateTime {
         DateTime.timezone = timezone;
     }
 
+    public long getTime() {
+        return this.getDateTime().getTime();
+    }
     public int getHours() {
         return this.getDateTime().getHours();
     }
@@ -82,5 +82,9 @@ public class DateTime {
                 this.getDate(), this.getMonth(), this.getYear(),
                 this.getHours(), this.getMinutes(), this.getSeconds()
         );
+    }
+
+    public int compare(DateTime dt) {
+        return this.getDateTime().compareTo(dt.getDateTime());
     }
 }
