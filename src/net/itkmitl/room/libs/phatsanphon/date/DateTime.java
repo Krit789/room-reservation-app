@@ -15,6 +15,10 @@ public class DateTime {
         this.format();
     }
 
+    public DateTime() {
+
+    }
+
     private String replaceText() {
         return rawDateTime.replace("T", " ");
     }
@@ -22,7 +26,8 @@ public class DateTime {
     private void format() {
         try {
             String dateTime = this.replaceText();
-            this.setDateTime(sdf.parse(dateTime));
+            Date finalDateTime = sdf.parse(dateTime);
+            this.setDateTime(finalDateTime);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -44,19 +49,39 @@ public class DateTime {
         DateTime.timezone = timezone;
     }
 
+    /*
+     * Return DateTime in milliseconds
+     */
     public long getTime() {
         return this.getDateTime().getTime();
     }
+
+    public void setTime(long time) {
+        this.getDateTime().setTime(time);
+    }
+
     public int getHours() {
         return this.getDateTime().getHours();
+    }
+
+    public void setHours(int hours) {
+        this.getDateTime().setHours(hours);
     }
 
     public int getMinutes() {
         return this.getDateTime().getMinutes();
     }
 
+    public void setMinutes(int minutes) {
+        this.getDateTime().setMinutes(minutes);
+    }
+
     public int getSeconds() {
         return this.getDateTime().getSeconds();
+    }
+
+    public void setSeconds(int seconds) {
+        this.getDateTime().setSeconds(seconds);
     }
 
     public int getDayOfWeek() {
@@ -67,14 +92,29 @@ public class DateTime {
         return this.getDateTime().getDate();
     }
 
+    public void setDate(int date) {
+        this.getDateTime().setDate(date);
+    }
+
     public int getMonth() {
         return this.getDateTime().getMonth() + 1;
+    }
+
+    public int setMonth(int month) {
+        this.getDateTime().setMonth(month - 1);
     }
 
     public int getYear() {
         return this.getDateTime().getYear() + 1900;
     }
 
+    public void setYear(int year) {
+        this.getDateTime().setYear(year - 1900);
+    }
+
+    /*
+     * Return String into database format
+     */
     @Override
     public String toString() {
         return String.format(
