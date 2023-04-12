@@ -18,7 +18,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Login implements ActionListener {
-    private JFrame outerPane, innerPane;
+    private JFrame outerPane;
+    private JPanel innerPane;
     private JTextField usernameField, passwordField;
     private JLabel usernameText, passwordText, loginHeader;
     private ImageIcon img_itbuilding;
@@ -29,12 +30,10 @@ public class Login implements ActionListener {
     private JMenu newWindowMenu;
     private JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
 
-    public Login() {
-        outerPane = new JFrame("Login Page");
-        outerPane.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        outerPane.setExtendedState(outerPane.getExtendedState() | outerPane.MAXIMIZED_BOTH);
+    private void outerPaneInitialize() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        //Menubar
+        //----------------------- Menubar -----------------------
         // Menu Components declaration
         menuBar = new JMenuBar();
         fileMenu = new JMenu("File");
@@ -91,7 +90,26 @@ public class Login implements ActionListener {
         menuBar.add(helpMenu);
         helpMenu.add(helpMenuItem1);
 
-        innerPane = new JFrame();
+        outerPane = new JFrame();
+        outerPane.setTitle("Login");
+        outerPane.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        outerPane.setPreferredSize(screenSize);
+        ImageIcon backgroundImage = new ImageIcon(FewFile.getImage("account/img/account_background.png")); // Load your image
+        JLabel backgroundLabel = new JLabel(backgroundImage);
+        outerPane.setContentPane(backgroundLabel);
+        outerPane.pack();
+        outerPane.setLocationRelativeTo(null);
+        outerPane.setExtendedState(outerPane.getExtendedState() | outerPane.MAXIMIZED_BOTH);
+        outerPane.setLayout(new BorderLayout());
+        outerPane.setJMenuBar(menuBar);
+    }
+
+    public Login() {
+        //JFrame and MenuBar Initialization
+        outerPaneInitialize();
+
+
+        innerPane = new JPanel();
         usernameField = new JTextField();
         passwordField = new JTextField();
         usernameText = new JLabel("Username : ");
@@ -100,9 +118,8 @@ public class Login implements ActionListener {
         img_itbuilding = new ImageIcon(FewFile.getImage("account/img/it_building.png"));
 
 
-        outerPane.setLayout(new BorderLayout());
-        outerPane.setJMenuBar(menuBar);
-//        outerPane.add(menuBar, BorderLayout.NORTH);
+
+//        outerPane.add(innerPane);
         outerPane.setVisible(true);
     }
 
