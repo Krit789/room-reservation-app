@@ -30,6 +30,7 @@ public class BaseWindow extends ComponentAdapter {
     private final JProgressBar progressBar;
     private final JLabel statusLabel;
     private ArrayList<Image> multiIcon;
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();;
 
     private boolean autoCenterMainMenu = true;
 
@@ -49,7 +50,7 @@ public class BaseWindow extends ComponentAdapter {
 //        baseFrame.setSize(screenSize);
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         baseFrame.setMinimumSize(new Dimension(640, 480));
-        baseFrame.setSize(new Dimension(1280, 720));
+        baseFrame.setSize(screenSize);
         baseFrame.addComponentListener(this);
         baseFrame.setExtendedState(baseFrame.getExtendedState() | baseFrame.MAXIMIZED_BOTH);
 
