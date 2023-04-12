@@ -7,9 +7,7 @@ import net.itkmitl.room.portal.admin.BaseWindow;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Login implements ActionListener {
@@ -27,6 +25,7 @@ public class Login implements ActionListener {
     private JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
     private ArrayList<Image> multiIcon;
     private JPanel paneN, paneW, paneS, paneE;
+    private Insets insets;
 
 
     private void menuBarInitialize() {
@@ -91,28 +90,58 @@ public class Login implements ActionListener {
     private void outerPaneInitialize() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-
         outerPane = new OutPane();
         outerPane.setPreferredSize(screenSize);
+
+        outerPane.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                // Get the current size of the panel
+                Dimension size = outerPane.getSize();
+                int width = size.width;
+                int height = size.height;
+
+                // Calculate the new padding based on the current size
+                int paddingSize = Math.min(width, height) / 20;
+                Insets newInsets = new Insets(paddingSize, paddingSize, paddingSize, paddingSize);
+
+                // Update the padding of the nested panel
+                innerPane.setBorder(BorderFactory.createEmptyBorder(newInsets.top, newInsets.left, newInsets.bottom, newInsets.right));
+                insets.top = newInsets.top;
+                insets.left = newInsets.left;
+                insets.bottom = newInsets.bottom;
+                insets.right = newInsets.right;
+
+                // Repaint the panel to update the layout
+                outerPane.revalidate();
+                outerPane.repaint();
+            }
+        });
+
+
     }
 
     private void innerPaneInitialize() {
         innerPane = new JPanel(new BorderLayout());
-        innerPane.setPreferredSize(new Dimension(400, 600));
-        innerPane.setBackground(Color.WHITE);
-        Insets insets = new Insets(10, 10, 10, 10);
-        innerPane.setBorder(BorderFactory.createEmptyBorder());
-        JLabel labelNorth = new JLabel("North", SwingConstants.CENTER);
-        innerPane.add(labelNorth, BorderLayout.NORTH);
-        JLabel labelSouth = new JLabel("South", SwingConstants.CENTER);
-        innerPane.add(labelSouth, BorderLayout.SOUTH);
-        JLabel labelEast = new JLabel("East", SwingConstants.CENTER);
-        innerPane.add(labelEast, BorderLayout.EAST);
-        JLabel labelWest = new JLabel("West", SwingConstants.CENTER);
-        innerPane.add(labelWest, BorderLayout.WEST);
-//        JLabel labelCenter = new JLabel("Center", SwingConstants.CENTER);
-//        innerPane.add(labelCenter, BorderLayout.CENTER);
-        innerPane.setMaximumSize(new Dimension(100, 100));
+        insets = new Insets(100, 100, 100, 100);
+        innerPane.setBorder(BorderFactory.createEmptyBorder(insets.top, insets.left, insets.bottom, insets.right));
+        JLabel label = new JLabel("Content", SwingConstants.CENTER);
+        innerPane.add(label, BorderLayout.CENTER);
+//        innerPane.setPreferredSize(new Dimension(400, 600));
+//        innerPane.setBackground(Color.WHITE);
+//        Insets insets = new Insets(10, 10, 10, 10);
+//        innerPane.setBorder(BorderFactory.createEmptyBorder());
+//        JLabel labelNorth = new JLabel("North", SwingConstants.CENTER);
+//        innerPane.add(labelNorth, BorderLayout.NORTH);
+//        JLabel labelSouth = new JLabel("South", SwingConstants.CENTER);
+//        innerPane.add(labelSouth, BorderLayout.SOUTH);
+//        JLabel labelEast = new JLabel("East", SwingConstants.CENTER);
+//        innerPane.add(labelEast, BorderLayout.EAST);
+//        JLabel labelWest = new JLabel("West", SwingConstants.CENTER);
+//        innerPane.add(labelWest, BorderLayout.WEST);
+////        JLabel labelCenter = new JLabel("Center", SwingConstants.CENTER);
+////        innerPane.add(labelCenter, BorderLayout.CENTER);
+//        innerPane.setMaximumSize(new Dimension(100, 100));
         innerPane.setOpaque(false);
     }
 
