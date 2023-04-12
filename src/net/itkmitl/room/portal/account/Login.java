@@ -26,6 +26,7 @@ public class Login implements ActionListener {
     private ArrayList<Image> multiIcon;
     private JPanel paneN, paneW, paneS, paneE;
     private final Insets insets = new Insets(400, 600, 400, 600);
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();;
 
 
     private void menuBarInitialize() {
@@ -88,7 +89,6 @@ public class Login implements ActionListener {
     }
 
     private void outerPaneInitialize() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
         outerPane = new OutPane();
         outerPane.setPreferredSize(screenSize);
@@ -152,7 +152,7 @@ public class Login implements ActionListener {
         baseFrame = new JFrame();
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         baseFrame.setMinimumSize(new Dimension(640, 480));
-        baseFrame.setSize(new Dimension(1280, 720));
+        baseFrame.setSize(screenSize);
         baseFrame.setExtendedState(baseFrame.getExtendedState() | baseFrame.MAXIMIZED_BOTH);
         baseFrame.setJMenuBar(menuBar);
         multiIcon = new ArrayList<>();
