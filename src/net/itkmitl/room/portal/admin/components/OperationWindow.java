@@ -41,7 +41,7 @@ public class OperationWindow extends InternalFrame{
         // Title Text
         title = new JLabel("Welcome to Laew Tae Hong System");
         menuDesc = new JLabel("Choose categories you want to interact with below.");
-        title.setMinimumSize(new Dimension(300, 70));
+//        title.setMinimumSize(new Dimension(300, 70));
         title.setFont(new Font("Arial", Font.BOLD, 25));
         topPanel.add(title);
         topPanel.add(menuDesc);

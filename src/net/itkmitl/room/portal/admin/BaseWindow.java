@@ -177,7 +177,7 @@ public class BaseWindow extends ComponentAdapter {
 
         // Status bar
         statusBar.setLayout(new GridBagLayout());
-        statusLabel = new JLabel("You want to use GridBagConsraints#anchor to define the position within the cell that you want to align the component to.");
+        statusLabel = new JLabel("Ready.");
         statusLabel.setMinimumSize(new Dimension(128, statusBar.getHeight()));
 
         // Adding JLabel to the left of statusBar
@@ -223,21 +223,6 @@ public class BaseWindow extends ComponentAdapter {
         return pref;
     }
 
-//    public void macResetMenuBar() {
-//        try {
-//            String os = System.getProperty("os.name").toLowerCase();
-//            if (os.contains("mac")) {
-////                System.setProperty("apple.laf.useScreenMenuBar", "false");
-////                baseFrame.setJMenuBar(null);
-//                Application application = Application.getApplication();
-//                application.setDefaultMenuBar(null);
-//            }
-//
-//        } catch (Exception ignored) {
-//
-//        }
-//    }
-
 
     @Override
     public void componentResized(ComponentEvent e) {
@@ -261,6 +246,8 @@ public class BaseWindow extends ComponentAdapter {
                 System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
             }
             try {
+//                UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+
                 UIManager.setLookAndFeel(new FlatIntelliJLaf());
             } catch (Exception ignored) {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -270,7 +257,7 @@ public class BaseWindow extends ComponentAdapter {
         } catch (Exception ignored) {
 
         }
-        new BaseWindow(); //start your application
+        new BaseWindow(); //start the application
     }
 
 }
