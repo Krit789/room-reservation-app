@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class DateTime {
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private final String rawDateTime;
+    private String rawDateTime;
     private Date dateTime;
     private static int timezone = 7;
 
