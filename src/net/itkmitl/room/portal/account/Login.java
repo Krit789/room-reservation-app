@@ -25,7 +25,7 @@ public class Login implements ActionListener {
     private JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
     private ArrayList<Image> multiIcon;
     private JPanel paneN, paneW, paneS, paneE;
-    private Insets insets;
+    private final Insets insets = new Insets(400, 600, 400, 600);
 
 
     private void menuBarInitialize() {
@@ -102,7 +102,7 @@ public class Login implements ActionListener {
                 int height = size.height;
 
                 // Calculate the new padding based on the current size
-                int paddingSize = Math.min(width, height) / 20;
+                int paddingSize = Math.min(width, height) / 5;
                 Insets newInsets = new Insets(paddingSize, paddingSize, paddingSize, paddingSize);
 
                 // Update the padding of the nested panel
@@ -123,10 +123,11 @@ public class Login implements ActionListener {
 
     private void innerPaneInitialize() {
         innerPane = new JPanel(new BorderLayout());
-        insets = new Insets(100, 100, 100, 100);
+//        insets = ;
         innerPane.setBorder(BorderFactory.createEmptyBorder(insets.top, insets.left, insets.bottom, insets.right));
         JLabel label = new JLabel("Content", SwingConstants.CENTER);
         innerPane.add(label, BorderLayout.CENTER);
+        innerPane.setMaximumSize(new Dimension(400, 600));
 //        innerPane.setPreferredSize(new Dimension(400, 600));
 //        innerPane.setBackground(Color.WHITE);
 //        Insets insets = new Insets(10, 10, 10, 10);
