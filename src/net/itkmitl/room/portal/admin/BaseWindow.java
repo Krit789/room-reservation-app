@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import net.itkmitl.room.GUIStarter;
+import net.itkmitl.room.MacConfig;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.portal.Login;
 import net.itkmitl.room.portal.admin.components.AboutDialog;
@@ -239,12 +240,7 @@ public class BaseWindow extends ComponentAdapter {
         }
     public static void main(String[] args) {
         try {
-            String os = System.getProperty("os.name").toLowerCase();
-            if (os.contains("mac")) {
-                System.setProperty("apple.laf.useScreenMenuBar", "true");
-                System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
-                System.setProperty("com.apple.mrj.application.apple.menu.about.name", "Laew Tae Hong Management");
-            }
+            MacConfig.menuBar("Laew Tae Hong Management");
             try {
 //                UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
 
