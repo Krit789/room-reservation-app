@@ -1,6 +1,6 @@
 package net.itkmitl.room;
 
-import net.itkmitl.room.portal.*;
+import net.itkmitl.room.portal.account.Login;
 
 public class GUIStarter {
     public static void main(final String[] args) {

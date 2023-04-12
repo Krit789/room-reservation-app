@@ -1,11 +1,5 @@
-package net.itkmitl.room.portal;
+package net.itkmitl.room.portal.account;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.stage.Stage;
-import net.itkmitl.room.GUIStarter;
 import net.itkmitl.room.MacConfig;
 import net.itkmitl.room.libs.peeranat.util.*;
 import net.itkmitl.room.portal.admin.BaseWindow;
@@ -15,11 +9,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.event.ComponentListener;
+import java.util.ArrayList;
 
 public class Login implements ActionListener {
-    private JFrame outerPane;
-    private JPanel innerPane;
+    private JFrame baseFrame;
+    private OutPane outerPane;
+    private JPanel innerPane, paddingN;
     private JTextField usernameField, passwordField;
     private JLabel usernameText, passwordText, loginHeader;
     private ImageIcon img_itbuilding;
@@ -29,6 +25,8 @@ public class Login implements ActionListener {
     private JMenuItem optionMenuItem1, helpMenuItem1;
     private JMenu newWindowMenu;
     private JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
+    private ArrayList<Image> multiIcon;
+
 
     private void outerPaneInitialize() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -57,7 +55,7 @@ public class Login implements ActionListener {
         optionMenuItem1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                outerPane.dispose();
+                baseFrame.dispose();
                 String[] arguments = new String[]{""};
                 BaseWindow.main(arguments);
             }
@@ -90,26 +88,42 @@ public class Login implements ActionListener {
         menuBar.add(helpMenu);
         helpMenu.add(helpMenuItem1);
 
-        outerPane = new JFrame();
-        outerPane.setTitle("Login");
-        outerPane.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        outerPane = new OutPane();
         outerPane.setPreferredSize(screenSize);
-        ImageIcon backgroundImage = new ImageIcon(FewFile.getImage("account/img/account_background.png")); // Load your image
-        JLabel backgroundLabel = new JLabel(backgroundImage);
-        outerPane.setContentPane(backgroundLabel);
-        outerPane.pack();
-        outerPane.setLocationRelativeTo(null);
-        outerPane.setExtendedState(outerPane.getExtendedState() | outerPane.MAXIMIZED_BOTH);
-        outerPane.setLayout(new BorderLayout());
-        outerPane.setJMenuBar(menuBar);
+//        ImageIcon backgroundImage = new ImageIcon(FewFile.getImage("account/img/account_background.png")); // Load your image
+//        JLabel backgroundLabel = new JLabel(backgroundImage);
+
+    }
+
+    private void innerPaneInitialize() {
+        innerPane = new JPanel(new BorderLayout());
+        innerPane.setPreferredSize(new Dimension(400, 600));
+        innerPane.setBackground(Color.WHITE);
+        innerPane.setOpaque(false);
     }
 
     public Login() {
         //JFrame and MenuBar Initialization
+        baseFrame = new JFrame();
+        multiIcon = new ArrayList<>();
+        multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-128px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-64px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-56px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-48px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-40px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-20px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-16px.png").getImage());
+        baseFrame.setIconImages(multiIcon);
+//        baseFrame.setSize(screenSize);
+        baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        baseFrame.setMinimumSize(new Dimension(640, 480));
+        baseFrame.setSize(new Dimension(1280, 720));
+        baseFrame.setExtendedState(baseFrame.getExtendedState() | baseFrame.MAXIMIZED_BOTH);
+
         outerPaneInitialize();
+        innerPaneInitialize();
 
-
-        innerPane = new JPanel();
         usernameField = new JTextField();
         passwordField = new JTextField();
         usernameText = new JLabel("Username : ");
@@ -117,12 +131,13 @@ public class Login implements ActionListener {
         loginHeader = new JLabel("Login");
         img_itbuilding = new ImageIcon(FewFile.getImage("account/img/it_building.png"));
 
+        outerPane.add(usernameText);
 
+        outerPane.add(innerPane);
 
-//        outerPane.add(innerPane);
-        outerPane.setVisible(true);
+        baseFrame.add(outerPane);
+        baseFrame.setVisible(true);
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {

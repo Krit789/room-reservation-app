@@ -2,7 +2,6 @@ package net.itkmitl.room.portal.admin;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -10,8 +9,6 @@ import java.util.ArrayList;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import net.itkmitl.room.GUIStarter;
 import net.itkmitl.room.MacConfig;
-import net.itkmitl.room.libs.peeranat.util.FewFile;
-import net.itkmitl.room.portal.Login;
 import net.itkmitl.room.portal.admin.components.AboutDialog;
 import net.itkmitl.room.portal.admin.components.GBCBuilder;
 import net.itkmitl.room.portal.admin.components.OperationWindow;
