@@ -7,14 +7,28 @@ import java.awt.*;
 
 public class OutPane extends JPanel {
 
+    private JPanel paneN, paneW, paneS, paneE;
     public OutPane() {
-        setLayout(null);
-//        JLabel label = new JLabel("Hello, World!");
+        setLayout(new BorderLayout());
+
+//        paneN = new JPanel();
+//        paneW = new JPanel();
+//        paneS = new JPanel();
+//        paneE = new JPanel();
+//
+//        add(paneN, BorderLayout.NORTH);
+//        add(paneW, BorderLayout.WEST);
+//        add(paneS, BorderLayout.SOUTH);
+//        add(paneE, BorderLayout.EAST);
+
+
+        //        JLabel label = new JLabel("Hello, World!");
 //        label.setBounds(50, 50, 200, 30);
 //        add(label);
 //        JButton button = new JButton("Click me!");
 //        button.setBounds(50, 100, 100, 30);
 //        add(button);
+
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Login implements ActionListener {
     private JFrame baseFrame;
     private OutPane outerPane;
-    private JPanel innerPane, paddingN;
+    private JPanel innerPane, floatingBox;
     private JTextField usernameField, passwordField;
     private JLabel usernameText, passwordText, loginHeader;
     private ImageIcon img_itbuilding;
@@ -26,11 +26,10 @@ public class Login implements ActionListener {
     private JMenu newWindowMenu;
     private JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
     private ArrayList<Image> multiIcon;
+    private JPanel paneN, paneW, paneS, paneE;
 
 
-    private void outerPaneInitialize() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
+    private void menuBarInitialize() {
         //----------------------- Menubar -----------------------
         // Menu Components declaration
         menuBar = new JMenuBar();
@@ -87,24 +86,45 @@ public class Login implements ActionListener {
 
         menuBar.add(helpMenu);
         helpMenu.add(helpMenuItem1);
+    }
+
+    private void outerPaneInitialize() {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
 
         outerPane = new OutPane();
         outerPane.setPreferredSize(screenSize);
-//        ImageIcon backgroundImage = new ImageIcon(FewFile.getImage("account/img/account_background.png")); // Load your image
-//        JLabel backgroundLabel = new JLabel(backgroundImage);
-
     }
 
     private void innerPaneInitialize() {
         innerPane = new JPanel(new BorderLayout());
         innerPane.setPreferredSize(new Dimension(400, 600));
         innerPane.setBackground(Color.WHITE);
+        Insets insets = new Insets(10, 10, 10, 10);
+        innerPane.setBorder(BorderFactory.createEmptyBorder());
+        JLabel labelNorth = new JLabel("North", SwingConstants.CENTER);
+        innerPane.add(labelNorth, BorderLayout.NORTH);
+        JLabel labelSouth = new JLabel("South", SwingConstants.CENTER);
+        innerPane.add(labelSouth, BorderLayout.SOUTH);
+        JLabel labelEast = new JLabel("East", SwingConstants.CENTER);
+        innerPane.add(labelEast, BorderLayout.EAST);
+        JLabel labelWest = new JLabel("West", SwingConstants.CENTER);
+        innerPane.add(labelWest, BorderLayout.WEST);
+//        JLabel labelCenter = new JLabel("Center", SwingConstants.CENTER);
+//        innerPane.add(labelCenter, BorderLayout.CENTER);
+        innerPane.setMaximumSize(new Dimension(100, 100));
         innerPane.setOpaque(false);
     }
 
     public Login() {
         //JFrame and MenuBar Initialization
+        menuBarInitialize();
         baseFrame = new JFrame();
+        baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        baseFrame.setMinimumSize(new Dimension(640, 480));
+        baseFrame.setSize(new Dimension(1280, 720));
+        baseFrame.setExtendedState(baseFrame.getExtendedState() | baseFrame.MAXIMIZED_BOTH);
+        baseFrame.setJMenuBar(menuBar);
         multiIcon = new ArrayList<>();
         multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
         multiIcon.add(new ImageIcon("resource/icons/icon-128px.png").getImage());
@@ -115,11 +135,9 @@ public class Login implements ActionListener {
         multiIcon.add(new ImageIcon("resource/icons/icon-20px.png").getImage());
         multiIcon.add(new ImageIcon("resource/icons/icon-16px.png").getImage());
         baseFrame.setIconImages(multiIcon);
-//        baseFrame.setSize(screenSize);
-        baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        baseFrame.setMinimumSize(new Dimension(640, 480));
-        baseFrame.setSize(new Dimension(1280, 720));
-        baseFrame.setExtendedState(baseFrame.getExtendedState() | baseFrame.MAXIMIZED_BOTH);
+
+        floatingBox = new JPanel();
+        floatingBox.setSize(new Dimension(400, 500));
 
         outerPaneInitialize();
         innerPaneInitialize();
@@ -131,11 +149,12 @@ public class Login implements ActionListener {
         loginHeader = new JLabel("Login");
         img_itbuilding = new ImageIcon(FewFile.getImage("account/img/it_building.png"));
 
-        outerPane.add(usernameText);
+//        innerPane.add(usernameText);
 
+        innerPane.add(floatingBox);
         outerPane.add(innerPane);
 
-        baseFrame.add(outerPane);
+        baseFrame.setContentPane(outerPane);
         baseFrame.setVisible(true);
     }
 
