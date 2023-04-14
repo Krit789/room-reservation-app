@@ -13,7 +13,8 @@ import java.util.ArrayList;
 public class Login implements ActionListener {
     private JFrame baseFrame;
     private OutPane outerPane;
-    private JPanel innerPane, floatingBox;
+    private JButton loginButton;
+    private JPanel innerPane, floatingBox, buttonBox;
     private JTextField usernameField, passwordField;
     private JLabel usernameText, passwordText, loginHeader;
     private ImageIcon img_itbuilding;
@@ -92,6 +93,7 @@ public class Login implements ActionListener {
 
         outerPane = new OutPane();
         outerPane.setPreferredSize(screenSize);
+        outerPane.setBackground(new Color(15,27,47));
 
         outerPane.addComponentListener(new ComponentAdapter() {
             @Override
@@ -168,18 +170,60 @@ public class Login implements ActionListener {
 
         floatingBox = new JPanel();
         floatingBox.setSize(new Dimension(400, 500));
+        floatingBox.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
         outerPaneInitialize();
         innerPaneInitialize();
 
         usernameField = new JTextField();
         passwordField = new JTextField();
-        usernameText = new JLabel("Username : ");
-        passwordText = new JLabel("Password : ");
-        loginHeader = new JLabel("Login");
+        usernameText = new JLabel("Username : ", SwingConstants.RIGHT);
+        passwordText = new JLabel("Password : ", SwingConstants.RIGHT);
+        loginButton = new JButton("Login");
+        loginHeader = new JLabel("Login", SwingConstants.CENTER);
         img_itbuilding = new ImageIcon(FewFile.getImage("account/img/it_building.png"));
 
+        buttonBox = new JPanel();
+        buttonBox.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        buttonBox.add(loginButton);
 //        innerPane.add(usernameText);
+        //Tried using GridBag Layout (Card Layout sounds interesting too, but are too complicated)
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 1;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 3;
+        c.ipady = 10;
+        c.insets = new Insets(5, 0, 5, 0);
+        floatingBox.add(loginHeader, c);
+        c.weightx = 0.05;
+        c.gridx = 1;
+        c.gridy = 1;
+        c.gridwidth = 1;
+        floatingBox.add(usernameText, c);
+        c.weightx = 0.57;
+        c.gridx = 2;
+        c.gridy = 1;
+        floatingBox.add(passwordField, c);
+        c.weightx = 0.03;
+        c.gridx = 1;
+        c.gridy = 2;
+        floatingBox.add(passwordText, c);
+        c.weightx = 0.57;
+        c.gridx = 2;
+        c.gridy = 2;
+        floatingBox.add(usernameField, c);
+        c.gridx = 2;
+        c.gridy = 3;
+        floatingBox.add(buttonBox, c);
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weightx = 0.40;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridheight = 5;
+        floatingBox.add(new JLabel("building goes here"), c);//Image wont go in
+        c.gridheight = 1;
 
         innerPane.add(floatingBox);
         outerPane.add(innerPane);
