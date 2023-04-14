@@ -34,7 +34,7 @@ public class OutPane extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Image image = new ImageIcon(FewFile.getImage("account/img/account_background.png")).getImage();
+        Image image = new ImageIcon(FewFile.getImage("account/img/Gradient.png")).getImage();
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
     }
 
