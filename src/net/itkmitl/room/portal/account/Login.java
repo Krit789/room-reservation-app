@@ -188,6 +188,7 @@ public class Login implements ActionListener {
         buttonBox.setLayout(new FlowLayout(FlowLayout.RIGHT));
         buttonBox.add(loginButton);
 //        innerPane.add(usernameText);
+
         //Tried using GridBag Layout (Card Layout sounds interesting too, but are too complicated)
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1;
@@ -195,7 +196,7 @@ public class Login implements ActionListener {
         c.gridy = 0;
         c.gridwidth = 3;
         c.ipady = 10;
-        c.insets = new Insets(5, 0, 5, 0);
+        c.insets = new Insets(5, 0, 5, 40);
         floatingBox.add(loginHeader, c);
         c.weightx = 0.05;
         c.gridx = 1;
