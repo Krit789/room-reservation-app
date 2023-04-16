@@ -1,4 +1,4 @@
-{ip: 49.228.131.109, database: room_reservation, port: 3357, username: test_user,
+{ ip: 49.228.131.109, database: room_reservation, port: 3357, username: test_user,
   password: Pu57HDrrXgvVLn, timeout_time: 13,
   never_timeout: true, config_dir: 'C:\Users\Jarukrit\Programming\room-reservation-app\test.yml',
-  create_new_db_if_doesnt_exist: false}
+  create_new_db_if_doesnt_exist: false }

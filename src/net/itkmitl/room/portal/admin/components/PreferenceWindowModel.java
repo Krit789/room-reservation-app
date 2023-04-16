@@ -1,7 +1,6 @@
 package net.itkmitl.room.portal.admin.components;
 
 import net.itkmitl.room.libs.peeranat.config.FewConfig;
-import net.itkmitl.room.libs.peeranat.util.FewPassword;
 
 import java.io.File;
 
