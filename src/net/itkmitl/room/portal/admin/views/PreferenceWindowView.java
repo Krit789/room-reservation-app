@@ -1,29 +1,25 @@
-package net.itkmitl.room.portal.admin.components;
+package net.itkmitl.room.portal.admin.views;
 
-import net.itkmitl.room.libs.jarukrit.ConfigManager;
-import net.itkmitl.room.libs.peeranat.config.FewConfig;
+import net.itkmitl.room.portal.admin.components.GBCBuilder;
+import net.itkmitl.room.portal.admin.components.InternalFrame;
+import net.itkmitl.room.portal.admin.models.PreferenceWindowModel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 
-public class PreferenceWindowView extends InternalFrame implements ChangeListener, ActionListener {
+public class PreferenceWindowView extends InternalFrame {
     private final JInternalFrame frame;
-    private final JTabbedPane settingTab;
-    private final JPanel databasePanel, instancePanel, titlePanel, frameButtonPanel, dbCredPanel, dbConnectionPanel, timeoutPanel, resetPanel, configPanel;
-    private final JButton okButton, cancelButton, applyButton, resetButton, configPickerButton;
-    private final JLabel pageTitle, dbAddressLabel, dbPortLabel, dbNameLabel, dbUserLabel, dbPasswordLabel, timeoutLabel1, timeoutLabel2, resetLabel, configLabel;
-    private final JTextField dbAddressTextField, dbNameTextField, dbUserTextField, configDirectory;
-    private final JCheckBox createDbCheckBox, timeoutCheckBox;
-    private final JSpinner dbPortSpinner, timeoutSpinner;
-    private final JPasswordField dbPasswordField;
-    private PreferenceWindowModel model;
-    private final JFileChooser fileChooser;
+    public final JTabbedPane settingTab;
+    public final JPanel databasePanel, instancePanel, titlePanel, frameButtonPanel, dbCredPanel, dbConnectionPanel, timeoutPanel, resetPanel, configPanel;
+    public final JButton okButton, cancelButton, applyButton, resetButton, configPickerButton;
+    public final JLabel pageTitle, dbAddressLabel, dbPortLabel, dbNameLabel, dbUserLabel, dbPasswordLabel, timeoutLabel1, timeoutLabel2, resetLabel, configLabel;
+    public final JTextField dbAddressTextField, dbNameTextField, dbUserTextField, configDirectory;
+    public final JCheckBox createDbCheckBox, timeoutCheckBox;
+    public final JSpinner dbPortSpinner, timeoutSpinner;
+    public final JPasswordField dbPasswordField;
+    public PreferenceWindowModel model;
+    public final JFileChooser fileChooser;
 
     public PreferenceWindowView() {
         this(new PreferenceWindowModel());
@@ -53,14 +49,10 @@ public class PreferenceWindowView extends InternalFrame implements ChangeListene
         frame.add(titlePanel, BorderLayout.NORTH);
 
         settingTab = new JTabbedPane();
-        settingTab.addChangeListener(this);
 
         okButton = new JButton("OK");
-        okButton.addActionListener(this);
         cancelButton = new JButton("Cancel");
-        cancelButton.addActionListener(this);
         applyButton = new JButton("Apply");
-        applyButton.addActionListener(this);
         frameButtonPanel.add(okButton);
         frameButtonPanel.add(cancelButton);
         frameButtonPanel.add(applyButton);
@@ -128,7 +120,6 @@ public class PreferenceWindowView extends InternalFrame implements ChangeListene
 
         timeoutCheckBox = new JCheckBox("Never timeout users");
         timeoutCheckBox.setSelected(m.isNeverTimeout());
-        timeoutCheckBox.addActionListener(this);
         timeoutPanel.add(timeoutCheckBox, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 2, new Insets(0, 10, 10, 10)).setColumnSpan(4, 1));
 
 
@@ -141,7 +132,6 @@ public class PreferenceWindowView extends InternalFrame implements ChangeListene
         configDirectory.setEditable(false);
         fileChooser = new JFileChooser();
         configPickerButton = new JButton("Browse...");
-        configPickerButton.addActionListener(this);
 
         configPanel.add(configLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.05, 0, 0, new Insets(0, 10, 5, 0)).getGBC());
         configPanel.add(configDirectory, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.92, 1, 0, new Insets(0, 0, 5, 0)).getGBC());
@@ -169,63 +159,6 @@ public class PreferenceWindowView extends InternalFrame implements ChangeListene
         frame.add(settingTab, BorderLayout.CENTER);
 
         frame.add(frameButtonPanel, BorderLayout.SOUTH);
-    }
-
-
-    public void stateChanged(ChangeEvent e) {
-        if (e.getSource().equals(settingTab)) {
-            switch (settingTab.getSelectedIndex()) {
-                case 0:
-                    pageTitle.setText("Database");
-                    break;
-                case 1:
-                    pageTitle.setText("Client");
-                    break;
-            }
-        }
-    }
-
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(cancelButton)) {
-            try {
-                frame.setClosed(true);
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        } else if (e.getSource().equals(timeoutCheckBox)) {
-            model.setNeverTimeout(timeoutCheckBox.isSelected());
-            timeoutSpinner.setEnabled(!timeoutCheckBox.isSelected());
-        } else if (e.getSource().equals(configPickerButton)) {
-            int chose = fileChooser.showOpenDialog(null);
-            if (chose == JFileChooser.APPROVE_OPTION) {
-                PreferenceWindowModel.setConfigFile(new File(fileChooser.getSelectedFile().getAbsolutePath()));
-                configDirectory.setText(fileChooser.getSelectedFile().getAbsolutePath());
-            }
-        } else if (e.getSource().equals(applyButton)) {
-            pushToModel();
-            model.writeToConfig();
-        } else if (e.getSource().equals(okButton)) {
-            pushToModel();
-            model.writeToConfig();
-            try {
-                frame.setClosed(true);
-
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
-    private void pushToModel() {
-        model.setUsername(dbUserTextField.getText());
-        model.setPassword(String.valueOf(dbPasswordField.getPassword()));
-        model.setSqlDBName(dbNameTextField.getText());
-        model.setSqlAddress(dbAddressTextField.getText());
-        model.setSqlPort((Integer) dbPortSpinner.getValue());
-        model.setCreateNewDB(createDbCheckBox.isSelected());
-        model.setTimeout((Integer) timeoutSpinner.getValue());
-        model.setNeverTimeout(timeoutCheckBox.isSelected());
     }
 
     public JInternalFrame getFrame() {

@@ -1,4 +1,4 @@
-package net.itkmitl.room.portal.admin.components;
+package net.itkmitl.room.portal.admin.models;
 
 import net.itkmitl.room.libs.peeranat.config.FewConfig;
 

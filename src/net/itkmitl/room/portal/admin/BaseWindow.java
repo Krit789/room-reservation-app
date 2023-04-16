@@ -14,6 +14,8 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import net.itkmitl.room.GUIStarter;
 import net.itkmitl.room.MacConfig;
 import net.itkmitl.room.portal.admin.components.*;
+import net.itkmitl.room.portal.admin.controllers.PreferenceWindowController;
+import net.itkmitl.room.portal.admin.views.PreferenceWindowView;
 
 public class BaseWindow extends ComponentAdapter implements ActionListener, InternalFrameListener {
     private OperationWindow mainMenu;
@@ -174,17 +176,20 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     }
 
     private PreferenceWindowView spawnPreference() {
-        PreferenceWindowView pref = new PreferenceWindowView();
+        PreferenceWindowController pref = new PreferenceWindowController();
+        PreferenceWindowView view = pref.getView();
+
         Dimension desktopSize = desktop.getSize();
-        Dimension jInternalFrameSize = pref.getFrame().getSize();
-        pref.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+        Dimension jInternalFrameSize = view.getFrame().getSize();
+        view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
-        pref.getFrame().addInternalFrameListener(this);
-        pref.getFrame().show();
-        pref.getFrame().setVisible(true);
-        desktop.add(pref.getFrame());
-        pref.getFrame().moveToFront();
-        return pref;
+        view.getFrame().addInternalFrameListener(this);
+        view.getFrame().show();
+        view.getFrame().setVisible(true);
+        desktop.add(view.getFrame());
+        view.getFrame().moveToFront();
+
+        return view;
     }
 
     public TableView spawnTableView() {
