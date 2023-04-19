@@ -15,7 +15,7 @@ public class Login implements ActionListener {
     private OutPane outerPane;
     private JButton loginButton;
     private JPanel innerPane, floatingBox, buttonBox;
-    private JTextField usernameField, passwordField;
+    private JTextField usernameField;
     private JLabel usernameText, passwordText, loginHeader;
     private ImageIcon img_itbuilding;
     private JMenuBar menuBar;
@@ -26,6 +26,8 @@ public class Login implements ActionListener {
     private JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
     private ArrayList<Image> multiIcon;
     private JPanel paneN, paneW, paneS, paneE;
+    private JPasswordField passwordField;
+
     private final Insets insets = new Insets(400, 600, 400, 600);
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();;
 
@@ -177,7 +179,7 @@ public class Login implements ActionListener {
         innerPaneInitialize();
 
         usernameField = new JTextField();
-        passwordField = new JTextField();
+        passwordField = new JPasswordField();
         usernameText = new JLabel("Username : ", SwingConstants.RIGHT);
         passwordText = new JLabel("Password : ", SwingConstants.RIGHT);
         loginButton = new JButton("Login");
@@ -206,7 +208,7 @@ public class Login implements ActionListener {
         c.weightx = 0.57;
         c.gridx = 2;
         c.gridy = 1;
-        floatingBox.add(passwordField, c);
+        floatingBox.add(usernameField, c);
         c.weightx = 0.03;
         c.gridx = 1;
         c.gridy = 2;
@@ -214,7 +216,7 @@ public class Login implements ActionListener {
         c.weightx = 0.57;
         c.gridx = 2;
         c.gridy = 2;
-        floatingBox.add(usernameField, c);
+        floatingBox.add(passwordField, c);
         c.gridx = 2;
         c.gridy = 3;
         floatingBox.add(buttonBox, c);
