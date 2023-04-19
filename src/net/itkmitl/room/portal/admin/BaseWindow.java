@@ -24,12 +24,11 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     private final JFrame baseFrame;
     private final JPanel statusBar;
     private final JMenuBar menuBar;
-    private final JMenu fileMenu, windowMenu, optionMenu, helpMenu;
+    public static JMenu windowMenu;
+    private final JMenu fileMenu, optionMenu, helpMenu;
     private final JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
     private final JMenuItem optionMenuItem1, optionMenuItem2, optionMenuItem3, optionMenuItem4;
-    private final JMenu newWindowMenu;
-    public static JMenu windowListMenu;
-    private final JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
+    private final JMenuItem windowMenuItem2, windowMenuItem3;
     private final JCheckBoxMenuItem windowCheckBoxMenuItem1;
     private final JMenuItem aboutMenuItem1;
     private static JDesktopPane desktop;
@@ -37,8 +36,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     private final JLabel statusLabel;
     private ArrayList<Image> multiIcon;
     public static HashMap<JInternalFrame, JMenuItem> windowList = new HashMap<>();
-    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    ;
+//    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     private boolean autoCenterMainMenu = true;
 
@@ -56,7 +54,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         baseFrame.setIconImages(multiIcon);
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         baseFrame.setMinimumSize(new Dimension(640, 480));
-        baseFrame.setSize(screenSize);
+        baseFrame.setSize(1280, 720);
         baseFrame.addComponentListener(this);
         baseFrame.setExtendedState(baseFrame.getExtendedState() | baseFrame.MAXIMIZED_BOTH);
 
@@ -64,7 +62,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         menuBar = new JMenuBar();
         fileMenu = new JMenu("File");
         optionMenu = new JMenu("Options");
-        windowMenu = new JMenu("Window");
+        BaseWindow.windowMenu = new JMenu("Window");
         helpMenu = new JMenu("Help");
 
         // 'File' Menu Components declaration
@@ -76,6 +74,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         optionMenuItem1 = new JMenuItem("Connect");
         optionMenuItem2 = new JMenuItem("Disconnect");
         optionMenuItem3 = new JMenuItem("Settings");
+        optionMenuItem3.setIcon(new ImageIcon("resource/icons/settingsicon-16px.png"));
         optionMenuItem3.addActionListener(this);
         optionMenuItem4 = new JMenuItem("Switch to User Mode");
         optionMenuItem4.addActionListener(this);
@@ -85,12 +84,9 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         windowCheckBoxMenuItem1.setToolTipText("Automatically center Main Menu when Main Window is resized");
         windowCheckBoxMenuItem1.addActionListener(this);
         windowMenuItem2 = new JMenuItem("Cascade Window");
+        windowMenuItem2.setIcon(new ImageIcon("resource/icons/Cascade-16px.png"));
         windowMenuItem3 = new JMenuItem("Close all Window");
-        newWindowMenu = new JMenu("New");
-        BaseWindow.windowListMenu = new JMenu("Opened Window");
-        windowMenuItem1 = new JMenuItem("Main Menu");
-        windowMenuItem1.setEnabled(false);
-        windowMenuItem1.addActionListener(this);
+        windowMenuItem3.setIcon(new ImageIcon("resource/icons/CloseAll-16px.png"));
 
         // 'About' Menu Components declaration
         aboutMenuItem1 = new JMenuItem("About Us");
@@ -113,14 +109,12 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         optionMenu.add(optionMenuItem3);
 
         menuBar.add(windowMenu);
-        windowMenu.add(newWindowMenu);
-        newWindowMenu.add(windowMenuItem1);
-        windowMenu.add(windowListMenu);
-        windowMenu.add(new JSeparator());
         windowMenu.add(windowCheckBoxMenuItem1);
         windowMenu.add(windowMenuItem2);
         windowMenuItem2.addActionListener(this);
         windowMenu.add(windowMenuItem3);
+        windowMenu.add(new JSeparator());
+
         menuBar.add(helpMenu);
         aboutMenuItem1.addActionListener(this);
         helpMenu.add(aboutMenuItem1);
@@ -194,11 +188,6 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         return view;
     }
 
-
-
-    public void addTableListener(TableView table){
-        table.getFrame().addInternalFrameListener(this);
-    }
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(aboutMenuItem1)) {
             new AboutDialog(baseFrame);
@@ -220,8 +209,6 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
                 mainMenu.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                         (desktopSize.height - jInternalFrameSize.height) / 2);
             }
-        } else if (e.getSource().equals(windowMenuItem1)) {
-            spawnMainMenu();
         } else if (e.getSource().equals(windowMenuItem2)) {
             for (JInternalFrame i : desktop.getAllFrames()
             ) {
@@ -247,14 +234,15 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     public void internalFrameOpened(InternalFrameEvent e) {
         JMenuItem newItem = new JMenuItem(e.getInternalFrame().getTitle());
         windowList.put(e.getInternalFrame(), newItem);
-        windowListMenu.add(newItem);
+        newItem.setIcon(e.getInternalFrame().getFrameIcon());
+        windowMenu.add(newItem);
     }
 
     public void internalFrameClosing(InternalFrameEvent e) {
     }
 
     public void internalFrameClosed(InternalFrameEvent e) {
-        windowListMenu.remove(windowList.get(e.getInternalFrame()));
+        windowMenu.remove(windowList.get(e.getInternalFrame()));
         windowList.remove(e.getInternalFrame());
     }
 

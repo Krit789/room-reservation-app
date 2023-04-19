@@ -6,6 +6,7 @@ import net.itkmitl.room.portal.admin.views.PreferenceWindowView;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.filechooser.FileFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -22,6 +23,22 @@ public class PreferenceWindowController implements ChangeListener, ActionListene
         view = new PreferenceWindowView();
         model = new PreferenceWindowModel();
 
+        view.fileChooser.setFileFilter(new FileFilter() {
+            @Override
+            public boolean accept(File f) {
+                if (f.isDirectory()) {
+                    return true;
+                } else {
+                    String filename = f.getName().toLowerCase();
+                    return filename.endsWith(".yml") ;
+                }
+            }
+
+            @Override
+            public String getDescription() {
+                return "YAML Ain't Markup Language format (*.yml)";
+            }
+        });
         view.settingTab.addChangeListener(this);
         view.okButton.addActionListener(this);
         view.cancelButton.addActionListener(this);

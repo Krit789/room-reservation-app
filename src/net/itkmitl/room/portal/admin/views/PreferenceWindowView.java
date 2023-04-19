@@ -1,14 +1,13 @@
 package net.itkmitl.room.portal.admin.views;
 
 import net.itkmitl.room.portal.admin.components.GBCBuilder;
-import net.itkmitl.room.portal.admin.components.InternalFrame;
 import net.itkmitl.room.portal.admin.models.PreferenceWindowModel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class PreferenceWindowView extends InternalFrame {
+public class PreferenceWindowView {
     private final JInternalFrame frame;
     public final JTabbedPane settingTab;
     public final JPanel databasePanel, instancePanel, titlePanel, frameButtonPanel, dbCredPanel, dbConnectionPanel, timeoutPanel, resetPanel, configPanel;
