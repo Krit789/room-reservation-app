@@ -15,7 +15,7 @@ public class PreferenceWindowView extends InternalFrame {
     public final JButton okButton, cancelButton, applyButton, resetButton, configPickerButton;
     public final JLabel pageTitle, dbAddressLabel, dbPortLabel, dbNameLabel, dbUserLabel, dbPasswordLabel, timeoutLabel1, timeoutLabel2, resetLabel, configLabel;
     public final JTextField dbAddressTextField, dbNameTextField, dbUserTextField, configDirectory;
-    public final JCheckBox createDbCheckBox, timeoutCheckBox;
+    public final JCheckBox timeoutCheckBox;
     public final JSpinner dbPortSpinner, timeoutSpinner;
     public final JPasswordField dbPasswordField;
     public PreferenceWindowModel model;
@@ -80,8 +80,6 @@ public class PreferenceWindowView extends InternalFrame {
         dbNameTextField = new JTextField(m.getSqlDBName());
         dbUserTextField = new JTextField(m.getUsername());
         dbPasswordField = new JPasswordField(m.getPassword());
-        createDbCheckBox = new JCheckBox("Create new database with the specified name if the database doesn't exist");
-        createDbCheckBox.setSelected(m.isCreateNewDB());
 
         dbCredPanel.add(dbUserLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 0).setInset(new Insets(0, 10, 5, 0)));
         dbCredPanel.add(dbUserTextField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 0).setInset(new Insets(0, 0, 5, 10)));
@@ -96,7 +94,6 @@ public class PreferenceWindowView extends InternalFrame {
 
         dbConnectionPanel.add(dbNameLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.2, 0, 1).setInset(new Insets(0, 10, 5, 0)));
         dbConnectionPanel.add(dbNameTextField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.8, 1, 1).setInset(new Insets(0, 0, 5, 10)));
-        dbConnectionPanel.add(createDbCheckBox, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.8, 0, 2, new Insets(0, 10, 0, 0)).setColumnSpan(4, 1));
 
         databasePanel.add(dbCredPanel, new GBCBuilder(GridBagConstraints.BOTH, 1, 0.5, 0, 0).setInset(new Insets(10, 10, 0, 10)));
         databasePanel.add(dbConnectionPanel, new GBCBuilder(GridBagConstraints.BOTH, 1, 0.4, 0, 1).setInset(new Insets(10, 10, 10, 10)));
@@ -122,7 +119,6 @@ public class PreferenceWindowView extends InternalFrame {
         timeoutCheckBox.setSelected(m.isNeverTimeout());
         timeoutPanel.add(timeoutCheckBox, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 2, new Insets(0, 10, 10, 10)).setColumnSpan(4, 1));
 
-
         instancePanel.add(timeoutPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.1, 0, 0, new Insets(10, 10, 0, 10)).getGBC());
 
         configPanel = new JPanel();
@@ -146,7 +142,6 @@ public class PreferenceWindowView extends InternalFrame {
         resetPanel.add(resetLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 0, 0).getGBC());
 
         instancePanel.add(new JPanel(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.5, 0, 3).getGBC());
-
 
         resetButton = new JButton("Reset");
         resetPanel.add(resetButton, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 1, 0).getGBC());

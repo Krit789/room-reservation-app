@@ -26,9 +26,7 @@ public class PreferenceWindowController implements ChangeListener, ActionListene
         view.okButton.addActionListener(this);
         view.cancelButton.addActionListener(this);
         view.applyButton.addActionListener(this);
-
         view.timeoutCheckBox.addActionListener(this);
-
         view.configPickerButton.addActionListener(this);
     }
 
@@ -38,7 +36,6 @@ public class PreferenceWindowController implements ChangeListener, ActionListene
         model.setSqlDBName(view.dbNameTextField.getText());
         model.setSqlAddress(view.dbAddressTextField.getText());
         model.setSqlPort((Integer) view.dbPortSpinner.getValue());
-        model.setCreateNewDB(view.createDbCheckBox.isSelected());
         model.setTimeout((Integer) view.timeoutSpinner.getValue());
         model.setNeverTimeout(view.timeoutCheckBox.isSelected());
     }

@@ -8,7 +8,6 @@ public class PreferenceWindowModel {
     private String username, password;
     private String sqlAddress, sqlDBName;
     private int sqlPort = 3306;
-    private boolean createNewDB;
     private int timeout;
     private boolean neverTimeout;
     private static File configFile = new File("test.yml");
@@ -60,15 +59,6 @@ public class PreferenceWindowModel {
     public void setSqlDBName(String sqlDBName) {
         this.sqlDBName = sqlDBName;
     }
-
-    public boolean isCreateNewDB() {
-        return createNewDB;
-    }
-
-    public void setCreateNewDB(boolean createNewDB) {
-        this.createNewDB = createNewDB;
-    }
-
     public int getTimeout() {
         return timeout;
     }
@@ -92,7 +82,6 @@ public class PreferenceWindowModel {
         config.set("database", getSqlDBName());
         config.set("ip", getSqlAddress());
         config.set("port", getSqlPort());
-        config.set("create_new_db_if_doesnt_exist", isCreateNewDB());
         config.set("timeout_time", getTimeout());
         config.set("never_timeout", isNeverTimeout());
         config.set("config_dir", getConfigFile().getAbsolutePath());
@@ -108,7 +97,6 @@ public class PreferenceWindowModel {
             setSqlDBName(config.asString("database"));
             setSqlAddress(config.asString("ip"));
             setSqlPort(config.asInt("port"));
-            setCreateNewDB(config.asBoolean("create_new_db_if_doesnt_exist"));
             setTimeout(config.asInt("timeout_time"));
             setNeverTimeout(config.asBoolean("never_timeout"));
         } catch (Exception e){

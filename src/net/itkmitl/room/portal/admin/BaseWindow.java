@@ -14,18 +14,21 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import net.itkmitl.room.GUIStarter;
 import net.itkmitl.room.MacConfig;
 import net.itkmitl.room.portal.admin.components.*;
+import net.itkmitl.room.portal.admin.controllers.OperationWindowController;
 import net.itkmitl.room.portal.admin.controllers.PreferenceWindowController;
+import net.itkmitl.room.portal.admin.views.OperationWindowView;
 import net.itkmitl.room.portal.admin.views.PreferenceWindowView;
 
 public class BaseWindow extends ComponentAdapter implements ActionListener, InternalFrameListener {
-    private OperationWindow mainMenu;
+    private final OperationWindowView mainMenu;
     private final JFrame baseFrame;
     private final JPanel statusBar;
     private final JMenuBar menuBar;
     private final JMenu fileMenu, windowMenu, optionMenu, helpMenu;
     private final JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
     private final JMenuItem optionMenuItem1, optionMenuItem2, optionMenuItem3, optionMenuItem4;
-    private final JMenu newWindowMenu, windowListMenu;
+    private final JMenu newWindowMenu;
+    public static JMenu windowListMenu;
     private final JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
     private final JCheckBoxMenuItem windowCheckBoxMenuItem1;
     private final JMenuItem aboutMenuItem1;
@@ -33,7 +36,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     private final JProgressBar progressBar;
     private final JLabel statusLabel;
     private ArrayList<Image> multiIcon;
-    private HashMap<JInternalFrame, JMenuItem> windowList = new HashMap<>();
+    public static HashMap<JInternalFrame, JMenuItem> windowList = new HashMap<>();
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     ;
 
@@ -84,7 +87,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         windowMenuItem2 = new JMenuItem("Cascade Window");
         windowMenuItem3 = new JMenuItem("Close all Window");
         newWindowMenu = new JMenu("New");
-        windowListMenu = new JMenu("Opened Window");
+        BaseWindow.windowListMenu = new JMenu("Opened Window");
         windowMenuItem1 = new JMenuItem("Main Menu");
         windowMenuItem1.setEnabled(false);
         windowMenuItem1.addActionListener(this);
@@ -156,23 +159,22 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         // Setting Window size and boilerplate code
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainMenu = spawnMainMenu();
-
-
         baseFrame.setVisible(true);
     }
 
-    private OperationWindow spawnMainMenu() {
-        OperationWindow oper = new OperationWindow();
+    private OperationWindowView spawnMainMenu() {
+        OperationWindowController oper = new OperationWindowController();
+        OperationWindowView view = oper.getView();
         Dimension desktopSize = desktop.getSize();
-        Dimension jInternalFrameSize = oper.getFrame().getSize();
-        oper.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+        Dimension jInternalFrameSize = view.getFrame().getSize();
+        view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
-        oper.getFrame().addInternalFrameListener(this);
-        oper.getFrame().show();
-        oper.getFrame().setVisible(true);
-        desktop.add(oper.getFrame());
-        oper.getFrame().moveToFront();
-        return oper;
+        view.getFrame().addInternalFrameListener(this);
+        view.getFrame().show();
+        view.getFrame().setVisible(true);
+        desktop.add(view.getFrame());
+        view.getFrame().moveToFront();
+        return view;
     }
 
     private PreferenceWindowView spawnPreference() {
@@ -192,21 +194,11 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         return view;
     }
 
-    public TableView spawnTableView() {
-        TableView table = new TableView();
-        Dimension desktopSize = desktop.getSize();
-        Dimension jInternalFrameSize = table.getFrame().getSize();
-        table.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
-                (desktopSize.height - jInternalFrameSize.height) / 2);
+
+
+    public void addTableListener(TableView table){
         table.getFrame().addInternalFrameListener(this);
-        table.getFrame().show();
-        table.getFrame().setVisible(true);
-        desktop.add(table.getFrame());
-        table.getFrame().moveToFront();
-        return table;
     }
-
-
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(aboutMenuItem1)) {
             new AboutDialog(baseFrame);
@@ -297,150 +289,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         new BaseWindow(); //start the application
     }
 
-    class OperationWindow extends InternalFrame implements ActionListener {
-        private final JInternalFrame frame;
-        private final JPanel topPanel, contentPanel, userTabPanel, roomTabPanel, reservationTabPanel, feedbackTabPanel;
-        private final JLabel title, menuDesc;
-        private final JTabbedPane menuSelect;
 
-        // User TabPane
-        private final JButton viewUser, manageUser, lookupUser;
-        private final JLabel viewUserLabel, manageUserLabel, lookupUserLabel;
-
-        // User TabPane
-        private final JButton viewRoom, manageRoom, lookupRoom;
-        private final JLabel viewRoomLabel, manageRoomLabel, lookupRoomLabel;
-
-        // Reservation TabPane
-        private final JButton viewReservation, manageReservation, lookupReservation;
-        private final JLabel viewReservationLabel, manageReservationLabel, lookupReservationLabel;
-
-        // Feedback TabPane
-        private final JButton viewFeedback, manageFeedback, lookupFeedback;
-        private final JLabel viewFeedbackLabel, manageFeedbackLabel, lookupFeedbackLabel;
-
-        public OperationWindow() {
-            frame = new JInternalFrame(("Main Menu"), false, false, false, true);
-
-            frame.setFrameIcon(new ImageIcon("resource/icons/icon-16px.png"));
-            frame.setSize(512, 300);
-            frame.setLayout(new BorderLayout());
-
-            topPanel = new JPanel();
-            topPanel.setBorder(new EmptyBorder(10, 10, 5, 10));
-            frame.add(topPanel, BorderLayout.NORTH);
-            topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
-
-            // Title Text
-            title = new JLabel("Welcome to Laew Tae Hong System");
-            menuDesc = new JLabel("Choose categories you want to interact with below.");
-            title.setFont(new Font("Arial", Font.BOLD, 25));
-            topPanel.add(title);
-            topPanel.add(menuDesc);
-            title.setAlignmentX(Component.LEFT_ALIGNMENT);
-            menuDesc.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-            // Tabbed Menu Pane
-            contentPanel = new JPanel();
-            contentPanel.setLayout(new BorderLayout());
-            menuSelect = new JTabbedPane();
-            contentPanel.add(menuSelect, BorderLayout.CENTER);
-            frame.add(contentPanel);
-
-            // Menu Content
-            userTabPanel = new JPanel();
-            menuSelect.add("User", userTabPanel);
-            roomTabPanel = new JPanel();
-            menuSelect.add("Room", roomTabPanel);
-            reservationTabPanel = new JPanel();
-            menuSelect.add("Reservation", reservationTabPanel);
-            feedbackTabPanel = new JPanel();
-            menuSelect.add("Feedback", feedbackTabPanel);
-
-            // User TabPanel
-            userTabPanel.setLayout(new GridBagLayout());
-
-            viewUser = new JButton("View");
-            viewUser.addActionListener(this);
-            manageUser = new JButton("Manage");
-            lookupUser = new JButton("Lookup");
-
-            viewUserLabel = new JLabel("Display all users and their data.");
-            manageUserLabel = new JLabel("Create, delete or make changes to users data.");
-            lookupUserLabel = new JLabel("Lookup each users by their corresponding data.");
-
-            userTabPanel.add(viewUser, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.3, 0, 0, new Insets(5, 10, 0, 0)).setPadding(20, 0));
-            userTabPanel.add(viewUserLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 0, new Insets(0, 10, 0, 0)).getGBC());
-            userTabPanel.add(manageUser, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.3, 0, 1, new Insets(5, 10, 0, 0)).setPadding(20, 0));
-            userTabPanel.add(manageUserLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 1, new Insets(0, 10, 0, 0)).getGBC());
-            userTabPanel.add(lookupUser, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.3, 0, 2, new Insets(5, 10, 0, 0)).setPadding(20, 0));
-            userTabPanel.add(lookupUserLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 2, new Insets(0, 10, 0, 0)).getGBC());
-
-            // Room TabPanel
-            roomTabPanel.setLayout(new GridBagLayout());
-
-            viewRoom = new JButton("View");
-            manageRoom = new JButton("Manage");
-            lookupRoom = new JButton("Lookup");
-
-            viewRoomLabel = new JLabel("Display all rooms and their status.");
-            manageRoomLabel = new JLabel("Create, delete or make changes to rooms data.");
-            lookupRoomLabel = new JLabel("Lookup each rooms by their corresponding data.");
-
-            roomTabPanel.add(viewRoom, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.3, 0, 0, new Insets(5, 10, 0, 0)).setPadding(20, 0));
-            roomTabPanel.add(viewRoomLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 0, new Insets(0, 10, 0, 0)).getGBC());
-            roomTabPanel.add(manageRoom, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.3, 0, 1, new Insets(5, 10, 0, 0)).setPadding(20, 0));
-            roomTabPanel.add(manageRoomLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 1, new Insets(0, 10, 0, 0)).getGBC());
-            roomTabPanel.add(lookupRoom, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.3, 0, 2, new Insets(5, 10, 0, 0)).setPadding(20, 0));
-            roomTabPanel.add(lookupRoomLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 2, new Insets(0, 10, 0, 0)).getGBC());
-
-            // Reservation TabPanel
-            reservationTabPanel.setLayout(new GridBagLayout());
-
-            viewReservation = new JButton("View");
-            manageReservation = new JButton("Manage");
-            lookupReservation = new JButton("Lookup");
-
-            viewReservationLabel = new JLabel("Display all reservations.");
-            manageReservationLabel = new JLabel("Create, delete or make changes to each reservations.");
-            lookupReservationLabel = new JLabel("Lookup each reservations by their corresponding data.");
-
-            reservationTabPanel.add(viewReservation, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.3, 0, 0, new Insets(5, 10, 0, 0)).setPadding(20, 0));
-            reservationTabPanel.add(viewReservationLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 0, new Insets(0, 10, 0, 0)).getGBC());
-            reservationTabPanel.add(manageReservation, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.3, 0, 1, new Insets(5, 10, 0, 0)).setPadding(20, 0));
-            reservationTabPanel.add(manageReservationLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 1, new Insets(0, 10, 0, 0)).getGBC());
-            reservationTabPanel.add(lookupReservation, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.3, 0, 2, new Insets(5, 10, 0, 0)).setPadding(20, 0));
-            reservationTabPanel.add(lookupReservationLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 2, new Insets(0, 10, 0, 0)).getGBC());
-
-            // Feedback TabPanel
-            feedbackTabPanel.setLayout(new GridBagLayout());
-
-            viewFeedback = new JButton("View");
-            manageFeedback = new JButton("Manage");
-            lookupFeedback = new JButton("Lookup");
-
-            viewFeedbackLabel = new JLabel("Display all feedbacks and their properties.");
-            manageFeedbackLabel = new JLabel("Manage, remove or make changes to feedbacks data.");
-            lookupFeedbackLabel = new JLabel("Lookup each feedbacks by their corresponding attribute.");
-
-            feedbackTabPanel.add(viewFeedback, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.3, 0, 0, new Insets(5, 10, 0, 0)).setPadding(20, 0));
-            feedbackTabPanel.add(viewFeedbackLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 0, new Insets(0, 10, 0, 0)).getGBC());
-            feedbackTabPanel.add(manageFeedback, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.3, 0, 1, new Insets(5, 10, 0, 0)).setPadding(20, 0));
-            feedbackTabPanel.add(manageFeedbackLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 1, new Insets(0, 10, 0, 0)).getGBC());
-            feedbackTabPanel.add(lookupFeedback, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.3, 0, 2, new Insets(5, 10, 0, 0)).setPadding(20, 0));
-            feedbackTabPanel.add(lookupFeedbackLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 2, new Insets(0, 10, 0, 0)).getGBC());
-        }
-        public void actionPerformed(ActionEvent e){
-            if (e.getSource().equals(viewUser)){
-                spawnTableView();
-            }
-        }
-        @Override
-        public JInternalFrame getFrame() {
-            return frame;
-        }
-
-    }
 
 }
 
