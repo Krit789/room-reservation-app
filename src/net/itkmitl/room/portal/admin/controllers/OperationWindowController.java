@@ -1,7 +1,7 @@
 package net.itkmitl.room.portal.admin.controllers;
 
 import net.itkmitl.room.portal.admin.BaseWindow;
-import net.itkmitl.room.portal.admin.components.TableView;
+import net.itkmitl.room.portal.admin.views.DataListTableView;
 import net.itkmitl.room.portal.admin.views.OperationWindowView;
 
 import javax.swing.*;
@@ -27,31 +27,32 @@ public class OperationWindowController implements ActionListener, InternalFrameL
         return view;
     }
 
-    public TableView spawnTableView() {
-        TableView table = new TableView();
+    public DataListTableController spawnTableView() {
+        DataListTableController table = new DataListTableController();
         Dimension desktopSize = BaseWindow.getDesktop().getSize();
-        Dimension jInternalFrameSize = table.getFrame().getSize();
-        table.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+        Dimension jInternalFrameSize = table.view.getFrame().getSize();
+        table.view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                 (desktopSize.height - jInternalFrameSize.height) / 2);
-        table.getFrame().addInternalFrameListener(this);
-        table.getFrame().show();
-        table.getFrame().setVisible(true);
-        BaseWindow.getDesktop().add(table.getFrame());
-        table.getFrame().moveToFront();
+        table.view.getFrame().addInternalFrameListener(this);
+        table.view.getFrame().show();
+        table.view.getFrame().setVisible(true);
+        BaseWindow.getDesktop().add(table.view.getFrame());
+        table.view.getFrame().moveToFront();
         return table;
     }
 
     public void internalFrameOpened(InternalFrameEvent e) {
         JMenuItem newItem = new JMenuItem(e.getInternalFrame().getTitle());
         BaseWindow.windowList.put(e.getInternalFrame(), newItem);
-        BaseWindow.windowListMenu.add(newItem);
+        newItem.setIcon(e.getInternalFrame().getFrameIcon());
+        BaseWindow.windowMenu.add(newItem);
     }
 
     public void internalFrameClosing(InternalFrameEvent e) {
     }
 
     public void internalFrameClosed(InternalFrameEvent e) {
-        BaseWindow.windowListMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
+        BaseWindow.windowMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
         BaseWindow.windowList.remove(e.getInternalFrame());
     }
 
