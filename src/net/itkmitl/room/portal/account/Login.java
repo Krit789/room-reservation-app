@@ -29,7 +29,8 @@ public class Login implements ActionListener {
     private JPasswordField passwordField;
 
     private final Insets insets = new Insets(400, 600, 400, 600);
-    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();;
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    ;
 
 
     private void menuBarInitialize() {
@@ -95,7 +96,7 @@ public class Login implements ActionListener {
 
         outerPane = new OutPane();
         outerPane.setPreferredSize(screenSize);
-        outerPane.setBackground(new Color(15,27,47));
+        outerPane.setBackground(new Color(15, 27, 47));
 
         outerPane.addComponentListener(new ComponentAdapter() {
             @Override
@@ -159,6 +160,8 @@ public class Login implements ActionListener {
         baseFrame.setSize(screenSize);
         baseFrame.setExtendedState(baseFrame.getExtendedState() | baseFrame.MAXIMIZED_BOTH);
         baseFrame.setJMenuBar(menuBar);
+        baseFrame.setMinimumSize(new Dimension(910, 480));
+
         multiIcon = new ArrayList<>();
         multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
         multiIcon.add(new ImageIcon("resource/icons/icon-128px.png").getImage());
@@ -186,6 +189,7 @@ public class Login implements ActionListener {
         loginHeader = new JLabel("Login", SwingConstants.CENTER);
         img_itbuilding = new ImageIcon(FewFile.getImage("account/img/it_building.png"));
 
+        loginButton.addActionListener(this);
         buttonBox = new JPanel();
         buttonBox.setLayout(new FlowLayout(FlowLayout.RIGHT));
         buttonBox.add(loginButton);
@@ -194,11 +198,12 @@ public class Login implements ActionListener {
         //Tried using GridBag Layout (Card Layout sounds interesting too, but are too complicated)
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1;
-        c.gridx = 0;
+        c.gridx = 1;
         c.gridy = 0;
         c.gridwidth = 3;
         c.ipady = 10;
-        c.insets = new Insets(5, 0, 5, 40);
+        c.ipadx = 50;
+        c.insets = new Insets(5, 0, 5, 45);
         floatingBox.add(loginHeader, c);
         c.weightx = 0.05;
         c.gridx = 1;
@@ -221,7 +226,7 @@ public class Login implements ActionListener {
         c.gridy = 3;
         floatingBox.add(buttonBox, c);
         c.fill = GridBagConstraints.VERTICAL;
-        c.weightx = 0.40;
+        c.weightx = 0.1;
         c.gridx = 0;
         c.gridy = 1;
         c.gridheight = 5;
@@ -237,7 +242,10 @@ public class Login implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        JButton buttonClicked = (JButton) e.getSource();
+        if (buttonClicked.equals(loginButton)) {
+            loginHeader.setText(baseFrame.getSize() + "");
+        }
     }
 
     public static void main(String[] args) {
