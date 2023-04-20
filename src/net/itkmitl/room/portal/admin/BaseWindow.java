@@ -202,10 +202,10 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
             GUIStarter.main(arguments);
         } else if (e.getSource().equals(windowCheckBoxMenuItem1)) {
             windowCheckBoxMenuItem1.setState(!autoCenterMainMenu);
-            autoCenterMainMenu = !autoCenterMainMenu;
-            if (autoCenterMainMenu) {
-                Dimension desktopSize = desktop.getSize();
-                Dimension jInternalFrameSize = mainMenu.getFrame().getSize();
+                autoCenterMainMenu = !autoCenterMainMenu;
+                if (autoCenterMainMenu) {
+                    Dimension desktopSize = desktop.getSize();
+                    Dimension jInternalFrameSize = mainMenu.getFrame().getSize();
                 mainMenu.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                         (desktopSize.height - jInternalFrameSize.height) / 2);
             }

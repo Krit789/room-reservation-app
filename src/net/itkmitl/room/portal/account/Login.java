@@ -30,7 +30,6 @@ public class Login implements ActionListener {
 
     private final Insets insets = new Insets(400, 600, 400, 600);
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-    ;
 
 
     private void menuBarInitialize() {
