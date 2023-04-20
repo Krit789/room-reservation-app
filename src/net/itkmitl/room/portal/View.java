@@ -16,12 +16,12 @@ public abstract class View extends JFrame {
     public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public View() {
-        this.outerPaneInitialize();
-        this.menuBarInitialize();
+        this.initializeOuterPane();
+        this.initializeMenuBar();
         this.initializeFrame();
     }
 
-    protected void menuBarInitialize() {
+    protected void initializeMenuBar() {
         //----------------------- Menubar -----------------------
         // Menu Components declaration
         menuBar = new JMenuBar();
@@ -71,7 +71,7 @@ public abstract class View extends JFrame {
         helpMenu.add(helpMenuItem1);
     }
 
-    protected void outerPaneInitialize() {
+    protected void initializeOuterPane() {
         outerPane = new OutPane();
         outerPane.setPreferredSize(screenSize);
         outerPane.setBackground(new Color(15, 27, 47));
@@ -96,8 +96,7 @@ public abstract class View extends JFrame {
     }
 
     protected void initializeFrame() {
-        this.setContentPane(outerPane);
-        this.setVisible(true);
+        this.setTitle("Laew Tae Hong");
 
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setMinimumSize(new Dimension(640, 480));
@@ -105,6 +104,9 @@ public abstract class View extends JFrame {
         this.setExtendedState(this.getExtendedState() | MAXIMIZED_BOTH);
         this.setJMenuBar(menuBar);
         this.setMinimumSize(new Dimension(910, 480));
+
+        this.setContentPane(outerPane);
+        this.setVisible(true);
     }
 
     protected abstract void initialize();
