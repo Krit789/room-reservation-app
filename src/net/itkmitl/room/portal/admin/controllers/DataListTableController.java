@@ -17,6 +17,7 @@ public class DataListTableController {
         this.model = model;
         view.getFrame().setTitle(model.getTitle());
         view.pageTitle.setText(model.getPageTitle());
-        view.table.setModel(new DefaultTableModel(model.getColumnData(), model.getColumnHeader()));
+        view.pageSubtitle.setText(model.getPageSubtitle());
+        view.table.setModel(model.getDtm());
     }
 }

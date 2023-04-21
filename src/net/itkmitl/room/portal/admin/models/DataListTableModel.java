@@ -1,18 +1,19 @@
 package net.itkmitl.room.portal.admin.models;
 
+import javax.swing.table.DefaultTableModel;
+
 public class DataListTableModel {
-    private String title, pageTitle;
-    private String[] columnHeader;
-    private Object[][] columnData;
+    private String title, pageTitle, pageSubtitle;
+    private DefaultTableModel dtm;
 
     public DataListTableModel(){
-        this("Table", "Untitled Page", new String[]{"A", "B", "C", "D"}, new Object[][]{{1, 2 ,3 ,true},{1, 2 ,3 ,true},{1, 2 ,3 ,true}});
+        this("Table", "Untitled Page", "3 Data Rows", new DefaultTableModel(new Object[][]{{1, 2 ,3 ,true},{1, 2 ,3 ,true},{1, 2 ,3 ,true}}, new String[]{"A", "B", "C", "D"}));
     }
-    public DataListTableModel(String title, String pageTitle, String[] columnHeader, Object[][] columnData){
+    public DataListTableModel(String title, String pageTitle, String pageSubtitle, DefaultTableModel dtm){
         this.title = title;
         this.pageTitle = pageTitle;
-        this.columnHeader = columnHeader;
-        this.columnData = columnData;
+        this.pageSubtitle = pageSubtitle;
+        this.dtm = dtm;
     }
 
     public String getTitle() {
@@ -31,19 +32,19 @@ public class DataListTableModel {
         this.pageTitle = pageTitle;
     }
 
-    public String[] getColumnHeader() {
-        return columnHeader;
+    public String getPageSubtitle() {
+        return pageSubtitle;
     }
 
-    public void setColumnHeader(String[] columnHeader) {
-        this.columnHeader = columnHeader;
+    public void setPageSubtitle(String pageSubtitle) {
+        this.pageSubtitle = pageSubtitle;
     }
 
-    public Object[][] getColumnData() {
-        return columnData;
+    public DefaultTableModel getDtm() {
+        return dtm;
     }
 
-    public void setColumnData(Object[][] columnData) {
-        this.columnData = columnData;
+    public void setDtm(DefaultTableModel dtm) {
+        this.dtm = dtm;
     }
 }

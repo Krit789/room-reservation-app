@@ -22,7 +22,7 @@ import net.itkmitl.room.portal.components.GBCBuilder;
 
 public class BaseWindow extends ComponentAdapter implements ActionListener, InternalFrameListener {
     private final OperationWindowView mainMenu;
-    private final JFrame baseFrame;
+    public static JFrame baseFrame;
     private final JPanel statusBar;
     private final JMenuBar menuBar;
     public static JMenu windowMenu;
@@ -44,7 +44,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     private boolean autoCenterMainMenu = true;
 
     public BaseWindow() {
-        baseFrame = new JFrame("Laew Tae Hong Management");
+        BaseWindow.baseFrame = new JFrame("Laew Tae Hong Management");
         multiIcon = new ArrayList<>();
         multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
         multiIcon.add(new ImageIcon("resource/icons/icon-128px.png").getImage());
