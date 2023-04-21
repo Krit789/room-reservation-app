@@ -12,7 +12,6 @@ public class DashboardView extends View {
 
     public DashboardView() {
         super();
-        this.initialize();
     }
 
     @Override
