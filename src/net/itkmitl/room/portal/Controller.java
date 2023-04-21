@@ -12,6 +12,6 @@ public abstract class Controller {
 
     protected void changeFrame(View current, Portal destination) {
         current.dispose();
-        destination.start();
+        destination.run();
     }
 }

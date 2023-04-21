@@ -19,6 +19,7 @@ public abstract class View extends JFrame {
         this.initializeOuterPane();
         this.initializeMenuBar();
         this.initializeFrame();
+        this.initialize();
     }
 
     protected void initializeMenuBar() {

@@ -2,6 +2,7 @@ package net.itkmitl.room.libs.phatsanphon.repository;
 
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Entity;
+
 import java.util.ArrayList;
 
 public class Repository<T extends Entity> {
@@ -35,17 +36,12 @@ public class Repository<T extends Entity> {
     }
 
     protected T map(FewQuery result) {
-        T object = null;
+        ArrayList<T> tempArray = this.maps(result);
 
-        while (result.nextBind()) {
-            try {
-                object = this.c.getDeclaredConstructor().newInstance();
-                object.processQuery(result);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+        if (!tempArray.isEmpty()) {
+            return tempArray.get(0);
         }
 
-        return object;
+        return null;
     }
 }
