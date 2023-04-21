@@ -1,6 +1,6 @@
 package net.itkmitl.room.portal.dashboard.components;
 
-import net.itkmitl.room.portal.admin.components.GBCBuilder;
+import net.itkmitl.room.portal.components.GBCBuilder;
 
 import javax.swing.*;
 import java.awt.*;
