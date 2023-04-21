@@ -39,7 +39,6 @@ public class DashboardController extends Controller implements ActionListener {
             String[] arguments = new String[]{""};
             BaseWindow.main(arguments);
         } else if (e.getSource().equals(this.getView().helpMenuItem1)){
-            System.out.println("Help");
             new AboutDialog(this.getView());
         }
     }
