@@ -47,7 +47,7 @@ public class Reservation extends Entity {
     }
 
     public void setUser(int userId) {
-        User user = new UserRepository(RVDB.getDB()).getUserById(userId);
+        User user = new UserRepository(this.getDB()).getUserById(userId);
         this.setUser(user);
     }
 
