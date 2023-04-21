@@ -1,5 +1,6 @@
 package net.itkmitl.room.portal.account;
 
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import net.itkmitl.room.MacConfig;
 import net.itkmitl.room.libs.peeranat.util.*;
 import net.itkmitl.room.portal.admin.BaseWindow;
@@ -249,6 +250,14 @@ public class Login implements ActionListener {
 
     public static void main(String[] args) {
         MacConfig.menuBar();
+        try {
+            MacConfig.menuBar("Laew Tae Hong Management");
+            try {
+                UIManager.setLookAndFeel(new FlatIntelliJLaf());
+            } catch (Exception ignored) {
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+            }
+        } catch (Exception ignored) {}
         new Login();
     }
 }

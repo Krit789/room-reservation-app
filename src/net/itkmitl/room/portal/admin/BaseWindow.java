@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import net.itkmitl.room.GUIStarter;
@@ -87,6 +88,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         windowMenuItem2.setIcon(new ImageIcon("resource/icons/Cascade-16px.png"));
         windowMenuItem3 = new JMenuItem("Close all Window");
         windowMenuItem3.setIcon(new ImageIcon("resource/icons/CloseAll-16px.png"));
+        windowMenuItem3.addActionListener(this);
 
         // 'About' Menu Components declaration
         aboutMenuItem1 = new JMenuItem("About Us");
@@ -209,7 +211,30 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
                 mainMenu.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                         (desktopSize.height - jInternalFrameSize.height) / 2);
             }
-        } else if (e.getSource().equals(windowMenuItem2)) {
+        } else if (e.getSource().equals(windowMenuItem3)){
+            HashMap<JInternalFrame, JMenuItem> removalList = new HashMap<>();
+            for (JInternalFrame i : windowList.keySet()) {
+                if (!i.getTitle().equals("Main Menu")){
+                    removalList.put(i, windowList.get(i));
+                }
+            }
+
+            for(Map.Entry<JInternalFrame, JMenuItem> entry : removalList.entrySet()) {
+                JInternalFrame key = entry.getKey();
+                JMenuItem value = entry.getValue();
+                windowList.remove(key);
+                windowMenu.remove(value);
+                try {
+                    key.setClosed(true);
+                } catch (Exception ignored){}
+            }
+//            for (JInternalFrame i: desktop.getAllFrames()){
+//                windowList.remove(i);
+//                windowMenu.remove(value);
+//                desktop.remove();
+//            }
+        }
+        else if (e.getSource().equals(windowMenuItem2)) {
             for (JInternalFrame i : desktop.getAllFrames()
             ) {
                 System.out.println(i.getTitle());
@@ -226,8 +251,8 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
                 mainMenu.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                         (desktopSize.height - jInternalFrameSize.height) / 2);
             }
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -270,10 +295,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
             } catch (Exception ignored) {
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
             }
-
-        } catch (Exception ignored) {
-
-        }
+        } catch (Exception ignored) {}
         new BaseWindow(); //start the application
     }
 
