@@ -1,4 +1,4 @@
-package net.itkmitl.room.portal.admin.components;
+package net.itkmitl.room.portal.components;
 
 import java.awt.*;
 
