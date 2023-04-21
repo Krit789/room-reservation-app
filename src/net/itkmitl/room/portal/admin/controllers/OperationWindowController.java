@@ -42,6 +42,7 @@ public class OperationWindowController implements ActionListener, InternalFrameL
     }
 
     public void internalFrameOpened(InternalFrameEvent e) {
+        BaseWindow.statusLabel.setText(e.getInternalFrame().getTitle() + " was opened.");
         JMenuItem newItem = new JMenuItem(e.getInternalFrame().getTitle());
         BaseWindow.windowList.put(e.getInternalFrame(), newItem);
         newItem.setIcon(e.getInternalFrame().getFrameIcon());

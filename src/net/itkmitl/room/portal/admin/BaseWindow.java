@@ -2,7 +2,6 @@ package net.itkmitl.room.portal.admin;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import java.awt.*;
@@ -14,11 +13,12 @@ import java.util.Map;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import net.itkmitl.room.GUIStarter;
 import net.itkmitl.room.MacConfig;
-import net.itkmitl.room.portal.admin.components.*;
 import net.itkmitl.room.portal.admin.controllers.OperationWindowController;
 import net.itkmitl.room.portal.admin.controllers.PreferenceWindowController;
 import net.itkmitl.room.portal.admin.views.OperationWindowView;
 import net.itkmitl.room.portal.admin.views.PreferenceWindowView;
+import net.itkmitl.room.portal.components.AboutDialog;
+import net.itkmitl.room.portal.components.GBCBuilder;
 
 public class BaseWindow extends ComponentAdapter implements ActionListener, InternalFrameListener {
     private final OperationWindowView mainMenu;
@@ -34,9 +34,11 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     private final JMenuItem aboutMenuItem1;
     private static JDesktopPane desktop;
     private final JProgressBar progressBar;
-    private final JLabel statusLabel;
+    public static JLabel statusLabel;
     private ArrayList<Image> multiIcon;
     public static HashMap<JInternalFrame, JMenuItem> windowList = new HashMap<>();
+
+    private boolean isPreferenceOpen = false;
 //    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     private boolean autoCenterMainMenu = true;
@@ -137,7 +139,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
 
         // Status bar
         statusBar.setLayout(new GridBagLayout());
-        statusLabel = new JLabel("Ready.");
+        BaseWindow.statusLabel = new JLabel("Ready.");
         statusLabel.setMinimumSize(new Dimension(128, statusBar.getHeight()));
 
         // Adding JLabel to the left of statusBar
@@ -197,7 +199,11 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
             baseFrame.dispose();
             System.exit(0);
         } else if (e.getSource().equals(optionMenuItem3)) {
-            spawnPreference();
+            if (!isPreferenceOpen){
+                spawnPreference();
+            } else {
+                statusLabel.setText("You can only have one preferences window open at a time.");
+            }
         } else if (e.getSource().equals(optionMenuItem4)) {
             baseFrame.dispose();
             String[] arguments = new String[]{""};
@@ -211,28 +217,26 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
                 mainMenu.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                         (desktopSize.height - jInternalFrameSize.height) / 2);
             }
-        } else if (e.getSource().equals(windowMenuItem3)){
+        } else if (e.getSource().equals(windowMenuItem3)) {
             HashMap<JInternalFrame, JMenuItem> removalList = new HashMap<>();
             for (JInternalFrame i : windowList.keySet()) {
-                if (!i.getTitle().equals("Main Menu")){
+                if (!i.getTitle().equals("Main Menu")) {
                     removalList.put(i, windowList.get(i));
                 }
             }
 
-            for(Map.Entry<JInternalFrame, JMenuItem> entry : removalList.entrySet()) {
+            for (Map.Entry<JInternalFrame, JMenuItem> entry : removalList.entrySet()) {
                 JInternalFrame key = entry.getKey();
                 JMenuItem value = entry.getValue();
                 windowList.remove(key);
                 windowMenu.remove(value);
                 try {
                     key.setClosed(true);
-                } catch (Exception ignored){}
+                } catch (Exception ignored) {
+                }
+                statusLabel.setText("All windows has been closed.");
+
             }
-//            for (JInternalFrame i: desktop.getAllFrames()){
-//                windowList.remove(i);
-//                windowMenu.remove(value);
-//                desktop.remove();
-//            }
         }
         else if (e.getSource().equals(windowMenuItem2)) {
             for (JInternalFrame i : desktop.getAllFrames()
@@ -258,6 +262,10 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
 
     public void internalFrameOpened(InternalFrameEvent e) {
         JMenuItem newItem = new JMenuItem(e.getInternalFrame().getTitle());
+        statusLabel.setText(e.getInternalFrame().getTitle() + " was opened.");
+        if (e.getInternalFrame().getTitle().equals("Preferences")){
+            isPreferenceOpen = true;
+        }
         windowList.put(e.getInternalFrame(), newItem);
         newItem.setIcon(e.getInternalFrame().getFrameIcon());
         windowMenu.add(newItem);
@@ -267,6 +275,9 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     }
 
     public void internalFrameClosed(InternalFrameEvent e) {
+        if (e.getInternalFrame().getTitle().equals("Preferences")){
+            isPreferenceOpen = false;
+        }
         windowMenu.remove(windowList.get(e.getInternalFrame()));
         windowList.remove(e.getInternalFrame());
     }

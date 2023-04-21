@@ -2,6 +2,7 @@ package net.itkmitl.room.portal.dashboard;
 
 import net.itkmitl.room.portal.Controller;
 import net.itkmitl.room.portal.admin.BaseWindow;
+import net.itkmitl.room.portal.components.AboutDialog;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +29,7 @@ public class DashboardController extends Controller implements ActionListener {
     @Override
     public void initializeListener() {
         this.getView().optionMenuItem1.addActionListener(this);
+        this.getView().helpMenuItem1.addActionListener(this);
     }
 
     @Override
@@ -36,6 +38,9 @@ public class DashboardController extends Controller implements ActionListener {
             this.getView().dispose();
             String[] arguments = new String[]{""};
             BaseWindow.main(arguments);
+        } else if (e.getSource().equals(this.getView().helpMenuItem1)){
+            System.out.println("Help");
+            new AboutDialog(this.getView());
         }
     }
 }

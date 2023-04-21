@@ -97,7 +97,6 @@ public abstract class View extends JFrame {
 
     protected void initializeFrame() {
         this.setTitle("Laew Tae Hong");
-
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setMinimumSize(new Dimension(640, 480));
         this.setSize(screenSize);

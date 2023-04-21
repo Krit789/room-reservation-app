@@ -1,6 +1,6 @@
 package net.itkmitl.room.portal.admin.views;
 
-import net.itkmitl.room.portal.admin.components.GBCBuilder;
+import net.itkmitl.room.portal.components.GBCBuilder;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
