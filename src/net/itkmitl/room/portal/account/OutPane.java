@@ -8,6 +8,7 @@ import java.awt.*;
 public class OutPane extends JPanel {
 
     private JPanel paneN, paneW, paneS, paneE;
+
     public OutPane() {
         setLayout(new BorderLayout());
 

@@ -2,6 +2,7 @@ package net.itkmitl.room.portal.account;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import net.itkmitl.room.MacConfig;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
