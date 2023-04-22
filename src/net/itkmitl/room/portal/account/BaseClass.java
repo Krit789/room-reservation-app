@@ -160,7 +160,6 @@ public abstract class BaseClass implements ActionListener {
         outerPaneInitialize();
         innerPaneInitialize();
 
-
         loginButton = new JButton("Login");
         registerButton = new JButton("Register");
         img_itbuilding = new ImageIcon(FewFile.getImage("account/img/it_building.png"));
@@ -171,7 +170,6 @@ public abstract class BaseClass implements ActionListener {
         buttonBox.setLayout(new FlowLayout(FlowLayout.RIGHT));
         buttonBox.add(registerButton);
         buttonBox.add(loginButton);
-//        innerPane.add(usernameText);
 
         innerPane.add(floatingBox);
         outerPane.add(innerPane);
