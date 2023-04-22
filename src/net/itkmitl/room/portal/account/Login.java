@@ -2,8 +2,6 @@ package net.itkmitl.room.portal.account;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import net.itkmitl.room.MacConfig;
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,12 +9,10 @@ import java.awt.event.*;
 public class Login extends BaseClass implements ActionListener {
     private JTextField usernameField;
     private JLabel usernameText, passwordText, loginHeader;
-    protected JPanel paneN, paneW, paneS, paneE;
     private JPasswordField passwordField;
-    protected Insets insets = new Insets(400, 600, 400, 600);
 
 
-//    มี loginButton, registerButton นะ เรียกใช้ได้เลย
+    //มี loginButton, registerButton นะ เรียกใช้ได้เลย
 
     public Login() {
         usernameField = new JTextField();
