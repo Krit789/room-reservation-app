@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Login implements ActionListener {
     private JFrame baseFrame;
     private OutPane outerPane;
-    private JButton loginButton;
+    private JButton loginButton, registerButton;
     private JPanel innerPane, floatingBox, buttonBox;
     private JTextField usernameField;
     private JLabel usernameText, passwordText, loginHeader;
@@ -28,7 +28,6 @@ public class Login implements ActionListener {
     private ArrayList<Image> multiIcon;
     private JPanel paneN, paneW, paneS, paneE;
     private JPasswordField passwordField;
-
     private final Insets insets = new Insets(400, 600, 400, 600);
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -186,12 +185,15 @@ public class Login implements ActionListener {
         usernameText = new JLabel("Username : ", SwingConstants.RIGHT);
         passwordText = new JLabel("Password : ", SwingConstants.RIGHT);
         loginButton = new JButton("Login");
+        registerButton = new JButton("Register");
         loginHeader = new JLabel("Login", SwingConstants.CENTER);
         img_itbuilding = new ImageIcon(FewFile.getImage("account/img/it_building.png"));
 
         loginButton.addActionListener(this);
+        registerButton.addActionListener(this);
         buttonBox = new JPanel();
         buttonBox.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        buttonBox.add(registerButton);
         buttonBox.add(loginButton);
 //        innerPane.add(usernameText);
 
@@ -226,7 +228,7 @@ public class Login implements ActionListener {
         c.gridy = 3;
         floatingBox.add(buttonBox, c);
         c.fill = GridBagConstraints.VERTICAL;
-        c.weightx = 0.1;
+        c.weightx = 0.4;
         c.gridx = 0;
         c.gridy = 1;
         c.gridheight = 5;
@@ -245,6 +247,10 @@ public class Login implements ActionListener {
         JButton buttonClicked = (JButton) e.getSource();
         if (buttonClicked.equals(loginButton)) {
             loginHeader.setText(baseFrame.getSize() + "");
+        }else if(buttonClicked.equals(registerButton)){
+            baseFrame.dispose();
+            String[] arguments = new String[]{""};
+            Register.main(arguments);
         }
     }
 
