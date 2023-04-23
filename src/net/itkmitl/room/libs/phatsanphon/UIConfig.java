@@ -8,6 +8,9 @@ public class UIConfig {
     public static void setLookAndFeel() {
         try {
             UIManager.setLookAndFeel(new FlatIntelliJLaf());
+            System.setProperty( "apple.laf.useScreenMenuBar", "true" );
+            System.setProperty( "apple.awt.application.name", "Laew Tae Hong Management" );
+            System.setProperty( "apple.awt.application.appearance", "system" );
             return;
         } catch (Exception ignored) {
         }

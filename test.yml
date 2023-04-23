@@ -1,3 +1,3 @@
 {ip: 49.228.131.109, database: room_reservation, port: 3357, username: test_user,
-  password: Pu57HDrrXgvVLn, timeout_time: 17, never_timeout: false, config_dir: /Users/tanakrit/Library/CloudStorage/OneDrive-KMITL/1.YearOne/01.OOP/OOP_Project/room-reservation-app/test.yml,
+  password: Pu57HDrrXgvVLn, timeout_time: 17, never_timeout: false, config_dir: 'C:\Users\Jarukrit\Programming\room-reservation-app\test.yml',
   create_new_db_if_doesnt_exist: false}

@@ -8,7 +8,6 @@ import javax.swing.*;
 
 public abstract class Portal {
     protected Portal() {
-        MacConfig.menuBar("Laew Tae Hong Management");
         UIConfig.setLookAndFeel();
     }
 

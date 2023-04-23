@@ -33,7 +33,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     private final JCheckBoxMenuItem windowCheckBoxMenuItem1;
     private final JMenuItem aboutMenuItem1;
     private static JDesktopPane desktop;
-    private final JProgressBar progressBar;
+    public static JProgressBar progressBar;
     public static JLabel statusLabel;
     private ArrayList<Image> multiIcon;
     public static HashMap<JInternalFrame, JMenuItem> windowList = new HashMap<>();
@@ -149,7 +149,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         statusBar.add(new JPanel(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 1, 0).getGBC());
 
         // Adding JProgressBar to the right of statusBar
-        progressBar = new JProgressBar();
+        BaseWindow.progressBar = new JProgressBar();
         progressBar.setIndeterminate(false);
         statusBar.add(progressBar, new GBCBuilder(GridBagConstraints.NONE, 0.2, 2, 0, new Insets(0, 10, 0, 10)).setAnchor(GridBagConstraints.EAST));
 
@@ -300,7 +300,10 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
 
     public static void main(String[] args) {
         try {
-            MacConfig.menuBar("Laew Tae Hong Management");
+//            MacConfig.menuBar("Laew Tae Hong Management");
+            System.setProperty( "apple.laf.useScreenMenuBar", "true" );
+            System.setProperty( "apple.awt.application.name", "Laew Tae Hong" );
+            System.setProperty( "apple.awt.application.appearance", "system" );
             try {
                 UIManager.setLookAndFeel(new FlatIntelliJLaf());
             } catch (Exception ignored) {
