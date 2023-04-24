@@ -2,6 +2,7 @@ package net.itkmitl.room.libs.phatsanphon.entity;
 
 import net.itkmitl.room.enums.*;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 
 public class Room extends Entity {
 
@@ -10,6 +11,10 @@ public class Room extends Entity {
     private int capacity;
     private String floor;
     private String building;
+
+    private DateTime openTime;
+    private DateTime closeTime;
+
     private EnumRoomState state;
 
     public Room(FewQuery query) {
@@ -60,6 +65,30 @@ public class Room extends Entity {
         this.building = building;
     }
 
+    public DateTime getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(DateTime openTime) {
+        this.openTime = openTime;
+    }
+
+    public void setOpenTime(String rawOpenTime) {
+        this.setOpenTime(new DateTime(rawOpenTime));
+    }
+
+    public DateTime getCloseTime() {
+        return closeTime;
+    }
+
+    public void setCloseTime(DateTime closeTime) {
+        this.closeTime = closeTime;
+    }
+
+    public void setCloseTime(String rawCloseTime) {
+        this.setCloseTime(new DateTime(rawCloseTime));
+    }
+
     public EnumRoomState getState() {
         return state;
     }
@@ -75,6 +104,8 @@ public class Room extends Entity {
         this.setCapacity(query.getValue("capacity").asInt());
         this.setFloor(query.getValue("floor").asString());
         this.setBuilding(query.getValue("building").asString());
+        this.setOpenTime(query.getValue("open_time").asString());
+        this.setCloseTime(query.getValue("close_time").asString());
         this.setState(EnumRoomState.valueOf(query.getValue("state").asString()));
     }
 }

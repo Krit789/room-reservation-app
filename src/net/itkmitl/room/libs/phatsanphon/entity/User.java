@@ -7,6 +7,8 @@ import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 public class User extends Entity {
     private int id;
     private String email;
+
+    private String passwordHash;
     private String firstname;
     private String lastname;
     private String telephoneNumber;
@@ -36,6 +38,14 @@ public class User extends Entity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public String getFirstname() {
@@ -99,6 +109,7 @@ public class User extends Entity {
     public void processQuery(FewQuery query) {
         this.setId(query.getValue("id").asInt());
         this.setEmail(query.getValue("email").asString());
+        this.setPasswordHash(query.getValue("password_hash").asString());
         this.setFirstname(query.getValue("firstname").asString());
         this.setLastname(query.getValue("lastname").asString());
         this.setTelephoneNumber(query.getValue("tel_num").asString());
