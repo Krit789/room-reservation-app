@@ -77,6 +77,8 @@ public class RoomRepository extends Repository<Room> {
         insert.insert("name", room.getName());
         insert.insert("building", room.getBuilding());
         insert.insert("capacity", room.getCapacity());
+        insert.insert("close_time", room.getCloseTime().toString());
+        insert.insert("open_time", room.getOpenTime().toString());
         insert.insert("floor", room.getFloor());
         insert.table("room");
 
@@ -104,6 +106,8 @@ public class RoomRepository extends Repository<Room> {
         update.set("building", room.getBuilding());
         update.set("capacity", room.getCapacity());
         update.set("floor", room.getFloor());
+        update.set("close_time", room.getCloseTime().toString());
+        update.set("open_time", room.getOpenTime().toString());
         update.table("user");
 
         this.getQuery().query(update);

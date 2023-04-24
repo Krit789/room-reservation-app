@@ -59,6 +59,7 @@ public class UserRepository extends Repository<User> {
         insert.insert("lastname", user.getLastname());
         insert.insert("tel_num", user.getTelephoneNumber());
         insert.insert("email", user.getEmail());
+        insert.insert("password_hash", user.getPasswordHash());
         insert.table("user");
 
         this.getQuery().query(insert);

@@ -2,6 +2,7 @@ package net.itkmitl.room.libs.phatsanphon.repository;
 
 import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.*;
+
 import java.util.ArrayList;
 
 /**
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 public class ReservationRepository extends Repository<Reservation> {
     /**
      * Constructor
+     *
      * @param query FewQuery
      */
     public ReservationRepository(final FewQuery query) {
@@ -97,6 +99,8 @@ public class ReservationRepository extends Repository<Reservation> {
 
         insert.insert("user_id", reservation.getUser().getId());
         insert.insert("room_id", reservation.getRoom().getId());
+        insert.insert("start_time", reservation.getStartTime().toString());
+        insert.insert("end_time", reservation.getEndTime().toString());
         insert.insert("reason", reservation.getReason());
         insert.table("reservation");
 
