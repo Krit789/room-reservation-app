@@ -24,8 +24,7 @@ public class ReservationRepository extends Repository<Reservation> {
     public ArrayList<Reservation> getReservations() {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.select("*");
-        select.table("reservation");
+        select.select("*").table("reservation");
 
         return this.maps(this.getQuery().query(select));
     }
@@ -37,10 +36,10 @@ public class ReservationRepository extends Repository<Reservation> {
     public Reservation getReservationById(int id) {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.where("id", id);
-        select.select("*");
-        select.limit(1);
-        select.table("reservation");
+        select.where("id", id)
+                .select("*")
+                .limit(1)
+                .table("reservation");
 
         return this.map(this.getQuery().query(select));
     }
@@ -52,9 +51,9 @@ public class ReservationRepository extends Repository<Reservation> {
     public ArrayList<Reservation> getReservationByRoomId(int roomId) {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.where("room_id", roomId);
-        select.select("*");
-        select.table("reservation");
+        select.where("room_id", roomId)
+                .select("*")
+                .table("reservation");
 
         return this.maps(this.getQuery().query(select));
     }
@@ -66,9 +65,9 @@ public class ReservationRepository extends Repository<Reservation> {
     public ArrayList<Reservation> getReservationByUserId(int userId) {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.where("user_id", userId);
-        select.select("*");
-        select.table("reservation");
+        select.where("user_id", userId)
+                .select("*")
+                .table("reservation");
 
         return this.maps(this.getQuery().query(select));
     }
@@ -79,8 +78,7 @@ public class ReservationRepository extends Repository<Reservation> {
     public void deleteReservationById(int id) {
         FewDeleteMySQL delete = new FewDeleteMySQL();
 
-        delete.table("reservation");
-        delete.where("id", id);
+        delete.where("id", id).table("reservation");
 
         this.getQuery().query(delete);
     }
@@ -97,12 +95,12 @@ public class ReservationRepository extends Repository<Reservation> {
             return false;
         }
 
-        insert.insert("user_id", reservation.getUser().getId());
-        insert.insert("room_id", reservation.getRoom().getId());
-        insert.insert("start_time", reservation.getStartTime().toString());
-        insert.insert("end_time", reservation.getEndTime().toString());
-        insert.insert("reason", reservation.getReason());
-        insert.table("reservation");
+        insert.insert("user_id", reservation.getUser().getId())
+                .insert("room_id", reservation.getRoom().getId())
+                .insert("start_time", reservation.getStartTime().toString())
+                .insert("end_time", reservation.getEndTime().toString())
+                .insert("reason", reservation.getReason())
+                .table("reservation");
 
         this.getQuery().query(insert);
 
@@ -116,13 +114,13 @@ public class ReservationRepository extends Repository<Reservation> {
             throw new RuntimeException("Please provided an id to update user");
         }
 
-        update.where("id", reservation.getId());
-        update.set("user_id", reservation.getUser().getId());
-        update.set("room_id", reservation.getRoom().getId());
-        update.set("reason", reservation.getReason());
-        update.set("start_time", reservation.getStartTime().toString());
-        update.set("end_time", reservation.getEndTime().toString());
-        update.table("reservation");
+        update.where("id", reservation.getId())
+                .set("user_id", reservation.getUser().getId())
+                .set("room_id", reservation.getRoom().getId())
+                .set("reason", reservation.getReason())
+                .set("start_time", reservation.getStartTime().toString())
+                .set("end_time", reservation.getEndTime().toString())
+                .table("reservation");
 
         this.getQuery().query(update);
     }

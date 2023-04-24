@@ -14,8 +14,7 @@ public class FeedbackRepository extends Repository<Feedback> {
     public ArrayList<Feedback> getFeedbacks() {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.select("*");
-        select.table("feedback");
+        select.select("*").table("feedback");
 
         return this.maps(this.getQuery().query(select));
     }
@@ -23,9 +22,7 @@ public class FeedbackRepository extends Repository<Feedback> {
     public ArrayList<Feedback> getFeedbacks(int limit) {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.select("*");
-        select.limit(limit);
-        select.table("feedback");
+        select.select("*").limit(limit).table("feedback");
 
         return this.maps(this.getQuery().query(select));
     }
@@ -33,9 +30,9 @@ public class FeedbackRepository extends Repository<Feedback> {
     public Feedback getFeedbackById(int id) {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.where("id", id);
-        select.select("*");
-        select.table("feedback");
+        select.where("id", id)
+                .select("*")
+                .table("feedback");
 
         return this.map(this.getQuery().query(select));
     }
@@ -43,9 +40,9 @@ public class FeedbackRepository extends Repository<Feedback> {
     public ArrayList<Feedback> getFeedbackByUserId(int userId) {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.where("user_id", userId);
-        select.select("*");
-        select.table("feedback");
+        select.where("user_id", userId)
+                .select("*")
+                .table("feedback");
 
         return this.maps(this.getQuery().query(select));
     }
@@ -53,9 +50,9 @@ public class FeedbackRepository extends Repository<Feedback> {
     public ArrayList<Feedback> getFeedbackByRoomId(int roomId) {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.where("user_id", roomId);
-        select.select("*");
-        select.table("feedback");
+        select.where("user_id", roomId)
+                .select("*")
+                .table("feedback");
 
         return this.maps(this.getQuery().query(select));
     }
@@ -63,11 +60,11 @@ public class FeedbackRepository extends Repository<Feedback> {
     public void createFeedback(Feedback feedback) {
         FewInsertMySQL insert = new FewInsertMySQL();
 
-        insert.insert("user_id", feedback.getUser().getId());
-        insert.insert("room_id", feedback.getRoom().getId());
-        insert.insert("comment", feedback.getComment());
-        insert.insert("rating", feedback.getRating());
-        insert.table("feedback");
+        insert.insert("user_id", feedback.getUser().getId())
+                .insert("room_id", feedback.getRoom().getId())
+                .insert("comment", feedback.getComment())
+                .insert("rating", feedback.getRating())
+                .table("feedback");
 
         this.getQuery().query(insert);
     }
@@ -79,12 +76,12 @@ public class FeedbackRepository extends Repository<Feedback> {
             throw new RuntimeException("Please provided an id to update user");
         }
 
-        update.where("id", feedback.getId());
-        update.set("user_id", feedback.getUser().getId());
-        update.set("room_id", feedback.getRoom().getId());
-        update.set("comment", feedback.getComment());
-        update.set("rating", feedback.getRating());
-        update.table("feedback");
+        update.where("id", feedback.getId())
+                .set("user_id", feedback.getUser().getId())
+                .set("room_id", feedback.getRoom().getId())
+                .set("comment", feedback.getComment())
+                .set("rating", feedback.getRating())
+                .table("feedback");
 
         this.getQuery().query(update);
     }
@@ -92,8 +89,7 @@ public class FeedbackRepository extends Repository<Feedback> {
     public void deleteFeedbackById(int id) {
         FewDeleteMySQL delete = new FewDeleteMySQL();
 
-        delete.table("feedback");
-        delete.where("id", id);
+        delete.where("id", id).table("feedback");
 
         this.getQuery().query(delete);
     }

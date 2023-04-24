@@ -16,8 +16,7 @@ public class UserRepository extends Repository<User> {
     public ArrayList<User> getUsers() {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.select("*");
-        select.table("user");
+        select.select("*").table("user");
 
         return this.maps(this.getQuery().query(select));
     }
@@ -28,9 +27,7 @@ public class UserRepository extends Repository<User> {
     public ArrayList<User> getUsers(int limit) {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.select("*");
-        select.table("user");
-        select.limit(limit);
+        select.select("*").limit(limit).table("user");
 
         return this.maps(this.getQuery().query(select));
     }
@@ -41,10 +38,10 @@ public class UserRepository extends Repository<User> {
     public User getUserById(int id) {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.select("*");
-        select.where("id", id);
-        select.limit(1);
-        select.table("user");
+        select.select("*")
+                .where("id", id)
+                .limit(1)
+                .table("user");
 
         return this.map(this.getQuery().query(select));
     }
@@ -55,12 +52,12 @@ public class UserRepository extends Repository<User> {
     public void createUser(User user) {
         FewInsertMySQL insert = new FewInsertMySQL();
 
-        insert.insert("firstname", user.getFirstname());
-        insert.insert("lastname", user.getLastname());
-        insert.insert("tel_num", user.getTelephoneNumber());
-        insert.insert("email", user.getEmail());
-        insert.insert("password_hash", user.getPasswordHash());
-        insert.table("user");
+        insert.insert("firstname", user.getFirstname())
+                .insert("lastname", user.getLastname())
+                .insert("tel_num", user.getTelephoneNumber())
+                .insert("email", user.getEmail())
+                .insert("password_hash", user.getPasswordHash())
+                .table("user");
 
         this.getQuery().query(insert);
     }
@@ -68,8 +65,7 @@ public class UserRepository extends Repository<User> {
     public void deleteUserById(int id) {
         FewDeleteMySQL delete = new FewDeleteMySQL();
 
-        delete.table("user");
-        delete.where("id", id);
+        delete.where("id", id).table("user");
 
         this.getQuery().query(delete);
     }
@@ -81,15 +77,15 @@ public class UserRepository extends Repository<User> {
             throw new RuntimeException("Please provided an id to update user");
         }
 
-        update.where("id", user.getId());
-        update.set("email", user.getEmail());
-        update.set("firstname", user.getFirstname());
-        update.set("lastname", user.getLastname());
-        update.set("tel_num", user.getTelephoneNumber());
-        update.set("is_active", user.isActive());
-        update.set("password_hash", user.getPasswordHash());
-        update.set("role", user.getRole());
-        update.table("user");
+        update.where("id", user.getId())
+                .set("email", user.getEmail())
+                .set("firstname", user.getFirstname())
+                .set("lastname", user.getLastname())
+                .set("tel_num", user.getTelephoneNumber())
+                .set("is_active", user.isActive())
+                .set("password_hash", user.getPasswordHash())
+                .set("role", user.getRole())
+                .table("user");
 
         this.getQuery().query(update);
     }
