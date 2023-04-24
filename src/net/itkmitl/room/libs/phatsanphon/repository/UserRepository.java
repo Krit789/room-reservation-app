@@ -87,6 +87,7 @@ public class UserRepository extends Repository<User> {
         update.set("lastname", user.getLastname());
         update.set("tel_num", user.getTelephoneNumber());
         update.set("is_active", user.isActive());
+        update.set("password_hash", user.getPasswordHash());
         update.set("role", user.getRole());
         update.table("user");
 
