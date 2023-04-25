@@ -7,11 +7,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class DataSearchView {
-    private final JPanel searchPanel, buttonPanel, titlePanel;
+    private final JPanel searchPanel, buttonPanel, titlePanel, radioPanel;
     public final ButtonGroup searchType;
     public final JRadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5;
     public final JTextField searchField;
-    private final JLabel searchLabel, pageTitle;
+    public final JLabel searchLabel, pageTitle;
     public final JButton searchButton;
     private final JInternalFrame frame;
 
@@ -32,12 +32,11 @@ public class DataSearchView {
         searchLabel = new JLabel("Enter Search Query");
         searchField = new JTextField();
         searchType = new ButtonGroup();
-        radioButton1 = new JRadioButton("ID");
-        radioButton1.setSelected(true);
-        radioButton2 = new JRadioButton("First Name");
-        radioButton3 = new JRadioButton("Last Name");
-        radioButton4 = new JRadioButton("E-Mail");
-        radioButton5 = new JRadioButton("Phone Number");
+        radioButton1 = new JRadioButton("");
+        radioButton2 = new JRadioButton("");
+        radioButton3 = new JRadioButton("");
+        radioButton4 = new JRadioButton("");
+        radioButton5 = new JRadioButton("");
         searchType.add(radioButton1);
         radioButton1.setSelected(true);
         searchType.add(radioButton2);
@@ -46,14 +45,19 @@ public class DataSearchView {
         searchType.add(radioButton5);
 
         searchPanel = new JPanel();
+        radioPanel = new JPanel();
+        radioPanel.setLayout(new FlowLayout());
         searchPanel.setLayout(new GridBagLayout());
-        searchPanel.add(searchLabel, new GBCBuilder(GridBagConstraints.EAST, 1, 1, 0, 0, new Insets(0,5,5,5)).getGBC());
-        searchPanel.add(searchField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 1, 0, 1, new Insets(5,5,5,5)).setColumnSpan(5, 1));
-        searchPanel.add(radioButton1, new GBCBuilder(GridBagConstraints.WEST, 0.1, 1, 0, 2, new Insets(5,5,5,0)).getGBC());
-        searchPanel.add(radioButton2, new GBCBuilder(GridBagConstraints.WEST, 0.2, 1, 1, 2, new Insets(5,5,5,0)).getGBC());
-        searchPanel.add(radioButton3, new GBCBuilder(GridBagConstraints.WEST, 0.2, 1, 2, 2, new Insets(5,5,5,0)).getGBC());
-        searchPanel.add(radioButton4, new GBCBuilder(GridBagConstraints.WEST, 0.2, 1, 3, 2, new Insets(5,5,5,0)).getGBC());
-        searchPanel.add(radioButton5, new GBCBuilder(GridBagConstraints.WEST, 0.3, 1, 4, 2, new Insets(5,5,5,5)).getGBC());
+        searchPanel.add(searchLabel, new GBCBuilder(GridBagConstraints.BOTH, 1, 0, 0, 0, new Insets(5,10,5,5)).getGBC());
+        searchPanel.add(searchField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 0, 1, new Insets(0,10,0,10)).getGBC());
+
+        radioPanel.add(radioButton1);
+        radioPanel.add(radioButton2);
+        radioPanel.add(radioButton3);
+        radioPanel.add(radioButton4);
+        radioPanel.add(radioButton5);
+        searchPanel.add(radioPanel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 0 ,2, new Insets(5,10,0,10)).setAnchor(GridBagConstraints.WEST));
+
 
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
