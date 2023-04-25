@@ -29,6 +29,25 @@ public class ReservationRepository extends Repository<Reservation> {
         return this.maps(this.getQuery().query(select));
     }
 
+    public ArrayList<Reservation> getReservationsBy(int prop, String search) {
+        String query = null;
+        switch (prop) {
+            case 0: // ID
+                query = String.format("SELECT * FROM `reservation` WHERE id='%s'", search);
+                break;
+            case 1: // User ID
+                query = String.format("SELECT * FROM `reservation` WHERE user_id='%s'", search);
+                break;
+            case 2: // Room ID
+                query = String.format("SELECT * FROM `reservation` WHERE room_id='%s'", search);
+                break;
+            case 3: // Reason
+                query = String.format("SELECT * FROM `reservation` WHERE reason LIKE '%%%s%%'", search);
+                break;
+        }
+        return this.maps(this.getQuery().unsafeQuery(query));
+    }
+
     /**
      * @param id int
      * @return Reservation

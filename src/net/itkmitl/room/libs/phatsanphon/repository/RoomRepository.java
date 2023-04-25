@@ -2,6 +2,7 @@ package net.itkmitl.room.libs.phatsanphon.repository;
 
 import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
+import net.itkmitl.room.libs.phatsanphon.entity.User;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,25 @@ public class RoomRepository extends Repository<Room> {
                 .table("room");
 
         return this.maps(this.getQuery().query(select));
+    }
+
+    public ArrayList<Room> getRoomsBy(int prop, String search) {
+        String query = null;
+        switch (prop) {
+            case 0: // ID
+                query = String.format("SELECT * FROM `room` WHERE id='%s'", search);
+                break;
+            case 1: // Name
+                query = String.format("SELECT * FROM `room` WHERE name LIKE '%%%s%%'", search);
+                break;
+            case 2: // Building
+                query = String.format("SELECT * FROM `room` WHERE building LIKE '%%%s%%'", search);
+                break;
+            case 3: // State
+                query = String.format("SELECT * FROM `room` WHERE state LIKE '%%%s%%'", search);
+                break;
+        }
+        return this.maps(this.getQuery().unsafeQuery(query));
     }
 
     public ArrayList<Room> getRoomsByBuilding(String building) {

@@ -7,11 +7,6 @@ import net.itkmitl.room.libs.phatsanphon.entity.User;
 import java.util.ArrayList;
 
 public class UserRepository extends Repository<User> {
-    public static final int ID = 0;
-    public static final int FIRST_NAME = 1;
-    public static final int LAST_NAME = 2;
-    public static final int TELEPHONE = 3;
-    public static final int EMAIL = 4;
 
     public UserRepository(final FewQuery query) {
         super(User.class, query);
@@ -42,20 +37,20 @@ public class UserRepository extends Repository<User> {
     public ArrayList<User> getUsersBy(int prop, String search) {
         String query = null;
         switch (prop) {
-            case 0:
-                query = String.format("SELECT * FROM 'user' WHERE id='%s'", search);
+            case 0: // ID
+                query = String.format("SELECT * FROM `user` WHERE id='%s'", search);
                 break;
-            case 1:
-                query = String.format("SELECT * FROM 'user' WHERE 'firstname' LIKE '%%%s%%'", search);
+            case 1: // First Name
+                query = String.format("SELECT * FROM `user` WHERE firstname LIKE '%%%s%%'", search);
                 break;
-            case 2:
-                query = String.format("SELECT * FROM 'user' WHERE 'lastname' LIKE '%%%s%%'", search);
+            case 2: // Last Name
+                query = String.format("SELECT * FROM `user` WHERE lastname LIKE '%%%s%%'", search);
                 break;
-            case 3:
-                query = String.format("SELECT * FROM 'user' WHERE 'tel_num' LIKE '%%%s%%'", search);
+            case 3: // E-Mail
+                query = String.format("SELECT * FROM `user` WHERE email LIKE '%%%s%%'", search);
                 break;
-            case 4:
-                query = String.format("SELECT * FROM 'user' WHERE 'email' LIKE '%%%s%%'", search);
+            case 4: // Phone Number
+                query = String.format("SELECT * FROM `user` WHERE tel_num LIKE '%%%s%%'", search);
                 break;
         }
         return this.maps(this.getQuery().unsafeQuery(query));

@@ -2,6 +2,7 @@ package net.itkmitl.room.libs.phatsanphon.repository;
 
 import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
+import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,28 @@ public class FeedbackRepository extends Repository<Feedback> {
         select.select("*").limit(limit).table("feedback");
 
         return this.maps(this.getQuery().query(select));
+    }
+
+    public ArrayList<Feedback> getFeedbacksBy(int prop, String search) {
+        String query = null;
+        switch (prop) {
+            case 0: // ID
+                query = String.format("SELECT * FROM `feedback` WHERE id='%s'", search);
+                break;
+            case 1: // Room ID
+                query = String.format("SELECT * FROM `feedback` WHERE room_id='%s'", search);
+                break;
+            case 2: // User ID
+                query = String.format("SELECT * FROM `feedback` WHERE lastname='%s'", search);
+                break;
+            case 3: // Rating
+                query = String.format("SELECT * FROM `feedback` WHERE rating LIKE '%%%s'", search);
+                break;
+            case 4: // Comment
+                query = String.format("SELECT * FROM `feedback` WHERE comment LIKE '%%%s%%'", search);
+                break;
+        }
+        return this.maps(this.getQuery().unsafeQuery(query));
     }
 
     public Feedback getFeedbackById(int id) {
