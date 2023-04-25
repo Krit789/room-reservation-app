@@ -6,18 +6,19 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class ConfigManager {
-    private static File configFile = new File("test.yml");
-
-    public ConfigManager(File configFile) {
-        this.configFile = configFile;
-    }
-
+	
+    private static File configFile;
+    
     public ConfigManager() {
-
+    	this(new File("test.yml"));
+    }
+    
+    public ConfigManager(File config) {
+    	ConfigManager.configFile = config;
     }
 
     public static void saveConnection(String database, String ip, int port, String username, String password) {
-        FewConfig config = new FewConfig(configFile);
+        FewConfig config = new FewConfig(ConfigManager.configFile);
         config.set("database", database);
         config.set("ip", ip);
         config.set("port", port);
@@ -35,7 +36,7 @@ public class ConfigManager {
     }
 
     public static ArrayList<String> getConnectionConfig() {
-        FewConfig config = new FewConfig(configFile);
+        FewConfig config = new FewConfig(ConfigManager.configFile);
         ArrayList<String> myConnection = new ArrayList<>();
         myConnection.add(config.asString("ip") + ":" + config.asString("port"));
         myConnection.add(config.asString("database"));
@@ -43,4 +44,5 @@ public class ConfigManager {
         myConnection.add(config.asString("password"));
         return myConnection;
     }
+    
 }
