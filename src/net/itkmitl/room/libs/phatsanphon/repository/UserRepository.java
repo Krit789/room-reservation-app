@@ -1,6 +1,7 @@
 package net.itkmitl.room.libs.phatsanphon.repository;
 
 import net.itkmitl.room.libs.peeranat.query.*;
+import net.itkmitl.room.libs.peeranat.util.FewMySQL;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class UserRepository extends Repository<User> {
     public static final int LAST_NAME = 2;
     public static final int TELEPHONE = 3;
     public static final int EMAIL = 4;
+
     public UserRepository(final FewQuery query) {
         super(User.class, query);
     }
@@ -37,12 +39,26 @@ public class UserRepository extends Repository<User> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<User> getUsersBy(int prop) {
-        FewSelectMySQL select = new FewSelectMySQL();
-
-//        select.select("*").where().table("user");
-
-        return this.maps(this.getQuery().query(select));
+    public ArrayList<User> getUsersBy(int prop, String search) {
+        String query = null;
+        switch (prop) {
+            case 0:
+                query = String.format("SELECT * FROM 'user' WHERE id='%s'", search);
+                break;
+            case 1:
+                query = String.format("SELECT * FROM 'user' WHERE 'firstname' LIKE '%%%s%%'", search);
+                break;
+            case 2:
+                query = String.format("SELECT * FROM 'user' WHERE 'lastname' LIKE '%%%s%%'", search);
+                break;
+            case 3:
+                query = String.format("SELECT * FROM 'user' WHERE 'tel_num' LIKE '%%%s%%'", search);
+                break;
+            case 4:
+                query = String.format("SELECT * FROM 'user' WHERE 'email' LIKE '%%%s%%'", search);
+                break;
+        }
+        return this.maps(this.getQuery().unsafeQuery(query));
     }
 
 
