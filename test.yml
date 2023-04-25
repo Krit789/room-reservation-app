@@ -1,9 +1,8 @@
-ip: 49.228.131.109
-database: room_reservation
+ip: "49.228.131.109"
+database: "room_reservation"
 port: 3357
-username: test_user
-password: Pu57HDrrXgvVLn
+username: "test_user"
+password: "Pu57HDrrXgvVLn"
 timeout_time: 17
 never_timeout: false
-config_dir: C:\Users\metha\git\room-reservation-app\test.yml
 create_new_db_if_doesnt_exist: false
