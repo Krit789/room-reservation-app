@@ -2,8 +2,6 @@ package net.itkmitl.room.portal.dashboard;
 
 import net.itkmitl.room.portal.Portal;
 
-import javax.swing.*;
-
 public class Dashboard extends Portal {
     private final DashboardController controller;
 

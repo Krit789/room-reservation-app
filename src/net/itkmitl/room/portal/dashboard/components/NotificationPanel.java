@@ -1,12 +1,22 @@
 package net.itkmitl.room.portal.dashboard.components;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import net.itkmitl.room.portal.components.GBCBuilder;
 
-import javax.swing.*;
-import java.awt.*;
-
 public class NotificationPanel extends JPanel {
-    public JLabel notificationTextLabel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4305337873118944635L;
+	public JLabel notificationTextLabel;
 
     public NotificationPanel() {
         super();

@@ -1,9 +1,13 @@
 package net.itkmitl.room.portal.account;
 
-import net.itkmitl.room.libs.peeranat.util.FewFile;
+import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 
 public class OutPane extends JPanel {
 

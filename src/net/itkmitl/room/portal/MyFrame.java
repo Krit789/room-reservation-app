@@ -1,17 +1,23 @@
 package net.itkmitl.room.portal;
 
-import net.itkmitl.room.libs.peeranat.util.FewFile;
-
 import java.awt.BorderLayout;
 import java.awt.Image;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
+import net.itkmitl.room.libs.peeranat.util.FewFile;
+
 public class MyFrame extends JFrame {
 
-    public MyFrame() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4198257395579538666L;
+
+	public MyFrame() {
         // Load the image
         ImageIcon icon = new ImageIcon(FewFile.getImage("account/img/it_building.png"));
         Image image = icon.getImage();

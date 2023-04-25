@@ -1,14 +1,29 @@
 package net.itkmitl.room.portal.dashboard;
 
-import net.itkmitl.room.portal.View;
-import net.itkmitl.room.portal.dashboard.components.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+
+import net.itkmitl.room.portal.View;
+import net.itkmitl.room.portal.dashboard.components.ContentPanel;
+import net.itkmitl.room.portal.dashboard.components.MainPanel;
+import net.itkmitl.room.portal.dashboard.components.NotificationPanel;
+import net.itkmitl.room.portal.dashboard.components.ReservationPanel;
+import net.itkmitl.room.portal.dashboard.components.RightPanel;
+import net.itkmitl.room.portal.dashboard.components.WelcomePanel;
 
 public class DashboardView extends View {
-    public JPanel rightPanel, mainPanel, contentPanel, welcomePanel, notificationPanel, reservationPanel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 5559587513984125656L;
+	public JPanel rightPanel, mainPanel, contentPanel, welcomePanel, notificationPanel, reservationPanel;
 
     public DashboardView() {
         super();
