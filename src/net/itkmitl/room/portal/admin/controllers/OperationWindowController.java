@@ -24,7 +24,9 @@ import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
+import net.itkmitl.room.portal.admin.views.DataSearchView;
 import net.itkmitl.room.portal.admin.views.OperationWindowView;
+import net.itkmitl.room.portal.admin.views.PreferenceWindowView;
 import net.itkmitl.room.portal.components.LoadingDialog;
 
 public class OperationWindowController implements ActionListener, InternalFrameListener {
@@ -41,6 +43,7 @@ public class OperationWindowController implements ActionListener, InternalFrameL
         view.viewRoom.addActionListener(this);
         view.viewReservation.addActionListener(this);
         view.viewFeedback.addActionListener(this);
+        view.lookupUser.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -52,6 +55,8 @@ public class OperationWindowController implements ActionListener, InternalFrameL
             databaseLoader(RESERVATION);
         } else if (e.getSource().equals(view.viewFeedback)) {
             databaseLoader(FEEDBACK);
+        } else if (e.getSource().equals(view.lookupUser)){
+            spawnSearch();
         }
     }
 
@@ -59,6 +64,20 @@ public class OperationWindowController implements ActionListener, InternalFrameL
         return view;
     }
 
+    public void spawnSearch(){
+        DataSearchView view = new DataSearchView();
+//        PreferenceWindowView view = pref.getView();
+
+        Dimension desktopSize = BaseWindow.getDesktop().getSize();
+        Dimension jInternalFrameSize = view.getFrame().getSize();
+        view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+        view.getFrame().addInternalFrameListener(this);
+        view.getFrame().show();
+        view.getFrame().setVisible(true);
+        BaseWindow.getDesktop().add(view.getFrame());
+        view.getFrame().moveToFront();
+    }
 
     public void databaseLoader(int whichTable) {
         SwingWorker worker = new SwingWorker() {
@@ -172,7 +191,6 @@ public class OperationWindowController implements ActionListener, InternalFrameL
             table.view.getFrame().setVisible(true);
             BaseWindow.getDesktop().add(table.view.getFrame());
             table.view.getFrame().moveToFront();
-//            modalDialog.dispose();
             return table;
         } else {
             JOptionPane.showMessageDialog(BaseWindow.baseFrame, data[1].toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);

@@ -8,15 +8,13 @@ import net.itkmitl.room.libs.phatsanphon.repository.*;
 import java.util.ArrayList;
 
 public class ApplicationMain {
-
     public static void main(String[] args) {
         FewQuery db = RVDB.getDB();
-        FeedbackRepository feedbackRepository = new FeedbackRepository(db);
+        RoomRepository roomRepository = new RoomRepository(db);
+        ArrayList<Room> roomList = roomRepository.getRooms();
 
-        ArrayList<Feedback> feedback = feedbackRepository.getFeedbacks();
-
-        for (Feedback fb : feedback) {
-            System.out.println(fb.getId());
+        for (Room room : roomList) {
+            System.out.println(room.getName());
         }
     }
 }
