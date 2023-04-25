@@ -6,6 +6,11 @@ import net.itkmitl.room.libs.phatsanphon.entity.User;
 import java.util.ArrayList;
 
 public class UserRepository extends Repository<User> {
+    public static final int ID = 0;
+    public static final int FIRST_NAME = 1;
+    public static final int LAST_NAME = 2;
+    public static final int TELEPHONE = 3;
+    public static final int EMAIL = 4;
     public UserRepository(final FewQuery query) {
         super(User.class, query);
     }
@@ -31,6 +36,15 @@ public class UserRepository extends Repository<User> {
 
         return this.maps(this.getQuery().query(select));
     }
+
+    public ArrayList<User> getUsersBy(int prop) {
+        FewSelectMySQL select = new FewSelectMySQL();
+
+//        select.select("*").where().table("user");
+
+        return this.maps(this.getQuery().query(select));
+    }
+
 
     /*
      * Get user by id
