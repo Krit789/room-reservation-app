@@ -1,15 +1,17 @@
 package net.itkmitl.room.libs.peeranat.config;
 
-import net.itkmitl.room.libs.peeranat.util.FewFile;
-import org.yaml.snakeyaml.Yaml;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.yaml.snakeyaml.Yaml;
 
 public class FewConfig {
+	
     private File file;
     private Yaml yaml;
     private HashMap<String, Object> data;

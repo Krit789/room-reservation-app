@@ -1,5 +1,17 @@
 package net.itkmitl.room.portal.admin.controllers;
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+import javax.swing.table.DefaultTableModel;
+
 import net.itkmitl.room.db.RVDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
@@ -12,19 +24,8 @@ import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
-import net.itkmitl.room.portal.admin.views.DataListTableView;
 import net.itkmitl.room.portal.admin.views.OperationWindowView;
 import net.itkmitl.room.portal.components.LoadingDialog;
-
-import javax.swing.*;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class OperationWindowController implements ActionListener, InternalFrameListener {
     OperationWindowView view;

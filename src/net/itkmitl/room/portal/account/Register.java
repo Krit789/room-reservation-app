@@ -1,15 +1,22 @@
 package net.itkmitl.room.portal.account;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
 import com.formdev.flatlaf.FlatIntelliJLaf;
+
 import net.itkmitl.room.MacConfig;
-import net.itkmitl.room.libs.peeranat.util.*;
-import net.itkmitl.room.portal.admin.BaseWindow;
-
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
 
 public class Register extends BaseClass implements ActionListener {
 

@@ -1,9 +1,9 @@
 package net.itkmitl.room.libs.phatsanphon.entity;
 
-import net.itkmitl.room.db.RVDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
-import net.itkmitl.room.libs.phatsanphon.repository.*;
+import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
+import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 
 public class Reservation extends Entity {
     private int id;

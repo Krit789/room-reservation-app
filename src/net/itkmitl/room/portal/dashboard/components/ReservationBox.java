@@ -1,13 +1,19 @@
 package net.itkmitl.room.portal.dashboard.components;
 
-import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 
 public class ReservationBox extends JPanel {
-    public JButton redirectButton;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3285944903070661887L;
+	public JButton redirectButton;
 
     public ReservationBox(String title) {
         super(new BorderLayout());

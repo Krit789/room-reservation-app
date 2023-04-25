@@ -1,7 +1,5 @@
 package net.itkmitl.room;
 
-import java.awt.*;
-
 public class MacConfig {
     public static void menuBar() {
         menuBar("Laew Tae Hong");

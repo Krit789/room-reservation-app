@@ -1,13 +1,29 @@
 package net.itkmitl.room.portal;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
+import javax.swing.WindowConstants;
+
 import net.itkmitl.room.portal.account.OutPane;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-
 public abstract class View extends JFrame {
-    public OutPane outerPane;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8075338715312313006L;
+	public OutPane outerPane;
     public JMenuBar menuBar;
     public JMenu fileMenu, windowMenu, optionMenu, helpMenu;
     public JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;

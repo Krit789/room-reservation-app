@@ -3,8 +3,6 @@ package net.itkmitl.room.portal.admin.controllers;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
 import net.itkmitl.room.portal.admin.views.DataListTableView;
 
-import javax.swing.table.DefaultTableModel;
-
 public class DataListTableController {
     DataListTableView view;
     DataListTableModel model;

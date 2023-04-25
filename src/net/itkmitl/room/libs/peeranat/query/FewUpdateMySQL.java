@@ -3,6 +3,7 @@ package net.itkmitl.room.libs.peeranat.query;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 public class FewUpdateMySQL extends FewMySQLBuilder {
 
@@ -40,6 +41,29 @@ public class FewUpdateMySQL extends FewMySQLBuilder {
 
     @Override
     public String builder() {
-        return null;
+    	StringBuilder output = new StringBuilder();
+		output.append("UPDATE ");
+		output.append("`").append(this.table).append("` SET ");
+
+		for (Entry<String, Object> entry : this.toUpdate.entrySet()) {
+			output.append("`").append(entry.getKey()).append("` = '").append(entry.getValue()).append("', ");
+		}
+		output.delete(output.length() - 2, output.length());
+
+		if (!this.wheres.isEmpty()) {
+			boolean isAlreadyWhere = false;
+			output.append(" WHERE");
+			for (FewMySQLWhere where : this.wheres) {
+				if (isAlreadyWhere) {
+					output.append(" ").append(where.getOperator().getValue()).append(" ");
+				}
+				output.append(" ").append(where.getWhereString()).append(" ");
+				isAlreadyWhere = true;
+			}
+		}
+		if (this.limit > 0) {
+			output.append(" LIMIT ").append(this.limit);
+		}
+		return output.toString();
     }
 }

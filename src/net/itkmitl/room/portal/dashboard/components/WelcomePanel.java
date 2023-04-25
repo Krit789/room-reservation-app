@@ -1,10 +1,18 @@
 package net.itkmitl.room.portal.dashboard.components;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class WelcomePanel extends JPanel {
-    public WelcomePanel() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4015833019658837000L;
+
+	public WelcomePanel() {
         super();
 
         this.setBackground(new Color(255, 255, 255));

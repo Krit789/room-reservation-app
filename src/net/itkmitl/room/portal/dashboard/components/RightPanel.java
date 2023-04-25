@@ -1,10 +1,18 @@
 package net.itkmitl.room.portal.dashboard.components;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class RightPanel extends JPanel {
-    public JLabel nameLabel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3515411566688472487L;
+	public JLabel nameLabel;
 
     public RightPanel() {
         super();

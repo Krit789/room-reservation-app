@@ -2,6 +2,7 @@ package net.itkmitl.room.libs.phatsanphon.entity;
 
 import net.itkmitl.room.enums.*;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 
 public class User extends Entity {
@@ -103,6 +104,14 @@ public class User extends Entity {
 
     private void setCreatedOn(String rawCreatedOn) {
         this.createdOn = new DateTime(rawCreatedOn);
+    }
+    
+    public boolean doLogin(String password) {
+    	String salt = FewPassword.getSalt(password);
+    	if (FewPassword.checkPassword(this.passwordHash, salt)) {
+    		return true;
+    	}
+    	return false;
     }
 
     @Override
