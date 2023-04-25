@@ -6,13 +6,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
+import javax.swing.*;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
 
@@ -42,6 +36,12 @@ public class Register extends BaseClass implements ActionListener {
         lastNameText = new JLabel("LastName : ", SwingConstants.LEFT);
         telText = new JLabel("Telephone :", SwingConstants.LEFT);
         registerHeader = new JLabel("Register", SwingConstants.CENTER);
+
+        innerPane.setBorder(BorderFactory.createEmptyBorder(newInsets.top, newInsets.left, newInsets.bottom, newInsets.right));
+        insets.top = newInsets.top;
+        insets.left = newInsets.left;
+        insets.bottom = newInsets.bottom;
+        insets.right = newInsets.right;
 
         namePanel = new JPanel();
         namePanel.setLayout(new GridBagLayout());
@@ -113,16 +113,13 @@ public class Register extends BaseClass implements ActionListener {
         c.gridx = 2;
         c.gridy = 6;
         floatingBox.add(buttonBox, c);
-        c.fill = GridBagConstraints.VERTICAL;
-        c.weightx = 0.4;
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridheight = 5;
-        floatingBox.add(new JLabel("building goes here"), c);//Image wont go in
-        c.gridheight = 1;
-
-        innerPane.add(floatingBox);
-        outerPane.add(innerPane);
+//        c.fill = GridBagConstraints.VERTICAL;
+//        c.weightx = 0.4;
+//        c.gridx = 0;
+//        c.gridy = 1;
+//        c.gridheight = 5;
+//        floatingBox.add(new JLabel("building goes here"), c);//Image wont go in
+//        c.gridheight = 1;
 
     }
 
