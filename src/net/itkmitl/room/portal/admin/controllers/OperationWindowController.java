@@ -1,36 +1,22 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import java.awt.Dimension;
+import net.itkmitl.room.portal.admin.BaseWindow;
+import net.itkmitl.room.portal.admin.components.DatabaseLoader;
+import net.itkmitl.room.portal.admin.models.DataSearchModel;
+import net.itkmitl.room.portal.admin.views.DataSearchView;
+import net.itkmitl.room.portal.admin.views.OperationWindowView;
+
+import javax.swing.*;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-import javax.swing.table.DefaultTableModel;
-
-import net.itkmitl.room.db.RVDB;
-import net.itkmitl.room.libs.peeranat.query.FewQuery;
-import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
-import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
-import net.itkmitl.room.libs.phatsanphon.entity.Room;
-import net.itkmitl.room.libs.phatsanphon.entity.User;
-import net.itkmitl.room.libs.phatsanphon.repository.FeedbackRepository;
-import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
-import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
-import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
-import net.itkmitl.room.portal.admin.BaseWindow;
-import net.itkmitl.room.portal.admin.models.DataListTableModel;
-import net.itkmitl.room.portal.admin.views.DataSearchView;
-import net.itkmitl.room.portal.admin.views.OperationWindowView;
-import net.itkmitl.room.portal.components.LoadingDialog;
-
 public class OperationWindowController implements ActionListener, InternalFrameListener {
-    OperationWindowView view;
-
+    private OperationWindowView view;
+    private DatabaseLoader dbl;
     public static final int USER = 1;
     public static final int ROOM = 2;
     public static final int RESERVATION = 3;
@@ -43,19 +29,29 @@ public class OperationWindowController implements ActionListener, InternalFrameL
         view.viewReservation.addActionListener(this);
         view.viewFeedback.addActionListener(this);
         view.lookupUser.addActionListener(this);
+        view.lookupRoom.addActionListener(this);
+        view.lookupReservation.addActionListener(this);
+        view.lookupFeedback.addActionListener(this);
+        dbl = new DatabaseLoader();
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.viewUser)) {
-            databaseLoader(USER);
+            dbl.databaseLoader(USER);
         } else if (e.getSource().equals(view.viewRoom)) {
-            databaseLoader(ROOM);
+            dbl.databaseLoader(ROOM);
         } else if (e.getSource().equals(view.viewReservation)) {
-            databaseLoader(RESERVATION);
+            dbl.databaseLoader(RESERVATION);
         } else if (e.getSource().equals(view.viewFeedback)) {
-            databaseLoader(FEEDBACK);
-        } else if (e.getSource().equals(view.lookupUser)){
-            spawnSearch();
+            dbl.databaseLoader(FEEDBACK);
+        } else if (e.getSource().equals(view.lookupUser)) {
+            spawnSearch(USER);
+        } else if (e.getSource().equals(view.lookupRoom)) {
+            spawnSearch(ROOM);
+        } else if (e.getSource().equals(view.lookupReservation)) {
+            spawnSearch(RESERVATION);
+        } else if (e.getSource().equals(view.lookupFeedback)) {
+            spawnSearch(FEEDBACK);
         }
     }
 
@@ -63,9 +59,43 @@ public class OperationWindowController implements ActionListener, InternalFrameL
         return view;
     }
 
-    public void spawnSearch(){
-        DataSearchView view = new DataSearchView();
-//        PreferenceWindowView view = pref.getView();
+    public void spawnSearch(int type) {
+        ArrayList<String> radioList = new ArrayList<>();
+        String title = null;
+        switch (type) {
+            case 1: // User
+                title = "User";
+                radioList.add("ID");
+                radioList.add("First Name");
+                radioList.add("Last Name");
+                radioList.add("E-Mail");
+                radioList.add("Phone Number");
+                break;
+            case 2: // Room
+                title = "Room";
+                radioList.add("ID");
+                radioList.add("Name");
+                radioList.add("Building");
+                radioList.add("State");
+                break;
+            case 3: // Reservation
+                title = "Reservation";
+                radioList.add("ID");
+                radioList.add("User ID");
+                radioList.add("Room ID");
+                radioList.add("Reason");
+                break;
+            case 4: // Feedback
+                title = "Feedback";
+                radioList.add("ID");
+                radioList.add("Room ID");
+                radioList.add("User ID");
+                radioList.add("Rating");
+                radioList.add("Comment");
+                break;
+        }
+        DataSearchController dsc = new DataSearchController(new DataSearchModel(radioList, title));
+        DataSearchView view = dsc.view;
 
         Dimension desktopSize = BaseWindow.getDesktop().getSize();
         Dimension jInternalFrameSize = view.getFrame().getSize();
@@ -78,127 +108,7 @@ public class OperationWindowController implements ActionListener, InternalFrameL
         view.getFrame().moveToFront();
     }
 
-    public void databaseLoader(int whichTable) {
-        SwingWorker worker = new SwingWorker() {
-            DataListTableModel model = new DataListTableModel();
-            Object[] data;
-            LoadingDialog ld = new LoadingDialog();
 
-            @Override
-            protected String doInBackground() throws Exception {
-                String errorMessage;
-                FewQuery db = RVDB.getDB();
-                DataListTableModel model = new DataListTableModel();
-                ld.dialog.setVisible(true);
-                BaseWindow.progressBar.setIndeterminate(true);
-                if (whichTable == 1) {
-                    BaseWindow.statusLabel.setText("Loading data from Database (User Table)");
-                    try {
-                        ArrayList<User> users_list = new UserRepository(db).getUsers();
-                        model.setTitle("User Data");
-                        model.setPageTitle("User DataTable");
-                        model.setPageSubtitle(users_list.size() + " records was retrieved from database.");
-                        DefaultTableModel dtm = new DefaultTableModel(null, new String[]{"ID", "First Name", "Last Name", "Active", "Phone Number", "E-Mail", "Role", "Created On", "Staff"});
-                        for (User u : users_list) {
-                            dtm.addRow(new Object[]{u.getId(), u.getFirstname(), u.getLastname(), u.isActive(), u.getEmail(), u.getTelephoneNumber(), u.getRole(), u.getCreatedOn(), u.isStaff()});
-                        }
-                        model.setDtm(dtm);
-                        data = new Object[]{Boolean.valueOf(true), model};
-                    } catch (Exception e) {
-                        errorMessage = e.getMessage();
-                        data = new Object[]{Boolean.valueOf(false), errorMessage};
-                    }
-                } else if (whichTable == 2) {
-                    BaseWindow.statusLabel.setText("Loading data from Database (Room Table)");
-                    try {
-                        ArrayList<Room> room_list = new RoomRepository(db).getRooms();
-                        model.setTitle("Room Data");
-                        model.setPageTitle("Room DataTable");
-                        model.setPageSubtitle(room_list.size() + " records was retrieved from database.");
-                        DefaultTableModel dtm = new DefaultTableModel(null, new String[]{"ID", "Name", "Building", "Capacity", "Floor", "State"});
-                        for (Room u : room_list) {
-                            dtm.addRow(new Object[]{u.getId(), u.getName(), u.getBuilding(), u.getCapacity(), u.getFloor(), u.getState()});
-                        }
-                        model.setDtm(dtm);
-                        data = new Object[]{Boolean.valueOf(true), model};
-                    } catch (Exception e) {
-                        errorMessage = e.getMessage();
-                        data = new Object[]{Boolean.valueOf(false), errorMessage};
-                        e.printStackTrace();
-
-                    }
-                } else if (whichTable == 3) {
-                    BaseWindow.statusLabel.setText("Loading data from Database (Reservation Table)");
-                    try {
-                        ArrayList<Reservation> reservations_list = new ReservationRepository(db).getReservations();
-                        model.setTitle("Reservation Data");
-                        model.setPageTitle("Reservation DataTable");
-                        model.setPageSubtitle(reservations_list.size() + " records was retrieved from database.");
-                        DefaultTableModel dtm = new DefaultTableModel(null, new String[]{"ID", "Room Name", "Room Location", "Reserver", "Start Time", "End Time", "Reservation Length", "Cancelled"});
-                        for (Reservation u : reservations_list) {
-                            dtm.addRow(new Object[]{u.getId(), u.getRoom().getName(), u.getRoom().getBuilding(), u.getUser(), u.getReason(), u.getStartTime(), u.getEndTime(), u.getReservationTime(), u.isCancelled()});
-                        }
-                        model.setDtm(dtm);
-                        data = new Object[]{Boolean.valueOf(true), model};
-                    } catch (Exception e) {
-                        errorMessage = e.getMessage();
-                        data = new Object[]{Boolean.valueOf(false), errorMessage};
-                    }
-                } else if (whichTable == 4) {
-                    BaseWindow.statusLabel.setText("Loading data from Database (Feedback Table)");
-                    try {
-                        ArrayList<Feedback> feedbacks_list = new FeedbackRepository(db).getFeedbacks();
-                        model.setTitle("Feedback Data");
-                        model.setPageTitle("Feedback DataTable");
-                        model.setPageSubtitle(feedbacks_list.size() + " records was retrieved from database.");
-                        DefaultTableModel dtm = new DefaultTableModel(null, new String[]{"ID", "Comment", "Rating", "Created On", "Room", "User"});
-                        for (Feedback u : feedbacks_list) {
-                            dtm.addRow(new Object[]{u.getId(), u.getComment(), u.getRating(), u.getCreatedOn(), u.getRoom().getName(), u.getUser().getFirstname() + " " + u.getUser().getLastname()});
-                        }
-                        model.setDtm(dtm);
-                        data = new Object[]{Boolean.valueOf(true), model};
-                    } catch (Exception e) {
-                        errorMessage = e.getMessage();
-                        data = new Object[]{Boolean.valueOf(false), errorMessage};
-                        e.printStackTrace();
-                    }
-                } else {
-                    data = new Object[]{Boolean.valueOf(false), "Unknown Error: Unable to Retrieve Data"};
-                }
-                return "";
-            }
-
-            @Override
-            protected void done() {
-                spawnTableView(data);
-                ld.dialog.dispose();
-                BaseWindow.progressBar.setIndeterminate(false);
-
-            }
-        };
-        worker.execute();
-    }
-
-    public DataListTableController spawnTableView(Object[] data) {
-        boolean dbReady = ((Boolean) data[0]);
-
-        if (dbReady) {
-            DataListTableController table = new DataListTableController((DataListTableModel) data[1]);
-            Dimension desktopSize = BaseWindow.getDesktop().getSize();
-            Dimension jInternalFrameSize = table.view.getFrame().getSize();
-            table.view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
-                    (desktopSize.height - jInternalFrameSize.height) / 2);
-            table.view.getFrame().addInternalFrameListener(this);
-            table.view.getFrame().show();
-            table.view.getFrame().setVisible(true);
-            BaseWindow.getDesktop().add(table.view.getFrame());
-            table.view.getFrame().moveToFront();
-            return table;
-        } else {
-            JOptionPane.showMessageDialog(BaseWindow.baseFrame, data[1].toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
-        }
-        return null;
-    }
 
     public void internalFrameOpened(InternalFrameEvent e) {
         BaseWindow.statusLabel.setText(e.getInternalFrame().getTitle() + " was opened.");

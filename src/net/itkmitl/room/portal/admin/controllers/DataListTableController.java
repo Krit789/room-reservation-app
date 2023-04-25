@@ -4,8 +4,8 @@ import net.itkmitl.room.portal.admin.models.DataListTableModel;
 import net.itkmitl.room.portal.admin.views.DataListTableView;
 
 public class DataListTableController {
-    DataListTableView view;
-    DataListTableModel model;
+    public DataListTableView view;
+    public DataListTableModel model;
 
     public DataListTableController(){
         this(new DataListTableModel());
