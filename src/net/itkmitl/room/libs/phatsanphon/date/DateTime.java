@@ -140,15 +140,6 @@ public class DateTime {
         );
     }
 
-    public java.sql.Date getSqlDate() {
-        try {
-            Date date = sdf.parse(this.getDateTime().toString());
-            return new java.sql.Date(date.getTime());
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public int compare(DateTime dt) {
         return this.getDateTime().compareTo(dt.getDateTime());
     }
