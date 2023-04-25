@@ -12,7 +12,6 @@ import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
-import net.itkmitl.room.portal.admin.views.DataListTableView;
 import net.itkmitl.room.portal.admin.views.OperationWindowView;
 import net.itkmitl.room.portal.components.LoadingDialog;
 
@@ -20,7 +19,6 @@ import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
