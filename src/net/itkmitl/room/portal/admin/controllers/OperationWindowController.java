@@ -26,7 +26,6 @@ import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
 import net.itkmitl.room.portal.admin.views.DataSearchView;
 import net.itkmitl.room.portal.admin.views.OperationWindowView;
-import net.itkmitl.room.portal.admin.views.PreferenceWindowView;
 import net.itkmitl.room.portal.components.LoadingDialog;
 
 public class OperationWindowController implements ActionListener, InternalFrameListener {
@@ -125,6 +124,8 @@ public class OperationWindowController implements ActionListener, InternalFrameL
                     } catch (Exception e) {
                         errorMessage = e.getMessage();
                         data = new Object[]{Boolean.valueOf(false), errorMessage};
+                        e.printStackTrace();
+
                     }
                 } else if (whichTable == 3) {
                     BaseWindow.statusLabel.setText("Loading data from Database (Reservation Table)");
@@ -159,6 +160,7 @@ public class OperationWindowController implements ActionListener, InternalFrameL
                     } catch (Exception e) {
                         errorMessage = e.getMessage();
                         data = new Object[]{Boolean.valueOf(false), errorMessage};
+                        e.printStackTrace();
                     }
                 } else {
                     data = new Object[]{Boolean.valueOf(false), "Unknown Error: Unable to Retrieve Data"};

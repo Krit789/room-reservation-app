@@ -8,11 +8,11 @@ import java.awt.*;
 
 public class DataSearchView {
     private final JPanel searchPanel, buttonPanel, titlePanel;
-    private final ButtonGroup searchType;
-    private final JRadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5;
-    private final JTextField searchField;
+    public final ButtonGroup searchType;
+    public final JRadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5;
+    public final JTextField searchField;
     private final JLabel searchLabel, pageTitle;
-    private final JButton serchButton;
+    public final JButton searchButton;
     private final JInternalFrame frame;
 
     public DataSearchView(){
@@ -33,11 +33,13 @@ public class DataSearchView {
         searchField = new JTextField();
         searchType = new ButtonGroup();
         radioButton1 = new JRadioButton("ID");
+        radioButton1.setSelected(true);
         radioButton2 = new JRadioButton("First Name");
         radioButton3 = new JRadioButton("Last Name");
         radioButton4 = new JRadioButton("E-Mail");
         radioButton5 = new JRadioButton("Phone Number");
         searchType.add(radioButton1);
+        radioButton1.setSelected(true);
         searchType.add(radioButton2);
         searchType.add(radioButton3);
         searchType.add(radioButton4);
@@ -55,8 +57,8 @@ public class DataSearchView {
 
         buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        serchButton = new JButton("Search");
-        buttonPanel.add(serchButton);
+        searchButton = new JButton("Search");
+        buttonPanel.add(searchButton);
 
         frame.add(titlePanel, BorderLayout.NORTH);
         frame.add(searchPanel, BorderLayout.CENTER);
