@@ -22,15 +22,11 @@ public class Login extends BaseClass implements ActionListener {
         passwordText = new JLabel("Password : ", SwingConstants.RIGHT);
         loginHeader = new JLabel("Login", SwingConstants.CENTER);
 
-        // Update the padding of the nested panel
         innerPane.setBorder(BorderFactory.createEmptyBorder(newInsets.top, newInsets.left, newInsets.bottom, newInsets.right));
         insets.top = newInsets.top;
         insets.left = newInsets.left;
         insets.bottom = newInsets.bottom;
         insets.right = newInsets.right;
-
-        GridBagConstraints c = new GridBagConstraints();
-
         //Tried using GridBag Layout (Card Layout sounds interesting too, but are too complicated)
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 1;
@@ -61,13 +57,13 @@ public class Login extends BaseClass implements ActionListener {
         c.gridx = 2;
         c.gridy = 3;
         floatingBox.add(buttonBox, c);
-        c.fill = GridBagConstraints.VERTICAL;
-        c.weightx = 0.4;
-        c.gridx = 0;
-        c.gridy = 1;
-        c.gridheight = 5;
-        floatingBox.add(new JLabel("building goes here"), c);//Image wont go in
-        c.gridheight = 1;
+//        c.fill = GridBagConstraints.VERTICAL;
+//        c.weightx = 0.4;
+//        c.gridx = 0;
+//        c.gridy = 1;
+//        c.gridheight = 5;
+//        floatingBox.add(new JLabel("building goes here"), c);//Image wont go in
+//        c.gridheight = 1;
     }
 
     public void actionPerformed(ActionEvent e) {

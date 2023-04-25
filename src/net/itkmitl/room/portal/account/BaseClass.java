@@ -20,6 +20,7 @@ public abstract class BaseClass implements ActionListener {
     protected JMenuItem optionMenuItem1, helpMenuItem1;
 
     protected JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
+    protected GridBagConstraints c;
     protected ArrayList<Image> multiIcon;
 
     protected Insets insets = new Insets(400, 600, 400, 600), newInsets;
@@ -154,7 +155,7 @@ public abstract class BaseClass implements ActionListener {
         baseFrame.setIconImages(multiIcon);
 
         floatingBox = new JPanel();
-        floatingBox.setSize(new Dimension(400, 500));
+        floatingBox.setSize(new Dimension(500, 500));
         floatingBox.setLayout(new GridBagLayout());
 
         outerPaneInitialize();
@@ -172,10 +173,24 @@ public abstract class BaseClass implements ActionListener {
         buttonBox.add(loginButton);
 
         innerPane.add(floatingBox);
+
         outerPane.add(innerPane);
 
         baseFrame.setContentPane(outerPane);
         baseFrame.setVisible(true);
+
+        //Add Building Image
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weightx = 0.4;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridheight = 5;
+        floatingBox.add(new JLabel("building goes here"), c);//Image wont go in
+        c.gridheight = 1;
+
+        // Update the padding of the nested panel
+
     }
 
     public static void main(String[] args) {

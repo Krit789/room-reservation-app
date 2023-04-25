@@ -15,8 +15,24 @@ public class DateTime {
         this.format();
     }
 
-    public DateTime() {
+    public DateTime(Date date) {
+        this.dateTime = date;
+    }
 
+    public DateTime(int year, int month, int date) {
+        this(year, month, date, 0, 0, 0);
+    }
+
+    public DateTime(int year, int month, int date, int hours, int minutes, int seconds) {
+        this.setYear(year);
+        this.setMonth(month);
+        this.setDate(date);
+        this.setHours(hours);
+        this.setMinutes(minutes);
+        this.setSeconds(seconds);
+    }
+
+    public DateTime() {
     }
 
     private String replaceText() {
@@ -118,10 +134,19 @@ public class DateTime {
     @Override
     public String toString() {
         return String.format(
-                "%d-%d-%d %d:%d:%d",
-                this.getDate(), this.getMonth(), this.getYear(),
+                "%d-%02d-%02d %02d:%02d:%02d",
+                this.getYear(), this.getMonth(), this.getDate(),
                 this.getHours(), this.getMinutes(), this.getSeconds()
         );
+    }
+
+    public java.sql.Date getSqlDate() {
+        try {
+            Date date = sdf.parse(this.getDateTime().toString());
+            return new java.sql.Date(date.getTime());
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public int compare(DateTime dt) {
