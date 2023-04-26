@@ -2,7 +2,9 @@ package net.itkmitl.room.portal.admin.controllers;
 
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.components.DatabaseLoader;
+import net.itkmitl.room.portal.admin.models.DataListTableModel;
 import net.itkmitl.room.portal.admin.models.DataSearchModel;
+import net.itkmitl.room.portal.admin.views.DataListEditableView;
 import net.itkmitl.room.portal.admin.views.DataSearchView;
 import net.itkmitl.room.portal.admin.views.OperationWindowView;
 
@@ -32,6 +34,10 @@ public class OperationWindowController implements ActionListener, InternalFrameL
         view.lookupRoom.addActionListener(this);
         view.lookupReservation.addActionListener(this);
         view.lookupFeedback.addActionListener(this);
+        view.manageUser.addActionListener(this);
+        view.manageRoom.addActionListener(this);
+        view.manageReservation.addActionListener(this);
+        view.manageFeedback.addActionListener(this);
         dbl = new DatabaseLoader();
     }
 
@@ -52,11 +58,28 @@ public class OperationWindowController implements ActionListener, InternalFrameL
             spawnSearch(RESERVATION);
         } else if (e.getSource().equals(view.lookupFeedback)) {
             spawnSearch(FEEDBACK);
+        } else if (e.getSource().equals(view.manageUser)){
+            spawnEditableTable();
         }
     }
 
     public OperationWindowView getView() {
         return view;
+    }
+
+    public void spawnEditableTable(){
+        DataListEditableController dsc = new DataListEditableController();
+        DataListEditableView view = dsc.view;
+
+        Dimension desktopSize = BaseWindow.getDesktop().getSize();
+        Dimension jInternalFrameSize = view.getFrame().getSize();
+        view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+        view.getFrame().addInternalFrameListener(this);
+        view.getFrame().show();
+        view.getFrame().setVisible(true);
+        BaseWindow.getDesktop().add(view.getFrame());
+        view.getFrame().moveToFront();
     }
 
     public void spawnSearch(int type) {

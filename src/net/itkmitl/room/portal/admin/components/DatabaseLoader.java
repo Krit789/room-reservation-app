@@ -34,7 +34,7 @@ public class DatabaseLoader implements InternalFrameListener {
             LoadingDialog ld = new LoadingDialog();
 
             @Override
-            protected String doInBackground() throws Exception {
+            protected String doInBackground() {
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);

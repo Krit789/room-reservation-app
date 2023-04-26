@@ -11,7 +11,7 @@ public class DataSearchView {
     public final ButtonGroup searchType;
     public final JRadioButton radioButton1, radioButton2, radioButton3, radioButton4, radioButton5;
     public final JTextField searchField;
-    public final JLabel searchLabel, pageTitle;
+    public final JLabel searchLabel, pageTitle, errorLabel;
     public final JButton searchButton;
     private final JInternalFrame frame;
 
@@ -60,9 +60,11 @@ public class DataSearchView {
 
 
         buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.setLayout(new GridBagLayout());
+        errorLabel = new JLabel("");
         searchButton = new JButton("Search");
-        buttonPanel.add(searchButton);
+        buttonPanel.add(errorLabel, new GBCBuilder(GridBagConstraints.NONE, 0.9, 1, 0 ,0, new Insets(0,0,10,5)).setAnchor(GridBagConstraints.EAST));
+        buttonPanel.add(searchButton, new GBCBuilder(GridBagConstraints.NONE, 0.1, 1, 1 ,0, new Insets(0,0,10,10)).setAnchor(GridBagConstraints.EAST));
 
         frame.add(titlePanel, BorderLayout.NORTH);
         frame.add(searchPanel, BorderLayout.CENTER);

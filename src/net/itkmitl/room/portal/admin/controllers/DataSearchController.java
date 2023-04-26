@@ -5,11 +5,13 @@ import net.itkmitl.room.portal.admin.models.DataSearchModel;
 import net.itkmitl.room.portal.admin.views.DataSearchView;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
 
-public class DataSearchController implements ActionListener {
+public class DataSearchController implements ActionListener, DocumentListener {
     protected DataSearchView view;
     private DataSearchModel model;
     private DatabaseLoader dbl;
@@ -27,6 +29,7 @@ public class DataSearchController implements ActionListener {
 
     public void initializer() {
         view.searchButton.addActionListener(this);
+        view.searchField.getDocument().addDocumentListener(this);
         view.pageTitle.setText(model.getTitle());
         int count = 0;
         for (Enumeration<AbstractButton> buttons = view.searchType.getElements(); buttons.hasMoreElements(); ) {
@@ -42,7 +45,7 @@ public class DataSearchController implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.searchButton)) {
-            if (!view.searchField.getText().equals("")) {
+            if (!view.searchField.getText().equals("") && numOnlyTextField()) {
                 if (view.pageTitle.getText().equals("User")) {
                     dbl.databaseLoader(1, getSelectedButtonIndex(view.searchType), view.searchField.getText());
                     System.out.println(getSelectedButtonIndex(view.searchType));
@@ -53,9 +56,11 @@ public class DataSearchController implements ActionListener {
                 } else if (view.pageTitle.getText().equals("Feedback")) {
                     dbl.databaseLoader(4, getSelectedButtonIndex(view.searchType), view.searchField.getText());
                 }
+                view.searchField.setText("");
             }
         }
     }
+
 
     public String getSelectedButtonText(ButtonGroup buttonGroup) {
         for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements(); ) {
@@ -78,4 +83,31 @@ public class DataSearchController implements ActionListener {
         }
         return -1;
     }
+
+    public void insertUpdate(DocumentEvent e) {
+        numOnlyTextField();
+    }
+
+    public void removeUpdate(DocumentEvent e) {
+        numOnlyTextField();
+    }
+
+    public void changedUpdate(DocumentEvent e) {
+        numOnlyTextField();
+    }
+
+    public boolean numOnlyTextField() {
+        if (getSelectedButtonText(view.searchType).contains("ID") || getSelectedButtonText(view.searchType).equals("Ratings") || getSelectedButtonText(view.searchType).equals("Phone Number")) {
+            try {
+                Integer.parseInt(view.searchField.getText());
+            } catch (Exception ex) {
+                view.errorLabel.setText(String.format("'%s' can only contains numbers!", getSelectedButtonText(view.searchType)));
+                return false;
+            }
+        } else {
+            view.errorLabel.setText("");
+        }
+        return true;
+    }
 }
+
