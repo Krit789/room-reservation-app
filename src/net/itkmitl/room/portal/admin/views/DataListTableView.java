@@ -15,7 +15,7 @@ public class DataListTableView {
     public final JLabel pageTitle, pageSubtitle;
     public JTable table;
     protected final JScrollPane scrollPane;
-    protected final JButton viewEntryButton;
+    public final JButton viewEntryButton;
 
     public DataListTableView() {
         frame = new JInternalFrame("Table", true, true, true, true);
@@ -26,15 +26,19 @@ public class DataListTableView {
         pageSubtitle = new JLabel();
 
         northPanel = new JPanel();
-        northPanel.setLayout(new GridLayout(1,2));
+        northPanel.setLayout(new GridBagLayout());
         titlePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        northPanel.add(titlePanel);
+        northPanel.add(titlePanel, new GBCBuilder(GridBagConstraints.NONE,1,0.9,0,0, new Insets(0,5,0,0)).setAnchor(GridBagConstraints.WEST));
         northButtonPanel = new JPanel();
-        northButtonPanel.setLayout(new GridBagLayout());
+        northButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        viewEntryButton = new JButton("View Selected");
-        northButtonPanel.add(viewEntryButton, new GBCBuilder(GridBagConstraints.NONE,0.5,1,1,0, new Insets(0,5,0,5)).setAnchor(GridBagConstraints.EAST));
-        northPanel.add(northButtonPanel);
+        viewEntryButton = new JButton("View");
+        viewEntryButton.setIcon(new ImageIcon("resource/icons/view-16px.png"));
+
+        northButtonPanel.add(new JLabel("Operations"));
+        northButtonPanel.add(viewEntryButton);
+        northPanel.add(new JSeparator(), new GBCBuilder(GridBagConstraints.HORIZONTAL,1,0.01,0,1).getGBC());
+        northPanel.add(northButtonPanel, new GBCBuilder(GridBagConstraints.NONE,1,0.09,0,2, new Insets(0,5,0,5)).setAnchor(GridBagConstraints.WEST));
         frame.add(northPanel, BorderLayout.NORTH);
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
         titlePanel.add(pageTitle);
@@ -58,8 +62,6 @@ public class DataListTableView {
                 return component;
             }
         };
-//        table.setColumnSelectionAllowed(false);
-//        table.setCellSelectionEnabled(true);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setFillsViewportHeight(true);
@@ -67,11 +69,10 @@ public class DataListTableView {
         scrollPane.createHorizontalScrollBar();
         frame.add(scrollPane, BorderLayout.CENTER);
 
-
-        if (this instanceof DataListTableView){
-            frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            frame.pack();
+        if (this instanceof DataListEditableView){
+//            System.out.println("Editable Table");
         }
+        frame.pack();
 
     }
 

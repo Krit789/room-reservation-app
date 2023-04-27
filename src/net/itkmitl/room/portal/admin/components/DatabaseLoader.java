@@ -11,6 +11,7 @@ import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
+import net.itkmitl.room.portal.admin.controllers.DataListEditableController;
 import net.itkmitl.room.portal.admin.controllers.DataListTableController;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
 import net.itkmitl.room.portal.components.LoadingDialog;
@@ -23,11 +24,18 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class DatabaseLoader implements InternalFrameListener {
+    private boolean editableTable;
     public void databaseLoader(int whichTable) {
-        databaseLoader(whichTable, 99, "");
+        databaseLoader(whichTable, 99, "", editableTable);
     }
-
-    public void databaseLoader(int whichTable, int type, String searchQuery) {
+    public void databaseLoader(int whichTable, boolean editableTable) {
+        databaseLoader(whichTable, 99, "", editableTable);
+    }
+    public void databaseLoader(int whichTable, int type, String searchQuery){
+        databaseLoader(whichTable, type, searchQuery, editableTable);
+    }
+    public void databaseLoader(int whichTable, int type, String searchQuery, boolean editableTable) {
+        this.editableTable = editableTable;
         SwingWorker worker = new SwingWorker() {
             DataListTableModel model = new DataListTableModel();
             Object[] data;
@@ -156,25 +164,37 @@ public class DatabaseLoader implements InternalFrameListener {
         worker.execute();
     }
 
-    public DataListTableController spawnTableView(Object[] data) {
+    public void spawnTableView(Object[] data) {
         boolean dbReady = ((Boolean) data[0]);
 
         if (dbReady) {
-            DataListTableController table = new DataListTableController((DataListTableModel) data[1]);
-            Dimension desktopSize = BaseWindow.getDesktop().getSize();
-            Dimension jInternalFrameSize = table.view.getFrame().getSize();
-            table.view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
-                    (desktopSize.height - jInternalFrameSize.height) / 2);
-            table.view.getFrame().addInternalFrameListener(this);
-            table.view.getFrame().show();
-            table.view.getFrame().setVisible(true);
-            BaseWindow.getDesktop().add(table.view.getFrame());
-            table.view.getFrame().moveToFront();
-            return table;
+            if (editableTable){
+                DataListEditableController table = new DataListEditableController((DataListTableModel) data[1]);
+                Dimension desktopSize = BaseWindow.getDesktop().getSize();
+                Dimension jInternalFrameSize = table.view.getFrame().getSize();
+                table.view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                        (desktopSize.height - jInternalFrameSize.height) / 2);
+                table.view.getFrame().addInternalFrameListener(this);
+                table.view.getFrame().show();
+                table.view.getFrame().setVisible(true);
+                BaseWindow.getDesktop().add(table.view.getFrame());
+                table.view.getFrame().moveToFront();
+            } else {
+                DataListTableController table = new DataListTableController((DataListTableModel) data[1]);
+                Dimension desktopSize = BaseWindow.getDesktop().getSize();
+                Dimension jInternalFrameSize = table.view.getFrame().getSize();
+                table.view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                        (desktopSize.height - jInternalFrameSize.height) / 2);
+                table.view.getFrame().addInternalFrameListener(this);
+                table.view.getFrame().show();
+                table.view.getFrame().setVisible(true);
+                BaseWindow.getDesktop().add(table.view.getFrame());
+                table.view.getFrame().moveToFront();
+            }
+
         } else {
             JOptionPane.showMessageDialog(BaseWindow.baseFrame, data[1].toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
         }
-        return null;
     }
 
     public void internalFrameOpened(InternalFrameEvent e) {

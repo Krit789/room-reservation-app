@@ -43,13 +43,13 @@ public class OperationWindowController implements ActionListener, InternalFrameL
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.viewUser)) {
-            dbl.databaseLoader(USER);
+            dbl.databaseLoader(USER, false);
         } else if (e.getSource().equals(view.viewRoom)) {
-            dbl.databaseLoader(ROOM);
+            dbl.databaseLoader(ROOM, false);
         } else if (e.getSource().equals(view.viewReservation)) {
-            dbl.databaseLoader(RESERVATION);
+            dbl.databaseLoader(RESERVATION, false);
         } else if (e.getSource().equals(view.viewFeedback)) {
-            dbl.databaseLoader(FEEDBACK);
+            dbl.databaseLoader(FEEDBACK, false);
         } else if (e.getSource().equals(view.lookupUser)) {
             spawnSearch(USER);
         } else if (e.getSource().equals(view.lookupRoom)) {
@@ -59,27 +59,12 @@ public class OperationWindowController implements ActionListener, InternalFrameL
         } else if (e.getSource().equals(view.lookupFeedback)) {
             spawnSearch(FEEDBACK);
         } else if (e.getSource().equals(view.manageUser)){
-            spawnEditableTable();
+            dbl.databaseLoader(USER, true);
         }
     }
 
     public OperationWindowView getView() {
         return view;
-    }
-
-    public void spawnEditableTable(){
-        DataListEditableController dsc = new DataListEditableController();
-        DataListEditableView view = dsc.view;
-
-        Dimension desktopSize = BaseWindow.getDesktop().getSize();
-        Dimension jInternalFrameSize = view.getFrame().getSize();
-        view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
-                (desktopSize.height - jInternalFrameSize.height) / 2);
-        view.getFrame().addInternalFrameListener(this);
-        view.getFrame().show();
-        view.getFrame().setVisible(true);
-        BaseWindow.getDesktop().add(view.getFrame());
-        view.getFrame().moveToFront();
     }
 
     public void spawnSearch(int type) {

@@ -8,13 +8,26 @@ import javax.swing.table.TableColumn;
 import java.awt.*;
 
 public class DataListEditableView extends DataListTableView{
-    public final JButton editSelectedButton;
+    public final JButton createButton, editSelectedButton, deletedSelectedButton;
     public DataListEditableView(){
         super();
         frame.setFrameIcon(new ImageIcon("resource/icons/tableedit-16px.png"));
         frame.setTitle("Editable Table");
-        editSelectedButton = new JButton("Edit Selected");
-        northButtonPanel.add(editSelectedButton,new GBCBuilder(GridBagConstraints.NONE,0.5,1,0,0, new Insets(0,5,0,5)).setAnchor(GridBagConstraints.EAST));
+
+        createButton = new JButton("Create");
+        createButton.setIcon(new ImageIcon("resource/icons/create-16px.png"));
+
+
+        editSelectedButton = new JButton("Edit");
+        editSelectedButton.setIcon(new ImageIcon("resource/icons/update-16px.png"));
+
+
+        deletedSelectedButton = new JButton("Delete");
+        deletedSelectedButton.setIcon(new ImageIcon("resource/icons/delete-16px.png"));
+
+        northButtonPanel.add(createButton);
+        northButtonPanel.add(editSelectedButton);
+        northButtonPanel.add(deletedSelectedButton);
 
     }
     @Override

@@ -47,14 +47,13 @@ public class DataSearchController implements ActionListener, DocumentListener {
         if (e.getSource().equals(view.searchButton)) {
             if (!view.searchField.getText().equals("") && numOnlyTextField()) {
                 if (view.pageTitle.getText().equals("User")) {
-                    dbl.databaseLoader(1, getSelectedButtonIndex(view.searchType), view.searchField.getText());
-                    System.out.println(getSelectedButtonIndex(view.searchType));
+                    dbl.databaseLoader(1, getSelectedButtonIndex(view.searchType), view.searchField.getText(), true);
                 } else if (view.pageTitle.getText().equals("Room")) {
-                    dbl.databaseLoader(2, getSelectedButtonIndex(view.searchType), view.searchField.getText());
+                    dbl.databaseLoader(2, getSelectedButtonIndex(view.searchType), view.searchField.getText(), true);
                 } else if (view.pageTitle.getText().equals("Reservation")) {
-                    dbl.databaseLoader(3, getSelectedButtonIndex(view.searchType), view.searchField.getText());
+                    dbl.databaseLoader(3, getSelectedButtonIndex(view.searchType), view.searchField.getText(), true);
                 } else if (view.pageTitle.getText().equals("Feedback")) {
-                    dbl.databaseLoader(4, getSelectedButtonIndex(view.searchType), view.searchField.getText());
+                    dbl.databaseLoader(4, getSelectedButtonIndex(view.searchType), view.searchField.getText(), true);
                 }
                 view.searchField.setText("");
             }
@@ -101,7 +100,10 @@ public class DataSearchController implements ActionListener, DocumentListener {
             try {
                 Integer.parseInt(view.searchField.getText());
             } catch (Exception ex) {
-                view.errorLabel.setText(String.format("'%s' can only contains numbers!", getSelectedButtonText(view.searchType)));
+                if (!view.searchField.getText().equals("")){
+                    view.errorLabel.setText(String.format("'%s' can only contains numbers!", getSelectedButtonText(view.searchType)));
+
+                }
                 return false;
             }
         } else {

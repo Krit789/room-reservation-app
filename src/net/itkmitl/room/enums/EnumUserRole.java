@@ -2,8 +2,8 @@ package net.itkmitl.room.enums;
 
 public enum EnumUserRole {
 
-    STUDENT(1, "นักศึกษา"), // Can reserve room and can do all what user think
-    STAFF(10, "เจ้าหน้าที่"), // Can check log who reserve
+    STUDENT(1, "นักศึกษา"), // Can reserve room and do all things that user can think of
+    STAFF(10, "เจ้าหน้าที่"), // Can check reserver logs
     ADMIN(99, "บร๊ะเจ้า"); // Can access config and back office
 
     private int level;

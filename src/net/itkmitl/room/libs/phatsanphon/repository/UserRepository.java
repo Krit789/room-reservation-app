@@ -82,6 +82,7 @@ public class UserRepository extends Repository<User> {
                 .insert("tel_num", user.getTelephoneNumber())
                 .insert("email", user.getEmail())
                 .insert("password_hash", user.getPasswordHash())
+                .insert("role", user.getRole().getLevel())
                 .table("user");
 
         this.getQuery().query(insert);
@@ -99,7 +100,7 @@ public class UserRepository extends Repository<User> {
         FewUpdateMySQL update = new FewUpdateMySQL();
 
         if (user.getId() == 0) {
-            throw new RuntimeException("Please provided an id to update user");
+            throw new RuntimeException("Please provide user id to update user record");
         }
 
         update.where("id", user.getId())
@@ -107,9 +108,9 @@ public class UserRepository extends Repository<User> {
                 .set("firstname", user.getFirstname())
                 .set("lastname", user.getLastname())
                 .set("tel_num", user.getTelephoneNumber())
-                .set("is_active", user.isActive())
+                .set("is_active", user.isActive() ? 1 : 0)
                 .set("password_hash", user.getPasswordHash())
-                .set("role", user.getRole())
+                .set("role", user.getRole().getLevel())
                 .table("user");
 
         this.getQuery().query(update);
