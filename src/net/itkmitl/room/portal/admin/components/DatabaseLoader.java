@@ -174,7 +174,6 @@ public class DatabaseLoader implements InternalFrameListener {
                 Dimension jInternalFrameSize = table.view.getFrame().getSize();
                 table.view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                         (desktopSize.height - jInternalFrameSize.height) / 2);
-                table.view.getFrame().addInternalFrameListener(this);
                 table.view.getFrame().show();
                 table.view.getFrame().setVisible(true);
                 BaseWindow.getDesktop().add(table.view.getFrame());
@@ -185,7 +184,6 @@ public class DatabaseLoader implements InternalFrameListener {
                 Dimension jInternalFrameSize = table.view.getFrame().getSize();
                 table.view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                         (desktopSize.height - jInternalFrameSize.height) / 2);
-                table.view.getFrame().addInternalFrameListener(this);
                 table.view.getFrame().show();
                 table.view.getFrame().setVisible(true);
                 BaseWindow.getDesktop().add(table.view.getFrame());
@@ -209,8 +207,15 @@ public class DatabaseLoader implements InternalFrameListener {
     }
 
     public void internalFrameClosed(InternalFrameEvent e) {
-        BaseWindow.windowMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
-        BaseWindow.windowList.remove(e.getInternalFrame());
+        try{
+            BaseWindow.windowMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
+            BaseWindow.windowList.remove(e.getInternalFrame());
+            System.out.printf("Removal Success: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
+        } catch (Exception ex){
+            System.out.printf("Removal Failure: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
+            ex.printStackTrace();
+        }
+
     }
 
     public void internalFrameIconified(InternalFrameEvent e) {

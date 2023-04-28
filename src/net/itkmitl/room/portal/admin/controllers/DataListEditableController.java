@@ -1,6 +1,7 @@
 package net.itkmitl.room.portal.admin.controllers;
 
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
+import net.itkmitl.room.portal.admin.components.DatabaseLoader;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
 import net.itkmitl.room.portal.admin.views.DataListEditableView;
 
@@ -9,6 +10,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyVetoException;
 
 public class DataListEditableController extends DataListTableController {
     public DataListEditableView view;
@@ -31,6 +33,7 @@ public class DataListEditableController extends DataListTableController {
         view.editSelectedButton.addActionListener(this);
         view.deletedSelectedButton.addActionListener(this);
         view.createButton.addActionListener(this);
+        view.getFrame().addInternalFrameListener(this);
 
     }
 
@@ -40,7 +43,6 @@ public class DataListEditableController extends DataListTableController {
             view.editSelectedButton.setEnabled(true);
             view.deletedSelectedButton.setEnabled(true);
             view.viewEntryButton.setEnabled(true);
-//            System.out.println(view.table.getValueAt(view.table.getSelectedRow(), 0).toString());
         }
     }
 
@@ -48,17 +50,18 @@ public class DataListEditableController extends DataListTableController {
     public void actionPerformed(ActionEvent e) {
         if (model.getPageTitle().contains("User")){
             if (e.getSource().equals(view.viewEntryButton)){
-                spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()));
+                spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
             } else if (e.getSource().equals(view.editSelectedButton)){
-                spawnUserDataEditor(1, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()));
+                spawnUserDataEditor(1, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
             } else if (e.getSource().equals(view.deletedSelectedButton)){
-                if (JOptionPane.showConfirmDialog(view.getFrame(), "Are you sure that you want to delete this record?", "WARNING",
+                if (JOptionPane.showConfirmDialog(view.getFrame(), "Are you sure that you want to delete this record?", "Warning",
                         JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    spawnUserDataEditor(3, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()));
-                } else {
+                    spawnUserDataEditor(3, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
+                    if (view.pageTitle.getText().contains("User")){
+                    }
                 }
             } else if (e.getSource().equals(view.createButton)) {
-                spawnUserDataEditor(2, -1);
+                spawnUserDataEditor(2, -1, this);
             }
         }
     }

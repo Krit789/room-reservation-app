@@ -7,52 +7,76 @@ import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
+import net.itkmitl.room.portal.admin.components.DatabaseLoader;
 import net.itkmitl.room.portal.admin.models.UserDataModel;
 import net.itkmitl.room.portal.admin.views.UserDataView;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.LoadingDialog;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class UserDataController implements ActionListener {
+public class UserDataController implements ActionListener, InternalFrameListener {
     UserDataView view;
-    UserDataModel model;
     User user;
     Object[] data;
     int mode;
+    DataListEditableController dlec;
 
-    public UserDataController(int mode, int userID) {
+    public UserDataController(int mode, int userID, DataListEditableController dlec) {
         this.mode = mode;
+        this.dlec = dlec;
         view = new UserDataView();
-        model = new UserDataModel();
-        view.saveButton.addActionListener(this);
-        view.cancelButton.addActionListener(this);
-        view.resetPasswordButton.addActionListener(this);
+        user = new User();
         switch (mode) {
             case 0: // Just Load
-            case 1: // Update
+                view.getFrame().setTitle("View User");
+                view.pageTitle.setText("User Records Viewer");
                 view.dataPanel.add(view.resetPasswordButton, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 4, 6, new Insets(10, 0, 10, 10)).getGBC());
                 view.getFrame().pack();
+                view.saveButton.addActionListener(this);
+                view.cancelButton.addActionListener(this);
+//                view.resetPasswordButton.addActionListener(this);
+                databaseLoader(userID);
+                break;
+            case 1: // Update
+                view.getFrame().setTitle("Update User");
+                view.pageTitle.setText("User Records Update");
+                view.dataPanel.add(view.resetPasswordButton, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 4, 6, new Insets(10, 0, 10, 10)).getGBC());
+                view.getFrame().pack();
+                view.saveButton.addActionListener(this);
+                view.cancelButton.addActionListener(this);
+                view.resetPasswordButton.addActionListener(this);
                 databaseLoader(userID);
                 break;
             case 2: // Create
-                user = new User();
-                view.dataPanel.add(view.passwordLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 6, new Insets(0, 10, 5, 5)).getGBC());
-                view.dataPanel.add(view.passwordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 6, new Insets(0, 0, 5, 10)).setColumnSpan(4, 1));
+                view.dataPanel.add(view.passwordLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.05, 0, 6, new Insets(0, 10, 5, 5)).getGBC());
+                view.dataPanel.add(view.passwordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 6, new Insets(0, 0, 5, 5)).setColumnSpan(3, 1));
+                view.dataPanel.add(view.resetPasswordButton, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.05, 4, 6, new Insets(0, 0, 5, 10)).getGBC());
+                view.saveButton.addActionListener(this);
+                view.cancelButton.addActionListener(this);
+//                view.resetPasswordButton.addActionListener(this);
+                view.resetPasswordButton.setEnabled(false);
+                view.getFrame().setTitle("User Creation");
+                view.pageTitle.setText("User Records Creator");
+                view.pageSubtitle.setText("Create new user records");
                 view.saveButton.setText("Create");
                 view.getFrame().pack();
                 break;
             case 3: // Delete
-                user = new User();
                 user.setId(userID);
                 databaseCommiter(user, 1);
                 break;
         }
+        view.getFrame().addInternalFrameListener(this);
+
     }
 
     public void databaseLoader(int userID) {
@@ -133,7 +157,12 @@ public class UserDataController implements ActionListener {
             protected void done() {
                 ld.dialog.dispose();
                 BaseWindow.progressBar.setIndeterminate(false);
-                view.getFrame().dispose();
+                if (mode != 1) {
+                    view.getFrame().dispose();
+                }
+                DatabaseLoader dbl = new DatabaseLoader();
+                dbl.databaseLoader(1, true);
+                dlec.view.getFrame().dispose();
 
             }
         };
@@ -144,27 +173,14 @@ public class UserDataController implements ActionListener {
         if ((boolean) data[0]) {
             User myUser = (User) data[1];
             user = (User) data[1];
-            model.setPageTitle("Record Data View");
-            model.setPageSubtitle("For user ID " + myUser.getId());
-            model.setUserID(myUser.getId());
-            model.setFirstName(myUser.getFirstname());
-            model.setLastName(myUser.getLastname());
-            model.setPhoneNumber(myUser.getTelephoneNumber());
-            model.setEmail(myUser.getEmail());
-            model.setActivation(myUser.isActive());
-            model.setRole(myUser.getRole().getLevel());
-            model.setCreatedOn(myUser.getCreatedOn());
-
-            view.getFrame().setTitle("Records Viewer");
-            view.pageTitle.setText(model.getPageTitle());
-            view.pageSubtitle.setText(model.getPageSubtitle());
-            view.idField.setText(model.getUserID() + "");
-            view.firstNameField.setText(model.getFirstName());
-            view.lastNameField.setText(model.getLastName());
-            view.telnumField.setText(model.getPhoneNumber());
-            view.emailField.setText(model.getEmail());
-            view.activeSelect.setSelectedIndex(model.isActivation() ? 0 : 1);
-            switch (model.getRole()) {
+            view.pageSubtitle.setText("User records for User ID " + myUser.getId());
+            view.idField.setText(user.getId() + "");
+            view.firstNameField.setText(user.getFirstname());
+            view.lastNameField.setText(user.getLastname());
+            view.telnumField.setText(user.getTelephoneNumber());
+            view.emailField.setText(user.getEmail());
+            view.activeSelect.setSelectedIndex(user.isActive() ? 0 : 1);
+            switch (user.getRole().getLevel()) {
                 case 1:
                     view.roleSelect.setSelectedIndex(0);
                     break;
@@ -175,7 +191,7 @@ public class UserDataController implements ActionListener {
                     view.roleSelect.setSelectedIndex(2);
                     break;
             }
-            view.createdOnField.setText(model.getCreatedOn().toString());
+            view.createdOnField.setText(user.getCreatedOn().toString());
 
             switch (mode) {
                 case 0:
@@ -226,12 +242,82 @@ public class UserDataController implements ActionListener {
                     user.setPasswordHash(FewPassword.getSalt(String.valueOf(view.passwordField.getPassword())));
                     databaseCommiter(user, 2);
                     break;
-
             }
-            view.getFrame().dispose();
 
         } else if (e.getSource().equals(view.cancelButton)) {
             view.getFrame().dispose();
+        } else if (e.getSource().equals(view.resetPasswordButton)) {
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
+            JPanel titlePanel = new JPanel();
+            JLabel pageTitle = new JLabel("Reset User Password");
+            JLabel pageSubtitle = new JLabel("Enter new password below.");
+
+            titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
+            titlePanel.add(pageTitle);
+            titlePanel.add(pageSubtitle);
+            pageTitle.setFont(new Font("Arial", Font.BOLD, 25));
+            titlePanel.setBorder(new EmptyBorder(0, 0, 5, 10));
+            pageTitle.setAlignmentX(Component.LEFT_ALIGNMENT);
+            pageSubtitle.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+            JPasswordField passwordField = new JPasswordField(20);
+            panel.add(titlePanel, BorderLayout.NORTH);
+            panel.add(passwordField, BorderLayout.CENTER);
+            String[] options = new String[]{"OK", "Cancel"};
+            int option = JOptionPane.showOptionDialog(BaseWindow.baseFrame, panel, "Reset Password",
+                    JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+                    new ImageIcon("resource/icons/key-32px.png"), options, options[0]);
+            if (option == 0) // pressing OK button
+            {
+                user.setPasswordHash(FewPassword.getSalt(new String(passwordField.getPassword())));
+            }
         }
+    }
+
+    @Override
+    public void internalFrameOpened(InternalFrameEvent e) {
+        BaseWindow.statusLabel.setText(e.getInternalFrame().getTitle() + " was opened.");
+        JMenuItem newItem = new JMenuItem(e.getInternalFrame().getTitle());
+        BaseWindow.windowList.put(e.getInternalFrame(), newItem);
+        newItem.setIcon(e.getInternalFrame().getFrameIcon());
+        BaseWindow.windowMenu.add(newItem);
+    }
+
+    @Override
+    public void internalFrameClosing(InternalFrameEvent e) {
+
+    }
+
+    @Override
+    public void internalFrameClosed(InternalFrameEvent e) {
+        try {
+            BaseWindow.windowMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
+            BaseWindow.windowList.remove(e.getInternalFrame());
+            System.out.println("Removal Success: " + e.getInternalFrame().getTitle() + " " + e.getInternalFrame().getClass().getCanonicalName() + " " + this.getClass().getSimpleName());
+        } catch (Exception ex) {
+            System.out.println("Removal Failure: " + e.getInternalFrame().getTitle() + " " + e.getSource().toString() + " " + e.getInternalFrame().getClass().getCanonicalName() + " " + this.getClass().getSimpleName());
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void internalFrameIconified(InternalFrameEvent e) {
+
+    }
+
+    @Override
+    public void internalFrameDeiconified(InternalFrameEvent e) {
+
+    }
+
+    @Override
+    public void internalFrameActivated(InternalFrameEvent e) {
+
+    }
+
+    @Override
+    public void internalFrameDeactivated(InternalFrameEvent e) {
+
     }
 }

@@ -33,7 +33,7 @@ public class DataListTableController implements ListSelectionListener, InternalF
         view.viewEntryButton.setEnabled(false);
         if (!(this instanceof DataListEditableController)){
             view.table.getSelectionModel().addListSelectionListener(this);
-
+            view.getFrame().addInternalFrameListener(this);
         }
         view.viewEntryButton.addActionListener(this);
 
@@ -42,7 +42,6 @@ public class DataListTableController implements ListSelectionListener, InternalF
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting() && view.table.getSelectedRow() != -1){
             view.viewEntryButton.setEnabled(true);
-//            System.out.println(view.table.getValueAt(view.table.getSelectedRow(), 0).toString());
         }
     }
 
@@ -58,8 +57,14 @@ public class DataListTableController implements ListSelectionListener, InternalF
     }
 
     public void internalFrameClosed(InternalFrameEvent e) {
-        BaseWindow.windowMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
-        BaseWindow.windowList.remove(e.getInternalFrame());
+        try{
+            BaseWindow.windowMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
+            BaseWindow.windowList.remove(e.getInternalFrame());
+            System.out.println("Removal Success: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
+        } catch (Exception ex){
+            System.out.println("Removal Failure: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
+            ex.printStackTrace();
+        }
     }
 
     public void internalFrameIconified(InternalFrameEvent e) {
@@ -74,25 +79,26 @@ public class DataListTableController implements ListSelectionListener, InternalF
     public void internalFrameDeactivated(InternalFrameEvent e) {
     }
 
-    public void spawnUserDataEditor(int mode, int userID){
-        UserDataController udc = new UserDataController(mode, userID);
-        UserDataView view = udc.view;
+    public void spawnUserDataEditor(int mode, int userID, DataListEditableController dlec){
+        UserDataController udc = new UserDataController(mode, userID, dlec);
+        if (mode != 3){
+            UserDataView view = udc.view;
 
-        Dimension desktopSize = BaseWindow.getDesktop().getSize();
-        Dimension jInternalFrameSize = view.getFrame().getSize();
-        view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
-                (desktopSize.height - jInternalFrameSize.height) / 2);
-        view.getFrame().addInternalFrameListener(this);
-        view.getFrame().show();
-        view.getFrame().setVisible(true);
-        BaseWindow.getDesktop().add(view.getFrame());
-        view.getFrame().moveToFront();
+            Dimension desktopSize = BaseWindow.getDesktop().getSize();
+            Dimension jInternalFrameSize = view.getFrame().getSize();
+            view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                    (desktopSize.height - jInternalFrameSize.height) / 2);
+            view.getFrame().show();
+            view.getFrame().setVisible(true);
+            BaseWindow.getDesktop().add(view.getFrame());
+            view.getFrame().moveToFront();
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.viewEntryButton)){
-            spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()));
+            spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
         }
     }
 }
