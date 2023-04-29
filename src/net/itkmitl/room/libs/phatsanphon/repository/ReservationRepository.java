@@ -119,6 +119,7 @@ public class ReservationRepository extends Repository<Reservation> {
                 .insert("start_time", reservation.getStartTime().toString())
                 .insert("end_time", reservation.getEndTime().toString())
                 .insert("reason", reservation.getReason())
+                .insert("is_cancelled", reservation.isCancelled() ? 1 : 0)
                 .table("reservation");
 
         this.getQuery().query(insert);
@@ -139,7 +140,10 @@ public class ReservationRepository extends Repository<Reservation> {
                 .set("reason", reservation.getReason())
                 .set("start_time", reservation.getStartTime().toString())
                 .set("end_time", reservation.getEndTime().toString())
+                .set("is_cancelled", reservation.isCancelled() ? 1 : 0)
                 .table("reservation");
+
+        System.out.println(update.builder());
 
         this.getQuery().query(update);
     }
