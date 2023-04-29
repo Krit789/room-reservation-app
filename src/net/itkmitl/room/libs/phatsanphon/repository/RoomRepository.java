@@ -126,7 +126,7 @@ public class RoomRepository extends Repository<Room> {
                 .set("floor", room.getFloor())
                 .set("close_time", room.getCloseTime().toString())
                 .set("open_time", room.getOpenTime().toString())
-                .table("user");
+                .table("room");
 
         this.getQuery().query(update);
     }
