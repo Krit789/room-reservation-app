@@ -58,8 +58,6 @@ public class DataListEditableController extends DataListTableController {
             } else if (e.getSource().equals(view.deletedSelectedButton)) {
                 if (JOptionPane.showConfirmDialog(view.getFrame(), "Are you sure that you want to delete this record?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     spawnUserDataEditor(3, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
-                    if (view.pageTitle.getText().contains("User")) {
-                    }
                 }
             } else if (e.getSource().equals(view.createButton)) {
                 spawnUserDataEditor(2, -1, this);
@@ -72,12 +70,36 @@ public class DataListEditableController extends DataListTableController {
             } else if (e.getSource().equals(view.deletedSelectedButton)) {
                 if (JOptionPane.showConfirmDialog(view.getFrame(), "Are you sure that you want to delete this record?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     spawnRoomDataEditor(3, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
-                    if (view.pageTitle.getText().contains("Room")) {
-                    }
                 }
             } else if (e.getSource().equals(view.createButton)) {
                 spawnRoomDataEditor(2, -1, this);
             }
+        }
+        else if (model.getPageTitle().equals("Reservation DataTable")) {
+            if (e.getSource().equals(view.viewEntryButton)) {
+                spawnReservationDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+            } else if (e.getSource().equals(view.editSelectedButton)) {
+                spawnReservationDataEditor(1, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
+            } else if (e.getSource().equals(view.deletedSelectedButton)) {
+                if (JOptionPane.showConfirmDialog(view.getFrame(), "Are you sure that you want to delete this record?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    spawnReservationDataEditor(3, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
+                }
+            } else if (e.getSource().equals(view.createButton)) {
+                spawnReservationDataEditor(2, -1, this);
+            }
+        }
+        else if (model.getPageTitle().equals("Feedback DataTable")) {
+//            if (e.getSource().equals(view.viewEntryButton)) {
+//                spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+//            } else if (e.getSource().equals(view.editSelectedButton)) {
+//                spawnRoomDataEditor(1, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
+//            } else if (e.getSource().equals(view.deletedSelectedButton)) {
+//                if (JOptionPane.showConfirmDialog(view.getFrame(), "Are you sure that you want to delete this record?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+//                    spawnRoomDataEditor(3, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
+//                }
+//            } else if (e.getSource().equals(view.createButton)) {
+//                spawnRoomDataEditor(2, -1, this);
+//            }
         }
     }
 }

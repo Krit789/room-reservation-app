@@ -3,10 +3,7 @@ package net.itkmitl.room.portal.admin.controllers;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
 import net.itkmitl.room.portal.admin.models.DataSearchModel;
-import net.itkmitl.room.portal.admin.views.DataListTableView;
-import net.itkmitl.room.portal.admin.views.DataSearchView;
-import net.itkmitl.room.portal.admin.views.RoomDataView;
-import net.itkmitl.room.portal.admin.views.UserDataView;
+import net.itkmitl.room.portal.admin.views.*;
 
 import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
@@ -114,15 +111,41 @@ public class DataListTableController implements ListSelectionListener, InternalF
         }
     }
 
+    public void spawnReservationDataEditor(int mode, int reservationID, DataListEditableController dlec) {
+        ReservationDataController rdc = new ReservationDataController(mode, reservationID, dlec);
+        if (mode != 3) {
+            ReservationDataView view = rdc.view;
+            view.getFrame().revalidate();
+            view.getFrame().pack();
+            Dimension desktopSize = BaseWindow.getDesktop().getSize();
+            Dimension jInternalFrameSize = view.getFrame().getSize();
+            view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                    (desktopSize.height - jInternalFrameSize.height) / 2);
+            view.getFrame().show();
+            view.getFrame().setVisible(true);
+            BaseWindow.getDesktop().add(view.getFrame());
+            view.getFrame().moveToFront();
+        }
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (model.getPageTitle().contains("User")) {
+        if (model.getPageTitle().equals("User DataTable")) {
             if (e.getSource().equals(view.viewEntryButton)) {
                 spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
             }
-        } else if (model.getPageTitle().contains("Room")) {
+        } else if (model.getPageTitle().equals("Room DataTable")) {
             if (e.getSource().equals(view.viewEntryButton)) {
                 spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+            }
+        } else if (model.getPageTitle().equals("Reservation DataTable")) {
+            if (e.getSource().equals(view.viewEntryButton)) {
+                spawnReservationDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+            }
+        } else if (model.getPageTitle().equals("Feedback DataTable")) {
+            if (e.getSource().equals(view.viewEntryButton)) {
+//                spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
             }
         }
 

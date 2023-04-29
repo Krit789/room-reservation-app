@@ -27,8 +27,8 @@ public class Reservation extends Entity {
         this.setUser(query.getValue("user_id").asInt());
         this.setRoom(query.getValue("room_id").asInt());
         this.setReason(query.getValue("reason").asString());
-        this.setStartTime(query.getValue("end_time").asString());
-        this.setEndTime(query.getValue("start_time").asString());
+        this.setStartTime(query.getValue("start_time").asString());
+        this.setEndTime(query.getValue("end_time").asString());
         this.setReservationTime(query.getValue("reservation_time").asString());
         this.setCancelled(query.getValue("is_cancelled").asBoolean());
     }
