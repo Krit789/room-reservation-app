@@ -50,6 +50,7 @@ public class FewQuery {
             return null;
         }
     }
+
     public FewQuery unsafeQuery(String query) {
         try {
             PreparedStatement statement = this.connection.prepareStatement(
@@ -123,11 +124,12 @@ public class FewQuery {
     public int getQueryCount() {
         return queryCount;
     }
+
     public int getAffectedRows() {
         return affectedRows;
     }
+
     public int getInsertedID() {
         return insertedID;
     }
-
 }

@@ -36,6 +36,10 @@ public class DateTime {
     }
 
     private String replaceText() {
+        int countColon = rawDateTime.length() - rawDateTime.replace(":", "").length();
+        if (countColon != 2){
+            rawDateTime += ":00";
+        }
         return rawDateTime.replace("T", " ");
     }
 

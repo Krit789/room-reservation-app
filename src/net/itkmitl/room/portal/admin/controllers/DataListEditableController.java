@@ -15,10 +15,12 @@ import java.beans.PropertyVetoException;
 public class DataListEditableController extends DataListTableController {
     public DataListEditableView view;
     public DataListTableModel model;
-    public DataListEditableController(){
+
+    public DataListEditableController() {
         this(new DataListTableModel());
     }
-    public DataListEditableController(DataListTableModel model){
+
+    public DataListEditableController(DataListTableModel model) {
         this.view = new DataListEditableView();
         this.model = model;
         view.getFrame().setTitle(model.getTitle());
@@ -39,7 +41,7 @@ public class DataListEditableController extends DataListTableController {
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        if (!e.getValueIsAdjusting() && view.table.getSelectedRow() != -1){
+        if (!e.getValueIsAdjusting() && view.table.getSelectedRow() != -1) {
             view.editSelectedButton.setEnabled(true);
             view.deletedSelectedButton.setEnabled(true);
             view.viewEntryButton.setEnabled(true);
@@ -48,20 +50,33 @@ public class DataListEditableController extends DataListTableController {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (model.getPageTitle().contains("User")){
-            if (e.getSource().equals(view.viewEntryButton)){
+        if (model.getPageTitle().equals("User DataTable")) {
+            if (e.getSource().equals(view.viewEntryButton)) {
                 spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
-            } else if (e.getSource().equals(view.editSelectedButton)){
+            } else if (e.getSource().equals(view.editSelectedButton)) {
                 spawnUserDataEditor(1, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
-            } else if (e.getSource().equals(view.deletedSelectedButton)){
-                if (JOptionPane.showConfirmDialog(view.getFrame(), "Are you sure that you want to delete this record?", "Warning",
-                        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            } else if (e.getSource().equals(view.deletedSelectedButton)) {
+                if (JOptionPane.showConfirmDialog(view.getFrame(), "Are you sure that you want to delete this record?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     spawnUserDataEditor(3, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
-                    if (view.pageTitle.getText().contains("User")){
+                    if (view.pageTitle.getText().contains("User")) {
                     }
                 }
             } else if (e.getSource().equals(view.createButton)) {
                 spawnUserDataEditor(2, -1, this);
+            }
+        } else if (model.getPageTitle().equals("Room DataTable")) {
+            if (e.getSource().equals(view.viewEntryButton)) {
+                spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+            } else if (e.getSource().equals(view.editSelectedButton)) {
+                spawnRoomDataEditor(1, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
+            } else if (e.getSource().equals(view.deletedSelectedButton)) {
+                if (JOptionPane.showConfirmDialog(view.getFrame(), "Are you sure that you want to delete this record?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    spawnRoomDataEditor(3, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
+                    if (view.pageTitle.getText().contains("Room")) {
+                    }
+                }
+            } else if (e.getSource().equals(view.createButton)) {
+                spawnRoomDataEditor(2, -1, this);
             }
         }
     }

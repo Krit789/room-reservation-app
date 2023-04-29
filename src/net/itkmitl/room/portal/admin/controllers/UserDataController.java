@@ -8,7 +8,6 @@ import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.components.DatabaseLoader;
-import net.itkmitl.room.portal.admin.models.UserDataModel;
 import net.itkmitl.room.portal.admin.views.UserDataView;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.LoadingDialog;
@@ -17,11 +16,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class UserDataController implements ActionListener, InternalFrameListener {
     UserDataView view;
@@ -43,7 +40,6 @@ public class UserDataController implements ActionListener, InternalFrameListener
                 view.getFrame().pack();
                 view.saveButton.addActionListener(this);
                 view.cancelButton.addActionListener(this);
-//                view.resetPasswordButton.addActionListener(this);
                 databaseLoader(userID);
                 break;
             case 1: // Update
@@ -62,7 +58,6 @@ public class UserDataController implements ActionListener, InternalFrameListener
                 view.dataPanel.add(view.resetPasswordButton, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.05, 4, 6, new Insets(0, 0, 5, 10)).getGBC());
                 view.saveButton.addActionListener(this);
                 view.cancelButton.addActionListener(this);
-//                view.resetPasswordButton.addActionListener(this);
                 view.resetPasswordButton.setEnabled(false);
                 view.getFrame().setTitle("User Creation");
                 view.pageTitle.setText("User Records Creator");
@@ -195,9 +190,9 @@ public class UserDataController implements ActionListener, InternalFrameListener
 
             switch (mode) {
                 case 0:
-                    view.firstNameField.setEditable(false);
-                    view.lastNameField.setEditable(false);
-                    view.telnumField.setEditable(false);
+                    view.firstNameField.setEnabled(false);
+                    view.lastNameField.setEnabled(false);
+                    view.telnumField.setEnabled(false);
                     view.activeSelect.setEnabled(false);
                     view.roleSelect.setEnabled(false);
                     view.emailField.setEnabled(false);
@@ -265,10 +260,8 @@ public class UserDataController implements ActionListener, InternalFrameListener
             panel.add(titlePanel, BorderLayout.NORTH);
             panel.add(passwordField, BorderLayout.CENTER);
             String[] options = new String[]{"OK", "Cancel"};
-            int option = JOptionPane.showOptionDialog(BaseWindow.baseFrame, panel, "Reset Password",
-                    JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
-                    new ImageIcon("resource/icons/key-32px.png"), options, options[0]);
-            if (option == 0) // pressing OK button
+            int option = JOptionPane.showOptionDialog(BaseWindow.baseFrame, panel, "Reset Password", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, new ImageIcon("resource/icons/key-32px.png"), options, options[0]);
+            if (option == 0 && !passwordField.getPassword().equals("")) // pressing OK button
             {
                 user.setPasswordHash(FewPassword.getSalt(new String(passwordField.getPassword())));
             }

@@ -58,8 +58,14 @@ public class OperationWindowController implements ActionListener, InternalFrameL
             spawnSearch(RESERVATION);
         } else if (e.getSource().equals(view.lookupFeedback)) {
             spawnSearch(FEEDBACK);
-        } else if (e.getSource().equals(view.manageUser)){
+        } else if (e.getSource().equals(view.manageUser)) {
             dbl.databaseLoader(USER, true);
+        } else if (e.getSource().equals(view.manageRoom)) {
+            dbl.databaseLoader(ROOM, true);
+        } else if (e.getSource().equals(view.manageReservation)) {
+            dbl.databaseLoader(RESERVATION, true);
+        } else if (e.getSource().equals(view.manageFeedback)) {
+            dbl.databaseLoader(FEEDBACK, true);
         }
     }
 
@@ -117,7 +123,6 @@ public class OperationWindowController implements ActionListener, InternalFrameL
     }
 
 
-
     public void internalFrameOpened(InternalFrameEvent e) {
         BaseWindow.statusLabel.setText(e.getInternalFrame().getTitle() + " was opened.");
         JMenuItem newItem = new JMenuItem(e.getInternalFrame().getTitle());
@@ -130,11 +135,11 @@ public class OperationWindowController implements ActionListener, InternalFrameL
     }
 
     public void internalFrameClosed(InternalFrameEvent e) {
-        try{
+        try {
             BaseWindow.windowMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
             BaseWindow.windowList.remove(e.getInternalFrame());
             System.out.println("Removal Success: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
-        } catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("Removal Failure: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
             ex.printStackTrace();
         }

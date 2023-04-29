@@ -1,6 +1,7 @@
 package net.itkmitl.room.portal.admin.components;
 
 import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
 import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
@@ -147,8 +148,8 @@ public class DatabaseLoader implements InternalFrameListener {
                             data = new Object[]{Boolean.valueOf(false), String.format("Error: Table %d is out of index!", whichTable)};
                             break;
                     }
-                } catch (Exception e) {
-                    errorMessage = e.getMessage();
+                } catch (Exception ex) {
+                    errorMessage = ProgramError.getStackTrace(ex);;
                     data = new Object[]{Boolean.valueOf(false), errorMessage};
                 }
                 return "";

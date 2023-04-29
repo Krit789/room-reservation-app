@@ -5,6 +5,7 @@ import net.itkmitl.room.portal.admin.models.DataListTableModel;
 import net.itkmitl.room.portal.admin.models.DataSearchModel;
 import net.itkmitl.room.portal.admin.views.DataListTableView;
 import net.itkmitl.room.portal.admin.views.DataSearchView;
+import net.itkmitl.room.portal.admin.views.RoomDataView;
 import net.itkmitl.room.portal.admin.views.UserDataView;
 
 import javax.swing.*;
@@ -20,10 +21,11 @@ public class DataListTableController implements ListSelectionListener, InternalF
     public DataListTableView view;
     public DataListTableModel model;
 
-    public DataListTableController(){
+    public DataListTableController() {
         this(new DataListTableModel());
     }
-    public DataListTableController(DataListTableModel model){
+
+    public DataListTableController(DataListTableModel model) {
         this.view = new DataListTableView();
         this.model = model;
         view.getFrame().setTitle(model.getTitle());
@@ -31,16 +33,17 @@ public class DataListTableController implements ListSelectionListener, InternalF
         view.pageSubtitle.setText(model.getPageSubtitle());
         view.table.setModel(model.getDtm());
         view.viewEntryButton.setEnabled(false);
-        if (!(this instanceof DataListEditableController)){
+        if (!(this instanceof DataListEditableController)) {
             view.table.getSelectionModel().addListSelectionListener(this);
             view.getFrame().addInternalFrameListener(this);
         }
         view.viewEntryButton.addActionListener(this);
 
     }
+
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        if (!e.getValueIsAdjusting() && view.table.getSelectedRow() != -1){
+        if (!e.getValueIsAdjusting() && view.table.getSelectedRow() != -1) {
             view.viewEntryButton.setEnabled(true);
         }
     }
@@ -57,11 +60,11 @@ public class DataListTableController implements ListSelectionListener, InternalF
     }
 
     public void internalFrameClosed(InternalFrameEvent e) {
-        try{
+        try {
             BaseWindow.windowMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
             BaseWindow.windowList.remove(e.getInternalFrame());
             System.out.println("Removal Success: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
-        } catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("Removal Failure: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
             ex.printStackTrace();
         }
@@ -79,10 +82,26 @@ public class DataListTableController implements ListSelectionListener, InternalF
     public void internalFrameDeactivated(InternalFrameEvent e) {
     }
 
-    public void spawnUserDataEditor(int mode, int userID, DataListEditableController dlec){
+    public void spawnUserDataEditor(int mode, int userID, DataListEditableController dlec) {
         UserDataController udc = new UserDataController(mode, userID, dlec);
-        if (mode != 3){
+        if (mode != 3) {
             UserDataView view = udc.view;
+
+            Dimension desktopSize = BaseWindow.getDesktop().getSize();
+            Dimension jInternalFrameSize = view.getFrame().getSize();
+            view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                    (desktopSize.height - jInternalFrameSize.height) / 2);
+            view.getFrame().show();
+            view.getFrame().setVisible(true);
+            BaseWindow.getDesktop().add(view.getFrame());
+            view.getFrame().moveToFront();
+        }
+    }
+
+    public void spawnRoomDataEditor(int mode, int roomID, DataListEditableController dlec) {
+        RoomDataController rdc = new RoomDataController(mode, roomID, dlec);
+        if (mode != 3) {
+            RoomDataView view = rdc.view;
 
             Dimension desktopSize = BaseWindow.getDesktop().getSize();
             Dimension jInternalFrameSize = view.getFrame().getSize();
@@ -97,8 +116,15 @@ public class DataListTableController implements ListSelectionListener, InternalF
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(view.viewEntryButton)){
-            spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+        if (model.getPageTitle().contains("User")) {
+            if (e.getSource().equals(view.viewEntryButton)) {
+                spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+            }
+        } else if (model.getPageTitle().contains("Room")) {
+            if (e.getSource().equals(view.viewEntryButton)) {
+                spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+            }
         }
+
     }
 }
