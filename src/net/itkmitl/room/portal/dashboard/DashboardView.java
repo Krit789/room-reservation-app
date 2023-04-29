@@ -12,7 +12,7 @@ import javax.swing.border.EmptyBorder;
 
 import net.itkmitl.room.portal.View;
 import net.itkmitl.room.portal.dashboard.components.ContentPanel;
-import net.itkmitl.room.portal.dashboard.components.MainPanel;
+import net.itkmitl.room.portal.components.MainPanel;
 import net.itkmitl.room.portal.dashboard.components.NotificationPanel;
 import net.itkmitl.room.portal.dashboard.components.ReservationPanel;
 import net.itkmitl.room.portal.dashboard.components.RightPanel;

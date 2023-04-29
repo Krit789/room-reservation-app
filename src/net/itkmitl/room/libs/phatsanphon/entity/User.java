@@ -105,14 +105,6 @@ public class User extends Entity {
     private void setCreatedOn(String rawCreatedOn) {
         this.createdOn = new DateTime(rawCreatedOn);
     }
-    
-    public boolean doLogin(String password) {
-    	String salt = FewPassword.getSalt(password);
-    	if (FewPassword.checkPassword(this.passwordHash, salt)) {
-    		return true;
-    	}
-    	return false;
-    }
 
     @Override
     public void processQuery(FewQuery query) {

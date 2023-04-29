@@ -18,10 +18,12 @@ public class DashboardController extends Controller implements ActionListener {
         return view;
     }
 
+    @Override
     public void start() {
         this.initialize();
     }
 
+    @Override
     public void initialize() {
         this.initializeListener();
     }
