@@ -98,6 +98,7 @@ public class RoomRepository extends Repository<Room> {
                 .insert("close_time", room.getCloseTime().toString())
                 .insert("open_time", room.getOpenTime().toString())
                 .insert("floor", room.getFloor())
+                .insert("state", room.getState())
                 .table("room");
 
         this.getQuery().query(insert);
@@ -126,8 +127,8 @@ public class RoomRepository extends Repository<Room> {
                 .set("floor", room.getFloor())
                 .set("close_time", room.getCloseTime().toString())
                 .set("open_time", room.getOpenTime().toString())
+                .set("state", room.getState())
                 .table("room");
-
         this.getQuery().query(update);
     }
 }
