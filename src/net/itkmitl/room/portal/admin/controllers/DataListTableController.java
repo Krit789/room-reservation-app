@@ -13,6 +13,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 
 public class DataListTableController implements ListSelectionListener, InternalFrameListener, ActionListener {
     public DataListTableView view;
@@ -92,6 +93,16 @@ public class DataListTableController implements ListSelectionListener, InternalF
             view.getFrame().setVisible(true);
             BaseWindow.getDesktop().add(view.getFrame());
             view.getFrame().moveToFront();
+            try {
+                view.getFrame().setSelected(true);
+                if (view.getFrame().isIcon()) {
+                    view.getFrame().setIcon(false);
+                }
+                view.getFrame().setSelected(true);
+            } catch (PropertyVetoException ex) {
+
+            }
+            view.getFrame().requestFocus();
         }
     }
 
@@ -108,6 +119,16 @@ public class DataListTableController implements ListSelectionListener, InternalF
             view.getFrame().setVisible(true);
             BaseWindow.getDesktop().add(view.getFrame());
             view.getFrame().moveToFront();
+            try {
+                view.getFrame().setSelected(true);
+                if (view.getFrame().isIcon()) {
+                    view.getFrame().setIcon(false);
+                }
+                view.getFrame().setSelected(true);
+            } catch (PropertyVetoException ex) {
+
+            }
+            view.getFrame().requestFocus();
         }
     }
 
@@ -125,6 +146,16 @@ public class DataListTableController implements ListSelectionListener, InternalF
             view.getFrame().setVisible(true);
             BaseWindow.getDesktop().add(view.getFrame());
             view.getFrame().moveToFront();
+            try {
+                view.getFrame().setSelected(true);
+                if (view.getFrame().isIcon()) {
+                    view.getFrame().setIcon(false);
+                }
+                view.getFrame().setSelected(true);
+            } catch (PropertyVetoException ex) {
+
+            }
+            view.getFrame().requestFocus();
         }
     }
 
@@ -142,6 +173,16 @@ public class DataListTableController implements ListSelectionListener, InternalF
             view.getFrame().setVisible(true);
             BaseWindow.getDesktop().add(view.getFrame());
             view.getFrame().moveToFront();
+            try {
+                view.getFrame().setSelected(true);
+                if (view.getFrame().isIcon()) {
+                    view.getFrame().setIcon(false);
+                }
+                view.getFrame().setSelected(true);
+            } catch (PropertyVetoException ex) {
+
+            }
+            view.getFrame().requestFocus();
         }
     }
 

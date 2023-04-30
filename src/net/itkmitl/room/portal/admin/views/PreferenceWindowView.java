@@ -35,6 +35,8 @@ public class PreferenceWindowView {
         frame.setFrameIcon(new ImageIcon("resource/icons/settings-16px.png"));
         frame.setMinimumSize(new Dimension(512, 400));
         frame.setSize(512, 400);
+        frame.setFocusable(true);
+        frame.requestFocusInWindow();
         pageTitle = new JLabel("Database");
         titlePanel = new JPanel();
         databasePanel = new JPanel();
@@ -135,17 +137,6 @@ public class PreferenceWindowView {
         instancePanel.add(configPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.1, 0, 2, new Insets(10, 10, 0, 10)).getGBC());
 
         instancePanel.add(new JPanel(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.7, 0, 2, new Insets(10, 10, 0, 10)).getGBC());
-//        resetPanel = new JPanel();
-//        resetPanel.setLayout(new GridBagLayout());
-
-//        resetLabel = new JLabel("Reset configuration data and start over. This action can't be revert!");
-//        resetPanel.add(resetLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 0, 0).getGBC());
-//
-//        instancePanel.add(new JPanel(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.5, 0, 3).getGBC());
-//
-//        resetButton = new JButton("Reset");
-//        resetPanel.add(resetButton, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 1, 0).getGBC());
-//        instancePanel.add(resetPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.1, 0, 4, new Insets(0, 10, 0, 10)).getGBC());
         instancePanel.add(new JSeparator(), new GBCBuilder(GridBagConstraints.BOTH, 1, 0.1, 0, 5).setInset(new Insets(10, 0, 0, 0)));
 
 

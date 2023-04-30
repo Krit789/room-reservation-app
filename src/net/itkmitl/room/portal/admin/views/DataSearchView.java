@@ -21,6 +21,7 @@ public class DataSearchView {
         frame.setSize(480, 200);
         frame.setFrameIcon(new ImageIcon("resource/icons/tablesearch-16px.png"));
         frame.setLayout(new BorderLayout());
+        frame.setFocusable(true);
 
         titlePanel = new JPanel();
         pageTitle = new JLabel("Search");
@@ -65,7 +66,7 @@ public class DataSearchView {
         searchButton = new JButton("Search");
         buttonPanel.add(errorLabel, new GBCBuilder(GridBagConstraints.NONE, 0.9, 1, 0 ,0, new Insets(0,0,10,5)).setAnchor(GridBagConstraints.EAST));
         buttonPanel.add(searchButton, new GBCBuilder(GridBagConstraints.NONE, 0.1, 1, 1 ,0, new Insets(0,0,10,10)).setAnchor(GridBagConstraints.EAST));
-
+        frame.getRootPane().setDefaultButton(searchButton);
         frame.add(titlePanel, BorderLayout.NORTH);
         frame.add(searchPanel, BorderLayout.CENTER);
         frame.add(buttonPanel, BorderLayout.SOUTH);

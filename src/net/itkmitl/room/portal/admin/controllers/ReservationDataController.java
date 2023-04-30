@@ -99,16 +99,25 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                 BaseWindow.progressBar.setIndeterminate(true);
                 FewQuery db = RVDB.getDB();
                 try {
-                    Reservation myRoom = new ReservationRepository(db).getReservationById(reservationID);
-                    ArrayList<User> user_list = new UserRepository(db).getUsers();
-                    ArrayList<Room> room_list = new RoomRepository(db).getRooms();
-                    for (User u : user_list) {
-                        userArrayList.add(new UserComboBoxModel(u));
+                    Reservation myReservation = new ReservationRepository(db).getReservationById(reservationID);
+                    switch (mode) {
+                        case 0: // View Only
+                            userArrayList.add(new UserComboBoxModel(myReservation.getUser()));
+                            roomArrayList.add(new RoomComboBoxModel(myReservation.getRoom()));
+                            break;
+                        default:
+                            ArrayList<User> user_list = new UserRepository(db).getUsers();
+                            ArrayList<Room> room_list = new RoomRepository(db).getRooms();
+                            for (User u : user_list) {
+                                userArrayList.add(new UserComboBoxModel(u));
+                            }
+                            for (Room r : room_list) {
+                                roomArrayList.add(new RoomComboBoxModel(r));
+                            }
+                            break;
                     }
-                    for (Room r : room_list) {
-                        roomArrayList.add(new RoomComboBoxModel(r));
-                    }
-                    data = new Object[]{true, myRoom};
+
+                    data = new Object[]{true, myReservation};
                 } catch (Exception ex) {
                     errorMessage = ex.getMessage();
                     data = new Object[]{false, errorMessage};
@@ -246,6 +255,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                     view.roomIDSelect.setSelectedItem(r);
                 }
             }
+
             view.reasonField.setText(reservation.getReason());
             view.startTimeHourField.getModel().setValue(reservation.getStartTime().getHours());
             view.startTimeMinuteField.getModel().setValue(reservation.getStartTime().getMinutes());
@@ -256,7 +266,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
             view.cancelledCheckbox.setSelected(reservation.isCancelled());
 
             switch (mode) {
-                case 0:
+                case 0: // View Mode
                     view.userIDSelect.setEnabled(false);
                     view.roomIDSelect.setEnabled(false);
                     view.reasonField.setEditable(false);
@@ -425,7 +435,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                 endModel.setMaximum(myRoom.getCloseTime().getMinutes());
                 view.endTimeMinuteField.setValue(Math.min((Integer) view.endTimeMinuteField.getValue(), myRoom.getCloseTime().getMinutes()));
 
-                if ((Integer) view.startTimeHourField.getValue() == (Integer) view.endTimeHourField.getValue()){
+                if ((Integer) view.startTimeHourField.getValue() == (Integer) view.endTimeHourField.getValue()) {
                     SpinnerNumberModel startModel = (SpinnerNumberModel) view.startTimeMinuteField.getModel();
                     startModel.setMaximum((Integer) view.endTimeMinuteField.getValue());
                     view.startTimeMinuteField.setValue(Math.min((Integer) view.endTimeMinuteField.getValue(), (Integer) view.startTimeMinuteField.getValue()));

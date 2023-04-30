@@ -93,14 +93,23 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                 FewQuery db = RVDB.getDB();
                 try {
                     Feedback myFeedback = new FeedbackRepository(db).getFeedbackById(reservationID);
-                    ArrayList<User> user_list = new UserRepository(db).getUsers();
-                    ArrayList<Room> room_list = new RoomRepository(db).getRooms();
-                    for (User u : user_list) {
-                        userArrayList.add(new UserComboBoxModel(u));
+                    switch (mode) {
+                        case 0:
+                            ArrayList<User> user_list = new UserRepository(db).getUsers();
+                            ArrayList<Room> room_list = new RoomRepository(db).getRooms();
+                            for (User u : user_list) {
+                                userArrayList.add(new UserComboBoxModel(u));
+                            }
+                            for (Room r : room_list) {
+                                roomArrayList.add(new RoomComboBoxModel(r));
+                            }
+                            break;
+                        default:
+                            userArrayList.add(new UserComboBoxModel(myFeedback.getUser()));
+                            roomArrayList.add(new RoomComboBoxModel(myFeedback.getRoom()));
+                            break;
                     }
-                    for (Room r : room_list) {
-                        roomArrayList.add(new RoomComboBoxModel(r));
-                    }
+
                     data = new Object[]{true, myFeedback};
                 } catch (Exception ex) {
                     errorMessage = ex.getMessage();

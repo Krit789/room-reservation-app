@@ -14,6 +14,7 @@ import javax.swing.event.InternalFrameListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 
 public class OperationWindowController implements ActionListener, InternalFrameListener {
@@ -120,6 +121,17 @@ public class OperationWindowController implements ActionListener, InternalFrameL
         view.getFrame().setVisible(true);
         BaseWindow.getDesktop().add(view.getFrame());
         view.getFrame().moveToFront();
+        try {
+            view.getFrame().setSelected(true);
+            if (view.getFrame().isIcon()) {
+                view.getFrame().setIcon(false);
+            }
+            view.getFrame().setSelected(true);
+        } catch (PropertyVetoException ex) {
+
+        }
+        view.getFrame().requestFocus();
+        view.searchField.requestFocusInWindow();
     }
 
 
