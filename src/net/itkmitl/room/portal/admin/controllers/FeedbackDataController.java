@@ -94,7 +94,11 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                 try {
                     Feedback myFeedback = new FeedbackRepository(db).getFeedbackById(reservationID);
                     switch (mode) {
-                        case 0:
+                        case 0: // View Only
+                            userArrayList.add(new UserComboBoxModel(myFeedback.getUser()));
+                            roomArrayList.add(new RoomComboBoxModel(myFeedback.getRoom()));
+                            break;
+                        default:
                             ArrayList<User> user_list = new UserRepository(db).getUsers();
                             ArrayList<Room> room_list = new RoomRepository(db).getRooms();
                             for (User u : user_list) {
@@ -103,10 +107,6 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                             for (Room r : room_list) {
                                 roomArrayList.add(new RoomComboBoxModel(r));
                             }
-                            break;
-                        default:
-                            userArrayList.add(new UserComboBoxModel(myFeedback.getUser()));
-                            roomArrayList.add(new RoomComboBoxModel(myFeedback.getRoom()));
                             break;
                     }
 
