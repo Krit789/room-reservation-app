@@ -43,6 +43,9 @@ public class FewQuery {
                     this.fields.put(this.resultMeta.getColumnName(col), null);
                 }
             }
+            statement.close();
+            close();
+            this.connection.close();
             return this;
 
         } catch (Exception e) {
@@ -53,7 +56,7 @@ public class FewQuery {
 
     public FewQuery unsafeQuery(String query) {
         try {
-            PreparedStatement statement = this.connection.prepareStatement(
+        	PreparedStatement statement = this.connection.prepareStatement(
                     query,
                     PreparedStatement.RETURN_GENERATED_KEYS
             );
@@ -71,11 +74,14 @@ public class FewQuery {
                     this.fields.put(this.resultMeta.getColumnName(col), null);
                 }
             }
+            statement.close();
+            close();
+            this.connection.close();
             return this;
         } catch (Exception e) {
             System.out.println("ERROR: Unable to prepare query (" + e.getMessage() + ")");
             return null;
-        }
+        } 
     }
 
     public void close() {
@@ -109,8 +115,9 @@ public class FewQuery {
     public boolean nextBind() {
         try {
             boolean isNext = this.result.next();
-            if (!isNext) return false;
-
+            if (!isNext) {
+            	return false;
+            }
             for (int col = 1; col <= this.resultMeta.getColumnCount(); col++) {
                 String fieldName = this.resultMeta.getColumnName(col);
                 this.fields.put(fieldName, new FewMySQLValue(result.getObject(col)));
