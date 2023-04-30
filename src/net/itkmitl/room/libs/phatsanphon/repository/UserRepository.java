@@ -1,10 +1,13 @@
 package net.itkmitl.room.libs.phatsanphon.repository;
 
-import net.itkmitl.room.libs.peeranat.query.*;
-import net.itkmitl.room.libs.peeranat.util.FewMySQL;
-import net.itkmitl.room.libs.phatsanphon.entity.User;
-
 import java.util.ArrayList;
+
+import net.itkmitl.room.libs.peeranat.query.FewDeleteMySQL;
+import net.itkmitl.room.libs.peeranat.query.FewInsertMySQL;
+import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.peeranat.query.FewSelectMySQL;
+import net.itkmitl.room.libs.peeranat.query.FewUpdateMySQL;
+import net.itkmitl.room.libs.phatsanphon.entity.User;
 
 public class UserRepository extends Repository<User> {
 

@@ -1,8 +1,7 @@
 package net.itkmitl.room.libs.phatsanphon.entity;
 
-import net.itkmitl.room.enums.*;
+import net.itkmitl.room.enums.EnumUserRole;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
-import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 
 public class User extends Entity {
@@ -96,10 +95,6 @@ public class User extends Entity {
 
     public DateTime getCreatedOn() {
         return createdOn;
-    }
-
-    private void setCreatedOn(DateTime createdOn) {
-        this.createdOn = createdOn;
     }
 
     private void setCreatedOn(String rawCreatedOn) {

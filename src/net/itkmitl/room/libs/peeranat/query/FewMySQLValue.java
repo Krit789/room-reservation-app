@@ -21,7 +21,7 @@ public class FewMySQLValue {
         return Boolean.parseBoolean(asString());
     }
     public float asFloat(){ return Float.parseFloat(asString()); }
-
+    
     public Object getRaw() {
         return this.val;
     }
