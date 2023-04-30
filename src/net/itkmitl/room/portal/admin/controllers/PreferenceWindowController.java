@@ -39,6 +39,7 @@ public class PreferenceWindowController implements ChangeListener, ActionListene
                 return "YAML Ain't Markup Language format (*.yml)";
             }
         });
+        view.configPickerButton.setEnabled(false);
         view.settingTab.addChangeListener(this);
         view.okButton.addActionListener(this);
         view.cancelButton.addActionListener(this);

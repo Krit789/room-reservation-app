@@ -10,9 +10,9 @@ import java.awt.*;
 public class PreferenceWindowView {
     private final JInternalFrame frame;
     public final JTabbedPane settingTab;
-    public final JPanel databasePanel, instancePanel, titlePanel, frameButtonPanel, dbCredPanel, dbConnectionPanel, timeoutPanel, resetPanel, configPanel;
-    public final JButton okButton, cancelButton, applyButton, resetButton, configPickerButton;
-    public final JLabel pageTitle, dbAddressLabel, dbPortLabel, dbNameLabel, dbUserLabel, dbPasswordLabel, timeoutLabel1, timeoutLabel2, resetLabel, configLabel;
+    public final JPanel databasePanel, instancePanel, titlePanel, frameButtonPanel, dbCredPanel, dbConnectionPanel, timeoutPanel, configPanel;
+    public final JButton okButton, cancelButton, applyButton, configPickerButton;
+    public final JLabel pageTitle, dbAddressLabel, dbPortLabel, dbNameLabel, dbUserLabel, dbPasswordLabel, timeoutLabel1, timeoutLabel2, configLabel;
     public final JTextField dbAddressTextField, dbNameTextField, dbUserTextField, configDirectory;
     public final JCheckBox timeoutCheckBox;
     public final JSpinner dbPortSpinner, timeoutSpinner;
@@ -134,17 +134,18 @@ public class PreferenceWindowView {
 
         instancePanel.add(configPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.1, 0, 2, new Insets(10, 10, 0, 10)).getGBC());
 
-        resetPanel = new JPanel();
-        resetPanel.setLayout(new GridBagLayout());
+        instancePanel.add(new JPanel(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.7, 0, 2, new Insets(10, 10, 0, 10)).getGBC());
+//        resetPanel = new JPanel();
+//        resetPanel.setLayout(new GridBagLayout());
 
-        resetLabel = new JLabel("Reset configuration data and start over. This action can't be revert!");
-        resetPanel.add(resetLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 0, 0).getGBC());
-
-        instancePanel.add(new JPanel(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.5, 0, 3).getGBC());
-
-        resetButton = new JButton("Reset");
-        resetPanel.add(resetButton, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 1, 0).getGBC());
-        instancePanel.add(resetPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.1, 0, 4, new Insets(0, 10, 0, 10)).getGBC());
+//        resetLabel = new JLabel("Reset configuration data and start over. This action can't be revert!");
+//        resetPanel.add(resetLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 0, 0).getGBC());
+//
+//        instancePanel.add(new JPanel(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.5, 0, 3).getGBC());
+//
+//        resetButton = new JButton("Reset");
+//        resetPanel.add(resetButton, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 1, 0).getGBC());
+//        instancePanel.add(resetPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.1, 0, 4, new Insets(0, 10, 0, 10)).getGBC());
         instancePanel.add(new JSeparator(), new GBCBuilder(GridBagConstraints.BOTH, 1, 0.1, 0, 5).setInset(new Insets(10, 0, 0, 0)));
 
 

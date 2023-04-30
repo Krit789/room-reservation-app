@@ -15,20 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JSeparator;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
@@ -42,6 +29,7 @@ import net.itkmitl.room.portal.admin.views.OperationWindowView;
 import net.itkmitl.room.portal.admin.views.PreferenceWindowView;
 import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.GBCBuilder;
+import net.itkmitl.room.portal.components.LoadingDialog;
 
 public class BaseWindow extends ComponentAdapter implements ActionListener, InternalFrameListener {
     private final OperationWindowView mainMenu;
@@ -199,21 +187,45 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     }
 
     private PreferenceWindowView spawnPreference() {
-        PreferenceWindowController pref = new PreferenceWindowController();
-        PreferenceWindowView view = pref.getView();
+        final PreferenceWindowController[] pref = {null};
+        final PreferenceWindowView[] view = {null};
+        SwingWorker worker = new SwingWorker() {
+            LoadingDialog ld = new LoadingDialog();
+            @Override
+            protected String doInBackground() {
+                String errorMessage;
+                ld.dialog.setVisible(true);
+                BaseWindow.progressBar.setIndeterminate(true);
+                pref[0] = new PreferenceWindowController();
+                view[0] = pref[0].getView();
+                spawnPreferenceView(view);
+                return "";
+            }
 
-        Dimension desktopSize = desktop.getSize();
-        Dimension jInternalFrameSize = view.getFrame().getSize();
-        view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
-                (desktopSize.height - jInternalFrameSize.height) / 2);
-        view.getFrame().addInternalFrameListener(this);
-        view.getFrame().show();
-        view.getFrame().setVisible(true);
-        desktop.add(view.getFrame());
-        view.getFrame().moveToFront();
-
-        return view;
+            @Override
+            protected void done() {
+                ld.dialog.dispose();
+                BaseWindow.progressBar.setIndeterminate(false);
+            }
+        };
+        worker.execute();
+        return view[0];
     }
+
+    private PreferenceWindowView spawnPreferenceView(PreferenceWindowView[] view) {
+        Dimension desktopSize = desktop.getSize();
+        Dimension jInternalFrameSize = view[0].getFrame().getSize();
+        view[0].getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+        view[0].getFrame().addInternalFrameListener(this);
+        view[0].getFrame().show();
+        view[0].getFrame().setVisible(true);
+        desktop.add(view[0].getFrame());
+        view[0].getFrame().moveToFront();
+        return view[0];
+    }
+
+
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(aboutMenuItem1)) {
@@ -323,7 +335,6 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
 
     public static void main(String[] args) {
         try {
-//            MacConfig.menuBar("Laew Tae Hong Management");
             System.setProperty( "apple.laf.useScreenMenuBar", "true" );
             System.setProperty( "apple.awt.application.name", "Laew Tae Hong" );
             System.setProperty( "apple.awt.application.appearance", "system" );

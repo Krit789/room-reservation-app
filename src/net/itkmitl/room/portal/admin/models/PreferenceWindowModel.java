@@ -10,7 +10,7 @@ public class PreferenceWindowModel {
     private int sqlPort = 3306;
     private int timeout;
     private boolean neverTimeout;
-    private static File configFile = new File("test.yml");
+    private static File configFile = new File("config.yml");
 
     public static File getConfigFile() {
         return configFile;
