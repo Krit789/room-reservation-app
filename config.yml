@@ -5,4 +5,3 @@ username: "test_user"
 password: "Pu57HDrrXgvVLn"
 timeout_time: 17
 never_timeout: false
-create_new_db_if_doesnt_exist: false

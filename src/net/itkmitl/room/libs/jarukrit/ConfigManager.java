@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ConfigManager {
 	
     public static void saveConnection(String database, String ip, int port, String username, String password) {
-        FewConfig config = new FewConfig(new File("test.yml"));
+        FewConfig config = new FewConfig(new File("config.yml"));
         config.set("database", database);
         config.set("ip", ip);
         config.set("port", port);
@@ -26,7 +26,7 @@ public class ConfigManager {
     }
 
     public static ArrayList<String> getConnectionConfig() {
-    	FewConfig config = new FewConfig(new File("test.yml"));
+    	FewConfig config = new FewConfig(new File("config.yml"));
         ArrayList<String> myConnection = new ArrayList<>();
         myConnection.add(config.asString("ip") + ":" + config.asString("port"));
         myConnection.add(config.asString("database"));
