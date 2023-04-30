@@ -10,6 +10,7 @@ public class ReservationDataView {
     private JInternalFrame frame;
     private JPanel dataPanelPad, titlePanel, buttonPanel, timePanel;
     public JPanel dataPanel;
+    private JScrollPane reasonScrollPane;
     public JButton saveButton, cancelButton;
     public JLabel pageTitle, pageSubtitle;
     private JLabel idLabel, userIDLabel, roomIDLabel, reasonLabel, startTimeLabel, endTimeLabel, reservationTimeLabel;
@@ -61,9 +62,13 @@ public class ReservationDataView {
 
         reasonLabel = new JLabel("Reason");
         reasonField = new JTextArea("");
+        reasonField.setRows(3);
+        reasonField.setLineWrap(true);
+        reasonScrollPane = new JScrollPane(reasonField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         dataPanel.add(reasonLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 3, new Insets(0, 10, 5, 5)).getGBC());
-        dataPanel.add(reasonField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 3, new Insets(0, 0, 5, 10)).getGBC());
-        dataPanel.add(new JPanel(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 4).getGBC());
+        dataPanel.add(reasonScrollPane, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 3, new Insets(0, 0, 5, 10)).setColumnSpan(1, 3));
+        dataPanel.add(new JPanel(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 4, new Insets(0, 10, 5, 5)).getGBC());
+        dataPanel.add(new JPanel(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 5, new Insets(0, 10, 5, 5)).getGBC());
 
         timePanel = new JPanel();
         timePanel.setLayout(new GridBagLayout());
@@ -84,15 +89,15 @@ public class ReservationDataView {
         timePanel.add(endTimeLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.2, 0, 1, new Insets(0, 10, 5, 5)).getGBC());
         timePanel.add(endTimeHourField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.4, 1, 1, new Insets(0, 30, 5, 5)).getGBC());
         timePanel.add(endTimeMinuteField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.4, 2, 1, new Insets(0, 0, 5, 5)).getGBC());
-        dataPanel.add(timePanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 5).setColumnSpan(2, 1));
+        dataPanel.add(timePanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 6).setColumnSpan(2, 1));
 
         reservationTimeLabel = new JLabel("Reservation Time");
         reservationTimeField = new JTextField("");
-        dataPanel.add(reservationTimeLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 6, new Insets(0, 10, 5, 5)).getGBC());
-        dataPanel.add(reservationTimeField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 6, new Insets(0, 0, 5, 10)).getGBC());
+        dataPanel.add(reservationTimeLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 7, new Insets(0, 10, 5, 5)).getGBC());
+        dataPanel.add(reservationTimeField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 7, new Insets(0, 0, 5, 10)).getGBC());
 
         cancelledCheckbox = new JCheckBox("Is Cancelled");
-        dataPanel.add(cancelledCheckbox, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 7, new Insets(10, 10, 10, 0)).setColumnSpan(2, 1));
+        dataPanel.add(cancelledCheckbox, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 8, new Insets(10, 10, 10, 0)).setColumnSpan(2, 1));
 
         idField.setEditable(false);
         reservationTimeField.setEnabled(false);

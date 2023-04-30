@@ -50,7 +50,7 @@ public class DataListEditableController extends DataListTableController {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (model.getPageTitle().equals("User DataTable")) {
+        if (model.getPageTitle().contains("User")) {
             if (e.getSource().equals(view.viewEntryButton)) {
                 spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
             } else if (e.getSource().equals(view.editSelectedButton)) {
@@ -62,7 +62,7 @@ public class DataListEditableController extends DataListTableController {
             } else if (e.getSource().equals(view.createButton)) {
                 spawnUserDataEditor(2, -1, this);
             }
-        } else if (model.getPageTitle().equals("Room DataTable")) {
+        } else if (model.getPageTitle().contains("Room")) {
             if (e.getSource().equals(view.viewEntryButton)) {
                 spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
             } else if (e.getSource().equals(view.editSelectedButton)) {
@@ -75,7 +75,7 @@ public class DataListEditableController extends DataListTableController {
                 spawnRoomDataEditor(2, -1, this);
             }
         }
-        else if (model.getPageTitle().equals("Reservation DataTable")) {
+        else if (model.getPageTitle().contains("Reservation")) {
             if (e.getSource().equals(view.viewEntryButton)) {
                 spawnReservationDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
             } else if (e.getSource().equals(view.editSelectedButton)) {
@@ -88,18 +88,18 @@ public class DataListEditableController extends DataListTableController {
                 spawnReservationDataEditor(2, -1, this);
             }
         }
-        else if (model.getPageTitle().equals("Feedback DataTable")) {
-//            if (e.getSource().equals(view.viewEntryButton)) {
-//                spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
-//            } else if (e.getSource().equals(view.editSelectedButton)) {
-//                spawnRoomDataEditor(1, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
-//            } else if (e.getSource().equals(view.deletedSelectedButton)) {
-//                if (JOptionPane.showConfirmDialog(view.getFrame(), "Are you sure that you want to delete this record?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-//                    spawnRoomDataEditor(3, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
-//                }
-//            } else if (e.getSource().equals(view.createButton)) {
-//                spawnRoomDataEditor(2, -1, this);
-//            }
+        else if (model.getPageTitle().contains("Feedback")) {
+            if (e.getSource().equals(view.viewEntryButton)) {
+                spawnFeedbackDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+            } else if (e.getSource().equals(view.editSelectedButton)) {
+                spawnFeedbackDataEditor(1, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
+            } else if (e.getSource().equals(view.deletedSelectedButton)) {
+                if (JOptionPane.showConfirmDialog(view.getFrame(), "Are you sure that you want to delete this record?", "Warning", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    spawnFeedbackDataEditor(3, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), this);
+                }
+            } else if (e.getSource().equals(view.createButton)) {
+                spawnFeedbackDataEditor(2, -1, this);
+            }
         }
     }
 }

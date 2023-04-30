@@ -128,24 +128,41 @@ public class DataListTableController implements ListSelectionListener, InternalF
         }
     }
 
+    public void spawnFeedbackDataEditor(int mode, int feedbackID, DataListEditableController dlec) {
+        FeedbackDataController fdc = new FeedbackDataController(mode, feedbackID, dlec);
+        if (mode != 3) {
+            FeedbackDataView view = fdc.view;
+            view.getFrame().revalidate();
+            view.getFrame().pack();
+            Dimension desktopSize = BaseWindow.getDesktop().getSize();
+            Dimension jInternalFrameSize = view.getFrame().getSize();
+            view.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                    (desktopSize.height - jInternalFrameSize.height) / 2);
+            view.getFrame().show();
+            view.getFrame().setVisible(true);
+            BaseWindow.getDesktop().add(view.getFrame());
+            view.getFrame().moveToFront();
+        }
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (model.getPageTitle().equals("User DataTable")) {
+        if (model.getPageTitle().contains("User")) {
             if (e.getSource().equals(view.viewEntryButton)) {
                 spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
             }
-        } else if (model.getPageTitle().equals("Room DataTable")) {
+        } else if (model.getPageTitle().contains("Room")) {
             if (e.getSource().equals(view.viewEntryButton)) {
                 spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
             }
-        } else if (model.getPageTitle().equals("Reservation DataTable")) {
+        } else if (model.getPageTitle().contains("Reservation")) {
             if (e.getSource().equals(view.viewEntryButton)) {
                 spawnReservationDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
             }
-        } else if (model.getPageTitle().equals("Feedback DataTable")) {
+        } else if (model.getPageTitle().contains("Feedback")) {
             if (e.getSource().equals(view.viewEntryButton)) {
-//                spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+                spawnFeedbackDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
             }
         }
 
