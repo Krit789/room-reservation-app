@@ -22,6 +22,7 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 
 public class DatabaseLoader implements InternalFrameListener {
@@ -179,6 +180,16 @@ public class DatabaseLoader implements InternalFrameListener {
                 table.view.getFrame().setVisible(true);
                 BaseWindow.getDesktop().add(table.view.getFrame());
                 table.view.getFrame().moveToFront();
+                try {
+                    table.view.getFrame().setSelected(true);
+                    if (table.view.getFrame().isIcon()) {
+                        table.view.getFrame().setIcon(false);
+                    }
+                    table.view.getFrame().setSelected(true);
+                } catch (PropertyVetoException ex) {
+
+                }
+                table.view.getFrame().requestFocus();
             } else {
                 DataListTableController table = new DataListTableController((DataListTableModel) data[1]);
                 Dimension desktopSize = BaseWindow.getDesktop().getSize();
@@ -189,6 +200,16 @@ public class DatabaseLoader implements InternalFrameListener {
                 table.view.getFrame().setVisible(true);
                 BaseWindow.getDesktop().add(table.view.getFrame());
                 table.view.getFrame().moveToFront();
+                try {
+                    table.view.getFrame().setSelected(true);
+                    if (table.view.getFrame().isIcon()) {
+                        table.view.getFrame().setIcon(false);
+                    }
+                    table.view.getFrame().setSelected(true);
+                } catch (PropertyVetoException ex) {
+
+                }
+                table.view.getFrame().requestFocus();
             }
 
         } else {
