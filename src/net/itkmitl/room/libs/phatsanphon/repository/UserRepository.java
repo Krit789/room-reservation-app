@@ -75,6 +75,20 @@ public class UserRepository extends Repository<User> {
     }
 
     /*
+     * Get user by email
+     */
+    public User getUserByEmail(String email) {
+        FewSelectMySQL select = new FewSelectMySQL();
+
+        select.select("*")
+                .where("email", email)
+                .limit(1)
+                .table("user");
+
+        return this.map(this.getQuery().query(select));
+    }
+
+    /*
      * Create user
      */
     public void createUser(User user) {
