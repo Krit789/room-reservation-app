@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +24,7 @@ import javax.swing.event.InternalFrameListener;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 
 import net.itkmitl.room.GUIStarter;
+import net.itkmitl.room.portal.admin.controllers.AuthController;
 import net.itkmitl.room.portal.admin.controllers.OperationWindowController;
 import net.itkmitl.room.portal.admin.controllers.PreferenceWindowController;
 import net.itkmitl.room.portal.admin.views.OperationWindowView;
@@ -167,8 +169,8 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
 
         // Setting Window size and boilerplate code
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        mainMenu = spawnMainMenu();
         baseFrame.setVisible(true);
+        mainMenu = spawnMainMenu();
     }
 
     private OperationWindowView spawnMainMenu() {
@@ -183,6 +185,16 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         view.getFrame().setVisible(true);
         desktop.add(view.getFrame());
         view.getFrame().moveToFront();
+        try {
+            view.getFrame().setSelected(true);
+            if (view.getFrame().isIcon()) {
+                view.getFrame().setIcon(false);
+            }
+            view.getFrame().setSelected(true);
+        } catch (PropertyVetoException ex) {
+
+        }
+        view.getFrame().requestFocus();
         return view;
     }
 
@@ -222,6 +234,16 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         view[0].getFrame().setVisible(true);
         desktop.add(view[0].getFrame());
         view[0].getFrame().moveToFront();
+        try {
+            view[0].getFrame().setSelected(true);
+            if (view[0].getFrame().isIcon()) {
+                view[0].getFrame().setIcon(false);
+            }
+            view[0].getFrame().setSelected(true);
+        } catch (PropertyVetoException ex) {
+
+        }
+        view[0].getFrame().requestFocus();
         return view[0];
     }
 
@@ -298,6 +320,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     public void internalFrameOpened(InternalFrameEvent e) {
         JMenuItem newItem = new JMenuItem(e.getInternalFrame().getTitle());
         statusLabel.setText(e.getInternalFrame().getTitle() + " was opened.");
+        e.getInternalFrame().requestFocus();
         if (e.getInternalFrame().getTitle().equals("Preferences")){
             isPreferenceOpen = true;
         }
@@ -344,7 +367,11 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
             }
         } catch (Exception ignored) {}
-        new BaseWindow(); //start the application
+        if (AuthController.authenticated){
+            new BaseWindow(); //start the application
+        } else {
+            new AuthController();
+        }
     }
 
 

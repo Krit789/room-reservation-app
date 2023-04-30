@@ -32,8 +32,6 @@ public class AuthView {
         frame.add(new JLabel(new ImageIcon("resource/account/banner/banner1-50.png")), BorderLayout.NORTH);
         frame.setIconImages(multiIcon);
         frame.setResizable(false);
-        frame.setSize(411, 280);
-
         loginPanel = new JPanel();
         loginPanel.setLayout(new GridBagLayout());
         userLabel = new JLabel("E-Mail");
@@ -47,7 +45,8 @@ public class AuthView {
         loginPanel.add(passwordLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 1, new Insets(10, 10, 5, 5)).getGBC());
         loginPanel.add(passwordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 1, new Insets(10, 0, 5, 10)).getGBC());
 
-        loginPanel.add(alertLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 1, 2, new Insets(0, 5, 10, 10)).getGBC());
+        loginPanel.add(new JPanel(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 2, new Insets(0, 10, 10, 5)).getGBC());
+        loginPanel.add(alertLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 2, new Insets(0, 0, 10, 10)).getGBC());
 
         buttonPanel = new JPanel();
         buttonPanel.setBorder(new EmptyBorder(0, 0 ,5 ,5));
@@ -59,7 +58,9 @@ public class AuthView {
 
         frame.add(loginPanel, BorderLayout.CENTER);
         frame.add(buttonPanel, BorderLayout.SOUTH);
-
+        frame.getRootPane().setDefaultButton(loginButton);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }

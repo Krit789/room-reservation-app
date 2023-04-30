@@ -45,6 +45,7 @@ public class AuthController implements ActionListener {
                     User myUser = new UserRepository(db).getUserByEmail(email);
                     if (myUser != null){
                         if (FewPassword.checkPassword(password, myUser.getPasswordHash()) && myUser.getRole().getLevel() >= 10) {
+                            AuthController.authenticated = true;
                             data = new Object[]{true, myUser};
                         } else {
                             view.alertLabel.setText("Invalid Password or Insufficient Permission!");
