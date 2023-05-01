@@ -28,7 +28,7 @@ public abstract class View extends JFrame {
     public JMenu fileMenu, windowMenu, optionMenu, helpMenu;
     public JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
     public JMenuItem optionMenuItem1, helpMenuItem1;
-    public JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
+//    public JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
     public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     public View() {
@@ -62,9 +62,9 @@ public abstract class View extends JFrame {
         optionMenuItem1 = new JMenuItem("Switch to Admin Mode");
 
         // 'Window' Menu Components declaration
-        windowMenuItem1 = new JMenuItem("1");
-        windowMenuItem2 = new JMenuItem("2");
-        windowMenuItem3 = new JMenuItem("3");
+//        windowMenuItem1 = new JMenuItem("1");
+//        windowMenuItem2 = new JMenuItem("2");
+//        windowMenuItem3 = new JMenuItem("3");
 
         // 'Help' Menu Components declaration
         helpMenuItem1 = new JMenuItem("About Us");
@@ -79,10 +79,10 @@ public abstract class View extends JFrame {
         menuBar.add(optionMenu);
         optionMenu.add(optionMenuItem1);
 
-        menuBar.add(windowMenu);
-        windowMenu.add(windowMenuItem1);
-        windowMenu.add(windowMenuItem2);
-        windowMenu.add(windowMenuItem3);
+//        menuBar.add(windowMenu);
+//        windowMenu.add(windowMenuItem1);
+//        windowMenu.add(windowMenuItem2);
+//        windowMenu.add(windowMenuItem3);
 
         menuBar.add(helpMenu);
         helpMenu.add(helpMenuItem1);
