@@ -1,6 +1,8 @@
 package net.itkmitl.room.portal.account;
 
 import net.itkmitl.room.portal.Controller;
+import net.itkmitl.room.portal.account.components.LoginPanel;
+import net.itkmitl.room.portal.account.components.RegisterPanel;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
 
@@ -39,17 +41,16 @@ public class EntryController extends Controller implements ActionListener{
     protected void changeCard(String name){
         CardLayout cl = (CardLayout)(this.getView().contentPannel.getLayout());
         cl.show(this.getView().contentPannel, name);
-        System.out.println("changed");
     }
 
-    private String getRegisterDetail(EntryView view){
+    private String getRegisterDetail(RegisterPanel reg){
         //temporary placeholder
-        return "regis";
+        return reg.getData();
     }
 
-    private String getLoginDetail(EntryView view){
+    private String getLoginDetail(LoginPanel login){
         //temporary placeholder
-        return "log";
+        return login.getData();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -62,9 +63,9 @@ public class EntryController extends Controller implements ActionListener{
         } else if (e.getSource().equals(this.getView().loginPanel.registerButton)){
             this.changeCard("Register");
         } else if (e.getSource().equals(this.getView().loginPanel.loginButton)){
-            System.out.println(this.getLoginDetail(this.getView()));
+            System.out.println(this.getLoginDetail(this.getView().loginPanel));
         } else if (e.getSource().equals(this.getView().registerPanel.registerButton)){
-            System.out.println(this.getRegisterDetail(this.getView()));
+            System.out.println(this.getRegisterDetail(this.getView().registerPanel));
         } else if (e.getSource().equals(this.getView().registerPanel.loginButton)){
             this.changeCard("Login");
         }

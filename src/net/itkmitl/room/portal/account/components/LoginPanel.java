@@ -1,13 +1,12 @@
 package net.itkmitl.room.portal.account.components;
 
-import net.itkmitl.room.portal.account.temp_old.OutPane;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.Arrays;
 
 public class LoginPanel extends JPanel{
     protected GridBagConstraints c;
@@ -72,5 +71,9 @@ public class LoginPanel extends JPanel{
         c.gridheight = 5;
         this.add(new JLabel("building goes here"), c);//Image wont go in
         c.gridheight = 1;
+    }
+
+    public String getData(){
+        return usernameField.getText() + Arrays.toString(passwordField.getPassword());
     }
 }

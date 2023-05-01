@@ -16,7 +16,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.WindowConstants;
 
-import net.itkmitl.room.portal.account.OutPane;
+import net.itkmitl.room.portal.account.components.OutPane;
 
 public abstract class View extends JFrame {
     /**

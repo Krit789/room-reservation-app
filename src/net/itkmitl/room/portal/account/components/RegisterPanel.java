@@ -3,6 +3,7 @@ package net.itkmitl.room.portal.account.components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class RegisterPanel extends JPanel{
     protected GridBagConstraints c;
@@ -113,5 +114,10 @@ public class RegisterPanel extends JPanel{
         c.gridheight = 5;
         this.add(new JLabel("building goes here"), c);//Image wont go in
         c.gridheight = 1;
+    }
+    public String getData(){
+        return usernameField.getText() + Arrays.toString(passwordField.getPassword()) +
+                studentIdField.getText() + firstNameField.getText() + lastNameField.getText() +
+                telField.getText();
     }
 }
