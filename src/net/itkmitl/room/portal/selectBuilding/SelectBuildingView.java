@@ -3,13 +3,14 @@ package net.itkmitl.room.portal.selectBuilding;
 import net.itkmitl.room.portal.View;
 import net.itkmitl.room.portal.components.Header;
 import net.itkmitl.room.portal.components.LeftPanel;
+import net.itkmitl.room.portal.components.LeftSelectorPanel;
 import net.itkmitl.room.portal.components.MainPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SelectBuildingView extends View {
-    public JPanel leftPanel, innerPanel, mainPanel, header;
+    public JPanel leftPanel, innerPanel, mainPanel, header, leftSelectorPanel;
 
     public SelectBuildingView() {
         super();
@@ -20,6 +21,7 @@ public class SelectBuildingView extends View {
         leftPanel = new LeftPanel();
         innerPanel = new MainPanel();
         mainPanel = new JPanel(new BorderLayout());
+        leftSelectorPanel = new LeftSelectorPanel();
         mainPanel.setOpaque(false);
 
         header = new Header("Select a Building", "But I need to tell you something");
@@ -33,5 +35,6 @@ public class SelectBuildingView extends View {
 
         this.add(leftPanel, BorderLayout.WEST);
         this.add(mainPanel, BorderLayout.CENTER);
+        leftPanel.add(leftSelectorPanel, BorderLayout.CENTER);
     }
 }
