@@ -9,13 +9,15 @@ public class LeftPanel extends JPanel {
     public LeftPanel() {
         super(new BorderLayout());
 
-        this.setBackground(new Color(255, 255, 255));
+        this.setBackground(new Color(16, 52, 105));
         this.setPreferredSize(
                 new Dimension(408, (int) this.getBounds().getSize().getHeight())
         );
 
         nameLabel = new JLabel("LAEW TAE HONG");
-        nameLabel.setFont(new Font("Calibri", Font.BOLD, 20));
+        nameLabel.setFont(new Font("Calibri", Font.BOLD, 25));
+        nameLabel.setAlignmentX(CENTER_ALIGNMENT);
+        nameLabel.setForeground(Color.WHITE);
 
         this.add(nameLabel, BorderLayout.NORTH);
     }

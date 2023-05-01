@@ -1,27 +1,19 @@
-package net.itkmitl.room.portal.account;
+package net.itkmitl.room.portal.account.components;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.Arrays;
 
-import com.formdev.flatlaf.FlatIntelliJLaf;
-
-import net.itkmitl.room.MacConfig;
-
-public class Register extends BaseClass implements ActionListener {
-
-    private JPanel namePanel;
+public class RegisterPanel extends JPanel{
+    protected GridBagConstraints c;
+    private JPanel namePanel, buttonBox;
     private JTextField usernameField, studentIdField, firstNameField, lastNameField, telField;
     private JLabel usernameText, passwordText, registerHeader, studentIdText, firstNameText, lastNameText, telText;
     private JPasswordField passwordField;
-
-
-    public Register() {
-        //JFrame and MenuBar Initialization
+    public JButton loginButton, registerButton;
+    public RegisterPanel(){
+        super(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         usernameField = new JTextField();
         passwordField = new JPasswordField();
@@ -36,15 +28,17 @@ public class Register extends BaseClass implements ActionListener {
         lastNameText = new JLabel("LastName : ", SwingConstants.LEFT);
         telText = new JLabel("Telephone :", SwingConstants.LEFT);
         registerHeader = new JLabel("Register", SwingConstants.CENTER);
+        loginButton = new JButton("Login");
+        registerButton = new JButton("Register");
 
-        innerPane.setBorder(BorderFactory.createEmptyBorder(newInsets.top, newInsets.left, newInsets.bottom, newInsets.right));
-        insets.top = newInsets.top;
-        insets.left = newInsets.left;
-        insets.bottom = newInsets.bottom;
-        insets.right = newInsets.right;
+        buttonBox = new JPanel();
+        buttonBox.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        buttonBox.add(loginButton);
+        buttonBox.add(registerButton);
 
         namePanel = new JPanel();
         namePanel.setLayout(new GridBagLayout());
+
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0.025;
         c.gridx = 1;
@@ -70,84 +64,60 @@ public class Register extends BaseClass implements ActionListener {
         c.ipady = 10;
         c.ipadx = 50;
         c.insets = new Insets(5, 0, 5, 45);
-        floatingBox.add(registerHeader, c);
+        this.add(registerHeader, c);
         c.weightx = 0.01;
         c.gridx = 1;
         c.gridy = 1;
         c.gridwidth = 1;
-        floatingBox.add(usernameText, c);
+        this.add(usernameText, c);
         c.weightx = 0.59;
         c.gridx = 2;
         c.gridy = 1;
-        floatingBox.add(usernameField, c);
+        this.add(usernameField, c);
         c.weightx = 0.01;
         c.gridx = 1;
         c.gridy = 2;
-        floatingBox.add(passwordText, c);
+        this.add(passwordText, c);
         c.weightx = 0.59;
         c.gridx = 2;
         c.gridy = 2;
-        floatingBox.add(passwordField, c);
+        this.add(passwordField, c);
         c.weightx = 0.01;
         c.gridx = 1;
         c.gridy = 3;
-        floatingBox.add(studentIdText, c);
+        this.add(studentIdText, c);
         c.weightx = 0.59;
         c.gridx = 2;
         c.gridy = 3;
-        floatingBox.add(studentIdField, c);
+        this.add(studentIdField, c);
         c.weightx = 0.60;
         c.gridwidth = 2;
         c.gridx = 1;
         c.gridy = 4;
-        floatingBox.add(namePanel, c);
+        this.add(namePanel, c);
         c.weightx = 0.01;
         c.gridwidth = 1;
         c.gridx = 1;
         c.gridy = 5;
-        floatingBox.add(telText, c);
+        this.add(telText, c);
         c.weightx = 0.59;
         c.gridx = 2;
         c.gridy = 5;
-        floatingBox.add(telField, c);
+        this.add(telField, c);
         c.gridx = 2;
         c.gridy = 6;
-        floatingBox.add(buttonBox, c);
-//        c.fill = GridBagConstraints.VERTICAL;
-//        c.weightx = 0.4;
-//        c.gridx = 0;
-//        c.gridy = 1;
-//        c.gridheight = 5;
-//        floatingBox.add(new JLabel("building goes here"), c);//Image wont go in
-//        c.gridheight = 1;
-
+        this.add(buttonBox, c);
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weightx = 0.4;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.gridheight = 5;
+        this.add(new JLabel("building goes here"), c);//Image wont go in
+        c.gridheight = 1;
     }
-
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JButton buttonClicked = (JButton) e.getSource();
-        if (buttonClicked.equals(registerButton)) {
-            registerHeader.setText(baseFrame.getSize() + "");
-        } else if (buttonClicked.equals(loginButton)) {
-            baseFrame.dispose();
-            String[] arguments = new String[]{""};
-            Login.main(arguments);
-        }
+    public String getData(){
+        return usernameField.getText() + Arrays.toString(passwordField.getPassword()) +
+                studentIdField.getText() + firstNameField.getText() + lastNameField.getText() +
+                telField.getText();
     }
-
-    public static void main(String[] args) {
-        MacConfig.menuBar();
-        try {
-            MacConfig.menuBar("Laew Tae Hong Management");
-            try {
-                UIManager.setLookAndFeel(new FlatIntelliJLaf());
-            } catch (Exception ignored) {
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-            }
-        } catch (Exception ignored) {
-        }
-        new Register();
-    }
-
 }
