@@ -29,21 +29,25 @@ public class FeedbackRepository extends Repository<Feedback> {
     }
 
 
-    public ArrayList<Feedback> getFeedbacksBy(FeedbackQuery prop, String search) {
-        String query = switch (prop) {
-            case ID -> // ID
-                    String.format("SELECT * FROM `feedback` WHERE id='%s'", search);
-            case ROOM_ID -> // Room ID
-                    String.format("SELECT * FROM `feedback` WHERE room_id='%s'", search);
-            case USER_ID -> // User ID
-                    String.format("SELECT * FROM `feedback` WHERE lastname='%s'", search);
-            case RATING -> // Rating
-                    String.format("SELECT * FROM `feedback` WHERE rating LIKE '%%%s'", search);
-            case COMMENT -> // Comment
-                    String.format("SELECT * FROM `feedback` WHERE comment LIKE '%%%s%%'", search);
-        };
+    public ArrayList<Feedback> getFeedbacks(FeedbackQuery queryBy, String query) {
+        if (queryBy == FeedbackQuery.ID) {
+            Feedback data = this.getFeedbackById(Integer.parseInt(query));
 
-        return this.maps(this.getQuery().unsafeQuery(query));
+            ArrayList<Feedback> objects = new ArrayList<>();
+            objects.add(data);
+
+            return objects;
+        } else if (queryBy == FeedbackQuery.USER_ID) {
+            return this.getFeedbacksByUserId(Integer.parseInt(query));
+        } else if (queryBy == FeedbackQuery.ROOM_ID) {
+            return this.getFeedbacksByRoomId(Integer.parseInt(query));
+        } else if (queryBy == FeedbackQuery.RATING) {
+            return this.getFeedbacksByRating(query);
+        } else if (queryBy == FeedbackQuery.COMMENT) {
+            return this.getFeedbacksByComment(query);
+        }
+
+        return null;
     }
 
     public Feedback getFeedbackById(int id) {
@@ -56,7 +60,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         return this.map(this.getQuery().query(select));
     }
 
-    public ArrayList<Feedback> getFeedbackByUserId(int userId) {
+    public ArrayList<Feedback> getFeedbacksByUserId(int userId) {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("user_id", userId)
@@ -66,7 +70,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Feedback> getFeedbackByRoomId(int roomId) {
+    public ArrayList<Feedback> getFeedbacksByRoomId(int roomId) {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("user_id", roomId)
@@ -76,8 +80,13 @@ public class FeedbackRepository extends Repository<Feedback> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Feedback> getFeedbackByComment(String comment) {
+    public ArrayList<Feedback> getFeedbacksByComment(String comment) {
         String query = String.format("SELECT * FROM `feedback` WHERE comment LIKE '%%%s%%'", comment);
+        return this.maps(this.getQuery().unsafeQuery(query));
+    }
+
+    public ArrayList<Feedback> getFeedbacksByRating(String rating) {
+        String query = String.format("SELECT * FROM `feedback` WHERE rating LIKE '%%%s'", rating);
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 

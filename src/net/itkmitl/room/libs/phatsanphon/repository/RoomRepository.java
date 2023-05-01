@@ -43,23 +43,44 @@ public class RoomRepository extends Repository<Room> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Room> getRoomsBy(RoomQuery prop, String search) {
-        String query = switch (prop) {
-            case ID -> // ID
-                    String.format("SELECT * FROM `room` WHERE id='%s'", search);
-            case NAME -> // Name
-                    String.format("SELECT * FROM `room` WHERE name LIKE '%%%s%%'", search);
-            case BUILDING -> // Building
-                    String.format("SELECT * FROM `room` WHERE building LIKE '%%%s%%'", search);
-            case STATE -> // State
-                    String.format("SELECT * FROM `room` WHERE state LIKE '%%%s%%'", search);
-        };
+    public ArrayList<Room> getRooms(RoomQuery queryBy, String query) {
+        if (queryBy == RoomQuery.ID) {
+            Room data = this.getRoomById(Integer.parseInt(query));
+
+            ArrayList<Room> objects = new ArrayList<>();
+            objects.add(data);
+
+            return objects;
+        } else if (queryBy == RoomQuery.NAME) {
+            return this.getRoomsByName(query);
+        } else if (queryBy == RoomQuery.BUILDING) {
+            return this.getRoomsByBuilding(query);
+        } else if (queryBy == RoomQuery.STATE) {
+            return this.getRoomsByState(query);
+        }
+
+        return null;
+    }
+
+    public ArrayList<Room> getRoomsByBuilding(String building) {
+        String query = String.format(
+                "SELECT * FROM `room` WHERE building LIKE '%%%s%%'", building
+        );
+
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
-    private ArrayList<Room> getRoomsByBuilding(String building) {
+    public ArrayList<Room> getRoomsByName(String name) {
         String query = String.format(
-                "SELECT * FROM `room` WHERE building LIKE '%%%s%%'", building
+                String.format("SELECT * FROM `room` WHERE name LIKE '%%%s%%'", name)
+        );
+
+        return this.maps(this.getQuery().unsafeQuery(query));
+    }
+
+    public ArrayList<Room> getRoomsByState(String state) {
+        String query = String.format(
+                String.format("SELECT * FROM `room` WHERE state LIKE '%%%s%%'", state)
         );
 
         return this.maps(this.getQuery().unsafeQuery(query));
