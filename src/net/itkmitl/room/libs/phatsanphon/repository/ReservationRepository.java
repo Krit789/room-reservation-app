@@ -2,6 +2,7 @@ package net.itkmitl.room.libs.phatsanphon.repository;
 
 import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.*;
+import net.itkmitl.room.libs.phatsanphon.repository.enums.ReservationQuery;
 
 import java.util.ArrayList;
 
@@ -29,22 +30,18 @@ public class ReservationRepository extends Repository<Reservation> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Reservation> getReservationsBy(int prop, String search) {
-        String query = null;
-        switch (prop) {
-            case 0: // ID
-                query = String.format("SELECT * FROM `reservation` WHERE id='%s'", search);
-                break;
-            case 1: // User ID
-                query = String.format("SELECT * FROM `reservation` WHERE user_id='%s'", search);
-                break;
-            case 2: // Room ID
-                query = String.format("SELECT * FROM `reservation` WHERE room_id='%s'", search);
-                break;
-            case 3: // Reason
-                query = String.format("SELECT * FROM `reservation` WHERE reason LIKE '%%%s%%'", search);
-                break;
-        }
+    public ArrayList<Reservation> getReservationsBy(ReservationQuery queryBy, String search) {
+        String query = switch (queryBy) {
+            case ID -> // ID
+                    String.format("SELECT * FROM `reservation` WHERE id='%s'", search);
+            case USER_ID -> // User ID
+                    String.format("SELECT * FROM `reservation` WHERE user_id='%s'", search);
+            case ROOM_ID -> // Room ID
+                    String.format("SELECT * FROM `reservation` WHERE room_id='%s'", search);
+            case REASON -> // Reason
+                    String.format("SELECT * FROM `reservation` WHERE reason LIKE '%%%s%%'", search);
+        };
+
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 

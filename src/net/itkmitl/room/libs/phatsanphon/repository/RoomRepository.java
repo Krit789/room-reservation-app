@@ -8,6 +8,7 @@ import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.query.FewSelectMySQL;
 import net.itkmitl.room.libs.peeranat.query.FewUpdateMySQL;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
+import net.itkmitl.room.libs.phatsanphon.repository.enums.RoomQuery;
 
 public class RoomRepository extends Repository<Room> {
     public RoomRepository(final FewQuery query) {
@@ -42,33 +43,26 @@ public class RoomRepository extends Repository<Room> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Room> getRoomsBy(int prop, String search) {
-        String query = null;
-        switch (prop) {
-            case 0: // ID
-                query = String.format("SELECT * FROM `room` WHERE id='%s'", search);
-                break;
-            case 1: // Name
-                query = String.format("SELECT * FROM `room` WHERE name LIKE '%%%s%%'", search);
-                break;
-            case 2: // Building
-                query = String.format("SELECT * FROM `room` WHERE building LIKE '%%%s%%'", search);
-                break;
-            case 3: // State
-                query = String.format("SELECT * FROM `room` WHERE state LIKE '%%%s%%'", search);
-                break;
-        }
+    public ArrayList<Room> getRoomsBy(RoomQuery prop, String search) {
+        String query = switch (prop) {
+            case ID -> // ID
+                    String.format("SELECT * FROM `room` WHERE id='%s'", search);
+            case NAME -> // Name
+                    String.format("SELECT * FROM `room` WHERE name LIKE '%%%s%%'", search);
+            case BUILDING -> // Building
+                    String.format("SELECT * FROM `room` WHERE building LIKE '%%%s%%'", search);
+            case STATE -> // State
+                    String.format("SELECT * FROM `room` WHERE state LIKE '%%%s%%'", search);
+        };
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
-    public ArrayList<Room> getRoomsByBuilding(String building) {
-        FewSelectMySQL select = new FewSelectMySQL();
+    private ArrayList<Room> getRoomsByBuilding(String building) {
+        String query = String.format(
+                "SELECT * FROM `room` WHERE building LIKE '%%%s%%'", building
+        );
 
-        select.where("building", building)
-                .select("*")
-                .table("room");
-
-        return this.maps(this.getQuery().query(select));
+        return this.maps(this.getQuery().unsafeQuery(query));
     }
 
     public ArrayList<Room> getRoomsByFloor(String floor) {

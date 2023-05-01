@@ -2,12 +2,9 @@ package net.itkmitl.room.libs.phatsanphon.repository;
 
 import java.util.ArrayList;
 
-import net.itkmitl.room.libs.peeranat.query.FewDeleteMySQL;
-import net.itkmitl.room.libs.peeranat.query.FewInsertMySQL;
-import net.itkmitl.room.libs.peeranat.query.FewQuery;
-import net.itkmitl.room.libs.peeranat.query.FewSelectMySQL;
-import net.itkmitl.room.libs.peeranat.query.FewUpdateMySQL;
+import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
+import net.itkmitl.room.libs.phatsanphon.repository.enums.FeedbackQuery;
 
 public class FeedbackRepository extends Repository<Feedback> {
 
@@ -31,25 +28,21 @@ public class FeedbackRepository extends Repository<Feedback> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Feedback> getFeedbacksBy(int prop, String search) {
-        String query = null;
-        switch (prop) {
-            case 0: // ID
-                query = String.format("SELECT * FROM `feedback` WHERE id='%s'", search);
-                break;
-            case 1: // Room ID
-                query = String.format("SELECT * FROM `feedback` WHERE room_id='%s'", search);
-                break;
-            case 2: // User ID
-                query = String.format("SELECT * FROM `feedback` WHERE lastname='%s'", search);
-                break;
-            case 3: // Rating
-                query = String.format("SELECT * FROM `feedback` WHERE rating LIKE '%%%s'", search);
-                break;
-            case 4: // Comment
-                query = String.format("SELECT * FROM `feedback` WHERE comment LIKE '%%%s%%'", search);
-                break;
-        }
+
+    public ArrayList<Feedback> getFeedbacksBy(FeedbackQuery prop, String search) {
+        String query = switch (prop) {
+            case ID -> // ID
+                    String.format("SELECT * FROM `feedback` WHERE id='%s'", search);
+            case ROOM_ID -> // Room ID
+                    String.format("SELECT * FROM `feedback` WHERE room_id='%s'", search);
+            case USER_ID -> // User ID
+                    String.format("SELECT * FROM `feedback` WHERE lastname='%s'", search);
+            case RATING -> // Rating
+                    String.format("SELECT * FROM `feedback` WHERE rating LIKE '%%%s'", search);
+            case COMMENT -> // Comment
+                    String.format("SELECT * FROM `feedback` WHERE comment LIKE '%%%s%%'", search);
+        };
+
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
@@ -81,6 +74,11 @@ public class FeedbackRepository extends Repository<Feedback> {
                 .table("feedback");
 
         return this.maps(this.getQuery().query(select));
+    }
+
+    public ArrayList<Feedback> getFeedbackByComment(String comment) {
+        String query = String.format("SELECT * FROM `feedback` WHERE comment LIKE '%%%s%%'", comment);
+        return this.maps(this.getQuery().unsafeQuery(query));
     }
 
     public void createFeedback(Feedback feedback) {

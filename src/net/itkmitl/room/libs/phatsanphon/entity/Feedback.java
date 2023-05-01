@@ -64,7 +64,6 @@ public class Feedback extends Entity {
         this.setRoom(room);
     }
 
-
     public DateTime getCreatedOn() {
         return createdOn;
     }
