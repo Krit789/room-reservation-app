@@ -13,7 +13,7 @@ public class AuthView {
     private JPanel loginPanel, buttonPanel;
     public JButton loginButton, cancelButton;
     private JLabel userLabel, passwordLabel;
-    public JLabel alertLabel;
+    public JLabel alertLabel, bannerLabel;
     public JTextField loginField;
     public JPasswordField passwordField;
 
@@ -28,9 +28,10 @@ public class AuthView {
         multiIcon.add(new ImageIcon("resource/icons/icon-40px.png").getImage());
         multiIcon.add(new ImageIcon("resource/icons/icon-20px.png").getImage());
         multiIcon.add(new ImageIcon("resource/icons/icon-16px.png").getImage());
-        frame.setLayout(new BorderLayout());
-        frame.add(new JLabel(new ImageIcon("resource/account/banner/banner1-50.png")), BorderLayout.NORTH);
         frame.setIconImages(multiIcon);
+        frame.setLayout(new BorderLayout());
+        bannerLabel = new JLabel(new ImageIcon("resource/account/banner/banner1-50.png"));
+        frame.add(bannerLabel, BorderLayout.NORTH);
         frame.setResizable(false);
         loginPanel = new JPanel();
         loginPanel.setLayout(new GridBagLayout());

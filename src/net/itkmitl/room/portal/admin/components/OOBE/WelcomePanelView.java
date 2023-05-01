@@ -3,17 +3,23 @@ package net.itkmitl.room.portal.admin.components.OOBE;
 import net.itkmitl.room.portal.components.GBCBuilder;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class WelcomePanelView extends JPanel {
     private JLabel title, description;
 
     public WelcomePanelView() {
-        this.setLayout(new GridBagLayout());
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBorder(new EmptyBorder(15, 10 ,0 ,15));
         title = new JLabel("Welcome to Laew Tae Hong");
-        description = new JLabel("<html><p style=\"width:100px\">" +
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rhoncus iaculis tellus, ut sollicitudin nisl ultricies pharetra. Sed quis purus nisl. Phasellus tempor risus commodo tempor vestibulum. Quisque vitae commodo leo. Aenean sed tellus nec risus ultricies viverra eget eu massa. Pellentesque fringilla lectus vitae sollicitudin suscipit. Maecenas porttitor fringilla ante eu mattis." + "</p></html>");
-        this.add(title, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.1, 0, 0, new Insets(10, 10, 10, 10)).getGBC());
-        this.add(description, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.9, 0, 1, new Insets(10, 10, 10, 10)).getGBC());
+        title.setFont(new Font("SansSerif", Font.BOLD, 18));
+        description = new JLabel("<html><p style=\"width:225px\">" +
+                "It looks like this is the first time you use Laew Tae Hong, let's begin our setup process and get going!" + "</p><br><br><p><u>Laew Tae Hong requires</u></p><ul><li>MySQL Database with read and write access</li><li>Local disk with read and write access</li></ul></html>");
+        description.setFont(new Font("SansSerif", Font.PLAIN, 12));
+
+        this.add(title);
+        this.add(Box.createRigidArea(new Dimension(0, 25)));
+        this.add(description);
     }
 }

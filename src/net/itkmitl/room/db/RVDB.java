@@ -9,4 +9,8 @@ public class RVDB {
     public static FewQuery getDB() {
         return new FewQuery(FewDB.getConnection(new ConfigManager().getConnectionConfig()));
     }
+
+    public static FewQuery getDBwithoutDB() {
+        return new FewQuery(FewDB.getConnectionWithoutDB(new ConfigManager().getConnectionConfig()));
+    }
 }

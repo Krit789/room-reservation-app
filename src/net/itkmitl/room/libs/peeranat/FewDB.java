@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import net.itkmitl.room.db.RVDB;
 import net.itkmitl.room.enums.EnumDBSchema;
+import net.itkmitl.room.libs.peeranat.query.FewQuery;
 
 public class FewDB {
 
@@ -34,8 +35,35 @@ public class FewDB {
         return null;
     }
 
+    public static Connection getConnectionWithoutDB(String server, String username, String password) {
+        if (connection != null) return connection;
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://" + server,
+                    username,
+                    password
+            );
+        } catch (Exception e) {
+            System.out.println("ERROR: Unable to connect to database (" + e.getMessage() + ")");
+        }
+        return connection;
+    }
+
+    public static Connection getConnectionWithoutDB(ArrayList<String> CM) {
+        if (CM.size() == 4){
+            return getConnectionWithoutDB(CM.get(0), CM.get(2), CM.get(3));
+        }
+        System.out.println("Connection Config length is invalid!");
+        return null;
+    }
+
+
     public static void createTable(EnumDBSchema schema) {
         RVDB.getDB().unsafeQuery(schema.getRaw());
     }
-    
+
+    public static void createDatabase(String databaseName) {
+        RVDB.getDBwithoutDB().unsafeQuery(String.format("CREATE DATABASE IF NOT EXISTS %s;", databaseName));
+    }
 }
