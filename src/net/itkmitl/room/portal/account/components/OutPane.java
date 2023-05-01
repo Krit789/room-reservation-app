@@ -1,4 +1,4 @@
-package net.itkmitl.room.portal.account;
+package net.itkmitl.room.portal.account.components;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
