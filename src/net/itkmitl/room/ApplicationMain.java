@@ -14,24 +14,9 @@ import java.util.Date;
 public class ApplicationMain {
     public static void main(String[] args) {
         FewQuery db = RVDB.getDB();
+        UserRepository userRepository = new UserRepository(db);
 
-        RoomRepository roomRepository = new RoomRepository(db);
-        FeedbackRepository feedbackRepository = new FeedbackRepository(db);
-
-        Room pjBased = new Room();
-        pjBased.setName("Project Based 1");
-        pjBased.setBuilding("School of IT");
-        pjBased.setFloor("2");
-        pjBased.setOpenTime(new DateTime(new Date(2023 - 1900, 3, 25, 1, 0, 0)));
-        pjBased.setCloseTime(new DateTime(new Date(2023 - 1900, 3, 25, 11, 0, 0)));
-
-        Feedback feedback = new Feedback();
-        feedback.setRoom(7);
-        feedback.setUser(6);
-        feedback.setComment("Good Job!");
-        feedback.setRating(4.5);
-
-//        roomRepository.createRoom(pjBased);
-        feedbackRepository.createFeedback(feedback);
+        User data = userRepository.getUserById(41);
+        System.out.println(data.getCreatedOn());
     }
 }

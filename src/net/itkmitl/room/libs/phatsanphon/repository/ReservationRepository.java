@@ -156,6 +156,7 @@ public class ReservationRepository extends Repository<Reservation> {
                 .set("reason", reservation.getReason())
                 .set("start_time", reservation.getStartTime().getTime())
                 .set("end_time", reservation.getEndTime().getTime())
+                .set("reservation_time", System.currentTimeMillis())
                 .set("is_cancelled", reservation.isCancelled() ? 1 : 0)
                 .table("reservation");
 

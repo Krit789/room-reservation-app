@@ -98,11 +98,13 @@ public class User extends Entity {
     }
 
     private void setCreatedOn(long createdOn) {
-        this.createdOn = new DateTime(createdOn);
+        this.createdOn = new DateTime(createdOn * 1000);
     }
 
     @Override
     public void processQuery(FewQuery query) {
+        System.out.println(query.getValue("created_on").asString());
+
         this.setId(query.getValue("id").asInt());
         this.setEmail(query.getValue("email").asString());
         this.setPasswordHash(query.getValue("password_hash").asString());

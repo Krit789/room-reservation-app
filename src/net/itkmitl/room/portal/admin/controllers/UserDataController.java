@@ -311,6 +311,5 @@ public class UserDataController implements ActionListener, InternalFrameListener
 
     @Override
     public void internalFrameDeactivated(InternalFrameEvent e) {
-
     }
 }

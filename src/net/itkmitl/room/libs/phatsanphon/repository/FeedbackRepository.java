@@ -96,6 +96,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         insert.insert("user_id", feedback.getUser().getId())
                 .insert("room_id", feedback.getRoom().getId())
                 .insert("comment", feedback.getComment())
+                .insert("created_on", System.currentTimeMillis())
                 .insert("rating", feedback.getRating())
                 .table("feedback");
 
