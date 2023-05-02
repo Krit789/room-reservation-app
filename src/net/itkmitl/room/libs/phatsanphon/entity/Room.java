@@ -73,8 +73,8 @@ public class Room extends Entity {
         this.openTime = openTime;
     }
 
-    public void setOpenTime(String rawOpenTime) {
-        this.setOpenTime(new DateTime(rawOpenTime));
+    public void setOpenTime(long openTime) {
+        this.setOpenTime(new DateTime(openTime));
     }
 
     public DateTime getCloseTime() {
@@ -85,8 +85,8 @@ public class Room extends Entity {
         this.closeTime = closeTime;
     }
 
-    public void setCloseTime(String rawCloseTime) {
-        this.setCloseTime(new DateTime(rawCloseTime));
+    public void setCloseTime(long closeTime) {
+        this.setCloseTime(new DateTime(closeTime));
     }
 
     public EnumRoomState getState() {
@@ -104,8 +104,8 @@ public class Room extends Entity {
         this.setCapacity(query.getValue("capacity").asInt());
         this.setFloor(query.getValue("floor").asString());
         this.setBuilding(query.getValue("building").asString());
-        this.setOpenTime(query.getValue("open_time").asString());
-        this.setCloseTime(query.getValue("close_time").asString());
+        this.setOpenTime(query.getValue("open_time").asLong());
+        this.setCloseTime(query.getValue("close_time").asLong());
         this.setState(EnumRoomState.valueOf(query.getValue("state").asString()));
     }
 }

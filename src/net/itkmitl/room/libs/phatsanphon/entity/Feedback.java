@@ -72,8 +72,8 @@ public class Feedback extends Entity {
         this.createdOn = createdOn;
     }
 
-    private void setCreatedOn(String rawCreatedOn) {
-        this.setCreatedOn(new DateTime(rawCreatedOn));
+    private void setCreatedOn(long createdOn) {
+        this.setCreatedOn(new DateTime(createdOn));
     }
 
     public String getComment() {

@@ -97,8 +97,8 @@ public class User extends Entity {
         return createdOn;
     }
 
-    private void setCreatedOn(String rawCreatedOn) {
-        this.createdOn = new DateTime(rawCreatedOn);
+    private void setCreatedOn(long createdOn) {
+        this.createdOn = new DateTime(createdOn);
     }
 
     @Override
