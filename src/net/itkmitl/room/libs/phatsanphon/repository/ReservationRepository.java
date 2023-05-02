@@ -2,6 +2,8 @@ package net.itkmitl.room.libs.phatsanphon.repository;
 
 import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.*;
+import net.itkmitl.room.libs.phatsanphon.repository.enums.FeedbackQuery;
+import net.itkmitl.room.libs.phatsanphon.repository.enums.ReservationQuery;
 
 import java.util.ArrayList;
 
@@ -29,23 +31,31 @@ public class ReservationRepository extends Repository<Reservation> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Reservation> getReservationsBy(int prop, String search) {
-        String query = null;
-        switch (prop) {
-            case 0: // ID
-                query = String.format("SELECT * FROM `reservation` WHERE id='%s'", search);
-                break;
-            case 1: // User ID
-                query = String.format("SELECT * FROM `reservation` WHERE user_id='%s'", search);
-                break;
-            case 2: // Room ID
-                query = String.format("SELECT * FROM `reservation` WHERE room_id='%s'", search);
-                break;
-            case 3: // Reason
-                query = String.format("SELECT * FROM `reservation` WHERE reason LIKE '%%%s%%'", search);
-                break;
+    public ArrayList<Reservation> getReservations(int limit) {
+        FewSelectMySQL select = new FewSelectMySQL();
+
+        select.select("*").limit(limit).table("reservation");
+
+        return this.maps(this.getQuery().query(select));
+    }
+
+    public ArrayList<Reservation> getReservations(ReservationQuery queryBy, String query) {
+        if (queryBy == ReservationQuery.ID) {
+            Reservation data = this.getReservationById(Integer.parseInt(query));
+
+            ArrayList<Reservation> objects = new ArrayList<>();
+            objects.add(data);
+
+            return objects;
+        } else if (queryBy == ReservationQuery.USER_ID) {
+            return this.getReservationsByUserId(Integer.parseInt(query));
+        } else if (queryBy == ReservationQuery.ROOM_ID) {
+            return this.getReservationsByRoomId(Integer.parseInt(query));
+        } else if (queryBy == ReservationQuery.REASON) {
+            return this.getReservationsByReason(query);
         }
-        return this.maps(this.getQuery().unsafeQuery(query));
+
+        return null;
     }
 
     /**
@@ -67,7 +77,7 @@ public class ReservationRepository extends Repository<Reservation> {
      * @param roomId int
      * @return ArrayList<Reservation>
      */
-    public ArrayList<Reservation> getReservationByRoomId(int roomId) {
+    public ArrayList<Reservation> getReservationsByRoomId(int roomId) {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("room_id", roomId)
@@ -81,7 +91,7 @@ public class ReservationRepository extends Repository<Reservation> {
      * @param userId int
      * @return ArrayList<Reservation>
      */
-    public ArrayList<Reservation> getReservationByUserId(int userId) {
+    public ArrayList<Reservation> getReservationsByUserId(int userId) {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("user_id", userId)
@@ -89,6 +99,12 @@ public class ReservationRepository extends Repository<Reservation> {
                 .table("reservation");
 
         return this.maps(this.getQuery().query(select));
+    }
+
+    public ArrayList<Reservation> getReservationsByReason(String reason) {
+        String query = String.format("SELECT * FROM `reservation` WHERE reason LIKE '%%%s%%'", reason);
+
+        return this.maps(this.getQuery().unsafeQuery(query));
     }
 
     /**

@@ -8,6 +8,7 @@ import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.query.FewSelectMySQL;
 import net.itkmitl.room.libs.peeranat.query.FewUpdateMySQL;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
+import net.itkmitl.room.libs.phatsanphon.repository.enums.RoomQuery;
 
 public class RoomRepository extends Repository<Room> {
     public RoomRepository(final FewQuery query) {
@@ -42,33 +43,47 @@ public class RoomRepository extends Repository<Room> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Room> getRoomsBy(int prop, String search) {
-        String query = null;
-        switch (prop) {
-            case 0: // ID
-                query = String.format("SELECT * FROM `room` WHERE id='%s'", search);
-                break;
-            case 1: // Name
-                query = String.format("SELECT * FROM `room` WHERE name LIKE '%%%s%%'", search);
-                break;
-            case 2: // Building
-                query = String.format("SELECT * FROM `room` WHERE building LIKE '%%%s%%'", search);
-                break;
-            case 3: // State
-                query = String.format("SELECT * FROM `room` WHERE state LIKE '%%%s%%'", search);
-                break;
+    public ArrayList<Room> getRooms(RoomQuery queryBy, String query) {
+        if (queryBy == RoomQuery.ID) {
+            Room data = this.getRoomById(Integer.parseInt(query));
+
+            ArrayList<Room> objects = new ArrayList<>();
+            objects.add(data);
+
+            return objects;
+        } else if (queryBy == RoomQuery.NAME) {
+            return this.getRoomsByName(query);
+        } else if (queryBy == RoomQuery.BUILDING) {
+            return this.getRoomsByBuilding(query);
+        } else if (queryBy == RoomQuery.STATE) {
+            return this.getRoomsByState(query);
         }
-        return this.maps(this.getQuery().unsafeQuery(query));
+
+        return null;
     }
 
     public ArrayList<Room> getRoomsByBuilding(String building) {
-        FewSelectMySQL select = new FewSelectMySQL();
+        String query = String.format(
+                "SELECT * FROM `room` WHERE building LIKE '%%%s%%'", building
+        );
 
-        select.where("building", building)
-                .select("*")
-                .table("room");
+        return this.maps(this.getQuery().unsafeQuery(query));
+    }
 
-        return this.maps(this.getQuery().query(select));
+    public ArrayList<Room> getRoomsByName(String name) {
+        String query = String.format(
+                String.format("SELECT * FROM `room` WHERE name LIKE '%%%s%%'", name)
+        );
+
+        return this.maps(this.getQuery().unsafeQuery(query));
+    }
+
+    public ArrayList<Room> getRoomsByState(String state) {
+        String query = String.format(
+                String.format("SELECT * FROM `room` WHERE state LIKE '%%%s%%'", state)
+        );
+
+        return this.maps(this.getQuery().unsafeQuery(query));
     }
 
     public ArrayList<Room> getRoomsByFloor(String floor) {

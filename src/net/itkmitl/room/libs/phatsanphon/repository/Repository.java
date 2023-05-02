@@ -37,11 +37,6 @@ public class Repository<T extends Entity> {
 
     protected T map(FewQuery result) {
         ArrayList<T> tempArray = this.maps(result);
-
-        if (!tempArray.isEmpty()) {
-            return tempArray.get(0);
-        }
-
-        return null;
+        return !tempArray.isEmpty() ? tempArray.get(0) : null;
     }
 }

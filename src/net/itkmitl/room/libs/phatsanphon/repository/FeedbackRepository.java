@@ -2,12 +2,9 @@ package net.itkmitl.room.libs.phatsanphon.repository;
 
 import java.util.ArrayList;
 
-import net.itkmitl.room.libs.peeranat.query.FewDeleteMySQL;
-import net.itkmitl.room.libs.peeranat.query.FewInsertMySQL;
-import net.itkmitl.room.libs.peeranat.query.FewQuery;
-import net.itkmitl.room.libs.peeranat.query.FewSelectMySQL;
-import net.itkmitl.room.libs.peeranat.query.FewUpdateMySQL;
+import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
+import net.itkmitl.room.libs.phatsanphon.repository.enums.FeedbackQuery;
 
 public class FeedbackRepository extends Repository<Feedback> {
 
@@ -31,26 +28,26 @@ public class FeedbackRepository extends Repository<Feedback> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Feedback> getFeedbacksBy(int prop, String search) {
-        String query = null;
-        switch (prop) {
-            case 0: // ID
-                query = String.format("SELECT * FROM `feedback` WHERE id='%s'", search);
-                break;
-            case 1: // Room ID
-                query = String.format("SELECT * FROM `feedback` WHERE room_id='%s'", search);
-                break;
-            case 2: // User ID
-                query = String.format("SELECT * FROM `feedback` WHERE lastname='%s'", search);
-                break;
-            case 3: // Rating
-                query = String.format("SELECT * FROM `feedback` WHERE rating LIKE '%%%s'", search);
-                break;
-            case 4: // Comment
-                query = String.format("SELECT * FROM `feedback` WHERE comment LIKE '%%%s%%'", search);
-                break;
+
+    public ArrayList<Feedback> getFeedbacks(FeedbackQuery queryBy, String query) {
+        if (queryBy == FeedbackQuery.ID) {
+            Feedback data = this.getFeedbackById(Integer.parseInt(query));
+
+            ArrayList<Feedback> objects = new ArrayList<>();
+            objects.add(data);
+
+            return objects;
+        } else if (queryBy == FeedbackQuery.USER_ID) {
+            return this.getFeedbacksByUserId(Integer.parseInt(query));
+        } else if (queryBy == FeedbackQuery.ROOM_ID) {
+            return this.getFeedbacksByRoomId(Integer.parseInt(query));
+        } else if (queryBy == FeedbackQuery.RATING) {
+            return this.getFeedbacksByRating(query);
+        } else if (queryBy == FeedbackQuery.COMMENT) {
+            return this.getFeedbacksByComment(query);
         }
-        return this.maps(this.getQuery().unsafeQuery(query));
+
+        return null;
     }
 
     public Feedback getFeedbackById(int id) {
@@ -63,7 +60,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         return this.map(this.getQuery().query(select));
     }
 
-    public ArrayList<Feedback> getFeedbackByUserId(int userId) {
+    public ArrayList<Feedback> getFeedbacksByUserId(int userId) {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("user_id", userId)
@@ -73,7 +70,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Feedback> getFeedbackByRoomId(int roomId) {
+    public ArrayList<Feedback> getFeedbacksByRoomId(int roomId) {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("user_id", roomId)
@@ -81,6 +78,16 @@ public class FeedbackRepository extends Repository<Feedback> {
                 .table("feedback");
 
         return this.maps(this.getQuery().query(select));
+    }
+
+    public ArrayList<Feedback> getFeedbacksByComment(String comment) {
+        String query = String.format("SELECT * FROM `feedback` WHERE comment LIKE '%%%s%%'", comment);
+        return this.maps(this.getQuery().unsafeQuery(query));
+    }
+
+    public ArrayList<Feedback> getFeedbacksByRating(String rating) {
+        String query = String.format("SELECT * FROM `feedback` WHERE rating LIKE '%%%s'", rating);
+        return this.maps(this.getQuery().unsafeQuery(query));
     }
 
     public void createFeedback(Feedback feedback) {
