@@ -80,7 +80,7 @@ public class DataListTableController implements ListSelectionListener, InternalF
     public void internalFrameDeactivated(InternalFrameEvent e) {
     }
 
-    public void spawnUserDataEditor(int mode, int userID, DataListEditableController dlec) {
+    public void spawnUserDataEditor(int mode, int userID, DataListEditableController dlec) throws Exception {
         UserDataController udc = new UserDataController(mode, userID, dlec);
         if (mode != 3) {
             UserDataView view = udc.view;
@@ -189,22 +189,26 @@ public class DataListTableController implements ListSelectionListener, InternalF
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (model.getPageTitle().contains("User")) {
-            if (e.getSource().equals(view.viewEntryButton)) {
-                spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+        try {
+            if (model.getPageTitle().contains("User")) {
+                if (e.getSource().equals(view.viewEntryButton)) {
+                    spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+                }
+            } else if (model.getPageTitle().contains("Room")) {
+                if (e.getSource().equals(view.viewEntryButton)) {
+                    spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+                }
+            } else if (model.getPageTitle().contains("Reservation")) {
+                if (e.getSource().equals(view.viewEntryButton)) {
+                    spawnReservationDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+                }
+            } else if (model.getPageTitle().contains("Feedback")) {
+                if (e.getSource().equals(view.viewEntryButton)) {
+                    spawnFeedbackDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+                }
             }
-        } else if (model.getPageTitle().contains("Room")) {
-            if (e.getSource().equals(view.viewEntryButton)) {
-                spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
-            }
-        } else if (model.getPageTitle().contains("Reservation")) {
-            if (e.getSource().equals(view.viewEntryButton)) {
-                spawnReservationDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
-            }
-        } else if (model.getPageTitle().contains("Feedback")) {
-            if (e.getSource().equals(view.viewEntryButton)) {
-                spawnFeedbackDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
-            }
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(BaseWindow.baseFrame, ex.toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }

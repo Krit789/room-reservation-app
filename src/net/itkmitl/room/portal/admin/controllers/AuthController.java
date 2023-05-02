@@ -91,6 +91,11 @@ public class AuthController implements ActionListener {
             }
         } catch (Exception ignored) {
         }
-        new AuthController();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new AuthController();
+            }
+        });
     }
 }

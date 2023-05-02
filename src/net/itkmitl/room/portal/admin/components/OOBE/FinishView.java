@@ -19,7 +19,7 @@ public class FinishView extends JPanel {
         title = new JLabel("Laew Tae Hong Administration Setup");
         title.setFont(new Font("SansSerif", Font.BOLD, 18));
         description = new JLabel("<html><p style=\"width:225px\">" +
-               "Please keep this key in a safe place because you're not going to see it again. To enter Laew Tae Hong Administration click on Laew Tae Hong logo on the login page 3 times." + "</p></html>");
+               "Please keep this key safe because you're not going to see it again. To enter Laew Tae Hong Administration click on Laew Tae Hong logo on the login page 3 times." + "</p></html>");
         description.setFont(new Font("SansSerif", Font.PLAIN, 12));
 
         titlePanel.add(title);
@@ -27,10 +27,11 @@ public class FinishView extends JPanel {
         titlePanel.add(description);
         this.add(titlePanel, BorderLayout.NORTH);
 
-//        final String uuid = UUID.randomUUID().toString().replace("-", "");
         firstAccountPanel = new JPanel();
         firstAccountPanel.setLayout(new GridBagLayout());
         firstPasswordDisplay = new JLabel("<html><p><b>Important</b></p><p style=\"width:225px\">This is your default administration password,<br> E-Mail is blank.</p></html>");
+        firstPasswordDisplay.setFont(new Font("SansSerif", Font.PLAIN, 12));
+
         firstPassWordField = new JTextField("");
         firstPassWordField.setEditable(false);
         firstPassWordField.setFont(new Font("SansSerif", Font.PLAIN, 16));
@@ -38,8 +39,6 @@ public class FinishView extends JPanel {
         firstAccountPanel.add(firstPassWordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 1, new Insets(10, 0,0 ,0)).getGBC());
 
         this.add(firstAccountPanel, BorderLayout.CENTER);
-
-
 
     }
 }

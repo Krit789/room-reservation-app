@@ -63,7 +63,7 @@ public class DatabaseLoader implements InternalFrameListener {
             LoadingDialog ld = new LoadingDialog();
 
             @Override
-            protected String doInBackground() {
+            protected String doInBackground() throws Exception{
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
@@ -91,7 +91,7 @@ public class DatabaseLoader implements InternalFrameListener {
                             model.setPageSubtitle(users_list.size() + " records was retrieved from database.");
                             dtm = new DefaultTableModel(null, new String[]{"ID", "First Name", "Last Name", "Active", "Phone Number", "E-Mail", "Role", "Created On", "Staff"});
                             for (User u : users_list) {
-                                dtm.addRow(new Object[]{u.getId(), u.getFirstname(), u.getLastname(), u.isActive(), u.getEmail(), u.getTelephoneNumber(), u.getRole(), u.getCreatedOn(), u.isStaff()});
+                                dtm.addRow(new Object[]{u.getId(), u.getFirstname(), u.getLastname(), u.isActive(), u.getTelephoneNumber(), u.getEmail(), u.getRole(), u.getCreatedOn(), u.isStaff()});
                             }
                             model.setDtm(dtm);
                             data = new Object[]{Boolean.valueOf(true), model};
@@ -174,7 +174,6 @@ public class DatabaseLoader implements InternalFrameListener {
                     }
                 } catch (Exception ex) {
                     errorMessage = ProgramError.getStackTrace(ex);
-                    ;
                     data = new Object[]{Boolean.valueOf(false), errorMessage};
                 }
                 return "";

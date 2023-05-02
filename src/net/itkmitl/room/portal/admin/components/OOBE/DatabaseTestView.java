@@ -7,8 +7,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class DatabaseTestView extends JPanel {
-    private JLabel title, description, connectionLabel, credentialLabel, databaseLabel, tableLabel, yesLabel, noLabel;
+    public JLabel title, description,connectionLabel, credentialLabel, databaseLabel, userTableLabel, roomTableLabel, reservationTableLabel, feedbackTableLabel, tableIndexLabel, tableRelationshipLabel, yesLabel, noLabel;
     private JPanel topPanel;
+    public JScrollPane resultPane;
     protected JPanel resultPanel;
 
     public DatabaseTestView() {
@@ -24,26 +25,28 @@ public class DatabaseTestView extends JPanel {
         topPanel.add(title);
         topPanel.add(Box.createRigidArea(new Dimension(0, 15)));
         topPanel.add(description);
-        topPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        topPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         resultPanel = new JPanel();
         resultPanel.setLayout(new GridBagLayout());
         connectionLabel = new JLabel("Database Connection");
         credentialLabel = new JLabel("Credential Authentication");
-        databaseLabel = new JLabel("Database Exist");
-        tableLabel = new JLabel("Table Exist");
+        databaseLabel = new JLabel("Database");
+        userTableLabel = new JLabel("User Table");
+        roomTableLabel = new JLabel("Room Table");
+        reservationTableLabel = new JLabel("Reservation Table");
+        feedbackTableLabel = new JLabel("Feedback Table");
+        tableIndexLabel = new JLabel("Table Index");
+        tableRelationshipLabel = new JLabel("Table Relationship");
         yesLabel = new JLabel(new ImageIcon("resource/icons/yes-16px.png"));
         noLabel = new JLabel(new ImageIcon("resource/icons/no-16px.png"));
 
-        resultPanel.add(connectionLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 0, new Insets(0,5,5,5)).getGBC());
-
-        resultPanel.add(credentialLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 1, new Insets(5,5,5,5)).getGBC());
-
-        resultPanel.add(databaseLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 2, new Insets(5,5,5,5)).getGBC());
-
-        resultPanel.add(tableLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 3, new Insets(5,5,5,5)).getGBC());
-
-        resultPanel.setBorder(new EmptyBorder(0, 25, 0 ,25));
         this.add(topPanel, BorderLayout.NORTH);
-        this.add(resultPanel, BorderLayout.CENTER);
+        resultPane = new JScrollPane(resultPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        this.add(resultPane, BorderLayout.CENTER);
+
+    }
+
+    public void setDescription(String description){
+        this.description.setText(String.format("<html><p style=\"width:225px\">%s</p></html>", description));
     }
 }
