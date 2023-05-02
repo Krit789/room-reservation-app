@@ -6,12 +6,16 @@ import net.itkmitl.room.portal.account.components.RegisterPanel;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
-public class EntryController extends Controller implements ActionListener{
+public class EntryController extends Controller implements ActionListener, ComponentListener {
     private final EntryView view;
+    private User myUser;
 
     public EntryController(EntryView view){
         this.view = view;
@@ -36,6 +40,7 @@ public class EntryController extends Controller implements ActionListener{
         this.getView().loginPanel.loginButton.addActionListener(this);
         this.getView().registerPanel.registerButton.addActionListener(this);
         this.getView().registerPanel.loginButton.addActionListener(this);
+        this.getView().contentPannel.addComponentListener(this);
     }
 
     protected void changeCard(String name){
@@ -43,14 +48,10 @@ public class EntryController extends Controller implements ActionListener{
         cl.show(this.getView().contentPannel, name);
     }
 
-    private String getRegisterDetail(RegisterPanel reg){
         //temporary placeholder
-        return reg.getData();
     }
 
-    private String getLoginDetail(LoginPanel login){
         //temporary placeholder
-        return login.getData();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -63,11 +64,35 @@ public class EntryController extends Controller implements ActionListener{
         } else if (e.getSource().equals(this.getView().loginPanel.registerButton)){
             this.changeCard("Register");
         } else if (e.getSource().equals(this.getView().loginPanel.loginButton)){
-            System.out.println(this.getLoginDetail(this.getView().loginPanel));
         } else if (e.getSource().equals(this.getView().registerPanel.registerButton)){
-            System.out.println(this.getRegisterDetail(this.getView().registerPanel));
         } else if (e.getSource().equals(this.getView().registerPanel.loginButton)){
             this.changeCard("Login");
         }
+    }
+
+    @Override
+    public void componentResized(ComponentEvent e) {
+        if(e.getSource().equals(this.getView().contentPannel)){
+            Dimension size = this.getView().getSize();
+            int width = size.width;
+            int height = size.height;
+            int paddingSize = Math.min(width, height) / 5;
+            this.getView().contentPannel.setBorder(BorderFactory.createEmptyBorder(paddingSize, paddingSize, paddingSize, paddingSize));
+        }
+    }
+
+    @Override
+    public void componentMoved(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+
     }
 }

@@ -6,8 +6,6 @@ import net.itkmitl.room.portal.account.components.RegisterPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class EntryView extends View{
     protected JPanel contentPannel;
