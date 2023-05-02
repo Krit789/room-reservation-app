@@ -77,16 +77,16 @@ public class RoomDataView {
         openTimeLabel = new JLabel("Open Time");
         openTimeHourField = new JSpinner(new SpinnerNumberModel(0, 0, 23, 1));
         openTimeHourField.setEditor(new JSpinner.NumberEditor(openTimeHourField, "00"));
-        openTimeMinuteField = new JSpinner(new SpinnerNumberModel(0, 0, 59, 1));
+        openTimeMinuteField = new JSpinner(new SpinnerNumberModel(0, 0, 59, 30));
         openTimeMinuteField.setEditor(new JSpinner.NumberEditor(openTimeMinuteField, "00"));
         timePanel.add(openTimeLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.2, 0, 0, new Insets(0, 10, 5, 5)).getGBC());
         timePanel.add(openTimeHourField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.2, 1, 0, new Insets(0, 0, 5, 5)).getGBC());
         timePanel.add(openTimeMinuteField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.2, 2, 0, new Insets(0, 0, 5, 5)).getGBC());
 
         closeTimeLabel = new JLabel("Close Time");
-        closeTimeHourField = new JSpinner(new SpinnerNumberModel(0, 0, 23, 1));
+        closeTimeHourField = new JSpinner(new SpinnerNumberModel(23, 0, 23, 1));
         closeTimeHourField.setEditor(new JSpinner.NumberEditor(closeTimeHourField, "00"));
-        closeTimeMinuteField = new JSpinner(new SpinnerNumberModel(0, 0, 59, 1));
+        closeTimeMinuteField = new JSpinner(new SpinnerNumberModel(0, 0, 59, 30));
         closeTimeMinuteField.setEditor(new JSpinner.NumberEditor(closeTimeMinuteField, "00"));
         timePanel.add(closeTimeLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.2, 3, 0, new Insets(0, 30, 5, 5)).getGBC());
         timePanel.add(closeTimeHourField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.2, 4, 0, new Insets(0, 0, 5, 5)).getGBC());

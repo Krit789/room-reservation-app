@@ -126,14 +126,15 @@ public class ReservationRepository extends Repository<Reservation> {
         FewInsertMySQL insert = new FewInsertMySQL();
 
         if (reservation.getUser() == null && reservation.getRoom() == null) {
-            System.out.println("User or Room must include.");
+            System.out.println("User or Room must be included in the Reservation Object.");
             return false;
         }
 
         insert.insert("user_id", reservation.getUser().getId())
                 .insert("room_id", reservation.getRoom().getId())
-                .insert("start_time", reservation.getStartTime().toString())
-                .insert("end_time", reservation.getEndTime().toString())
+                .insert("start_time", reservation.getStartTime().getTime())
+                .insert("end_time", reservation.getEndTime().getTime())
+                .insert("reservation_time", System.currentTimeMillis())
                 .insert("reason", reservation.getReason())
                 .insert("is_cancelled", reservation.isCancelled() ? 1 : 0)
                 .table("reservation");

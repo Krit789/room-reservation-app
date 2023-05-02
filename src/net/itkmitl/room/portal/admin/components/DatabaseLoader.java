@@ -31,19 +31,34 @@ import java.util.ArrayList;
 
 public class DatabaseLoader implements InternalFrameListener {
     private boolean editableTable;
+
     public void databaseLoader(int whichTable) {
-        databaseLoader(whichTable, 99, "", editableTable);
+        databaseLoader(whichTable, 99, "", editableTable, null);
     }
+
     public void databaseLoader(int whichTable, boolean editableTable) {
-        databaseLoader(whichTable, 99, "", editableTable);
+        databaseLoader(whichTable, 99, "", editableTable, null);
     }
-    public void databaseLoader(int whichTable, int type, String searchQuery){
-        databaseLoader(whichTable, type, searchQuery, editableTable);
+
+    public void databaseLoader(int whichTable, String searchQuery, boolean editableTable) {
+        databaseLoader(whichTable, 99, searchQuery, editableTable, null);
     }
+
     public void databaseLoader(int whichTable, int type, String searchQuery, boolean editableTable) {
+        databaseLoader(whichTable, type, searchQuery, editableTable, null);
+    }
+
+    public void databaseLoader(int whichTable, int type, String searchQuery) {
+        databaseLoader(whichTable, type, searchQuery, editableTable, null);
+    }
+
+    public void databaseLoader(int whichTable, int type, String searchQuery, DataListEditableController table) {
+        databaseLoader(whichTable, type, searchQuery, editableTable, table);
+    }
+
+    public void databaseLoader(int whichTable, int type, String searchQuery, boolean editableTable, DataListEditableController table) {
         this.editableTable = editableTable;
         SwingWorker worker = new SwingWorker<>() {
-//            DataListTableModel model = new DataListTableModel();
             Object[] data;
             LoadingDialog ld = new LoadingDialog();
 
@@ -98,9 +113,9 @@ public class DatabaseLoader implements InternalFrameListener {
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (Room Table)");
                             model.setPageSubtitle(room_list.size() + " records was retrieved from database.");
-                            dtm = new DefaultTableModel(null, new String[]{"ID", "Name", "Building", "Capacity", "Floor", "State"});
+                            dtm = new DefaultTableModel(null, new String[]{"ID", "Name", "Building", "Floor", "Capacity", "Open Time", "Close Time", "State"});
                             for (Room u : room_list) {
-                                dtm.addRow(new Object[]{u.getId(), u.getName(), u.getBuilding(), u.getCapacity(), u.getFloor(), u.getState()});
+                                dtm.addRow(new Object[]{u.getId(), u.getName(), u.getBuilding(), u.getFloor(), u.getCapacity(), String.format("%02d:%02d", u.getOpenTime().getHours(), u.getOpenTime().getMinutes()), String.format("%02d:%02d", u.getCloseTime().getHours(), u.getCloseTime().getMinutes()), u.getState()});
                             }
                             model.setDtm(dtm);
                             data = new Object[]{Boolean.valueOf(true), model};
@@ -122,15 +137,15 @@ public class DatabaseLoader implements InternalFrameListener {
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (Reservation Table)");
                             model.setPageSubtitle(reservations_list.size() + " records was retrieved from database.");
-                            dtm = new DefaultTableModel(null, new String[]{"ID", "Room Name", "Room Location", "Reserver", "Reason", "Start Time", "End Time", "Reservation Length", "Cancelled"});
+                            dtm = new DefaultTableModel(null, new String[]{"ID", "Room Name", "Room Location", "Reserver", "Reason", "Start Time", "End Time", "Reserved At", "Cancelled"});
                             for (Reservation u : reservations_list) {
-                                dtm.addRow(new Object[]{u.getId(), u.getRoom().getName(), u.getRoom().getBuilding(), u.getUser().getFirstname() + " " + u.getUser().getLastname(), u.getReason(), u.getStartTime(), u.getEndTime().toString(), u.getReservationTime(), u.isCancelled()});
+                                dtm.addRow(new Object[]{u.getId(), u.getRoom().getName(), u.getRoom().getBuilding(), u.getUser().getFirstname() + " " + u.getUser().getLastname(), u.getReason(), u.getStartTime(), u.getEndTime(), u.getReservationTime(), u.isCancelled()});
                             }
                             model.setDtm(dtm);
                             data = new Object[]{Boolean.valueOf(true), model};
                             break;
                         case 4:
-                            ArrayList<Feedback> feedbacks_list ;
+                            ArrayList<Feedback> feedbacks_list;
                             FeedbackRepository feedbackRepository = new FeedbackRepository(db);
                             switch (type) {
                                 case 99:
@@ -158,7 +173,8 @@ public class DatabaseLoader implements InternalFrameListener {
                             break;
                     }
                 } catch (Exception ex) {
-                    errorMessage = ProgramError.getStackTrace(ex);;
+                    errorMessage = ProgramError.getStackTrace(ex);
+                    ;
                     data = new Object[]{Boolean.valueOf(false), errorMessage};
                 }
                 return "";
@@ -166,7 +182,24 @@ public class DatabaseLoader implements InternalFrameListener {
 
             @Override
             protected void done() {
-                spawnTableView(data);
+                if ((table != null) && ((boolean) data[0])) {
+                    table.view.table.setModel(((DataListTableModel) data[1]).getDtm());
+                    try {
+                        table.view.getFrame().setSelected(true);
+                        if (table.view.getFrame().isIcon()) {
+                            table.view.getFrame().setIcon(false);
+                        }
+                        table.view.getFrame().setSelected(true);
+                    } catch (PropertyVetoException ex) {
+
+                    }
+                    table.view.getFrame().requestFocus();
+
+                } else if ((table != null) && (!(boolean) data[0])) {
+                    JOptionPane.showMessageDialog(BaseWindow.baseFrame, data[1].toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    spawnTableView(data);
+                }
                 ld.dialog.dispose();
                 BaseWindow.progressBar.setIndeterminate(false);
             }
@@ -178,7 +211,7 @@ public class DatabaseLoader implements InternalFrameListener {
         boolean dbReady = ((Boolean) data[0]);
 
         if (dbReady) {
-            if (editableTable){
+            if (editableTable) {
                 DataListEditableController table = new DataListEditableController((DataListTableModel) data[1]);
                 Dimension desktopSize = BaseWindow.getDesktop().getSize();
                 Dimension jInternalFrameSize = table.view.getFrame().getSize();
@@ -237,12 +270,10 @@ public class DatabaseLoader implements InternalFrameListener {
     }
 
     public void internalFrameClosed(InternalFrameEvent e) {
-        try{
+        try {
             BaseWindow.windowMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
             BaseWindow.windowList.remove(e.getInternalFrame());
-            System.out.printf("Removal Success: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
-        } catch (Exception ex){
-            System.out.printf("Removal Failure: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 

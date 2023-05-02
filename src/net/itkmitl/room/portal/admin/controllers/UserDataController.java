@@ -156,8 +156,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
                     view.getFrame().dispose();
                 }
                 DatabaseLoader dbl = new DatabaseLoader();
-                dbl.databaseLoader(1, true);
-                dlec.view.getFrame().dispose();
+                dbl.databaseLoader(1, 99, "", true, dlec);
 
             }
         };
@@ -217,7 +216,6 @@ public class UserDataController implements ActionListener, InternalFrameListener
             } else if (view.activeSelect.getSelectedIndex() == 1) {
                 user.setActive(false);
             }
-            System.out.println(view.roleSelect.getSelectedIndex());
             switch (view.roleSelect.getSelectedIndex()) {
                 case 0:
                     user.setRole(EnumUserRole.STUDENT);

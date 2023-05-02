@@ -192,9 +192,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                     view.getFrame().dispose();
                 }
                 DatabaseLoader dbl = new DatabaseLoader();
-                dbl.databaseLoader(3, true);
-                dlec.view.getFrame().dispose();
-
+                dbl.databaseLoader(3, 99, "", true, dlec);
             }
         };
         worker.execute();

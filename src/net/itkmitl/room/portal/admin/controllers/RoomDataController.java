@@ -148,8 +148,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                     view.getFrame().dispose();
                 }
                 DatabaseLoader dbl = new DatabaseLoader();
-                dbl.databaseLoader(2, true);
-                dlec.view.getFrame().dispose();
+                dbl.databaseLoader(2, 99, "", true, dlec);
 
             }
         };

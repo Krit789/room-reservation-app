@@ -75,7 +75,7 @@ public class ReservationDataView {
         startTimeLabel = new JLabel("Start Time");
         startTimeHourField = new JSpinner(new SpinnerNumberModel(0, 0, 23, 1));
         startTimeHourField.setEditor(new JSpinner.NumberEditor(startTimeHourField, "00"));
-        startTimeMinuteField = new JSpinner(new SpinnerNumberModel(0, 0, 59, 1));
+        startTimeMinuteField = new JSpinner(new SpinnerNumberModel(0, 0, 59, 30));
         startTimeMinuteField.setEditor(new JSpinner.NumberEditor(startTimeMinuteField, "00"));
         timePanel.add(startTimeLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.2, 0, 0, new Insets(0, 10, 5, 5)).getGBC());
         timePanel.add(startTimeHourField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.4, 1, 0, new Insets(0, 30, 5, 5)).getGBC());
@@ -84,7 +84,7 @@ public class ReservationDataView {
         endTimeLabel = new JLabel("End Time");
         endTimeHourField = new JSpinner(new SpinnerNumberModel(23, 0, 23, 1));
         endTimeHourField.setEditor(new JSpinner.NumberEditor(endTimeHourField, "00"));
-        endTimeMinuteField = new JSpinner(new SpinnerNumberModel(59, 0, 59, 1));
+        endTimeMinuteField = new JSpinner(new SpinnerNumberModel(0, 0, 59, 30));
         endTimeMinuteField.setEditor(new JSpinner.NumberEditor(endTimeMinuteField, "00"));
         timePanel.add(endTimeLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.2, 0, 1, new Insets(0, 10, 5, 5)).getGBC());
         timePanel.add(endTimeHourField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.4, 1, 1, new Insets(0, 30, 5, 5)).getGBC());

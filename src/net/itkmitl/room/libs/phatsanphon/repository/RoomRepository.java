@@ -113,8 +113,8 @@ public class RoomRepository extends Repository<Room> {
         insert.insert("name", room.getName())
                 .insert("building", room.getBuilding())
                 .insert("capacity", room.getCapacity())
-                .insert("close_time", room.getCloseTime().toString())
-                .insert("open_time", room.getOpenTime().toString())
+                .insert("close_time", room.getCloseTime().getTime())
+                .insert("open_time", room.getOpenTime().getTime())
                 .insert("floor", room.getFloor())
                 .insert("state", room.getState())
                 .table("room");

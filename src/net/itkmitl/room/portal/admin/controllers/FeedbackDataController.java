@@ -186,8 +186,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                     view.getFrame().dispose();
                 }
                 DatabaseLoader dbl = new DatabaseLoader();
-                dbl.databaseLoader(4, true);
-                dlec.view.getFrame().dispose();
+                dbl.databaseLoader(4, 99, "", true, dlec);
 
             }
         };

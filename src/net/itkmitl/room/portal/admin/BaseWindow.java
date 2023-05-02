@@ -24,6 +24,7 @@ import javax.swing.event.InternalFrameListener;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 
 import net.itkmitl.room.GUIStarter;
+import net.itkmitl.room.portal.admin.components.OOBE.OOBEController;
 import net.itkmitl.room.portal.admin.controllers.AuthController;
 import net.itkmitl.room.portal.admin.controllers.OperationWindowController;
 import net.itkmitl.room.portal.admin.controllers.PreferenceWindowController;
@@ -203,6 +204,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         final PreferenceWindowView[] view = {null};
         SwingWorker worker = new SwingWorker() {
             LoadingDialog ld = new LoadingDialog();
+
             @Override
             protected String doInBackground() {
                 String errorMessage;
@@ -248,7 +250,6 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     }
 
 
-
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(aboutMenuItem1)) {
             new AboutDialog(baseFrame);
@@ -256,7 +257,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
             baseFrame.dispose();
             System.exit(0);
         } else if (e.getSource().equals(optionMenuItem3)) {
-            if (!isPreferenceOpen){
+            if (!isPreferenceOpen) {
                 spawnPreference();
             } else {
                 statusLabel.setText("You can only have one preferences window open at a time.");
@@ -267,10 +268,10 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
             GUIStarter.main(arguments);
         } else if (e.getSource().equals(windowCheckBoxMenuItem1)) {
             windowCheckBoxMenuItem1.setState(!autoCenterMainMenu);
-                autoCenterMainMenu = !autoCenterMainMenu;
-                if (autoCenterMainMenu) {
-                    Dimension desktopSize = desktop.getSize();
-                    Dimension jInternalFrameSize = mainMenu.getFrame().getSize();
+            autoCenterMainMenu = !autoCenterMainMenu;
+            if (autoCenterMainMenu) {
+                Dimension desktopSize = desktop.getSize();
+                Dimension jInternalFrameSize = mainMenu.getFrame().getSize();
                 mainMenu.getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
                         (desktopSize.height - jInternalFrameSize.height) / 2);
             }
@@ -294,8 +295,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
                 statusLabel.setText("All windows has been closed.");
 
             }
-        }
-        else if (e.getSource().equals(windowMenuItem2)) {
+        } else if (e.getSource().equals(windowMenuItem2)) {
             for (JInternalFrame i : desktop.getAllFrames()
             ) {
                 System.out.println(i.getTitle());
@@ -321,7 +321,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         JMenuItem newItem = new JMenuItem(e.getInternalFrame().getTitle());
         statusLabel.setText(e.getInternalFrame().getTitle() + " was opened.");
         e.getInternalFrame().requestFocus();
-        if (e.getInternalFrame().getTitle().equals("Preferences")){
+        if (e.getInternalFrame().getTitle().equals("Preferences")) {
             isPreferenceOpen = true;
         }
         windowList.put(e.getInternalFrame(), newItem);
@@ -333,7 +333,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     }
 
     public void internalFrameClosed(InternalFrameEvent e) {
-        if (e.getInternalFrame().getTitle().equals("Preferences")){
+        if (e.getInternalFrame().getTitle().equals("Preferences")) {
             isPreferenceOpen = false;
         }
         windowMenu.remove(windowList.get(e.getInternalFrame()));
@@ -352,28 +352,36 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     public void internalFrameDeactivated(InternalFrameEvent e) {
     }
 
-    public static JDesktopPane getDesktop(){
+    public static JDesktopPane getDesktop() {
         return desktop;
     }
 
     public static void main(String[] args) {
         try {
-            System.setProperty( "apple.laf.useScreenMenuBar", "true" );
-            System.setProperty( "apple.awt.application.name", "Laew Tae Hong" );
-            System.setProperty( "apple.awt.application.appearance", "system" );
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
+            System.setProperty("apple.awt.application.name", "Laew Tae Hong");
+            System.setProperty("apple.awt.application.appearance", "system");
             try {
                 UIManager.setLookAndFeel(new FlatIntelliJLaf());
             } catch (Exception ignored) {
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
             }
-        } catch (Exception ignored) {}
-        if (AuthController.authenticated){
-            new BaseWindow(); //start the application
-        } else {
-            new AuthController();
+        } catch (Exception ignored) {
         }
-    }
 
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if (AuthController.authenticated) {
+                    new BaseWindow(); //start the application
+                } else {
+                    new BaseWindow();
+//                    new AuthController();
+                }
+            }
+        });
+
+    }
 
 
 }
