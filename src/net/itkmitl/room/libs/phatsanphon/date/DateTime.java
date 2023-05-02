@@ -5,14 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateTime {
-    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private String rawDateTime;
     private Date dateTime;
     private static int timezone = 7;
 
-    public DateTime(String rawDateTime) {
-        this.rawDateTime = rawDateTime;
-        this.format();
+    public DateTime(long unixTime) {
+        this(new Date(unixTime));
     }
 
     public DateTime(Date date) {
@@ -33,24 +30,6 @@ public class DateTime {
     }
 
     public DateTime() {
-    }
-
-    private String replaceText() {
-        int countColon = rawDateTime.length() - rawDateTime.replace(":", "").length();
-        if (countColon != 2){
-            rawDateTime += ":00";
-        }
-        return rawDateTime.replace("T", " ");
-    }
-
-    private void format() {
-        try {
-            String dateTime = this.replaceText();
-            Date finalDateTime = sdf.parse(dateTime);
-            this.setDateTime(finalDateTime);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private Date getDateTime() {

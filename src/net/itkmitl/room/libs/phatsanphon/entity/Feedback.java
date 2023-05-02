@@ -27,7 +27,7 @@ public class Feedback extends Entity {
         this.setRoom(query.getValue("room_id").asInt());
         this.setComment(query.getValue("comment").asString());
         this.setRating(query.getValue("rating").asDouble());
-        this.setCreatedOn(query.getValue("created_on").asString());
+        this.setCreatedOn(query.getValue("created_on").asLong());
     }
 
     public int getId() {
@@ -72,8 +72,8 @@ public class Feedback extends Entity {
         this.createdOn = createdOn;
     }
 
-    private void setCreatedOn(String rawCreatedOn) {
-        this.setCreatedOn(new DateTime(rawCreatedOn));
+    private void setCreatedOn(long createdOn) {
+        this.setCreatedOn(new DateTime(createdOn));
     }
 
     public String getComment() {

@@ -11,17 +11,27 @@ public class FewMySQLValue {
     public String asString() {
         return this.val.toString();
     }
+
     public int asInt() {
         return Integer.parseInt(asString());
     }
+
     public double asDouble() {
         return Double.parseDouble(asString());
     }
+
     public boolean asBoolean() {
         return Boolean.parseBoolean(asString());
     }
-    public float asFloat(){ return Float.parseFloat(asString()); }
-    
+
+    public float asFloat() {
+        return Float.parseFloat(asString());
+    }
+
+    public long asLong() {
+        return Long.parseLong(asString());
+    }
+
     public Object getRaw() {
         return this.val;
     }

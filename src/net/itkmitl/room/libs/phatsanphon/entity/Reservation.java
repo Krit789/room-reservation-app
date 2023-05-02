@@ -27,9 +27,9 @@ public class Reservation extends Entity {
         this.setUser(query.getValue("user_id").asInt());
         this.setRoom(query.getValue("room_id").asInt());
         this.setReason(query.getValue("reason").asString());
-        this.setStartTime(query.getValue("start_time").asString());
-        this.setEndTime(query.getValue("end_time").asString());
-        this.setReservationTime(query.getValue("reservation_time").asString());
+        this.setStartTime(query.getValue("start_time").asLong());
+        this.setEndTime(query.getValue("end_time").asLong());
+        this.setReservationTime(query.getValue("reservation_time").asLong());
         this.setCancelled(query.getValue("is_cancelled").asBoolean());
     }
 
@@ -83,8 +83,8 @@ public class Reservation extends Entity {
         this.startTime = startTime;
     }
 
-    private void setStartTime(String rawStartTime) {
-        this.setStartTime(new DateTime(rawStartTime));
+    private void setStartTime(long startTime) {
+        this.setStartTime(new DateTime(startTime));
     }
 
     public DateTime getEndTime() {
@@ -95,8 +95,8 @@ public class Reservation extends Entity {
         this.endTime = endTime;
     }
 
-    private void setEndTime(String rawEndTime) {
-        this.setEndTime(new DateTime(rawEndTime));
+    private void setEndTime(long endTime) {
+        this.setEndTime(new DateTime(endTime));
     }
 
     public DateTime getReservationTime() {
@@ -107,8 +107,8 @@ public class Reservation extends Entity {
         this.reservationTime = reservationTime;
     }
 
-    private void setReservationTime(String rawReservationTime) {
-        this.setReservationTime(new DateTime(rawReservationTime));
+    private void setReservationTime(long reservationTime) {
+        this.setReservationTime(new DateTime(reservationTime));
     }
 
     public boolean isCancelled() {
