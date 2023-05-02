@@ -4,7 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LeftSelectorBox extends JButton {
-    int boxID;
+    public int boxID;
+    public String type = "Select Box ";
     public LeftSelectorBox(String name, int ID){
         super(name);
         boxID = ID;

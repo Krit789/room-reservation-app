@@ -2,10 +2,13 @@ package net.itkmitl.room.portal.components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class LeftSelectorPanel extends JPanel {
     public JLabel parentCategory;
     private JButton backButton;
+    public ArrayList<LeftSelectorBox> boxHolder = new ArrayList<LeftSelectorBox>();
+
     public LeftSelectorPanel(){
         super();
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -28,6 +31,7 @@ public class LeftSelectorPanel extends JPanel {
         for(int i = 0; i < 5; i++) {
             LeftSelectorBox box = new LeftSelectorBox("Test Faculty " + i, i);
             this.add(box);
+            boxHolder.add(box);
         }
         //would be in a loop for all component to add
 
