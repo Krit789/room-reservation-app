@@ -21,7 +21,7 @@ public class FewQuery {
         this.fields = new HashMap<>();
     }
 
-    public FewQuery query(FewMySQLBuilder query) {
+    public FewQuery query(FewMySQLBuilder query) throws Exception{
         try {
             PreparedStatement statement = this.connection.prepareStatement(
                     query.builder(),
@@ -47,11 +47,11 @@ public class FewQuery {
 
         } catch (Exception e) {
             System.out.println("ERROR: Unable to prepare query (" + e.getMessage() + ")");
-            return null;
+            throw e;
         }
     }
 
-    public FewQuery unsafeQuery(String query) {
+    public FewQuery unsafeQuery(String query) throws Exception {
         try {
         	PreparedStatement statement = this.connection.prepareStatement(
                     query,
@@ -74,7 +74,7 @@ public class FewQuery {
             return this;
         } catch (Exception e) {
             System.out.println("ERROR: Unable to prepare query (" + e.getMessage() + ")");
-            return null;
+            throw e;
         } 
     }
 

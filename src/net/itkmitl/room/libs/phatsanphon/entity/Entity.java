@@ -7,17 +7,20 @@ import net.itkmitl.room.libs.peeranat.query.FewQuery;
  * Entity
  */
 public abstract class Entity {
-    private final FewQuery db = RVDB.getDB();
+    private final FewQuery db;
 
-    public Entity(FewQuery query) {
+    public Entity(FewQuery query) throws Exception {
+        db = RVDB.getDB();
         this.processQuery(query);
     };
 
-    public Entity() {}
+    public Entity() throws Exception {
+        db = RVDB.getDB();
+    }
 
     protected FewQuery getDB() {
         return this.db;
     }
 
-    public abstract void processQuery(FewQuery query);
+    public abstract void processQuery(FewQuery query) throws Exception;
 }

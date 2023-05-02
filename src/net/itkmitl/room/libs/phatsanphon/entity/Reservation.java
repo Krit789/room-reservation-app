@@ -15,22 +15,26 @@ public class Reservation extends Entity {
     private DateTime reservationTime;
     private boolean isCancelled;
 
-    public Reservation(FewQuery query) {
+    public Reservation(FewQuery query) throws Exception {
         super(query);
     }
 
-    public Reservation() {}
+    public Reservation() throws Exception {}
 
     @Override
-    public void processQuery(FewQuery query) {
-        this.setId(query.getValue("id").asInt());
-        this.setUser(query.getValue("user_id").asInt());
-        this.setRoom(query.getValue("room_id").asInt());
-        this.setReason(query.getValue("reason").asString());
-        this.setStartTime(query.getValue("start_time").asLong());
-        this.setEndTime(query.getValue("end_time").asLong());
-        this.setReservationTime(query.getValue("reservation_time").asLong());
-        this.setCancelled(query.getValue("is_cancelled").asBoolean());
+    public void processQuery(FewQuery query) throws Exception {
+        try {
+            this.setId(query.getValue("id").asInt());
+            this.setUser(query.getValue("user_id").asInt());
+            this.setRoom(query.getValue("room_id").asInt());
+            this.setReason(query.getValue("reason").asString());
+            this.setStartTime(query.getValue("start_time").asLong());
+            this.setEndTime(query.getValue("end_time").asLong());
+            this.setReservationTime(query.getValue("reservation_time").asLong());
+            this.setCancelled(query.getValue("is_cancelled").asBoolean());
+        } catch (Exception e) {
+             throw e;
+        }
     }
 
     public int getId() {
@@ -49,7 +53,7 @@ public class Reservation extends Entity {
         this.user = user;
     }
 
-    public void setUser(int userId) {
+    public void setUser(int userId) throws Exception {
         User user = new UserRepository(this.getDB()).getUserById(userId);
         this.setUser(user);
     }
@@ -62,8 +66,12 @@ public class Reservation extends Entity {
         this.room = room;
     }
 
-    public void setRoom(int roomId) {
-        Room room = new RoomRepository(this.getDB()).getRoomById(roomId);
+    public void setRoom(int roomId) throws Exception {
+        try {
+            Room room = new RoomRepository(this.getDB()).getRoomById(roomId);
+        } catch (Exception e){
+            throw e;
+        }
         this.setRoom(room);
     }
 

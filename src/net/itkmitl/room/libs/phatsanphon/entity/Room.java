@@ -17,11 +17,11 @@ public class Room extends Entity {
 
     private EnumRoomState state;
 
-    public Room(FewQuery query) {
+    public Room(FewQuery query) throws Exception {
         super(query);
     }
 
-    public Room() {
+    public Room() throws Exception {
 
     }
 

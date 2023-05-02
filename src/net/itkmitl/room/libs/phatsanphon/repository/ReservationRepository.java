@@ -23,23 +23,21 @@ public class ReservationRepository extends Repository<Reservation> {
     /**
      * @return ArrayList<Reservation>
      */
-    public ArrayList<Reservation> getReservations() {
+    public ArrayList<Reservation> getReservations() throws Exception{
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.select("*").table("reservation");
-
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Reservation> getReservations(int limit) {
+    public ArrayList<Reservation> getReservations(int limit) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.select("*").limit(limit).table("reservation");
-
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Reservation> getReservations(ReservationQuery queryBy, String query) {
+    public ArrayList<Reservation> getReservations(ReservationQuery queryBy, String query) throws Exception{
         if (queryBy == ReservationQuery.ID) {
             Reservation data = this.getReservationById(Integer.parseInt(query));
 
@@ -62,14 +60,13 @@ public class ReservationRepository extends Repository<Reservation> {
      * @param id int
      * @return Reservation
      */
-    public Reservation getReservationById(int id) {
+    public Reservation getReservationById(int id) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("id", id)
                 .select("*")
                 .limit(1)
                 .table("reservation");
-
         return this.map(this.getQuery().query(select));
     }
 
@@ -77,13 +74,12 @@ public class ReservationRepository extends Repository<Reservation> {
      * @param roomId int
      * @return ArrayList<Reservation>
      */
-    public ArrayList<Reservation> getReservationsByRoomId(int roomId) {
+    public ArrayList<Reservation> getReservationsByRoomId(int roomId) throws Exception{
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("room_id", roomId)
                 .select("*")
                 .table("reservation");
-
         return this.maps(this.getQuery().query(select));
     }
 
@@ -91,17 +87,16 @@ public class ReservationRepository extends Repository<Reservation> {
      * @param userId int
      * @return ArrayList<Reservation>
      */
-    public ArrayList<Reservation> getReservationsByUserId(int userId) {
+    public ArrayList<Reservation> getReservationsByUserId(int userId) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("user_id", userId)
                 .select("*")
                 .table("reservation");
-
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Reservation> getReservationsByReason(String reason) {
+    public ArrayList<Reservation> getReservationsByReason(String reason)  throws Exception {
         String query = String.format("SELECT * FROM `reservation` WHERE reason LIKE '%%%s%%'", reason);
 
         return this.maps(this.getQuery().unsafeQuery(query));
@@ -110,7 +105,7 @@ public class ReservationRepository extends Repository<Reservation> {
     /**
      * @param id int
      */
-    public void deleteReservationById(int id) {
+    public void deleteReservationById(int id)  throws Exception {
         FewDeleteMySQL delete = new FewDeleteMySQL();
 
         delete.where("id", id).table("reservation");
@@ -122,7 +117,7 @@ public class ReservationRepository extends Repository<Reservation> {
      * @param reservation Reservation
      * @return boolean
      */
-    public boolean createReservation(Reservation reservation) {
+    public boolean createReservation(Reservation reservation) throws Exception {
         FewInsertMySQL insert = new FewInsertMySQL();
 
         if (reservation.getUser() == null && reservation.getRoom() == null) {
@@ -144,7 +139,7 @@ public class ReservationRepository extends Repository<Reservation> {
         return true;
     }
 
-    public void updateReservation(Reservation reservation) {
+    public void updateReservation(Reservation reservation) throws Exception {
         FewUpdateMySQL update = new FewUpdateMySQL();
 
         if (reservation.getId() == 0) {
@@ -157,7 +152,7 @@ public class ReservationRepository extends Repository<Reservation> {
                 .set("reason", reservation.getReason())
                 .set("start_time", reservation.getStartTime().getTime())
                 .set("end_time", reservation.getEndTime().getTime())
-                .set("reservation_time", System.currentTimeMillis())
+                .set("reservation_time", System.currentTimeMillis() / 1000L)
                 .set("is_cancelled", reservation.isCancelled() ? 1 : 0)
                 .table("reservation");
 

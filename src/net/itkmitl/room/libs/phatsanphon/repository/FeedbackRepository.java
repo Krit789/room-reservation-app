@@ -12,7 +12,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         super(Feedback.class, query);
     }
 
-    public ArrayList<Feedback> getFeedbacks() {
+    public ArrayList<Feedback> getFeedbacks() throws Exception{
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.select("*").table("feedback");
@@ -20,7 +20,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Feedback> getFeedbacks(int limit) {
+    public ArrayList<Feedback> getFeedbacks(int limit) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.select("*").limit(limit).table("feedback");
@@ -29,7 +29,7 @@ public class FeedbackRepository extends Repository<Feedback> {
     }
 
 
-    public ArrayList<Feedback> getFeedbacks(FeedbackQuery queryBy, String query) {
+    public ArrayList<Feedback> getFeedbacks(FeedbackQuery queryBy, String query) throws Exception {
         if (queryBy == FeedbackQuery.ID) {
             Feedback data = this.getFeedbackById(Integer.parseInt(query));
 
@@ -50,7 +50,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         return null;
     }
 
-    public Feedback getFeedbackById(int id) {
+    public Feedback getFeedbackById(int id) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("id", id)
@@ -60,7 +60,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         return this.map(this.getQuery().query(select));
     }
 
-    public ArrayList<Feedback> getFeedbacksByUserId(int userId) {
+    public ArrayList<Feedback> getFeedbacksByUserId(int userId) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("user_id", userId)
@@ -70,7 +70,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Feedback> getFeedbacksByRoomId(int roomId) {
+    public ArrayList<Feedback> getFeedbacksByRoomId(int roomId) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("user_id", roomId)
@@ -80,30 +80,30 @@ public class FeedbackRepository extends Repository<Feedback> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Feedback> getFeedbacksByComment(String comment) {
+    public ArrayList<Feedback> getFeedbacksByComment(String comment) throws Exception {
         String query = String.format("SELECT * FROM `feedback` WHERE comment LIKE '%%%s%%'", comment);
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
-    public ArrayList<Feedback> getFeedbacksByRating(String rating) {
+    public ArrayList<Feedback> getFeedbacksByRating(String rating) throws Exception {
         String query = String.format("SELECT * FROM `feedback` WHERE rating LIKE '%%%s'", rating);
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
-    public void createFeedback(Feedback feedback) {
+    public void createFeedback(Feedback feedback) throws Exception {
         FewInsertMySQL insert = new FewInsertMySQL();
 
         insert.insert("user_id", feedback.getUser().getId())
                 .insert("room_id", feedback.getRoom().getId())
                 .insert("comment", feedback.getComment())
-                .insert("created_on", System.currentTimeMillis())
+                .insert("created_on", System.currentTimeMillis() / 1000L)
                 .insert("rating", feedback.getRating())
                 .table("feedback");
 
         this.getQuery().query(insert);
     }
 
-    public void updateFeedback(Feedback feedback) {
+    public void updateFeedback(Feedback feedback) throws Exception {
         FewUpdateMySQL update = new FewUpdateMySQL();
 
         if (feedback.getId() == 0) {
@@ -120,7 +120,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         this.getQuery().query(update);
     }
 
-    public void deleteFeedbackById(int id) {
+    public void deleteFeedbackById(int id) throws Exception {
         FewDeleteMySQL delete = new FewDeleteMySQL();
 
         delete.where("id", id).table("feedback");

@@ -42,49 +42,53 @@ public class ReservationDataController implements ActionListener, InternalFrameL
         this.mode = mode;
         this.dlec = dlec;
         view = new ReservationDataView();
-        reservation = new Reservation();
-        switch (mode) {
-            case 0: // Just Load
-                view.getFrame().setTitle("View Reservation");
-                view.pageTitle.setText("Reservation Records Viewer");
-                view.getFrame().pack();
-                view.saveButton.addActionListener(this);
-                view.cancelButton.addActionListener(this);
-                databaseLoader(reservationID);
-                break;
-            case 1: // Update
-                view.getFrame().setTitle("Update Reservation");
-                view.pageTitle.setText("Reservation Records Update");
-                view.getFrame().pack();
-                view.saveButton.addActionListener(this);
-                view.cancelButton.addActionListener(this);
-                view.roomIDSelect.addItemListener(this);
-                view.startTimeHourField.addChangeListener(this);
-                view.endTimeHourField.addChangeListener(this);
-                view.startTimeMinuteField.addChangeListener(this);
-                view.endTimeMinuteField.addChangeListener(this);
-                databaseLoader(reservationID);
-                break;
-            case 2: // Create
-                view.saveButton.addActionListener(this);
-                view.cancelButton.addActionListener(this);
-                view.getFrame().setTitle("Reservation Creation");
-                view.pageTitle.setText("Reservation Records Creator");
-                view.pageSubtitle.setText("Create new reservation records");
-                view.saveButton.setText("Create");
-                view.roomIDSelect.addItemListener(this);
-                view.startTimeHourField.addChangeListener(this);
-                view.endTimeHourField.addChangeListener(this);
-                view.startTimeMinuteField.addChangeListener(this);
-                view.endTimeMinuteField.addChangeListener(this);
-                dataPopulator();
-                break;
-            case 3: // Delete
-                reservation.setId(reservationID);
-                databaseCommiter(reservation, 1);
-                break;
+        try {
+            reservation = new Reservation();
+            switch (mode) {
+                case 0: // Just Load
+                    view.getFrame().setTitle("View Reservation");
+                    view.pageTitle.setText("Reservation Records Viewer");
+                    view.getFrame().pack();
+                    view.saveButton.addActionListener(this);
+                    view.cancelButton.addActionListener(this);
+                    databaseLoader(reservationID);
+                    break;
+                case 1: // Update
+                    view.getFrame().setTitle("Update Reservation");
+                    view.pageTitle.setText("Reservation Records Update");
+                    view.getFrame().pack();
+                    view.saveButton.addActionListener(this);
+                    view.cancelButton.addActionListener(this);
+                    view.roomIDSelect.addItemListener(this);
+                    view.startTimeHourField.addChangeListener(this);
+                    view.endTimeHourField.addChangeListener(this);
+                    view.startTimeMinuteField.addChangeListener(this);
+                    view.endTimeMinuteField.addChangeListener(this);
+                    databaseLoader(reservationID);
+                    break;
+                case 2: // Create
+                    view.saveButton.addActionListener(this);
+                    view.cancelButton.addActionListener(this);
+                    view.getFrame().setTitle("Reservation Creation");
+                    view.pageTitle.setText("Reservation Records Creator");
+                    view.pageSubtitle.setText("Create new reservation records");
+                    view.saveButton.setText("Create");
+                    view.roomIDSelect.addItemListener(this);
+                    view.startTimeHourField.addChangeListener(this);
+                    view.endTimeHourField.addChangeListener(this);
+                    view.startTimeMinuteField.addChangeListener(this);
+                    view.endTimeMinuteField.addChangeListener(this);
+                    dataPopulator();
+                    break;
+                case 3: // Delete
+                    reservation.setId(reservationID);
+                    databaseCommiter(reservation, 1);
+                    break;
+            }
+            view.getFrame().addInternalFrameListener(this);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(BaseWindow.baseFrame, ex.toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
         }
-        view.getFrame().addInternalFrameListener(this);
 
     }
 
@@ -98,12 +102,12 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
 
-                FewQuery db = RVDB.getDB();
-                ReservationRepository reservationRepository = new ReservationRepository(db);
-                UserRepository userRepository = new UserRepository(db);
-                RoomRepository roomRepository = new RoomRepository(db);
 
                 try {
+                    FewQuery db = RVDB.getDB();
+                    ReservationRepository reservationRepository = new ReservationRepository(db);
+                    UserRepository userRepository = new UserRepository(db);
+                    RoomRepository roomRepository = new RoomRepository(db);
                     Reservation myReservation = reservationRepository.getReservationById(reservationID);
                     switch (mode) {
                         case 0: // View Only
@@ -149,36 +153,40 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
-                FewQuery db = RVDB.getDB();
-                ReservationRepository myReservation = new ReservationRepository(db);
-                switch (mode) {
-                    case 0: // Update
-                        try {
-                            myReservation.updateReservation(reservation);
-                            data = new Object[]{true, myReservation};
-                        } catch (Exception ex) {
-                            errorMessage = ProgramError.getStackTrace(ex);
-                            data = new Object[]{false, errorMessage};
-                        }
-                        break;
-                    case 1: // Delete
-                        try {
-                            myReservation.deleteReservationById(reservation.getId());
-                            data = new Object[]{true, myReservation};
-                        } catch (Exception ex) {
-                            errorMessage = ProgramError.getStackTrace(ex);
-                            data = new Object[]{false, errorMessage};
-                        }
-                        break;
-                    case 2: // Create
-                        try {
-                            myReservation.createReservation(reservation);
-                            data = new Object[]{true, myReservation};
-                        } catch (Exception ex) {
-                            errorMessage = ProgramError.getStackTrace(ex);
-                            data = new Object[]{false, errorMessage};
-                        }
-                        break;
+                try {
+                    FewQuery db = RVDB.getDB();
+                    ReservationRepository myReservation = new ReservationRepository(db);
+                    switch (mode) {
+                        case 0: // Update
+                            try {
+                                myReservation.updateReservation(reservation);
+                                data = new Object[]{true, myReservation};
+                            } catch (Exception ex) {
+                                errorMessage = ProgramError.getStackTrace(ex);
+                                data = new Object[]{false, errorMessage};
+                            }
+                            break;
+                        case 1: // Delete
+                            try {
+                                myReservation.deleteReservationById(reservation.getId());
+                                data = new Object[]{true, myReservation};
+                            } catch (Exception ex) {
+                                errorMessage = ProgramError.getStackTrace(ex);
+                                data = new Object[]{false, errorMessage};
+                            }
+                            break;
+                        case 2: // Create
+                            try {
+                                myReservation.createReservation(reservation);
+                                data = new Object[]{true, myReservation};
+                            } catch (Exception ex) {
+                                errorMessage = ProgramError.getStackTrace(ex);
+                                data = new Object[]{false, errorMessage};
+                            }
+                            break;
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
                 }
 
                 return "";
@@ -208,11 +216,11 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
 
-                FewQuery db = RVDB.getDB();
-                UserRepository userRepository = new UserRepository(db);
-                RoomRepository roomRepository = new RoomRepository(db);
 
                 try {
+                    FewQuery db = RVDB.getDB();
+                    UserRepository userRepository = new UserRepository(db);
+                    RoomRepository roomRepository = new RoomRepository(db);
                     ArrayList<User> userList = userRepository.getUsers();
                     ArrayList<Room> roomList = roomRepository.getRooms();
                     for (User u : userList) {

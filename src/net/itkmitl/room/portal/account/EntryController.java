@@ -1,5 +1,6 @@
 package net.itkmitl.room.portal.account;
 
+import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.portal.Controller;
 import net.itkmitl.room.portal.account.components.LoginPanel;
@@ -51,12 +52,16 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     private void RegisterDetail(RegisterPanel reg){
         //temporary placeholder
-        myUser = new User();
-        myUser.setEmail(reg.getEmail());
-        myUser.setPasswordHash(reg.getPassword());
-        myUser.setFirstname(reg.getFirstName());
-        myUser.setLastname(reg.getLastName());
-        myUser.setTelephoneNumber(reg.getTelephone());
+        try {
+            myUser = new User();
+            myUser.setEmail(reg.getEmail());
+            myUser.setPasswordHash(reg.getPassword());
+            myUser.setFirstname(reg.getFirstName());
+            myUser.setLastname(reg.getLastName());
+            myUser.setTelephoneNumber(reg.getTelephone());
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void getLoginDetail(LoginPanel login){

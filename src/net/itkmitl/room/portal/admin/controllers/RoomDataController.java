@@ -29,40 +29,44 @@ public class RoomDataController implements ActionListener, InternalFrameListener
     public RoomDataController(int mode, int roomID, DataListEditableController dlec) {
         this.mode = mode;
         this.dlec = dlec;
-        view = new RoomDataView();
-        room = new Room();
-        switch (mode) {
-            case 0: // Just Load
-                view.getFrame().setTitle("View Room");
-                view.pageTitle.setText("Room Records Viewer");
-                view.getFrame().pack();
-                view.saveButton.addActionListener(this);
-                view.cancelButton.addActionListener(this);
-                databaseLoader(roomID);
-                break;
-            case 1: // Update
-                view.getFrame().setTitle("Update Room");
-                view.pageTitle.setText("Room Records Update");
-                view.getFrame().pack();
-                view.saveButton.addActionListener(this);
-                view.cancelButton.addActionListener(this);
-                databaseLoader(roomID);
-                break;
-            case 2: // Create
-                view.saveButton.addActionListener(this);
-                view.cancelButton.addActionListener(this);
-                view.getFrame().setTitle("Room Creation");
-                view.pageTitle.setText("Room Records Creator");
-                view.pageSubtitle.setText("Create new room records");
-                view.saveButton.setText("Create");
-                view.getFrame().pack();
-                break;
-            case 3: // Delete
-                room.setId(roomID);
-                databaseCommiter(room, 1);
-                break;
+        try {
+            view = new RoomDataView();
+            room = new Room();
+            switch (mode) {
+                case 0: // Just Load
+                    view.getFrame().setTitle("View Room");
+                    view.pageTitle.setText("Room Records Viewer");
+                    view.getFrame().pack();
+                    view.saveButton.addActionListener(this);
+                    view.cancelButton.addActionListener(this);
+                    databaseLoader(roomID);
+                    break;
+                case 1: // Update
+                    view.getFrame().setTitle("Update Room");
+                    view.pageTitle.setText("Room Records Update");
+                    view.getFrame().pack();
+                    view.saveButton.addActionListener(this);
+                    view.cancelButton.addActionListener(this);
+                    databaseLoader(roomID);
+                    break;
+                case 2: // Create
+                    view.saveButton.addActionListener(this);
+                    view.cancelButton.addActionListener(this);
+                    view.getFrame().setTitle("Room Creation");
+                    view.pageTitle.setText("Room Records Creator");
+                    view.pageSubtitle.setText("Create new room records");
+                    view.saveButton.setText("Create");
+                    view.getFrame().pack();
+                    break;
+                case 3: // Delete
+                    room.setId(roomID);
+                    databaseCommiter(room, 1);
+                    break;
+            }
+            view.getFrame().addInternalFrameListener(this);
+        } catch (Exception ex){
+            JOptionPane.showMessageDialog(BaseWindow.baseFrame, ex.getMessage(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
         }
-        view.getFrame().addInternalFrameListener(this);
 
     }
 
@@ -75,8 +79,8 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
-                FewQuery db = RVDB.getDB();
                 try {
+                    FewQuery db = RVDB.getDB();
                     Room myRoom = new RoomRepository(db).getRoomById(roomID);
                     data = new Object[]{true, myRoom};
                 } catch (Exception ex) {
@@ -105,36 +109,40 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
-                FewQuery db = RVDB.getDB();
-                RoomRepository myRoom = new RoomRepository(db);
-                switch (mode) {
-                    case 0: // Update
-                        try {
-                            myRoom.updateRoom(room);
-                            data = new Object[]{true, myRoom};
-                        } catch (Exception ex) {
-                            errorMessage = ProgramError.getStackTrace(ex);
-                            data = new Object[]{false, errorMessage};
-                        }
-                        break;
-                    case 1: // Delete
-                        try {
-                            myRoom.deleteRoomById(room.getId());
-                            data = new Object[]{true, myRoom};
-                        } catch (Exception ex) {
-                            errorMessage = ProgramError.getStackTrace(ex);
-                            data = new Object[]{false, errorMessage};
-                        }
-                        break;
-                    case 2: // Create
-                        try {
-                            myRoom.createRoom(room);
-                            data = new Object[]{true, myRoom};
-                        } catch (Exception ex) {
-                            errorMessage = ProgramError.getStackTrace(ex);
-                            data = new Object[]{false, errorMessage};
-                        }
-                        break;
+                try {
+                    FewQuery db = RVDB.getDB();
+                    RoomRepository myRoom = new RoomRepository(db);
+                    switch (mode) {
+                        case 0: // Update
+                            try {
+                                myRoom.updateRoom(room);
+                                data = new Object[]{true, myRoom};
+                            } catch (Exception ex) {
+                                errorMessage = ProgramError.getStackTrace(ex);
+                                data = new Object[]{false, errorMessage};
+                            }
+                            break;
+                        case 1: // Delete
+                            try {
+                                myRoom.deleteRoomById(room.getId());
+                                data = new Object[]{true, myRoom};
+                            } catch (Exception ex) {
+                                errorMessage = ProgramError.getStackTrace(ex);
+                                data = new Object[]{false, errorMessage};
+                            }
+                            break;
+                        case 2: // Create
+                            try {
+                                myRoom.createRoom(room);
+                                data = new Object[]{true, myRoom};
+                            } catch (Exception ex) {
+                                errorMessage = ProgramError.getStackTrace(ex);
+                                data = new Object[]{false, errorMessage};
+                            }
+                            break;
+                    }
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(BaseWindow.baseFrame, ex.toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
                 }
 
                 return "";

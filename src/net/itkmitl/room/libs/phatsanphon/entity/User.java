@@ -16,11 +16,11 @@ public class User extends Entity {
     private DateTime createdOn;
     private EnumUserRole role;
 
-    public User(FewQuery query) {
+    public User(FewQuery query) throws Exception {
         super(query);
     }
 
-    public User() {
+    public User()  throws Exception{
 
     }
 

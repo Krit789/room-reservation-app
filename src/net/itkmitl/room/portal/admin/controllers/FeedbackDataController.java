@@ -39,45 +39,49 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
     private final ArrayList<RoomComboBoxModel> roomArrayList = new ArrayList<>();
     private final DataListEditableController dlec;
 
-    public FeedbackDataController(int mode, int feedbackID, DataListEditableController dlec) {
+    public FeedbackDataController(int mode, int feedbackID, DataListEditableController dlec){
         this.mode = mode;
         this.dlec = dlec;
         view = new FeedbackDataView();
-        feedback = new Feedback();
-        switch (mode) {
-            case 0: // Just Load
-                view.getFrame().setTitle("View Feedback");
-                view.pageTitle.setText("Feedback Records Viewer");
-                view.getFrame().pack();
-                view.saveButton.addActionListener(this);
-                view.cancelButton.addActionListener(this);
-                databaseLoader(feedbackID);
-                break;
-            case 1: // Update
-                view.getFrame().setTitle("Update Feedback");
-                view.pageTitle.setText("Feedback Records Update");
-                view.getFrame().pack();
-                view.saveButton.addActionListener(this);
-                view.cancelButton.addActionListener(this);
-                databaseLoader(feedbackID);
-                break;
-            case 2: // Create
-                view.saveButton.addActionListener(this);
-                view.cancelButton.addActionListener(this);
-                view.getFrame().setTitle("Feedback Creation");
-                view.pageTitle.setText("Feedback Records Creator");
-                view.pageSubtitle.setText("Create new feedback records");
-                view.saveButton.setText("Create");
-                dataPopulator();
-                break;
-            case 3: // Delete
-                feedback.setId(feedbackID);
-                databaseCommiter(feedback, 1);
-                break;
+        try {
+            feedback = new Feedback();
+            switch (mode) {
+                case 0: // Just Load
+                    view.getFrame().setTitle("View Feedback");
+                    view.pageTitle.setText("Feedback Records Viewer");
+                    view.getFrame().pack();
+                    view.saveButton.addActionListener(this);
+                    view.cancelButton.addActionListener(this);
+                    databaseLoader(feedbackID);
+                    break;
+                case 1: // Update
+                    view.getFrame().setTitle("Update Feedback");
+                    view.pageTitle.setText("Feedback Records Update");
+                    view.getFrame().pack();
+                    view.saveButton.addActionListener(this);
+                    view.cancelButton.addActionListener(this);
+                    databaseLoader(feedbackID);
+                    break;
+                case 2: // Create
+                    view.saveButton.addActionListener(this);
+                    view.cancelButton.addActionListener(this);
+                    view.getFrame().setTitle("Feedback Creation");
+                    view.pageTitle.setText("Feedback Records Creator");
+                    view.pageSubtitle.setText("Create new feedback records");
+                    view.saveButton.setText("Create");
+                    dataPopulator();
+                    break;
+                case 3: // Delete
+                    feedback.setId(feedbackID);
+                    databaseCommiter(feedback, 1);
+                    break;
+            }
+            view.ratingSpinner.addChangeListener(this);
+            view.ratingSlider.addChangeListener(this);
+            view.getFrame().addInternalFrameListener(this);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
         }
-        view.ratingSpinner.addChangeListener(this);
-        view.ratingSlider.addChangeListener(this);
-        view.getFrame().addInternalFrameListener(this);
 
     }
 
@@ -90,13 +94,11 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
-
-                FewQuery db = RVDB.getDB();
-                FeedbackRepository feedbackRepository = new FeedbackRepository(db);
-                UserRepository userRepository = new UserRepository(db);
-                RoomRepository roomRepository = new RoomRepository(db);
-
                 try {
+                    FewQuery db = RVDB.getDB();
+                    FeedbackRepository feedbackRepository = new FeedbackRepository(db);
+                    UserRepository userRepository = new UserRepository(db);
+                    RoomRepository roomRepository = new RoomRepository(db);
                     Feedback myFeedback = feedbackRepository.getFeedbackById(reservationID);
                     switch (mode) {
                         case 0: // View Only
@@ -142,37 +144,27 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
-                FewQuery db = RVDB.getDB();
-                FeedbackRepository myFeedback = new FeedbackRepository(db);
-
-                switch (mode) {
-                    case 0: // Update
-                        try {
+                try {
+                    FewQuery db = RVDB.getDB();
+                    FeedbackRepository myFeedback = new FeedbackRepository(db);
+                    switch (mode) {
+                        case 0: // Update
                             myFeedback.updateFeedback(feedback);
                             data = new Object[]{true, myFeedback};
-                        } catch (Exception ex) {
-                            errorMessage = ProgramError.getStackTrace(ex);
-                            data = new Object[]{false, errorMessage};
-                        }
-                        break;
-                    case 1: // Delete
-                        try {
+                            break;
+                        case 1: // Delete
                             myFeedback.deleteFeedbackById(feedback.getId());
                             data = new Object[]{true, myFeedback};
-                        } catch (Exception ex) {
-                            errorMessage = ProgramError.getStackTrace(ex);
-                            data = new Object[]{false, errorMessage};
-                        }
-                        break;
-                    case 2: // Create
-                        try {
+                            break;
+                        case 2: // Create
                             myFeedback.createFeedback(feedback);
                             data = new Object[]{true, myFeedback};
-                        } catch (Exception ex) {
-                            errorMessage = ProgramError.getStackTrace(ex);
-                            data = new Object[]{false, errorMessage};
-                        }
-                        break;
+                            break;
+                    }
+                } catch (Exception ex) {
+                    errorMessage = ProgramError.getStackTrace(ex);
+                    data = new Object[]{false, errorMessage};
+                    JOptionPane.showMessageDialog(BaseWindow.baseFrame, ex.toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
                 }
 
                 return "";
@@ -202,12 +194,10 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
-
-                FewQuery db = RVDB.getDB();
-                UserRepository userRepository = new UserRepository(db);
-                RoomRepository roomRepository = new RoomRepository(db);
-
                 try {
+                    FewQuery db = RVDB.getDB();
+                    UserRepository userRepository = new UserRepository(db);
+                    RoomRepository roomRepository = new RoomRepository(db);
                     ArrayList<User> userList = userRepository.getUsers();
                     ArrayList<Room> roomList = roomRepository.getRooms();
                     for (User u : userList) {

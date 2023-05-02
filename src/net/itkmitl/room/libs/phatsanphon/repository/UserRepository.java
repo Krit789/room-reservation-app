@@ -20,7 +20,7 @@ public class UserRepository extends Repository<User> {
     /*
      * Get all users
      */
-    public ArrayList<User> getUsers() {
+    public ArrayList<User> getUsers() throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.select("*").table("user");
@@ -31,7 +31,7 @@ public class UserRepository extends Repository<User> {
     /*
      * Get all users with limit
      */
-    public ArrayList<User> getUsers(int limit) {
+    public ArrayList<User> getUsers(int limit) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.select("*").limit(limit).table("user");
@@ -39,7 +39,7 @@ public class UserRepository extends Repository<User> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<User> getUsers(UserQuery queryBy, String query) {
+    public ArrayList<User> getUsers(UserQuery queryBy, String query) throws Exception {
         if (queryBy == UserQuery.ID) {
             User data = this.getUserById(Integer.parseInt(query));
 
@@ -67,7 +67,7 @@ public class UserRepository extends Repository<User> {
     /*
      * Get user by id
      */
-    public User getUserById(int id) {
+    public User getUserById(int id) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.select("*")
@@ -81,25 +81,25 @@ public class UserRepository extends Repository<User> {
     /*
      * Get user by email
      */
-    public User getUserByEmail(String email) {
+    public User getUserByEmail(String email) throws Exception {
         String query = String.format("SELECT * FROM `user` WHERE email LIKE '%%%s%%'", email);
 
         return this.map(this.getQuery().unsafeQuery(query));
     }
 
-    public ArrayList<User> getUsersByFirstname(String firstname) {
+    public ArrayList<User> getUsersByFirstname(String firstname) throws Exception {
         String query = String.format("SELECT * FROM `user` WHERE firstname LIKE '%%%s%%'", firstname);
 
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
-    public ArrayList<User> getUsersByTelephoneNumber(String telephoneNumber) {
+    public ArrayList<User> getUsersByTelephoneNumber(String telephoneNumber) throws Exception{
         String query = String.format("SELECT * FROM `user` WHERE tel_num LIKE '%%%s%%'", telephoneNumber);
 
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
-    public ArrayList<User> getUsersByLastname(String lastname) {
+    public ArrayList<User> getUsersByLastname(String lastname) throws Exception {
         String query = String.format("SELECT * FROM `user` WHERE lastname LIKE '%%%s%%'", lastname);
 
         return this.maps(this.getQuery().unsafeQuery(query));
@@ -108,7 +108,7 @@ public class UserRepository extends Repository<User> {
     /*
      * Create user
      */
-    public void createUser(User user) {
+    public void createUser(User user) throws Exception {
         FewInsertMySQL insert = new FewInsertMySQL();
 
         insert.insert("firstname", user.getFirstname())
@@ -117,13 +117,13 @@ public class UserRepository extends Repository<User> {
                 .insert("email", user.getEmail())
                 .insert("password_hash", user.getPasswordHash())
                 .insert("role", user.getRole().getLevel())
-                .insert("created_on", System.currentTimeMillis())
+                .insert("created_on", System.currentTimeMillis() / 1000L)
                 .table("user");
 
         this.getQuery().query(insert);
     }
 
-    public void deleteUserById(int id) {
+    public void deleteUserById(int id) throws Exception {
         FewDeleteMySQL delete = new FewDeleteMySQL();
 
         delete.where("id", id).table("user");
@@ -131,7 +131,7 @@ public class UserRepository extends Repository<User> {
         this.getQuery().query(delete);
     }
 
-    public void updateUser(User user) {
+    public void updateUser(User user) throws Exception {
         FewUpdateMySQL update = new FewUpdateMySQL();
 
         if (user.getId() == 0) {

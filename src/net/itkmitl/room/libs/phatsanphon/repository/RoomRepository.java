@@ -15,7 +15,7 @@ public class RoomRepository extends Repository<Room> {
         super(Room.class, query);
     }
 
-    public ArrayList<Room> getRooms() {
+    public ArrayList<Room> getRooms() throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.select("*").table("room");
@@ -23,7 +23,7 @@ public class RoomRepository extends Repository<Room> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Room> getRooms(int limit) {
+    public ArrayList<Room> getRooms(int limit) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.select("*").table("room");
@@ -32,7 +32,7 @@ public class RoomRepository extends Repository<Room> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Room> getRooms(String building, String floor) {
+    public ArrayList<Room> getRooms(String building, String floor) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("building", building)
@@ -43,7 +43,7 @@ public class RoomRepository extends Repository<Room> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Room> getRooms(RoomQuery queryBy, String query) {
+    public ArrayList<Room> getRooms(RoomQuery queryBy, String query) throws Exception {
         if (queryBy == RoomQuery.ID) {
             Room data = this.getRoomById(Integer.parseInt(query));
 
@@ -62,7 +62,7 @@ public class RoomRepository extends Repository<Room> {
         return null;
     }
 
-    public ArrayList<Room> getRoomsByBuilding(String building) {
+    public ArrayList<Room> getRoomsByBuilding(String building) throws Exception {
         String query = String.format(
                 "SELECT * FROM `room` WHERE building LIKE '%%%s%%'", building
         );
@@ -70,7 +70,7 @@ public class RoomRepository extends Repository<Room> {
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
-    public ArrayList<Room> getRoomsByName(String name) {
+    public ArrayList<Room> getRoomsByName(String name) throws Exception {
         String query = String.format(
                 String.format("SELECT * FROM `room` WHERE name LIKE '%%%s%%'", name)
         );
@@ -78,7 +78,7 @@ public class RoomRepository extends Repository<Room> {
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
-    public ArrayList<Room> getRoomsByState(String state) {
+    public ArrayList<Room> getRoomsByState(String state) throws Exception {
         String query = String.format(
                 String.format("SELECT * FROM `room` WHERE state LIKE '%%%s%%'", state)
         );
@@ -86,7 +86,7 @@ public class RoomRepository extends Repository<Room> {
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
-    public ArrayList<Room> getRoomsByFloor(String floor) {
+    public ArrayList<Room> getRoomsByFloor(String floor)  throws Exception{
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("floor", floor)
@@ -96,7 +96,7 @@ public class RoomRepository extends Repository<Room> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public Room getRoomById(int id) {
+    public Room getRoomById(int id)  throws Exception{
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.select("*")
@@ -107,7 +107,7 @@ public class RoomRepository extends Repository<Room> {
         return this.map(this.getQuery().query(select));
     }
 
-    public void createRoom(Room room) {
+    public void createRoom(Room room) throws Exception {
         FewInsertMySQL insert = new FewInsertMySQL();
 
         insert.insert("name", room.getName())
@@ -122,7 +122,7 @@ public class RoomRepository extends Repository<Room> {
         this.getQuery().query(insert);
     }
 
-    public void deleteRoomById(int id) {
+    public void deleteRoomById(int id) throws Exception {
         FewDeleteMySQL delete = new FewDeleteMySQL();
 
         delete.table("room");
@@ -131,7 +131,7 @@ public class RoomRepository extends Repository<Room> {
         this.getQuery().query(delete);
     }
 
-    public void updateRoom(Room room) {
+    public void updateRoom(Room room) throws Exception {
         FewUpdateMySQL update = new FewUpdateMySQL();
 
         if (room.getId() == 0) {

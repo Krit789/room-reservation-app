@@ -12,7 +12,7 @@ public class FewDB {
 
     private static Connection connection;
 
-    public static Connection getConnection(String server, String database, String username, String password) {
+    public static Connection getConnection(String server, String database, String username, String password) throws Exception {
         if (connection != null) return connection;
         Connection connection = null;
         try {
@@ -23,11 +23,12 @@ public class FewDB {
             );
         } catch (Exception e) {
             System.out.println("ERROR: Unable to connect to database (" + e.getMessage() + ")");
+            throw e;
         }
         return connection;
     }
 
-    public static Connection getConnection(ArrayList<String> CM) {
+    public static Connection getConnection(ArrayList<String> CM) throws Exception {
         if (CM.size() == 4){
             return getConnection(CM.get(0), CM.get(1), CM.get(2), CM.get(3));
         }
@@ -35,7 +36,7 @@ public class FewDB {
         return null;
     }
 
-    public static Connection getConnectionWithoutDB(String server, String username, String password) {
+    public static Connection getConnectionWithoutDB(String server, String username, String password) throws Exception {
         if (connection != null) return connection;
         Connection connection = null;
         try {
@@ -46,11 +47,12 @@ public class FewDB {
             );
         } catch (Exception e) {
             System.out.println("ERROR: Unable to connect to database (" + e.getMessage() + ")");
+            throw e;
         }
         return connection;
     }
 
-    public static Connection getConnectionWithoutDB(ArrayList<String> CM) {
+    public static Connection getConnectionWithoutDB(ArrayList<String> CM) throws Exception {
         if (CM.size() == 4){
             return getConnectionWithoutDB(CM.get(0), CM.get(2), CM.get(3));
         }
@@ -59,11 +61,11 @@ public class FewDB {
     }
 
 
-    public static void createTable(EnumDBSchema schema) {
+    public static void createTable(EnumDBSchema schema) throws Exception{
         RVDB.getDB().unsafeQuery(schema.getRaw());
     }
 
-    public static void createDatabase(String databaseName) {
+    public static void createDatabase(String databaseName) throws Exception {
         RVDB.getDBwithoutDB().unsafeQuery(String.format("CREATE DATABASE IF NOT EXISTS %s;", databaseName));
     }
 }

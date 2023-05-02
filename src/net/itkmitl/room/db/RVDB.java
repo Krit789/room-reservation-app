@@ -6,11 +6,11 @@ import net.itkmitl.room.libs.peeranat.query.FewQuery;
 
 public class RVDB {
 
-    public static FewQuery getDB() {
+    public static FewQuery getDB() throws Exception {
         return new FewQuery(FewDB.getConnection(new ConfigManager().getConnectionConfig()));
     }
 
-    public static FewQuery getDBwithoutDB() {
+    public static FewQuery getDBwithoutDB() throws Exception {
         return new FewQuery(FewDB.getConnectionWithoutDB(new ConfigManager().getConnectionConfig()));
     }
 }

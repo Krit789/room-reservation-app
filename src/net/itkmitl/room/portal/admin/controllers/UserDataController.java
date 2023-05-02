@@ -27,7 +27,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
     int mode;
     DataListEditableController dlec;
 
-    public UserDataController(int mode, int userID, DataListEditableController dlec) {
+    public UserDataController(int mode, int userID, DataListEditableController dlec)  throws Exception {
         this.mode = mode;
         this.dlec = dlec;
         view = new UserDataView();
@@ -79,7 +79,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
             LoadingDialog ld = new LoadingDialog();
 
             @Override
-            protected String doInBackground() {
+            protected String doInBackground() throws Exception{
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
@@ -109,7 +109,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
             LoadingDialog ld = new LoadingDialog();
 
             @Override
-            protected String doInBackground() {
+            protected String doInBackground() throws Exception {
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);

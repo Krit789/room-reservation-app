@@ -13,15 +13,15 @@ public class Feedback extends Entity {
     private String comment;
     private double rating;
 
-    public Feedback(FewQuery result) {
+    public Feedback(FewQuery result) throws Exception {
         super(result);
     }
 
-    public Feedback() {
+    public Feedback() throws Exception {
     }
 
     @Override
-    public void processQuery(FewQuery query) {
+    public void processQuery(FewQuery query) throws Exception {
         this.setId(query.getValue("id").asInt());
         this.setUser(query.getValue("user_id").asInt());
         this.setRoom(query.getValue("room_id").asInt());
@@ -46,7 +46,7 @@ public class Feedback extends Entity {
         this.user = user;
     }
 
-    public void setUser(int userId) {
+    public void setUser(int userId) throws Exception {
         User user = new UserRepository(this.getDB()).getUserById(userId);
         this.setUser(user);
     }
@@ -59,7 +59,7 @@ public class Feedback extends Entity {
         this.room = room;
     }
 
-    public void setRoom(int roomId) {
+    public void setRoom(int roomId) throws Exception {
         Room room = new RoomRepository(this.getDB()).getRoomById(roomId);
         this.setRoom(room);
     }
