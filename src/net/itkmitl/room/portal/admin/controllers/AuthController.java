@@ -36,7 +36,7 @@ public class AuthController implements ActionListener {
     }
 
     private void authenticateUser(String email, String password){
-        SwingWorker worker = new SwingWorker() {
+        SwingWorker worker = new SwingWorker<>() {
             String errorMessage;
             @Override
             protected String doInBackground() {

@@ -52,7 +52,10 @@ public class UserRepository extends Repository<User> {
         } else if (queryBy == UserQuery.LASTNAME) {
             return this.getUsersByLastname(query);
         } else if (queryBy == UserQuery.EMAIL) {
-            return this.getUsersByEmail(query);
+        	User data = this.getUserByEmail(query);
+        	ArrayList<User> objects = new ArrayList<>();
+			objects.add(data);
+            return objects;
         } else if (queryBy == UserQuery.PHONE_NUMBER) {
             return this.getUsersByTelephoneNumber(query);
         }
@@ -78,10 +81,10 @@ public class UserRepository extends Repository<User> {
     /*
      * Get user by email
      */
-    public ArrayList<User> getUsersByEmail(String email) {
+    public User getUserByEmail(String email) {
         String query = String.format("SELECT * FROM `user` WHERE email LIKE '%%%s%%'", email);
 
-        return this.maps(this.getQuery().unsafeQuery(query));
+        return this.map(this.getQuery().unsafeQuery(query));
     }
 
     public ArrayList<User> getUsersByFirstname(String firstname) {

@@ -16,4 +16,13 @@ public enum FeedbackQuery {
     private void setQuery(int query) {
         this.query = query;
     }
+    
+    public static FeedbackQuery getQueryByID(int id) {
+    	for (FeedbackQuery query : values()) {
+    		if (query.getQuery() == id) {
+    			return query;
+    		}
+    	}
+    	return null;
+    }
 }

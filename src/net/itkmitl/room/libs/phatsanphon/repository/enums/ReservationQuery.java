@@ -16,4 +16,13 @@ public enum ReservationQuery {
     private void setQuery(int query) {
         this.query = query;
     }
+    
+    public static ReservationQuery getQueryByID(int id) {
+    	for (ReservationQuery query : values()) {
+    		if (query.getQuery() == id) {
+    			return query;
+    		}
+    	}
+    	return null;
+    }
 }

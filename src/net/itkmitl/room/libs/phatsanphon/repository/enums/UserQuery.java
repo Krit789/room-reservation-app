@@ -16,4 +16,13 @@ public enum UserQuery {
     private void setQuery(int query) {
         this.query = query;
     }
+    
+    public static UserQuery getQueryByID(int id) {
+    	for (UserQuery query : values()) {
+    		if (query.getQuery() == id) {
+    			return query;
+    		}
+    	}
+    	return null;
+    }
 }

@@ -11,6 +11,10 @@ import net.itkmitl.room.libs.phatsanphon.repository.FeedbackRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
+import net.itkmitl.room.libs.phatsanphon.repository.enums.FeedbackQuery;
+import net.itkmitl.room.libs.phatsanphon.repository.enums.ReservationQuery;
+import net.itkmitl.room.libs.phatsanphon.repository.enums.RoomQuery;
+import net.itkmitl.room.libs.phatsanphon.repository.enums.UserQuery;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.controllers.DataListEditableController;
 import net.itkmitl.room.portal.admin.controllers.DataListTableController;
@@ -38,8 +42,8 @@ public class DatabaseLoader implements InternalFrameListener {
     }
     public void databaseLoader(int whichTable, int type, String searchQuery, boolean editableTable) {
         this.editableTable = editableTable;
-        SwingWorker worker = new SwingWorker() {
-            DataListTableModel model = new DataListTableModel();
+        SwingWorker worker = new SwingWorker<>() {
+//            DataListTableModel model = new DataListTableModel();
             Object[] data;
             LoadingDialog ld = new LoadingDialog();
 
@@ -55,14 +59,15 @@ public class DatabaseLoader implements InternalFrameListener {
                     switch (whichTable) {
                         case 1:
                             ArrayList<User> users_list;
+                            UserRepository userRepository = new UserRepository(db);
                             switch (type) {
                                 case 99:
-                                    users_list = new UserRepository(db).getUsers();
+                                    users_list = userRepository.getUsers();
                                     model.setTitle("User Data");
                                     model.setPageTitle("User DataTable");
                                     break;
                                 default:
-                                    users_list = new UserRepository(db).getUsersBy(type, searchQuery);
+                                    users_list = new UserRepository(db).getUsers(UserQuery.getQueryByID(type), searchQuery);
                                     model.setTitle(String.format("Results for \"%s\" in user", searchQuery));
                                     model.setPageTitle("Query Search for User");
                                     break;
@@ -78,14 +83,15 @@ public class DatabaseLoader implements InternalFrameListener {
                             break;
                         case 2:
                             ArrayList<Room> room_list;
+                            RoomRepository roomRepository = new RoomRepository(db);
                             switch (type) {
                                 case 99:
-                                    room_list = new RoomRepository(db).getRooms();
+                                    room_list = roomRepository.getRooms();
                                     model.setTitle("Room Data");
                                     model.setPageTitle("Room DataTable");
                                     break;
                                 default:
-                                    room_list = new RoomRepository(db).getRoomsBy(type, searchQuery);
+                                    room_list = roomRepository.getRooms(RoomQuery.getQueryByID(type), searchQuery);
                                     model.setTitle(String.format("Results for \"%s\" in room", searchQuery));
                                     model.setPageTitle("Query Search for Room");
                                     break;
@@ -101,14 +107,15 @@ public class DatabaseLoader implements InternalFrameListener {
                             break;
                         case 3:
                             ArrayList<Reservation> reservations_list;
+                            ReservationRepository reservationRepository = new ReservationRepository(db);
                             switch (type) {
                                 case 99:
-                                    reservations_list = new ReservationRepository(db).getReservations();
+                                    reservations_list = reservationRepository.getReservations();
                                     model.setTitle("Reservation Data");
                                     model.setPageTitle("Reservation DataTable");
                                     break;
                                 default:
-                                    reservations_list = new ReservationRepository(db).getReservationsBy(type, searchQuery);
+                                    reservations_list = reservationRepository.getReservations(ReservationQuery.getQueryByID(type), searchQuery);
                                     model.setTitle(String.format("Results for \"%s\" in reservation", searchQuery));
                                     model.setPageTitle("Query Search for Reservation");
                                     break;
@@ -124,14 +131,15 @@ public class DatabaseLoader implements InternalFrameListener {
                             break;
                         case 4:
                             ArrayList<Feedback> feedbacks_list ;
+                            FeedbackRepository feedbackRepository = new FeedbackRepository(db);
                             switch (type) {
                                 case 99:
-                                    feedbacks_list = new FeedbackRepository(db).getFeedbacks();
+                                    feedbacks_list = feedbackRepository.getFeedbacks();
                                     model.setTitle("Feedback Data");
                                     model.setPageTitle("Feedback DataTable");
                                     break;
                                 default:
-                                    feedbacks_list = new FeedbackRepository(db).getFeedbacksBy(type, searchQuery);
+                                    feedbacks_list = feedbackRepository.getFeedbacks(FeedbackQuery.getQueryByID(type), searchQuery);
                                     model.setTitle(String.format("Results for \"%s\" in feedback", searchQuery));
                                     model.setPageTitle("Query Search for Feedback");
                                     break;
