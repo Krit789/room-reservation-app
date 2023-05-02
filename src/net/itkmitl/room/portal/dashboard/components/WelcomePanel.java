@@ -1,10 +1,11 @@
 package net.itkmitl.room.portal.dashboard.components;
 
+import net.itkmitl.room.portal.components.RoundedPanel;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class WelcomePanel extends RoundedPanel {
     /**

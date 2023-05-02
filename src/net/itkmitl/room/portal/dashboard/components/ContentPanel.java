@@ -1,7 +1,8 @@
 package net.itkmitl.room.portal.dashboard.components;
 
+import net.itkmitl.room.portal.components.RoundedPanel;
+
 import javax.swing.BoxLayout;
-import javax.swing.JPanel;
 import java.awt.*;
 
 public class ContentPanel extends RoundedPanel {

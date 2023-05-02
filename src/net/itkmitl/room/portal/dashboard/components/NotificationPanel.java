@@ -7,9 +7,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import net.itkmitl.room.portal.components.GBCBuilder;
+import net.itkmitl.room.portal.components.RoundedPanel;
 
 public class NotificationPanel extends RoundedPanel {
     /**

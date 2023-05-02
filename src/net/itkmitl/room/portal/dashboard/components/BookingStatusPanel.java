@@ -1,12 +1,13 @@
 package net.itkmitl.room.portal.dashboard.components;
 
 
+import net.itkmitl.room.portal.components.RoundedPanel;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class BookingStatusPanel extends RoundedPanel {
 
