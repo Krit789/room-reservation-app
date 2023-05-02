@@ -375,8 +375,8 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
                 if (AuthController.authenticated) {
                     new BaseWindow(); //start the application
                 } else {
-//                    new BaseWindow();
-                    new AuthController();
+                    new BaseWindow();
+//                    new AuthController();
                 }
             }
         });

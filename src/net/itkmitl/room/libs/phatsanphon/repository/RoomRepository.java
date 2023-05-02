@@ -35,10 +35,7 @@ public class RoomRepository extends Repository<Room> {
     public ArrayList<Room> getRooms(String building, String floor) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.where("building", building)
-                .where("floor", floor)
-                .select("*")
-                .table("room");
+        select.where("building", building).where("floor", floor).select("*").table("room");
 
         return this.maps(this.getQuery().query(select));
     }
@@ -63,46 +60,35 @@ public class RoomRepository extends Repository<Room> {
     }
 
     public ArrayList<Room> getRoomsByBuilding(String building) throws Exception {
-        String query = String.format(
-                "SELECT * FROM `room` WHERE building LIKE '%%%s%%'", building
-        );
+        String query = String.format("SELECT * FROM `room` WHERE building LIKE '%%%s%%'", building);
 
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
     public ArrayList<Room> getRoomsByName(String name) throws Exception {
-        String query = String.format(
-                String.format("SELECT * FROM `room` WHERE name LIKE '%%%s%%'", name)
-        );
+        String query = String.format("SELECT * FROM `room` WHERE name LIKE '%%%s%%'", name);
 
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
     public ArrayList<Room> getRoomsByState(String state) throws Exception {
-        String query = String.format(
-                String.format("SELECT * FROM `room` WHERE state LIKE '%%%s%%'", state)
-        );
+        String query = String.format("SELECT * FROM `room` WHERE state LIKE '%%%s%%'", state);
 
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
-    public ArrayList<Room> getRoomsByFloor(String floor)  throws Exception{
+    public ArrayList<Room> getRoomsByFloor(String floor) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.where("floor", floor)
-                .select("*")
-                .table("room");
+        select.where("floor", floor).select("*").table("room");
 
         return this.maps(this.getQuery().query(select));
     }
 
-    public Room getRoomById(int id)  throws Exception{
+    public Room getRoomById(int id) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.select("*")
-                .where("id", id)
-                .limit(1)
-                .table("room");
+        select.select("*").where("id", id).limit(1).table("room");
 
         return this.map(this.getQuery().query(select));
     }
@@ -110,14 +96,7 @@ public class RoomRepository extends Repository<Room> {
     public void createRoom(Room room) throws Exception {
         FewInsertMySQL insert = new FewInsertMySQL();
 
-        insert.insert("name", room.getName())
-                .insert("building", room.getBuilding())
-                .insert("capacity", room.getCapacity())
-                .insert("close_time", room.getCloseTime().getTime())
-                .insert("open_time", room.getOpenTime().getTime())
-                .insert("floor", room.getFloor())
-                .insert("state", room.getState())
-                .table("room");
+        insert.insert("name", room.getName()).insert("building", room.getBuilding()).insert("capacity", room.getCapacity()).insert("close_time", room.getCloseTime().getTime()).insert("open_time", room.getOpenTime().getTime()).insert("floor", room.getFloor()).insert("state", room.getState()).table("room");
 
         this.getQuery().query(insert);
     }
@@ -138,15 +117,7 @@ public class RoomRepository extends Repository<Room> {
             throw new RuntimeException("Please provided an id to update user");
         }
 
-        update.where("id", room.getId())
-                .set("name", room.getName())
-                .set("building", room.getBuilding())
-                .set("capacity", room.getCapacity())
-                .set("floor", room.getFloor())
-                .set("close_time", room.getCloseTime().getTime())
-                .set("open_time", room.getOpenTime().getTime())
-                .set("state", room.getState())
-                .table("room");
+        update.where("id", room.getId()).set("name", room.getName()).set("building", room.getBuilding()).set("capacity", room.getCapacity()).set("floor", room.getFloor()).set("close_time", room.getCloseTime().getTime()).set("open_time", room.getOpenTime().getTime()).set("state", room.getState()).table("room");
         this.getQuery().query(update);
     }
 }

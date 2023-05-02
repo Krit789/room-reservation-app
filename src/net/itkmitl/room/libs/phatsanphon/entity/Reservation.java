@@ -19,22 +19,19 @@ public class Reservation extends Entity {
         super(query);
     }
 
-    public Reservation() throws Exception {}
+    public Reservation() throws Exception {
+    }
 
     @Override
     public void processQuery(FewQuery query) throws Exception {
-        try {
-            this.setId(query.getValue("id").asInt());
-            this.setUser(query.getValue("user_id").asInt());
-            this.setRoom(query.getValue("room_id").asInt());
-            this.setReason(query.getValue("reason").asString());
-            this.setStartTime(query.getValue("start_time").asLong());
-            this.setEndTime(query.getValue("end_time").asLong());
-            this.setReservationTime(query.getValue("reservation_time").asLong());
-            this.setCancelled(query.getValue("is_cancelled").asBoolean());
-        } catch (Exception e) {
-             throw e;
-        }
+        this.setId(query.getValue("id").asInt());
+        this.setUser(query.getValue("user_id").asInt());
+        this.setRoom(query.getValue("room_id").asInt());
+        this.setReason(query.getValue("reason").asString());
+        this.setStartTime(query.getValue("start_time").asLong());
+        this.setEndTime(query.getValue("end_time").asLong());
+        this.setReservationTime(query.getValue("reservation_time").asLong());
+        this.setCancelled(query.getValue("is_cancelled").asBoolean());
     }
 
     public int getId() {
@@ -67,11 +64,7 @@ public class Reservation extends Entity {
     }
 
     public void setRoom(int roomId) throws Exception {
-        try {
-            Room room = new RoomRepository(this.getDB()).getRoomById(roomId);
-        } catch (Exception e){
-            throw e;
-        }
+        Room room = new RoomRepository(this.getDB()).getRoomById(roomId);
         this.setRoom(room);
     }
 

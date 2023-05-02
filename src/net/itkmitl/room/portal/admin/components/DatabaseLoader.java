@@ -172,6 +172,9 @@ public class DatabaseLoader implements InternalFrameListener {
                             data = new Object[]{Boolean.valueOf(false), String.format("Error: Table %d is out of index!", whichTable)};
                             break;
                     }
+                } catch (NullPointerException ex) {
+                    data = new Object[]{Boolean.valueOf(false), String.format("\"%s\" was not found in the records", searchQuery)};
+
                 } catch (Exception ex) {
                     errorMessage = ProgramError.getStackTrace(ex);
                     data = new Object[]{Boolean.valueOf(false), errorMessage};
