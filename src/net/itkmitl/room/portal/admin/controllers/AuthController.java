@@ -35,15 +35,18 @@ public class AuthController implements ActionListener {
         }
     }
 
-    private void authenticateUser(String email, String password){
+    private void authenticateUser(String email, String password) {
         SwingWorker worker = new SwingWorker<>() {
             String errorMessage;
+
             @Override
             protected String doInBackground() {
                 try {
                     FewQuery db = RVDB.getDB();
-                    User myUser = new UserRepository(db).getUserByEmail(email);
-                    if (myUser != null){
+                    UserRepository userRepository = new UserRepository(db);
+
+                    User myUser = userRepository.getUserByEmail(email);
+                    if (myUser != null) {
                         if (FewPassword.checkPassword(password, myUser.getPasswordHash()) && myUser.getRole().getLevel() >= 10) {
                             AuthController.authenticated = true;
                             data = new Object[]{true, myUser};
@@ -62,9 +65,10 @@ public class AuthController implements ActionListener {
                 }
                 return "";
             }
+
             @Override
             protected void done() {
-                if ((boolean) data[0]){
+                if ((boolean) data[0]) {
                     BaseWindow.main(new String[]{""});
                     view.getFrame().dispose();
                 } else {

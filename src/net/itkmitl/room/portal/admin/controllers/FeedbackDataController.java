@@ -90,17 +90,22 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
+
                 FewQuery db = RVDB.getDB();
+                FeedbackRepository feedbackRepository = new FeedbackRepository(db);
+                UserRepository userRepository = new UserRepository(db);
+                RoomRepository roomRepository = new RoomRepository(db);
+
                 try {
-                    Feedback myFeedback = new FeedbackRepository(db).getFeedbackById(reservationID);
+                    Feedback myFeedback = feedbackRepository.getFeedbackById(reservationID);
                     switch (mode) {
                         case 0: // View Only
                             userArrayList.add(new UserComboBoxModel(myFeedback.getUser()));
                             roomArrayList.add(new RoomComboBoxModel(myFeedback.getRoom()));
                             break;
                         default:
-                            ArrayList<User> user_list = new UserRepository(db).getUsers();
-                            ArrayList<Room> room_list = new RoomRepository(db).getRooms();
+                            ArrayList<User> user_list = userRepository.getUsers();
+                            ArrayList<Room> room_list = roomRepository.getRooms();
                             for (User u : user_list) {
                                 userArrayList.add(new UserComboBoxModel(u));
                             }
@@ -139,6 +144,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                 BaseWindow.progressBar.setIndeterminate(true);
                 FewQuery db = RVDB.getDB();
                 FeedbackRepository myFeedback = new FeedbackRepository(db);
+
                 switch (mode) {
                     case 0: // Update
                         try {
@@ -197,14 +203,18 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
+
                 FewQuery db = RVDB.getDB();
+                UserRepository userRepository = new UserRepository(db);
+                RoomRepository roomRepository = new RoomRepository(db);
+
                 try {
-                    ArrayList<User> user_list = new UserRepository(db).getUsers();
-                    ArrayList<Room> room_list = new RoomRepository(db).getRooms();
-                    for (User u : user_list) {
+                    ArrayList<User> userList = userRepository.getUsers();
+                    ArrayList<Room> roomList = roomRepository.getRooms();
+                    for (User u : userList) {
                         userArrayList.add(new UserComboBoxModel(u));
                     }
-                    for (Room r : room_list) {
+                    for (Room r : roomList) {
                         roomArrayList.add(new RoomComboBoxModel(r));
                     }
                     data = new Object[]{true, null};
@@ -235,7 +245,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
             Feedback myFeedback = (Feedback) data[1];
             feedback = (Feedback) data[1];
             view.pageSubtitle.setText("Feedback records for Feedback ID " + myFeedback.getId());
-            view.idField.setText(feedback.getId() + "");
+            view.idField.setText(String.valueOf(feedback.getId()));
             for (UserComboBoxModel u : userArrayList) {
                 view.userIDSelect.addItem(u);
                 if (u.getUser().getId() == feedback.getUser().getId()) {
