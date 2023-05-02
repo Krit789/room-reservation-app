@@ -1,5 +1,6 @@
 package net.itkmitl.room.portal.account;
 
+import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.portal.Controller;
 import net.itkmitl.room.portal.account.components.LoginPanel;
 import net.itkmitl.room.portal.account.components.RegisterPanel;
@@ -48,10 +49,20 @@ public class EntryController extends Controller implements ActionListener, Compo
         cl.show(this.getView().contentPannel, name);
     }
 
+    private void RegisterDetail(RegisterPanel reg){
         //temporary placeholder
+        myUser = new User();
+        myUser.setEmail(reg.getEmail());
+        myUser.setPasswordHash(reg.getPassword());
+        myUser.setFirstname(reg.getFirstName());
+        myUser.setLastname(reg.getLastName());
+        myUser.setTelephoneNumber(reg.getTelephone());
     }
 
+    private void getLoginDetail(LoginPanel login){
         //temporary placeholder
+        String email = login.getEmail();
+        String password = login.getPassword();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -64,7 +75,13 @@ public class EntryController extends Controller implements ActionListener, Compo
         } else if (e.getSource().equals(this.getView().loginPanel.registerButton)){
             this.changeCard("Register");
         } else if (e.getSource().equals(this.getView().loginPanel.loginButton)){
+            this.getLoginDetail(this.getView().loginPanel);
         } else if (e.getSource().equals(this.getView().registerPanel.registerButton)){
+            if(this.getView().registerPanel.isValid()) {
+                this.RegisterDetail(this.getView().registerPanel);
+            }else{
+                System.out.println("invalid");
+            }
         } else if (e.getSource().equals(this.getView().registerPanel.loginButton)){
             this.changeCard("Login");
         }

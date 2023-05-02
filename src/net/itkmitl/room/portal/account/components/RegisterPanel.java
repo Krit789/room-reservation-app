@@ -8,20 +8,22 @@ import java.util.Arrays;
 public class RegisterPanel extends JPanel{
     protected GridBagConstraints c;
     private JPanel namePanel, buttonBox;
-    private JTextField usernameField, studentIdField, firstNameField, lastNameField, telField;
-    private JLabel usernameText, passwordText, registerHeader, studentIdText, firstNameText, lastNameText, telText;
+    private JTextField emailField, studentIdField, firstNameField, lastNameField, telField;
+    private JLabel emailText, passwordText, registerHeader, studentIdText, firstNameText, lastNameText, telText;
+    public JLabel warningLabel;
     private JPasswordField passwordField;
     public JButton loginButton, registerButton;
     public RegisterPanel(){
         super(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        usernameField = new JTextField();
+        emailField = new JTextField();
         passwordField = new JPasswordField();
         studentIdField = new JTextField();
         firstNameField = new JTextField(30);
         lastNameField = new JTextField(30);
         telField = new JTextField();
-        usernameText = new JLabel("Username : ", SwingConstants.LEFT);
+        warningLabel = new JLabel("Invalid input");
+        emailText = new JLabel("Email : ", SwingConstants.LEFT);
         passwordText = new JLabel("Password : ", SwingConstants.LEFT);
         studentIdText = new JLabel("Student ID : ", SwingConstants.LEFT);
         firstNameText = new JLabel("FirstName : ", SwingConstants.LEFT);
@@ -33,6 +35,7 @@ public class RegisterPanel extends JPanel{
 
         buttonBox = new JPanel();
         buttonBox.setLayout(new FlowLayout(FlowLayout.RIGHT));
+//        buttonBox.add(warningLabel);
         buttonBox.add(loginButton);
         buttonBox.add(registerButton);
 
@@ -69,11 +72,11 @@ public class RegisterPanel extends JPanel{
         c.gridx = 1;
         c.gridy = 1;
         c.gridwidth = 1;
-        this.add(usernameText, c);
+        this.add(emailText, c);
         c.weightx = 0.59;
         c.gridx = 2;
         c.gridy = 1;
-        this.add(usernameField, c);
+        this.add(emailField, c);
         c.weightx = 0.01;
         c.gridx = 1;
         c.gridy = 2;
@@ -115,9 +118,25 @@ public class RegisterPanel extends JPanel{
         this.add(new JLabel("building goes here"), c);//Image wont go in
         c.gridheight = 1;
     }
-    public String getData(){
-        return usernameField.getText() + Arrays.toString(passwordField.getPassword()) +
-                studentIdField.getText() + firstNameField.getText() + lastNameField.getText() +
-                telField.getText();
+    public String getEmail(){
+        return emailField.getText();
+    }
+    public String getPassword(){
+        return Arrays.toString(passwordField.getPassword());
+    }
+    public String getStudentId(){
+        return studentIdField.getText();
+    }
+    public String getFirstName(){
+        return firstNameField.getText();
+    }
+    public String getLastName(){
+        return lastNameField.getText();
+    }
+    public String getTelephone(){
+        return telField.getText();
+    }
+    public boolean isValid(){
+        return false;
     }
 }

@@ -10,8 +10,8 @@ import java.util.Arrays;
 
 public class LoginPanel extends JPanel{
     protected GridBagConstraints c;
-    protected JTextField usernameField;
-    protected JLabel usernameText, passwordText, loginHeader;
+    protected JTextField emailField;
+    protected JLabel emailText, passwordText, loginHeader;
     protected JPasswordField passwordField;
     protected JPanel buttonBox;
     public JButton loginButton, registerButton;
@@ -23,9 +23,9 @@ public class LoginPanel extends JPanel{
 
         loginButton = new JButton("Login");
         registerButton = new JButton("Register");
-        usernameField = new JTextField();
+        emailField = new JTextField();
         passwordField = new JPasswordField();
-        usernameText = new JLabel("Username : ", SwingConstants.RIGHT);
+        emailText = new JLabel("Email : ", SwingConstants.RIGHT);
         passwordText = new JLabel("Password : ", SwingConstants.RIGHT);
         loginHeader = new JLabel("Login", SwingConstants.CENTER);
         buttonBox = new JPanel();
@@ -48,11 +48,11 @@ public class LoginPanel extends JPanel{
         c.gridx = 1;
         c.gridy = 1;
         c.gridwidth = 1;
-        this.add(usernameText, c);
+        this.add(emailText, c);
         c.weightx = 0.57;
         c.gridx = 2;
         c.gridy = 1;
-        this.add(usernameField, c);
+        this.add(emailField, c);
         c.weightx = 0.03;
         c.gridx = 1;
         c.gridy = 2;
@@ -73,7 +73,10 @@ public class LoginPanel extends JPanel{
         c.gridheight = 1;
     }
 
-    public String getData(){
-        return usernameField.getText() + Arrays.toString(passwordField.getPassword());
+    public String getEmail(){
+        return emailField.getText();
+    }
+    public String getPassword(){
+        return Arrays.toString(passwordField.getPassword());
     }
 }
