@@ -8,10 +8,11 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class BookingStatusPanel extends JPanel{
+public class BookingStatusPanel extends RoundedPanel {
 
     public JLabel titleLabel;
-    public BookingStatusPanel(){
+
+    public BookingStatusPanel() {
         super();
 
         this.setBackground(new Color(234, 234, 234));

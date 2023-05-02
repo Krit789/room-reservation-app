@@ -10,10 +10,10 @@ import javax.swing.border.EmptyBorder;
 
 public class ReservationBox extends JPanel {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3285944903070661887L;
-	public JButton redirectButton;
+     *
+     */
+    private static final long serialVersionUID = 3285944903070661887L;
+    public JButton redirectButton;
 
     public ReservationBox(String title) {
         super(new BorderLayout());

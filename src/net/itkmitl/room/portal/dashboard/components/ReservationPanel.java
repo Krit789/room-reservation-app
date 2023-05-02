@@ -1,18 +1,17 @@
 package net.itkmitl.room.portal.dashboard.components;
 
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class ReservationPanel extends JPanel {
+public class ReservationPanel extends RoundedPanel {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2988916769883492575L;
+     *
+     */
+    private static final long serialVersionUID = -2988916769883492575L;
 
-	public JLabel reservationTextLabel;
+    public JLabel reservationTextLabel;
 
     public static final String[] ROUTES = {"History", "Booking", "Calendar"};
 

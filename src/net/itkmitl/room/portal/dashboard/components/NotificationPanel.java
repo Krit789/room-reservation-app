@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import net.itkmitl.room.portal.components.GBCBuilder;
 
-public class NotificationPanel extends JPanel {
+public class NotificationPanel extends RoundedPanel {
     /**
 	 * 
 	 */

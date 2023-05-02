@@ -6,13 +6,13 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class WelcomePanel extends JPanel {
+public class WelcomePanel extends RoundedPanel {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4015833019658837000L;
+     *
+     */
+    private static final long serialVersionUID = -4015833019658837000L;
 
-	public WelcomePanel() {
+    public WelcomePanel() {
         super();
 
         this.setBackground(new Color(255, 255, 255));

@@ -20,10 +20,10 @@ import net.itkmitl.room.portal.dashboard.components.WelcomePanel;
 
 public class DashboardView extends View {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 5559587513984125656L;
-	public JPanel rightPanel, mainPanel, contentPanel, welcomePanel, notificationPanel, reservationPanel;
+     *
+     */
+    private static final long serialVersionUID = 5559587513984125656L;
+    public JPanel rightPanel, mainPanel, contentPanel, welcomePanel, notificationPanel, reservationPanel;
 
     public DashboardView() {
         super();
