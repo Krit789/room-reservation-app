@@ -110,7 +110,7 @@ public class User extends Entity {
         this.setLastname(query.getValue("lastname").asString());
         this.setTelephoneNumber(query.getValue("tel_num").asString());
         this.setActive(query.getValue("is_active").asBoolean());
-        this.setCreatedOn(query.getValue("created_on").asString());
+        this.setCreatedOn(query.getValue("created_on").asLong());
         this.setRole(EnumUserRole.searchRoleByLevel(query.getValue("role").asInt()));
     }
 }
