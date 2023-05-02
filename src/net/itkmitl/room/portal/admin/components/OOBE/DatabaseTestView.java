@@ -35,16 +35,12 @@ public class DatabaseTestView extends JPanel {
         noLabel = new JLabel(new ImageIcon("resource/icons/no-16px.png"));
 
         resultPanel.add(connectionLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 0, new Insets(0,5,5,5)).getGBC());
-//        resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 0, new Insets(0,0,5,5)).getGBC());
 
         resultPanel.add(credentialLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 1, new Insets(5,5,5,5)).getGBC());
-//        resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 1, new Insets(5,0,5,5)).getGBC());
 
         resultPanel.add(databaseLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 2, new Insets(5,5,5,5)).getGBC());
-//        resultPanel.add(new JLabel(new ImageIcon("resource/icons/info-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 2, new Insets(5,0,5,5)).getGBC());
 
         resultPanel.add(tableLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 3, new Insets(5,5,5,5)).getGBC());
-//        resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 3, new Insets(5,0,5,5)).getGBC());
 
         resultPanel.setBorder(new EmptyBorder(0, 25, 0 ,25));
         this.add(topPanel, BorderLayout.NORTH);

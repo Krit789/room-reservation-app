@@ -12,6 +12,7 @@ public class OOBEView {
     public JButton backButton, nextButton, cancelButton;
     public DatabaseSetupPanelView dbsp;
     public DatabaseTestView dbt;
+    public FinishView fn;
     public static String[] PANEL = {"Panel1", "Panel2", "Panel3", "Panel4"};
 
     public OOBEView(){
@@ -38,6 +39,8 @@ public class OOBEView {
         contentPanel.add(dbsp, PANEL[1]);
         dbt = new DatabaseTestView();
         contentPanel.add(dbt, PANEL[2]);
+        fn = new FinishView();
+        contentPanel.add(fn, PANEL[3]);
 
         backButton = new JButton("Back");
         nextButton = new JButton("Next");

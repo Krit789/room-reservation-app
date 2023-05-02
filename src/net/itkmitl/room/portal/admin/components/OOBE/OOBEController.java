@@ -19,6 +19,7 @@ public class OOBEController implements ActionListener {
     private int currentPage;
 
     public OOBEController() {
+//        currentPage = 2;
         FewConfig config = new FewConfig(new File("config.yml"));
         if (config.asString("first_run") == null) {
             view = new OOBEView();
@@ -26,6 +27,8 @@ public class OOBEController implements ActionListener {
             view.backButton.addActionListener(this);
             view.cancelButton.addActionListener(this);
             view.backButton.setEnabled(false);
+            CardLayout c = (CardLayout) view.contentPanel.getLayout();
+            c.show(view.contentPanel, OOBEView.PANEL[currentPage]);
         } else {
             new Dashboard();
         }
@@ -93,9 +96,13 @@ public class OOBEController implements ActionListener {
                 if (currentPage == 1) {
                     saveConfig();
                     initializeDatabase();
+
                 }
 
                 currentPage++;
+                if (currentPage == 1) {
+                    view.nextButton.setEnabled(false);
+                }
                 view.backButton.setEnabled(true);
                 if (currentPage == OOBEView.PANEL.length - 1) {
                     view.nextButton.setEnabled(false);
