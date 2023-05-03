@@ -12,6 +12,7 @@ public class LoginPanel extends JPanel{
     protected GridBagConstraints c;
     protected JTextField emailField;
     protected JLabel emailText, passwordText, loginHeader;
+    public JLabel warningLabel;
     protected JPasswordField passwordField;
     protected JPanel buttonBox;
     public JButton loginButton, registerButton;
@@ -30,6 +31,8 @@ public class LoginPanel extends JPanel{
         loginHeader = new JLabel("Login", SwingConstants.CENTER);
         buttonBox = new JPanel();
         buttonBox.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        warningLabel = new JLabel("", SwingConstants.RIGHT);
+        warningLabel.setForeground(Color.red);
 
         buttonBox.add(registerButton);
         buttonBox.add(loginButton);
@@ -64,6 +67,9 @@ public class LoginPanel extends JPanel{
         c.gridx = 2;
         c.gridy = 3;
         this.add(buttonBox, c);
+        c.gridx = 2;
+        c.gridy = 4;
+        this.add(warningLabel, c);
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.4;
         c.gridx = 0;

@@ -16,13 +16,12 @@ public class RegisterPanel extends JPanel{
     public RegisterPanel(){
         super(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        emailField = new JTextField();
-        passwordField = new JPasswordField();
-        studentIdField = new JTextField();
+        emailField = new JTextField("");
+        passwordField = new JPasswordField("");
+        studentIdField = new JTextField("");
         firstNameField = new JTextField(30);
         lastNameField = new JTextField(30);
-        telField = new JTextField();
-        warningLabel = new JLabel("Invalid input");
+        telField = new JTextField("");
         emailText = new JLabel("Email : ", SwingConstants.LEFT);
         passwordText = new JLabel("Password : ", SwingConstants.LEFT);
         studentIdText = new JLabel("Student ID : ", SwingConstants.LEFT);
@@ -32,10 +31,12 @@ public class RegisterPanel extends JPanel{
         registerHeader = new JLabel("Register", SwingConstants.CENTER);
         loginButton = new JButton("Login");
         registerButton = new JButton("Register");
+        warningLabel = new JLabel("");
+        warningLabel = new JLabel("", SwingConstants.RIGHT);
+        warningLabel.setForeground(Color.red);
 
         buttonBox = new JPanel();
         buttonBox.setLayout(new FlowLayout(FlowLayout.RIGHT));
-//        buttonBox.add(warningLabel);
         buttonBox.add(loginButton);
         buttonBox.add(registerButton);
 
@@ -110,11 +111,14 @@ public class RegisterPanel extends JPanel{
         c.gridx = 2;
         c.gridy = 6;
         this.add(buttonBox, c);
+        c.gridx = 2;
+        c.gridy = 7;
+        this.add(warningLabel, c);
         c.fill = GridBagConstraints.VERTICAL;
         c.weightx = 0.4;
         c.gridx = 0;
         c.gridy = 1;
-        c.gridheight = 5;
+        c.gridheight = 6;
         this.add(new JLabel("building goes here"), c);//Image wont go in
         c.gridheight = 1;
     }
@@ -135,8 +139,5 @@ public class RegisterPanel extends JPanel{
     }
     public String getTelephone(){
         return telField.getText();
-    }
-    public boolean isValid(){
-        return false;
     }
 }
