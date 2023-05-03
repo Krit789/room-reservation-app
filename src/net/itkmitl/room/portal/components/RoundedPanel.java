@@ -36,10 +36,13 @@ public class RoundedPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D graphics2D = (Graphics2D) g;
         Dimension arcs = new Dimension(arcWidth, arcHeight);
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         int width = getWidth();
         int height = getHeight();
-        g.setColor(backgroundColor);
-        g.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height);
+        graphics2D.setColor(backgroundColor);
+        graphics2D.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height);
     }
 }
