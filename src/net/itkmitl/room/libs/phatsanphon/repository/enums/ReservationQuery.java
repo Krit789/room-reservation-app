@@ -1,7 +1,7 @@
 package net.itkmitl.room.libs.phatsanphon.repository.enums;
 
 public enum ReservationQuery {
-    ID(0), ROOM_ID(1), USER_ID(2), REASON(3);
+    ID(0), USER_ID(1), ROOM_ID(2), REASON(3);
 
     private int query;
 

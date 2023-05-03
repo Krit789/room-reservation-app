@@ -37,10 +37,10 @@ public class FeedbackRepository extends Repository<Feedback> {
             objects.add(data);
 
             return objects;
-        } else if (queryBy == FeedbackQuery.USER_ID) {
-            return this.getFeedbacksByUserId(Integer.parseInt(query));
         } else if (queryBy == FeedbackQuery.ROOM_ID) {
             return this.getFeedbacksByRoomId(Integer.parseInt(query));
+        } else if (queryBy == FeedbackQuery.USER_ID) {
+            return this.getFeedbacksByUserId(Integer.parseInt(query));
         } else if (queryBy == FeedbackQuery.RATING) {
             return this.getFeedbacksByRating(query);
         } else if (queryBy == FeedbackQuery.COMMENT) {
@@ -73,7 +73,7 @@ public class FeedbackRepository extends Repository<Feedback> {
     public ArrayList<Feedback> getFeedbacksByRoomId(int roomId) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
-        select.where("user_id", roomId)
+        select.where("room_id", roomId)
                 .select("*")
                 .table("feedback");
 
