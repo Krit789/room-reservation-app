@@ -60,6 +60,7 @@ public class OOBEView {
         frame.setFocusable(true);
         frame.setResizable(false);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 

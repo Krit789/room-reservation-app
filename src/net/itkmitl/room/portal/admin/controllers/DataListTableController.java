@@ -1,6 +1,7 @@
 package net.itkmitl.room.portal.admin.controllers;
 
 import net.itkmitl.room.portal.admin.BaseWindow;
+import net.itkmitl.room.portal.admin.components.DatabaseLoader;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
 import net.itkmitl.room.portal.admin.models.DataSearchModel;
 import net.itkmitl.room.portal.admin.views.*;
@@ -18,25 +19,78 @@ import java.beans.PropertyVetoException;
 public class DataListTableController implements ListSelectionListener, InternalFrameListener, ActionListener {
     public DataListTableView view;
     public DataListTableModel model;
+    private int whichTable = 0;
 
     public DataListTableController() {
         this(new DataListTableModel());
     }
 
     public DataListTableController(DataListTableModel model) {
-        this.view = new DataListTableView();
         this.model = model;
-        view.getFrame().setTitle(model.getTitle());
-        view.pageTitle.setText(model.getPageTitle());
-        view.pageSubtitle.setText(model.getPageSubtitle());
-        view.table.setModel(model.getDtm());
-        view.viewEntryButton.setEnabled(false);
         if (!(this instanceof DataListEditableController)) {
+            this.view = new DataListTableView();
+            view.getFrame().setTitle(model.getTitle());
+            view.pageTitle.setText(model.getPageTitle());
+            view.pageSubtitle.setText(model.getPageSubtitle());
+            view.table.setModel(model.getDtm());
+            view.viewEntryButton.setEnabled(false);
             view.table.getSelectionModel().addListSelectionListener(this);
             view.getFrame().addInternalFrameListener(this);
+            view.reloadButton.addActionListener(this);
+            view.viewEntryButton.addActionListener(this);
         }
-        view.viewEntryButton.addActionListener(this);
+    }
 
+    public void reloadData() {
+        DatabaseLoader dbl = new DatabaseLoader();
+        // Search Model
+        if (model.getTitle().contains("\" in")) {
+            String[] out = model.getTitle().split("\"");
+            String query = out[1];
+            String type = out[2];
+            System.out.println(out[1] + " " + out[2]);
+            if (type.contains("user")) {
+                whichTable = 1;
+            } else if (type.contains("room")) {
+                whichTable = 2;
+            } else if (type.contains("reservation")) {
+                whichTable = 3;
+            } else if (type.contains("feedback")) {
+                whichTable = 4;
+            }
+            if (this instanceof DataListEditableController){
+                dbl.databaseLoader(whichTable, Character.getNumericValue(model.getPageTitle().charAt(1)), query, false, this);
+                ((DataListEditableController) this).view.viewEntryButton.setEnabled(false);
+                ((DataListEditableController) this).view.editSelectedButton.setEnabled(false);
+                ((DataListEditableController) this).view.deletedSelectedButton.setEnabled(false);
+
+            } else {
+                dbl.databaseLoader(whichTable, Character.getNumericValue(model.getPageTitle().charAt(1)), query, true, this);
+                this.view.viewEntryButton.setEnabled(false);
+
+            }
+            // Editable Model
+        } else {
+            if (model.getPageTitle().contains("User")) {
+                whichTable = 1;
+            } else if (model.getPageTitle().contains("Room")) {
+                whichTable = 2;
+            } else if (model.getPageTitle().contains("Reservation")) {
+                whichTable = 3;
+            } else if (model.getPageTitle().contains("Feedback")) {
+                whichTable = 4;
+            }
+            if (this instanceof DataListEditableController){
+                dbl.databaseLoader(whichTable, 99, "", false, this);
+                ((DataListEditableController) this).view.viewEntryButton.setEnabled(false);
+                ((DataListEditableController) this).view.editSelectedButton.setEnabled(false);
+                ((DataListEditableController) this).view.deletedSelectedButton.setEnabled(false);
+                ((DataListEditableController) this).view.viewEntryButton.setEnabled(false);
+            } else {
+                dbl.databaseLoader(whichTable, 99, "", true, this);
+                this.view.viewEntryButton.setEnabled(false);
+            }
+        }
     }
 
     @Override
@@ -189,27 +243,32 @@ public class DataListTableController implements ListSelectionListener, InternalF
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            if (model.getPageTitle().contains("User")) {
-                if (e.getSource().equals(view.viewEntryButton)) {
-                    spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+        if (e.getSource().equals(view.reloadButton)){
+            view.reloadButton.setEnabled(false);
+            view.reloadButton.revalidate();
+            reloadData();
+        } else {
+            try {
+                if (model.getPageTitle().contains("User")) {
+                    if (e.getSource().equals(view.viewEntryButton)) {
+                        spawnUserDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+                    }
+                } else if (model.getPageTitle().contains("Room")) {
+                    if (e.getSource().equals(view.viewEntryButton)) {
+                        spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+                    }
+                } else if (model.getPageTitle().contains("Reservation")) {
+                    if (e.getSource().equals(view.viewEntryButton)) {
+                        spawnReservationDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+                    }
+                } else if (model.getPageTitle().contains("Feedback")) {
+                    if (e.getSource().equals(view.viewEntryButton)) {
+                        spawnFeedbackDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
+                    }
                 }
-            } else if (model.getPageTitle().contains("Room")) {
-                if (e.getSource().equals(view.viewEntryButton)) {
-                    spawnRoomDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
-                }
-            } else if (model.getPageTitle().contains("Reservation")) {
-                if (e.getSource().equals(view.viewEntryButton)) {
-                    spawnReservationDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
-                }
-            } else if (model.getPageTitle().contains("Feedback")) {
-                if (e.getSource().equals(view.viewEntryButton)) {
-                    spawnFeedbackDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
-                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(BaseWindow.baseFrame, ex.toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (Exception ex){
-            JOptionPane.showMessageDialog(BaseWindow.baseFrame, ex.toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 }

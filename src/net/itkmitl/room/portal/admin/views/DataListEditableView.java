@@ -28,7 +28,7 @@ public class DataListEditableView extends DataListTableView{
         northButtonPanel.add(createButton);
         northButtonPanel.add(editSelectedButton);
         northButtonPanel.add(deletedSelectedButton);
-
+        frame.pack();
     }
     @Override
     public JInternalFrame getFrame() {

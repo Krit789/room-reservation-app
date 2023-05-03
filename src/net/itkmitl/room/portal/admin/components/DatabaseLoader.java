@@ -19,6 +19,7 @@ import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.controllers.DataListEditableController;
 import net.itkmitl.room.portal.admin.controllers.DataListTableController;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
+import net.itkmitl.room.portal.admin.views.DataListTableView;
 import net.itkmitl.room.portal.components.LoadingDialog;
 
 import javax.swing.*;
@@ -56,7 +57,7 @@ public class DatabaseLoader implements InternalFrameListener {
         databaseLoader(whichTable, type, searchQuery, editableTable, table);
     }
 
-    public void databaseLoader(int whichTable, int type, String searchQuery, boolean editableTable, DataListEditableController table) {
+    public void databaseLoader(int whichTable, int type, String searchQuery, boolean editableTable, DataListTableController table) {
         this.editableTable = editableTable;
         SwingWorker worker = new SwingWorker<>() {
             Object[] data;
@@ -84,7 +85,7 @@ public class DatabaseLoader implements InternalFrameListener {
                                 default:
                                     users_list = new UserRepository(db).getUsers(UserQuery.getQueryByID(type), searchQuery);
                                     model.setTitle(String.format("Results for \"%s\" in user", searchQuery));
-                                    model.setPageTitle("Query Search for User");
+                                    model.setPageTitle(String.format("(%d) Query Search for User", UserQuery.getQueryByID(type).getQuery()));
                                     break;
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (User Table)");
@@ -108,7 +109,7 @@ public class DatabaseLoader implements InternalFrameListener {
                                 default:
                                     room_list = roomRepository.getRooms(RoomQuery.getQueryByID(type), searchQuery);
                                     model.setTitle(String.format("Results for \"%s\" in room", searchQuery));
-                                    model.setPageTitle("Query Search for Room");
+                                    model.setPageTitle(String.format("(%d) Query Search for Room", RoomQuery.getQueryByID(type).getQuery()));
                                     break;
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (Room Table)");
@@ -133,6 +134,7 @@ public class DatabaseLoader implements InternalFrameListener {
                                     reservations_list = reservationRepository.getReservations(ReservationQuery.getQueryByID(type), searchQuery);
                                     model.setTitle(String.format("Results for \"%s\" in reservation", searchQuery));
                                     model.setPageTitle("Query Search for Reservation");
+                                    model.setPageTitle(String.format("(%d) Query Search for Reservation", ReservationQuery.getQueryByID(type).getQuery()));
                                     break;
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (Reservation Table)");
@@ -156,7 +158,8 @@ public class DatabaseLoader implements InternalFrameListener {
                                 default:
                                     feedbacks_list = feedbackRepository.getFeedbacks(FeedbackQuery.getQueryByID(type), searchQuery);
                                     model.setTitle(String.format("Results for \"%s\" in feedback", searchQuery));
-                                    model.setPageTitle("Query Search for Feedback");
+                                    model.setPageTitle(String.format("(%d) Query Search for Feedback", FeedbackQuery.getQueryByID(type).getQuery()));
+
                                     break;
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (Feedback Table)");
@@ -173,7 +176,7 @@ public class DatabaseLoader implements InternalFrameListener {
                             break;
                     }
                 } catch (NullPointerException ex) {
-                    data = new Object[]{Boolean.valueOf(false), String.format("\"%s\" was not found in the records", searchQuery)};
+                    data = new Object[]{Boolean.valueOf(false), String.format("\"%s\" type \"%d\" was not found in the records", searchQuery, type)};
 
                 } catch (Exception ex) {
                     errorMessage = ProgramError.getStackTrace(ex);
@@ -186,6 +189,11 @@ public class DatabaseLoader implements InternalFrameListener {
             protected void done() {
                 if ((table != null) && ((boolean) data[0])) {
                     table.view.table.setModel(((DataListTableModel) data[1]).getDtm());
+                    if (table instanceof DataListEditableController){
+                        ((DataListEditableController) table).view.reloadButton.setEnabled(true);
+                    } else {
+                        table.view.reloadButton.setEnabled(true);
+                    }
                     try {
                         table.view.getFrame().setSelected(true);
                         if (table.view.getFrame().isIcon()) {

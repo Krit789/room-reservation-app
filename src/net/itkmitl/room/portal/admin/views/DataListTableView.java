@@ -15,7 +15,7 @@ public class DataListTableView {
     public final JLabel pageTitle, pageSubtitle;
     public JTable table;
     protected final JScrollPane scrollPane;
-    public final JButton viewEntryButton;
+    public final JButton viewEntryButton, reloadButton;
 
     public DataListTableView() {
         frame = new JInternalFrame("Table", true, true, true, true);
@@ -32,10 +32,12 @@ public class DataListTableView {
         northButtonPanel = new JPanel();
         northButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
+        reloadButton = new JButton("Reload");
+        reloadButton.setIcon(new ImageIcon("resource/icons/reload-16px.png"));
         viewEntryButton = new JButton("View");
         viewEntryButton.setIcon(new ImageIcon("resource/icons/view-16px.png"));
-
         northButtonPanel.add(new JLabel("Operations"));
+        northButtonPanel.add(reloadButton);
         northButtonPanel.add(viewEntryButton);
         northPanel.add(new JSeparator(), new GBCBuilder(GridBagConstraints.HORIZONTAL,1,0.01,0,1).getGBC());
         northPanel.add(northButtonPanel, new GBCBuilder(GridBagConstraints.NONE,1,0.09,0,2, new Insets(0,5,0,5)).setAnchor(GridBagConstraints.WEST));
@@ -68,12 +70,7 @@ public class DataListTableView {
         scrollPane = new JScrollPane(table, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.createHorizontalScrollBar();
         frame.add(scrollPane, BorderLayout.CENTER);
-
-        if (this instanceof DataListEditableView){
-//            System.out.println("Editable Table");
-        }
         frame.pack();
-
     }
 
     public JInternalFrame getFrame() {

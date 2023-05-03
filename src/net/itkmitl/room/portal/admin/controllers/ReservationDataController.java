@@ -199,8 +199,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                 if (mode != 1) {
                     view.getFrame().dispose();
                 }
-                DatabaseLoader dbl = new DatabaseLoader();
-                dbl.databaseLoader(3, 99, "", true, dlec);
+                dlec.reloadData();
             }
         };
         worker.execute();

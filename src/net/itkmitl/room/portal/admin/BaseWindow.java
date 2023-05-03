@@ -170,6 +170,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
 
         // Setting Window size and boilerplate code
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        baseFrame.setLocationRelativeTo(null);
         baseFrame.setVisible(true);
         mainMenu = spawnMainMenu();
     }
