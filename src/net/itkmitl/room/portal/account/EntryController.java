@@ -8,7 +8,6 @@ import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.Controller;
-import net.itkmitl.room.portal.account.components.LoginPanel;
 import net.itkmitl.room.portal.account.components.RegisterPanel;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
@@ -16,12 +15,9 @@ import net.itkmitl.room.portal.dashboard.Dashboard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
+import java.awt.event.*;
 
-public class EntryController extends Controller implements ActionListener, ComponentListener {
+public class EntryController extends Controller implements ActionListener, ComponentListener, MouseListener {
     private final EntryView view;
     private User myUser;
     public static User currentUser;
@@ -45,16 +41,17 @@ public class EntryController extends Controller implements ActionListener, Compo
     protected void initializeListener() {
         this.getView().optionMenuItem1.addActionListener(this);
         this.getView().helpMenuItem1.addActionListener(this);
-        this.getView().loginPanel.registerButton.addActionListener(this);
+        this.getView().loginPanel.registerLabel2.addMouseListener(this);
+//        this.getView().loginPanel.registerButton.addActionListener(this);
         this.getView().loginPanel.loginButton.addActionListener(this);
         this.getView().registerPanel.registerButton.addActionListener(this);
         this.getView().registerPanel.loginButton.addActionListener(this);
-        this.getView().contentPannel.addComponentListener(this);
+        this.getView().contentPanel.addComponentListener(this);
     }
 
     protected void changeCard(String name){
-        CardLayout cl = (CardLayout)(this.getView().contentPannel.getLayout());
-        cl.show(this.getView().contentPannel, name);
+        CardLayout cl = (CardLayout)(this.getView().contentPanel.getLayout());
+        cl.show(this.getView().contentPanel, name);
     }
 
     private void RegisterDetail(RegisterPanel reg){
@@ -82,24 +79,32 @@ public class EntryController extends Controller implements ActionListener, Compo
         }
     }
     private void userLogin(String email, String password){
-        try {
-            FewQuery db = RVDB.getDB();
-            UserRepository userRepository = new UserRepository(db);
-            myUser = userRepository.getUserByEmail(email);
-            if (myUser != null) {
-                if (FewPassword.checkPassword(password, myUser.getPasswordHash())) {
-                    currentUser = myUser;
-                    this.changeFrame(this.getView(), new Dashboard());
-                }else{
-                    this.getView().loginPanel.warningLabel.setText("Invalid Password!");
+        SwingWorker worker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                try {
+                    FewQuery db = RVDB.getDB();
+                    UserRepository userRepository = new UserRepository(db);
+                    myUser = userRepository.getUserByEmail(email);
+                    if (myUser != null) {
+                        if (FewPassword.checkPassword(password, myUser.getPasswordHash())) {
+                            currentUser = myUser;
+                            changeFrame(getView(), new Dashboard());
+                        }else{
+                            getView().loginPanel.warningLabel.setText("Invalid Password!");
+                        }
+                    }else{
+                        getView().loginPanel.warningLabel.setText("User not found!");
+                    }
+                } catch (Exception ex){
+                    getView().loginPanel.warningLabel.setText("Invalid Email and/or Password!");
+                    JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
                 }
-            }else{
-                this.getView().loginPanel.warningLabel.setText("User not found!");
+                return null;
             }
-        } catch (Exception ex){
-            this.getView().loginPanel.warningLabel.setText("Invalid Email and/or Password!");
-            JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
-        }
+        };
+        worker.execute();
+
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -109,10 +114,13 @@ public class EntryController extends Controller implements ActionListener, Compo
             BaseWindow.main(arguments);
         } else if (e.getSource().equals(this.getView().helpMenuItem1)){
             new AboutDialog(this.getView());
-        } else if (e.getSource().equals(this.getView().loginPanel.registerButton)){
-            this.changeCard("Register");
-        } else if (e.getSource().equals(this.getView().loginPanel.loginButton)){
-            this.userLogin(this.getView().loginPanel.getEmail(), this.getView().loginPanel.getPassword());
+        }
+        else if (e.getSource().equals(this.getView().loginPanel.loginButton)){
+            if (getView().loginPanel.getEmail().length() > 3 && getView().loginPanel.getPassword().length() > 1){
+                this.userLogin(this.getView().loginPanel.getEmail(), this.getView().loginPanel.getPassword());
+            } else {
+                getView().loginPanel.warningLabel.setText("Email and/or Password must not be blank!");
+            }
         } else if (e.getSource().equals(this.getView().registerPanel.registerButton)){
             this.RegisterDetail(this.getView().registerPanel);
         } else if (e.getSource().equals(this.getView().registerPanel.loginButton)){
@@ -122,12 +130,12 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     @Override
     public void componentResized(ComponentEvent e) {
-        if(e.getSource().equals(this.getView().contentPannel)){
+        if(e.getSource().equals(this.getView().contentPanel)){
             Dimension size = this.getView().getSize();
             int width = size.width;
             int height = size.height;
             int paddingSize = Math.min(width, height) / 5;
-            this.getView().contentPannel.setBorder(BorderFactory.createEmptyBorder(paddingSize, paddingSize, paddingSize, paddingSize));
+            this.getView().contentPanel.setBorder(BorderFactory.createEmptyBorder(paddingSize, paddingSize, paddingSize, paddingSize));
         }
     }
 
@@ -143,6 +151,33 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     @Override
     public void componentHidden(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource().equals(getView().loginPanel.registerLabel2)){
+            this.changeCard("Register");
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 }

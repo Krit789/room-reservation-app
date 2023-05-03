@@ -7,20 +7,25 @@ import net.itkmitl.room.portal.account.components.RegisterPanel;
 import javax.swing.*;
 import java.awt.*;
 
-public class EntryView extends View{
-    protected JPanel contentPannel;
+public class EntryView extends View {
+    protected JPanel contentPanel;
     protected LoginPanel loginPanel;
     protected RegisterPanel registerPanel;
 
     @Override
     protected void initialize() {
-        contentPannel = new JPanel(new CardLayout());
-        contentPannel.setBorder(BorderFactory.createEmptyBorder(300, 200, 300, 200));
-        contentPannel.setOpaque(false);
+        contentPanel = new JPanel(new CardLayout());
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(300, 200, 300, 200));
+        contentPanel.setOpaque(false);
         loginPanel = new LoginPanel();
         registerPanel = new RegisterPanel();
-        contentPannel.add("Login", loginPanel);
-        contentPannel.add("Register", registerPanel);
-        this.add(contentPannel);
+        contentPanel.add("Login", loginPanel);
+        contentPanel.add("Register", registerPanel);
+        this.add(contentPanel);
+        this.setBackground(Color.white);
+        loginPanel.repaint();
+        loginPanel.revalidate();
+        registerPanel.repaint();
+        registerPanel.revalidate();
     }
 }

@@ -1,20 +1,13 @@
 package net.itkmitl.room.portal;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Insets;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import net.itkmitl.room.portal.account.components.OutPane;
 
@@ -30,6 +23,7 @@ public abstract class View extends JFrame {
     public JMenuItem optionMenuItem1, helpMenuItem1;
 //    public JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
     public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private ArrayList<Image> multiIcon;
 
     public View() {
         this.initializeOuterPane();
@@ -114,12 +108,22 @@ public abstract class View extends JFrame {
 
     protected void initializeFrame() {
         this.setTitle("Laew Tae Hong");
+        multiIcon = new ArrayList<>();
+        multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-128px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-64px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-56px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-48px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-40px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-20px.png").getImage());
+        multiIcon.add(new ImageIcon("resource/icons/icon-16px.png").getImage());
+        this.setIconImages(multiIcon);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setMinimumSize(new Dimension(640, 480));
+        this.setMinimumSize(new Dimension(1280, 720));
         this.setSize(screenSize);
         this.setExtendedState(this.getExtendedState() | MAXIMIZED_BOTH);
         this.setJMenuBar(menuBar);
-        this.setMinimumSize(new Dimension(910, 480));
+        this.setBackground(Color.white);
 
         this.setContentPane(outerPane);
         this.setVisible(true);
