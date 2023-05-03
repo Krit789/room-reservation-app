@@ -103,7 +103,7 @@ public class EntryController extends Controller implements ActionListener, Compo
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(this.getView().optionMenuItem1)) {
+        if (e.getSource().equals(this.getView().optionMenuItem1) && currentUser != null) {
             this.getView().dispose();
             String[] arguments = new String[]{""};
             BaseWindow.main(arguments);
