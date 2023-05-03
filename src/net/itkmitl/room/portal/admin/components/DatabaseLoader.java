@@ -28,6 +28,8 @@ import javax.swing.event.InternalFrameListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.beans.PropertyVetoException;
+import java.sql.SQLNonTransientConnectionException;
+import java.sql.SQLSyntaxErrorException;
 import java.util.ArrayList;
 
 public class DatabaseLoader implements InternalFrameListener {
@@ -64,13 +66,13 @@ public class DatabaseLoader implements InternalFrameListener {
             LoadingDialog ld = new LoadingDialog();
 
             @Override
-            protected String doInBackground() throws Exception{
+            protected String doInBackground() throws Exception {
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
-                FewQuery db = RVDB.getDB();
-                DataListTableModel model = new DataListTableModel();
                 try {
+                    FewQuery db = RVDB.getDB();
+                    DataListTableModel model = new DataListTableModel();
                     DefaultTableModel dtm;
                     switch (whichTable) {
                         case 1:
@@ -177,7 +179,8 @@ public class DatabaseLoader implements InternalFrameListener {
                     }
                 } catch (NullPointerException ex) {
                     data = new Object[]{Boolean.valueOf(false), String.format("\"%s\" type \"%d\" was not found in the records", searchQuery, type)};
-
+                } catch (SQLSyntaxErrorException | SQLNonTransientConnectionException ex) {
+                    data = new Object[]{Boolean.valueOf(false), ex.getMessage()};
                 } catch (Exception ex) {
                     errorMessage = ProgramError.getStackTrace(ex);
                     data = new Object[]{Boolean.valueOf(false), errorMessage};
@@ -189,7 +192,7 @@ public class DatabaseLoader implements InternalFrameListener {
             protected void done() {
                 if ((table != null) && ((boolean) data[0])) {
                     table.view.table.setModel(((DataListTableModel) data[1]).getDtm());
-                    if (table instanceof DataListEditableController){
+                    if (table instanceof DataListEditableController) {
                         ((DataListEditableController) table).view.reloadButton.setEnabled(true);
                     } else {
                         table.view.reloadButton.setEnabled(true);

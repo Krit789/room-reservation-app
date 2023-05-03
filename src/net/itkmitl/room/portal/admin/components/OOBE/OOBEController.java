@@ -182,6 +182,8 @@ public class OOBEController implements ActionListener, DocumentListener {
             if (currentPage + 1 == OOBEView.PANEL.length){
                 currentPage++;
                 FewConfig config = new FewConfig(new File("config.yml"));
+                config.set("timeout_time", 5);
+                config.set("never_timeout", false);
                 config.set("first_run", false);
                 config.saveConfig();
                 view.getFrame().dispose();

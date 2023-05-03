@@ -84,7 +84,6 @@ public class PreferenceWindowModel {
         config.set("port", getSqlPort());
         config.set("timeout_time", getTimeout());
         config.set("never_timeout", isNeverTimeout());
-        config.set("config_dir", getConfigFile().getAbsolutePath());
         config.saveConfig();
         System.out.println("Config Saved Successfully!");
     }

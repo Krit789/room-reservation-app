@@ -19,7 +19,7 @@ public class Repository<T extends Entity> {
         return this.query;
     }
 
-    protected ArrayList<T> maps(FewQuery result) {
+    protected ArrayList<T> maps(FewQuery result) throws Exception{
         ArrayList<T> objects = new ArrayList<>();
 
         while (result.nextBind()) {
@@ -28,14 +28,14 @@ public class Repository<T extends Entity> {
                 object.processQuery(result);
                 objects.add(object);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw e;
             }
         }
 
         return objects;
     }
 
-    protected T map(FewQuery result) {
+    protected T map(FewQuery result) throws Exception {
         ArrayList<T> tempArray = this.maps(result);
         return !tempArray.isEmpty() ? tempArray.get(0) : null;
     }
