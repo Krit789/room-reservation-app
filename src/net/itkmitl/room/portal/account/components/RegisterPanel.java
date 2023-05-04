@@ -11,13 +11,14 @@ import java.awt.*;
 import java.util.Arrays;
 
 public class RegisterPanel extends RoundedPanel {
-    private JPanel fieldPanel, operationPanel, twoColumnPanel;
-    private JTextField emailField, firstNameField, lastNameField, telField;
-    private JLabel emailText, passwordText, confirmPasswordText, registerHeader, firstNameText, lastNameText, telText, loginLabel1;
-    public JLabel loginLabel2, warningLabel;
-    private JPasswordField passwordField, confirmPasswordField;
-    public ButtonGradient registerButton;
-    public RegisterPanel(){
+    private final JPanel fieldPanel, operationPanel, twoColumnPanel;
+    private final JTextField emailField, firstNameField, lastNameField, telField;
+    private final JLabel emailText, passwordText, confirmPasswordText,registerHeader, firstNameText, lastNameText, telText, loginLabel1;
+    private final JLabel loginLabel2, warningLabel;
+    private final JPasswordField passwordField, confirmPasswordField;
+    private final ButtonGradient registerButton;
+
+    public RegisterPanel() {
         super(30, 30, Color.WHITE);
         this.setLayout(new GridBagLayout());
         emailField = new JTextField("");
@@ -97,22 +98,42 @@ public class RegisterPanel extends RoundedPanel {
         ImagePanel imagePanel = new ImagePanel(new ImageIcon("resource/account/banner/banner3-entry-25.png"));
         this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.35, 1, 0, 0).getGBC());
         this.add(fieldPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.65, 1, 1, 0, new Insets(0, 25, 0, 60)).setAnchor(GridBagConstraints.NORTHWEST));
-        this.setBorder(new EmptyBorder(25, 25, 25 ,25));
-
+        this.setBorder(new EmptyBorder(25, 25, 25, 25));
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return emailField.getText();
     }
-    public String getPassword(){
+
+    public String getPassword() {
         return Arrays.toString(passwordField.getPassword());
     }
-    public String getFirstName(){
+
+    public String getConfirmPassword() {
+        return Arrays.toString(confirmPasswordField.getPassword());
+    }
+
+    public String getFirstName() {
         return firstNameField.getText();
     }
-    public String getLastName(){
+
+    public String getLastName() {
         return lastNameField.getText();
     }
-    public String getTelephone(){
+
+    public String getTelephone() {
         return telField.getText();
+    }
+
+    public JLabel getLoginLabel2() {
+        return loginLabel2;
+    }
+
+    public JLabel getWarningLabel() {
+        return warningLabel;
+    }
+
+    public ButtonGradient getRegisterButton() {
+        return registerButton;
     }
 }

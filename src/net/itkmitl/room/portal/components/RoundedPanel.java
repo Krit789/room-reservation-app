@@ -6,7 +6,7 @@ import java.awt.*;
 public class RoundedPanel extends JPanel {
     private int arcWidth;
     private int arcHeight;
-    private Color backgroundColor;
+    private Color backgroundColor, color1, color2;
 
 
     public RoundedPanel() {
@@ -31,6 +31,14 @@ public class RoundedPanel extends JPanel {
         this.backgroundColor = backgroundColor;
         setOpaque(false);
     }
+    public RoundedPanel(int arcWidth, int arcHeight, Color color1, Color color2) {
+        this.arcWidth = arcWidth;
+        this.arcHeight = arcHeight;
+        this.backgroundColor = null;
+        this.color1 = color1;
+        this.color2 = color2;
+        setOpaque(false);
+    }
 
 
     @Override
@@ -42,7 +50,12 @@ public class RoundedPanel extends JPanel {
         graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         int width = getWidth();
         int height = getHeight();
-        graphics2D.setColor(backgroundColor);
+        if(backgroundColor != null) {
+            graphics2D.setColor(backgroundColor);
+        }else{
+            GradientPaint gra = new GradientPaint(0, 0, color1, width, 0, color2);
+            graphics2D.setPaint(gra);
+        }
         graphics2D.fillRoundRect(0, 0, width - 1, height - 1, arcs.width, arcs.height);
     }
 }

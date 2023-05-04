@@ -1,9 +1,6 @@
 package net.itkmitl.room.portal.dashboard;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import java.awt.*;
 
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -45,6 +42,7 @@ public class DashboardView extends View {
         contentPanel.add(notificationPanel);
         contentPanel.add(Box.createVerticalStrut(50));
         contentPanel.add(reservationPanel);
+        contentPanel.setOpaque(false);
 
         JPanel titleBox = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel title = new JLabel("LAEW TAE HONG");
