@@ -78,7 +78,7 @@ public class EntryController extends Controller implements ActionListener, Compo
                     FewQuery db = RVDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
                     getView().registerPanel.getWarningLabel().setIcon(new ImageIcon("resource/icons/loading-32px.gif"));
-                    if (userRepository.getUserByEmail(reg.getEmail()) == null) {
+                    if (userRepository.getExactUserByEmail(reg.getEmail()) == null) {
                         myUser = new User();
                         myUser.setEmail(reg.getEmail());
                         myUser.setPasswordHash(FewPassword.getSalt(reg.getPassword()));
@@ -117,7 +117,7 @@ public class EntryController extends Controller implements ActionListener, Compo
                     getView().loginPanel.getWarningLabel().setIcon(new ImageIcon("resource/icons/loading-32px.gif"));
                     FewQuery db = RVDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
-                    myUser = userRepository.getUserByEmail(email);
+                    myUser = userRepository.getExactUserByEmail(email);
                     if (myUser != null) {
                         if (FewPassword.checkPassword(password, myUser.getPasswordHash())) {
                             currentUser = myUser;

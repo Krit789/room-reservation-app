@@ -46,7 +46,7 @@ public class AuthController implements ActionListener {
                     FewQuery db = RVDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
 
-                    User myUser = userRepository.getUserByEmail(email);
+                    User myUser = userRepository.getExactUserByEmail(email);
                     if (myUser != null) {
                         if (FewPassword.checkPassword(password, myUser.getPasswordHash()) && myUser.getRole().getLevel() >= 10) {
                             AuthController.authenticated = true;

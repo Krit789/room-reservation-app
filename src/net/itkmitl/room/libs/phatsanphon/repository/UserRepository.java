@@ -52,9 +52,9 @@ public class UserRepository extends Repository<User> {
         } else if (queryBy == UserQuery.LASTNAME) {
             return this.getUsersByLastname(query);
         } else if (queryBy == UserQuery.EMAIL) {
-        	User data = this.getUserByEmail(query);
-        	ArrayList<User> objects = new ArrayList<>();
-			objects.add(data);
+            User data = this.getUserByEmail(query);
+            ArrayList<User> objects = new ArrayList<>();
+            objects.add(data);
             return objects;
         } else if (queryBy == UserQuery.PHONE_NUMBER) {
             return this.getUsersByTelephoneNumber(query);
@@ -87,13 +87,22 @@ public class UserRepository extends Repository<User> {
         return this.map(this.getQuery().unsafeQuery(query));
     }
 
+    public User getExactUserByEmail(String email) throws Exception {
+        FewSelectMySQL select = new FewSelectMySQL();
+        select.select("*")
+              .where("email", email)
+              .limit(1)
+              .table("user");
+        return this.map(this.getQuery().query(select));
+    }
+
     public ArrayList<User> getUsersByFirstname(String firstname) throws Exception {
         String query = String.format("SELECT * FROM `user` WHERE firstname LIKE '%%%s%%'", firstname);
 
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
-    public ArrayList<User> getUsersByTelephoneNumber(String telephoneNumber) throws Exception{
+    public ArrayList<User> getUsersByTelephoneNumber(String telephoneNumber) throws Exception {
         String query = String.format("SELECT * FROM `user` WHERE tel_num LIKE '%%%s%%'", telephoneNumber);
 
         return this.maps(this.getQuery().unsafeQuery(query));
