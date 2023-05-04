@@ -59,7 +59,7 @@ public class LoginPanel extends RoundedPanel {
         loginPanel.add(warningLabel, new GBCBuilder(GridBagConstraints.CENTER, 1, 0, 6, new Insets(5, 0, 5, 45)).getGBC());
         operationPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         operationPanel.setBackground(Color.white);
-        registerLabel1 = new JLabel("Don't have a account?");
+        registerLabel1 = new JLabel("Don't have an account?");
         registerLabel2 = new JLabel("<html><p><u>Register Here!</u></p></html>");
         registerLabel1.setFont(new Font("SansSerif", Font.PLAIN, 16));
         registerLabel2.setFont(new Font("SansSerif", Font.PLAIN, 16));

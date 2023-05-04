@@ -4,6 +4,8 @@ import java.awt.*;
 
 import javax.swing.*;
 
+import static net.itkmitl.room.portal.account.EntryController.currentUser;
+
 public class RightPanel extends JPanel {
     /**
 	 * 
@@ -22,7 +24,7 @@ public class RightPanel extends JPanel {
                 new Dimension(534, (int) this.getBounds().getSize().getHeight())
         );
 
-        nameLabel = new JLabel("Hello");
+        nameLabel = new JLabel("Hello " + currentUser.getFirstname() + " " + currentUser.getLastname());
         nameLabel.setFont(new Font("Calibri", Font.BOLD, 20));
         nameLabel.setAlignmentX(CENTER_ALIGNMENT);
         bookingPanel = new BookingStatusPanel();
