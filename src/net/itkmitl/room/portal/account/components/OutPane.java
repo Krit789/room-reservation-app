@@ -1,8 +1,6 @@
 package net.itkmitl.room.portal.account.components;
 
-import java.awt.BorderLayout;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -40,7 +38,9 @@ public class OutPane extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Image image = new ImageIcon(FewFile.getImage("account/img/Gradient.png")).getImage();
-        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2d.drawImage(image, 0, 0, getWidth(), getHeight(), this);
     }
 
     public static void main(String[] args) {

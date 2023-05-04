@@ -35,6 +35,7 @@ public class EntryController extends Controller implements ActionListener, Compo
     @Override
     protected void initialize() {
         this.initializeListener();
+        resizeContentPanel();
     }
 
     @Override
@@ -131,12 +132,16 @@ public class EntryController extends Controller implements ActionListener, Compo
     @Override
     public void componentResized(ComponentEvent e) {
         if(e.getSource().equals(this.getView().contentPanel)){
-            Dimension size = this.getView().getSize();
-            int width = size.width;
-            int height = size.height;
-            int paddingSize = Math.min(width, height) / 5;
-            this.getView().contentPanel.setBorder(BorderFactory.createEmptyBorder(paddingSize, paddingSize, paddingSize, paddingSize));
+            resizeContentPanel();
         }
+    }
+
+    protected void resizeContentPanel(){
+        Dimension size = this.getView().getSize();
+        int width = size.width;
+        int height = size.height;
+        int paddingSize = Math.min(width, height) / 5;
+        this.getView().contentPanel.setBorder(BorderFactory.createEmptyBorder(paddingSize, paddingSize, paddingSize, paddingSize));
     }
 
     @Override

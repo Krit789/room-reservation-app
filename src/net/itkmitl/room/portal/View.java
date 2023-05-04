@@ -90,22 +90,24 @@ public abstract class View extends JFrame {
         outerPane.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                // Get the current size of the panel
-                Dimension size = outerPane.getSize();
-                int width = size.width;
-                int height = size.height;
-
-                // Calculate the new padding based on the current size
-                int paddingSize = Math.min(width, height) / 5;
-                Insets newInsets = new Insets(paddingSize, paddingSize, paddingSize, paddingSize);
-
-                // Repaint the panel to update the layout
-                outerPane.revalidate();
-                outerPane.repaint();
+                repaintOuterPane();
             }
         });
     }
 
+    protected void repaintOuterPane(){
+        Dimension size = outerPane.getSize();
+        int width = size.width;
+        int height = size.height;
+
+        // Calculate the new padding based on the current size
+        int paddingSize = Math.min(width, height) / 5;
+        Insets newInsets = new Insets(paddingSize, paddingSize, paddingSize, paddingSize);
+
+        // Repaint the panel to update the layout
+        outerPane.revalidate();
+        outerPane.repaint();
+    }
     protected void initializeFrame() {
         this.setTitle("Laew Tae Hong");
         multiIcon = new ArrayList<>();
@@ -124,7 +126,6 @@ public abstract class View extends JFrame {
         this.setExtendedState(this.getExtendedState() | MAXIMIZED_BOTH);
         this.setJMenuBar(menuBar);
         this.setBackground(Color.white);
-
         this.setContentPane(outerPane);
         this.setVisible(true);
     }

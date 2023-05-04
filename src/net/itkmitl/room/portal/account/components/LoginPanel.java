@@ -7,7 +7,6 @@ import net.itkmitl.room.portal.components.RoundedPanel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.Arrays;
 
 public class LoginPanel extends RoundedPanel {
     protected JTextField emailField;
