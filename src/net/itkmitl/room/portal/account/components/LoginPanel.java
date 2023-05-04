@@ -23,7 +23,8 @@ public class LoginPanel extends RoundedPanel {
     private final ImagePanel imagePanel;
 
 
-    public LoginPanel() {
+
+    public LoginPanel(){
         super(30, 30, Color.WHITE);
         this.setLayout(new GridBagLayout());
         loginButton = new ButtonGradient();
@@ -71,16 +72,15 @@ public class LoginPanel extends RoundedPanel {
         operationPanel.add(loginButton);
         imagePanel = new ImagePanel(new ImageIcon("resource/account/banner/banner3-entry-25.png"));
         loginPanel.add(operationPanel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 7, new Insets(35, 0, 5, 45)).setAnchor(GridBagConstraints.SOUTHEAST));
-        this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.35, 1, 0, 0, new Insets(0, 0, 0, 0)).getGBC()); //Image wont go in
+        this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.35, 1, 0, 0).getGBC());
         this.add(loginPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.65, 1, 1, 0, new Insets(0, 25, 0, 60)).setAnchor(GridBagConstraints.NORTHWEST));
         this.setBorder(new EmptyBorder(25, 25, 25, 25));
     }
 
-    public String getEmail() {
+    public String getEmail(){
         return emailField.getText();
     }
-
-    public String getPassword() {
+    public String getPassword(){
         return String.valueOf(passwordField.getPassword());
     }
 
