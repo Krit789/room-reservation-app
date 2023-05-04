@@ -6,20 +6,21 @@ import net.itkmitl.room.portal.components.RoundedPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class LoginPanel extends RoundedPanel {
-    private JTextField emailField;
-    private JLabel emailText, passwordText, loginHeader, registerLabel1;
-    private JLabel warningLabel, registerLabel2;
-    private JPasswordField passwordField;
-    private JPanel loginPanel, operationPanel;
-    private ButtonGradient loginButton;
-    private ImagePanel imagePanel;
+    private final JTextField emailField;
+    private final JLabel emailText;
+    private final JLabel passwordText;
+    private final JLabel loginHeader;
+    private final JLabel registerLabel1;
+    private final JLabel warningLabel;
+    private final JLabel registerLabel2;
+    private final JPasswordField passwordField;
+    private final JPanel loginPanel;
+    private final JPanel operationPanel;
+    private final ButtonGradient loginButton;
+    private final ImagePanel imagePanel;
 
 
     public LoginPanel() {
@@ -30,7 +31,6 @@ public class LoginPanel extends RoundedPanel {
         loginButton.setFont(new Font("SansSerif", Font.PLAIN, 16));
         loginButton.setColor1(new Color(44, 102, 188));
         loginButton.setColor2(new Color(94, 135, 197));
-//        registerButton = new JButton("Register");
 
         // Email and Password Configuration
         int textSize = 16, fieldSize = 18;
@@ -42,21 +42,11 @@ public class LoginPanel extends RoundedPanel {
         passwordText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
         passwordField = new JPasswordField();
         passwordField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
-//        emailField.addActionListener(this);
-//        emailField.getDocument().addDocumentListener(this);
-//        passwordField.addActionListener(this);
-//        passwordField.getDocument().addDocumentListener(this);
 
         loginHeader = new JLabel("Login", SwingConstants.CENTER);
         loginHeader.setFont(new Font("SansSerif", Font.BOLD, 48));
-
-//        buttonBox = new JPanel();
-//        buttonBox.setLayout(new FlowLayout(FlowLayout.RIGHT));
         warningLabel = new JLabel("", SwingConstants.RIGHT);
         warningLabel.setForeground(Color.red);
-
-//        buttonBox.add(registerButton);
-//        buttonBox.add(loginButton);
 
         loginPanel = new JPanel();
         loginPanel.setBackground(Color.white);
@@ -117,26 +107,4 @@ public class LoginPanel extends RoundedPanel {
     public JLabel getRegisterLabel2() {
         return registerLabel2;
     }
-    //
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//        JTextField perfoemedField = (JTextField) e.getSource();
-//        if (perfoemedField.equals(emailField) || perfoemedField.equals(passwordField)) {
-//            loginButton.doClick();
-//        }
-//    }
-//
-//    @Override
-//    public void insertUpdate(DocumentEvent e) {
-//        warningLabel.setText("");
-//    }
-//
-//    @Override
-//    public void removeUpdate(DocumentEvent e) {
-//        warningLabel.setText("");
-//    }
-//
-//    @Override
-//    public void changedUpdate(DocumentEvent e) {
-//    }
 }
