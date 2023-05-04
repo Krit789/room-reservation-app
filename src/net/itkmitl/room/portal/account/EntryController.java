@@ -143,6 +143,7 @@ public class EntryController extends Controller implements ActionListener, Compo
         int height = size.height;
         int paddingSize = Math.min(width, height) / 5;
         this.getView().contentPanel.setBorder(BorderFactory.createEmptyBorder(paddingSize, paddingSize, paddingSize, paddingSize));
+        getView().loginPanel.operationPanel.revalidate();
     }
 
     @Override

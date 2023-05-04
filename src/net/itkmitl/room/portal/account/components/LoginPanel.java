@@ -17,7 +17,8 @@ public class LoginPanel extends RoundedPanel implements ActionListener, Document
     protected JLabel emailText, passwordText, loginHeader, registerLabel1;
     public JLabel warningLabel, registerLabel2;
     protected JPasswordField passwordField;
-    protected JPanel loginPanel, operationPanel;
+    protected JPanel loginPanel;
+    public JPanel operationPanel;
     public ButtonGradient loginButton;
     public ImagePanel imagePanel;
 

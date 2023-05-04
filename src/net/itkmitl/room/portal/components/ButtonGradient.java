@@ -86,7 +86,7 @@ public class ButtonGradient extends JButton {
         });
         timer = new Timer(40, new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
+            public void actionPerformed(ActionEvent e) {
                 if (mouseOver) {
                     if (alpha < 0.6f) {
                         alpha += 0.05f;
@@ -110,7 +110,7 @@ public class ButtonGradient extends JButton {
         });
         timerPressed = new Timer(0, new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
+            public void actionPerformed(ActionEvent e) {
                 pressedSize += getSizeSpeed();
                 if (alphaPressed <= 0) {
                     pressed = false;
@@ -123,7 +123,7 @@ public class ButtonGradient extends JButton {
     }
 
     @Override
-    protected void paintComponent(Graphics grphcs) {
+    protected void paintComponent(Graphics g) {
         int width = getWidth();
         int height = getHeight();
         BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
@@ -139,8 +139,8 @@ public class ButtonGradient extends JButton {
             paintPressed(g2);
         }
         g2.dispose();
-        grphcs.drawImage(img, 0, 0, null);
-        super.paintComponent(grphcs);
+        g.drawImage(img, 0, 0, null);
+        super.paintComponent(g);
     }
 
     private void paintPressed(Graphics2D g2) {
