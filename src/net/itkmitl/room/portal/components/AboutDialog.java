@@ -79,7 +79,7 @@ public class AboutDialog implements ActionListener, ListSelectionListener {
         okPanel = new JPanel();
         okPanel.add(okButton);
         aboutDialog.add(okPanel, new GBCBuilder(GridBagConstraints.CENTER, 1, 0.05, 0, 2).getGBC());
-
+        aboutDialog.setLocationRelativeTo(null);
         aboutDialog.setSize(320, 260);
         aboutDialog.setResizable(false);
         aboutDialog.setVisible(true);

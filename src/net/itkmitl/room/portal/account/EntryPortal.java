@@ -2,6 +2,8 @@ package net.itkmitl.room.portal.account;
 
 import net.itkmitl.room.portal.Portal;
 
+import javax.swing.*;
+
 public class EntryPortal extends Portal {
     private final EntryController controller;
 
@@ -12,8 +14,14 @@ public class EntryPortal extends Portal {
     }
 
     public static void main(String[] args) {
-        EntryPortal entryPortal = new EntryPortal();
-        entryPortal.run();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                EntryPortal entryPortal = new EntryPortal();
+                entryPortal.run();
+            }
+        });
+
     }
 
     @Override

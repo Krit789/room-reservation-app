@@ -1,18 +1,16 @@
 package net.itkmitl.room.portal.account.components;
 
-import net.itkmitl.room.portal.components.ButtonGradient;
-import net.itkmitl.room.portal.components.GBCBuilder;
-import net.itkmitl.room.portal.components.RoundedPanel;
+import net.itkmitl.room.portal.components.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class LoginPanel extends RoundedPanel {
-    private final JTextField emailField;
-    private final JLabel emailText, passwordText, loginHeader, registerLabel1;
+    private final BetterJTextField emailField;
+    private final JLabel loginHeader, registerLabel1;
     private final JLabel warningLabel, registerLabel2;
-    private final JPasswordField passwordField;
+    private final BetterJPasswordField passwordField;
     private final JPanel loginPanel, operationPanel;
     private final ButtonGradient loginButton;
     private final ImagePanel imagePanel;
@@ -27,15 +25,14 @@ public class LoginPanel extends RoundedPanel {
         loginButton.setColor2(new Color(94, 135, 197));
 
         // Email and Password Configuration
-        int textSize = 16, fieldSize = 18;
-        emailText = new JLabel("E-Mail", SwingConstants.RIGHT);
-        emailText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
-        emailField = new JTextField();
-        emailField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
-        passwordText = new JLabel("Password", SwingConstants.RIGHT);
-        passwordText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
-        passwordField = new JPasswordField();
-        passwordField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
+//        int textSize = 16, fieldSize = 18;
+//        emailText = new JLabel("E-Mail", SwingConstants.RIGHT);
+//        emailText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
+        emailField = new BetterJTextField("E-Mail");
+//        passwordText = new JLabel("Password", SwingConstants.RIGHT);
+//        passwordText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
+        passwordField = new BetterJPasswordField("Password");
+//        passwordField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
 
         loginHeader = new JLabel("Login", SwingConstants.CENTER);
         loginHeader.setFont(new Font("SansSerif", Font.BOLD, 48));
@@ -47,11 +44,11 @@ public class LoginPanel extends RoundedPanel {
         loginPanel.setBackground(Color.white);
         loginPanel.setLayout(new GridBagLayout());
         loginPanel.add(loginHeader, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 0, new Insets(15, 0, 40, 45)).setAnchor(GridBagConstraints.WEST));
-        loginPanel.add(emailText, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 1, new Insets(5, 0, 5, 45)).setAnchor(GridBagConstraints.WEST));
-        loginPanel.add(emailField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 2, new Insets(0, 0, 5, 45)).getGBC());
-        loginPanel.add(passwordText, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 3, new Insets(5, 0, 5, 45)).setAnchor(GridBagConstraints.WEST));
-        loginPanel.add(passwordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 4, new Insets(0, 0, 5, 45)).getGBC());
-        loginPanel.add(warningLabel, new GBCBuilder(GridBagConstraints.CENTER, 1, 0, 6, new Insets(5, 0, 0, 45)).getGBC());
+//        loginPanel.add(emailText, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 1, new Insets(5, 0, 5, 45)).setAnchor(GridBagConstraints.WEST));
+        loginPanel.add(emailField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 1, new Insets(0, 0, 25, 45)).getGBC());
+//        loginPanel.add(passwordText, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 3, new Insets(5, 0, 5, 45)).setAnchor(GridBagConstraints.WEST));
+        loginPanel.add(passwordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 2, new Insets(0, 0, 5, 45)).getGBC());
+        loginPanel.add(warningLabel, new GBCBuilder(GridBagConstraints.CENTER, 1, 0, 3, new Insets(5, 0, 0, 45)).getGBC());
         operationPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         operationPanel.setBackground(Color.white);
         registerLabel1 = new JLabel("Don't have an account?");
