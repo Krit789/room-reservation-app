@@ -15,10 +15,12 @@ import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.dashboard.Dashboard;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
 
-public class EntryController extends Controller implements ActionListener, ComponentListener, MouseListener {
+public class EntryController extends Controller implements ActionListener, ComponentListener, DocumentListener, MouseListener {
     private final EntryView view;
     private User myUser;
     public static User currentUser;
@@ -52,6 +54,10 @@ public class EntryController extends Controller implements ActionListener, Compo
         this.getView().helpMenuItem1.addActionListener(this);
         loginPanel.getRegisterLabel2().addMouseListener(this);
         loginPanel.getLoginButton().addActionListener(this);
+        loginPanel.getEmailField().addActionListener(this);
+        loginPanel.getEmailField().getDocument().addDocumentListener(this);
+        loginPanel.getPasswordField().addActionListener(this);
+        loginPanel.getPasswordField().getDocument().addDocumentListener(this);
         registerPanel.registerButton.addActionListener(this);
         registerPanel.loginLabel2.addMouseListener(this);
         this.getView().contentPanel.addComponentListener(this);
@@ -171,15 +177,6 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        Object objectPerformed = e.getSource();
-        if (objectPerformed.equals(getView().loginPanel.getRegisterLabel2())) {
-            this.changeCard("Register");
-        } else if (objectPerformed.equals(getView().registerPanel.loginLabel2)) {
-            this.changeCard("Login");
-        }
-    }
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -202,6 +199,16 @@ public class EntryController extends Controller implements ActionListener, Compo
     }
 
     @Override
+    public void mouseClicked(MouseEvent e) {
+        Object objectPerformed = e.getSource();
+        if (objectPerformed.equals(getView().loginPanel.getRegisterLabel2())) {
+            this.changeCard("Register");
+        } else if (objectPerformed.equals(getView().registerPanel.loginLabel2)) {
+            this.changeCard("Login");
+        }
+    }
+
+    @Override
     public void mouseExited(MouseEvent e) {
         Object objectPerformed = e.getSource();
         if (objectPerformed.equals(getView().loginPanel.getRegisterLabel2())) {
@@ -209,5 +216,20 @@ public class EntryController extends Controller implements ActionListener, Compo
         } else if (objectPerformed.equals(getView().registerPanel.loginLabel2)) {
             getView().registerPanel.loginLabel2.setForeground(new Color(94, 135, 197));
         }
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        loginPanel.getWarningLabel().setText(" ");
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        loginPanel.getWarningLabel().setText(" ");
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+
     }
 }

@@ -11,10 +11,11 @@ public class EntryPortal extends Portal {
         this.controller = new EntryController(view);
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         EntryPortal entryPortal = new EntryPortal();
         entryPortal.run();
     }
+
     @Override
     public void run() {
         controller.start();
