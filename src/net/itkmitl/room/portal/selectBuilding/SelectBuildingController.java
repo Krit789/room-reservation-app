@@ -3,6 +3,8 @@ package net.itkmitl.room.portal.selectBuilding;
 import net.itkmitl.room.portal.Controller;
 import net.itkmitl.room.portal.account.EntryView;
 import net.itkmitl.room.portal.components.LeftSelectorBox;
+import net.itkmitl.room.portal.components.LeftSelectorPanel;
+import net.itkmitl.room.portal.dashboard.Dashboard;
 import net.itkmitl.room.portal.dashboard.DashboardView;
 
 import java.awt.event.ActionEvent;
@@ -33,6 +35,7 @@ public class SelectBuildingController extends Controller implements ActionListen
         for(int i = this.getView().getSelectorPanel().leftBoxHolder.size() - 1; i >= 0; i--) {
             this.getView().getSelectorPanel().leftBoxHolder.get(i).addActionListener(this);
         }
+        ((LeftSelectorPanel)this.getView().leftSelectorPanel).backButton.addActionListener(this);
     }
 
     @Override
@@ -45,6 +48,8 @@ public class SelectBuildingController extends Controller implements ActionListen
                     //put roomBox query thingy here
                 }
             }
+        }else if(e.getSource().equals(((LeftSelectorPanel)this.getView().leftSelectorPanel).backButton)){
+            changeFrame(getView(), new Dashboard());
         }
     }
 }

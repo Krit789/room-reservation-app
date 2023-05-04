@@ -21,8 +21,11 @@ import javax.swing.border.BevelBorder;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import net.itkmitl.room.GUIStarter;
 import net.itkmitl.room.portal.admin.components.OOBE.OOBEController;
 import net.itkmitl.room.portal.admin.controllers.AuthController;
@@ -141,7 +144,8 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
 
 
         desktop = new JDesktopPane();
-        desktop.setBackground(new Color(51, 126, 185));
+//        desktop.setBackground(new Color(51, 126, 185));
+        desktop.setBackground(new Color(32, 34, 53));
         baseFrame.add(desktop, BorderLayout.CENTER);
 
         // create the status bar panel
@@ -363,7 +367,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
             System.setProperty("apple.awt.application.name", "Laew Tae Hong");
             System.setProperty("apple.awt.application.appearance", "system");
             try {
-                UIManager.setLookAndFeel(new FlatIntelliJLaf());
+                UIManager.setLookAndFeel(new FlatMacDarkLaf());
             } catch (Exception ignored) {
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
             }
