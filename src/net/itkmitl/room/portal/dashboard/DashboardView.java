@@ -2,9 +2,7 @@ package net.itkmitl.room.portal.dashboard;
 
 import java.awt.*;
 
-import javax.swing.Box;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import net.itkmitl.room.portal.View;
@@ -45,6 +43,7 @@ public class DashboardView extends View {
         contentPanel.setOpaque(false);
 
         JPanel titleBox = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JLabel lthIcon = new JLabel(new ImageIcon("resource/icons/icon-64px.png"));
         JLabel title = new JLabel("LAEW TAE HONG");
 
         titleBox.setOpaque(false);
@@ -53,6 +52,8 @@ public class DashboardView extends View {
         title.setFont(new Font("Cousine", Font.BOLD, 29));
         title.setForeground(Color.WHITE);
 
+        titleBox.add(lthIcon);
+        titleBox.add(Box.createHorizontalStrut(10));
         titleBox.add(title);
 
         mainPanel.add(titleBox, BorderLayout.NORTH);
