@@ -1,13 +1,14 @@
 package net.itkmitl.room.libs.phatsanphon;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import javax.swing.*;
 
 public class UIConfig {
     public static void setLookAndFeel() {
         try {
-            UIManager.setLookAndFeel(new FlatIntelliJLaf());
+            UIManager.setLookAndFeel(new FlatMacLightLaf());
             System.setProperty( "apple.laf.useScreenMenuBar", "true" );
             System.setProperty( "apple.awt.application.name", "Laew Tae Hong Management" );
             System.setProperty( "apple.awt.application.appearance", "system" );

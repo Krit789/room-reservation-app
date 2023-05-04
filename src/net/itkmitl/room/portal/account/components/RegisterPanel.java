@@ -82,6 +82,8 @@ public class RegisterPanel extends RoundedPanel {
         operationPanel.setBackground(Color.white);
         operationPanel.add(loginLabel1);
         operationPanel.add(loginLabel2);
+        loginLabel2.setForeground(new Color(94, 135, 197));
+
         operationPanel.add(Box.createRigidArea(new Dimension(35, 0)));
         operationPanel.add(registerButton);
 

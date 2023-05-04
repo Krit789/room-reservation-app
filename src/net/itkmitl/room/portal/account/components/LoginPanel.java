@@ -8,12 +8,13 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class LoginPanel extends RoundedPanel implements ActionListener, DocumentListener {
+public class LoginPanel extends RoundedPanel {
     protected JTextField emailField;
     protected JLabel emailText, passwordText, loginHeader, registerLabel1;
     public JLabel warningLabel, registerLabel2;
     protected JPasswordField passwordField;
-    protected JPanel loginPanel, operationPanel;
+    protected JPanel loginPanel;
+    public JPanel operationPanel;
     public ButtonGradient loginButton;
     public ImagePanel imagePanel;
 

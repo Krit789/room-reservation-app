@@ -43,10 +43,9 @@ public class EntryController extends Controller implements ActionListener, Compo
         this.getView().optionMenuItem1.addActionListener(this);
         this.getView().helpMenuItem1.addActionListener(this);
         this.getView().loginPanel.registerLabel2.addMouseListener(this);
-//        this.getView().loginPanel.registerButton.addActionListener(this);
         this.getView().loginPanel.loginButton.addActionListener(this);
         this.getView().registerPanel.registerButton.addActionListener(this);
-        this.getView().registerPanel.loginButton.addActionListener(this);
+        this.getView().registerPanel.loginLabel2.addMouseListener(this);
         this.getView().contentPanel.addComponentListener(this);
     }
 
@@ -122,10 +121,8 @@ public class EntryController extends Controller implements ActionListener, Compo
             } else {
                 getView().loginPanel.warningLabel.setText("Email and/or Password must not be blank!");
             }
-        } else if (e.getSource().equals(this.getView().registerPanel.registerButton)){
+        } else if (e.getSource().equals(this.getView().registerPanel.registerButton)) {
             this.RegisterDetail(this.getView().registerPanel);
-        } else if (e.getSource().equals(this.getView().registerPanel.loginButton)){
-            this.changeCard("Login");
         }
     }
 
@@ -164,7 +161,10 @@ public class EntryController extends Controller implements ActionListener, Compo
     public void mouseClicked(MouseEvent e) {
         if (e.getSource().equals(getView().loginPanel.registerLabel2)){
             this.changeCard("Register");
+        } else if (e.getSource().equals(getView().registerPanel.loginLabel2)){
+            this.changeCard("Login");
         }
+
     }
 
     @Override
