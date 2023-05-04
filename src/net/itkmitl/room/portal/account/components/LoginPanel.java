@@ -6,19 +6,14 @@ import net.itkmitl.room.portal.components.RoundedPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class LoginPanel extends RoundedPanel implements ActionListener, DocumentListener {
     protected JTextField emailField;
     protected JLabel emailText, passwordText, loginHeader, registerLabel1;
     public JLabel warningLabel, registerLabel2;
     protected JPasswordField passwordField;
-    protected JPanel loginPanel;
-    public JPanel operationPanel;
+    protected JPanel loginPanel, operationPanel;
     public ButtonGradient loginButton;
     public ImagePanel imagePanel;
 
@@ -32,7 +27,6 @@ public class LoginPanel extends RoundedPanel implements ActionListener, Document
         loginButton.setFont(new Font("SansSerif", Font.PLAIN, 16));
         loginButton.setColor1(new Color(44, 102, 188));
         loginButton.setColor2(new Color(94, 135, 197));
-//        registerButton = new JButton("Register");
 
         // Email and Password Configuration
         int textSize = 16, fieldSize = 18;
@@ -44,21 +38,11 @@ public class LoginPanel extends RoundedPanel implements ActionListener, Document
         passwordText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
         passwordField = new JPasswordField();
         passwordField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
-        emailField.addActionListener(this);
-        emailField.getDocument().addDocumentListener(this);
-        passwordField.addActionListener(this);
-        passwordField.getDocument().addDocumentListener(this);
 
         loginHeader = new JLabel("Login", SwingConstants.CENTER);
         loginHeader.setFont(new Font("SansSerif", Font.BOLD, 48));
-
-//        buttonBox = new JPanel();
-//        buttonBox.setLayout(new FlowLayout(FlowLayout.RIGHT));
         warningLabel = new JLabel("", SwingConstants.RIGHT);
         warningLabel.setForeground(Color.red);
-
-//        buttonBox.add(registerButton);
-//        buttonBox.add(loginButton);
 
         loginPanel = new JPanel();
         loginPanel.setBackground(Color.white);
@@ -83,37 +67,39 @@ public class LoginPanel extends RoundedPanel implements ActionListener, Document
         operationPanel.add(loginButton);
         imagePanel = new ImagePanel(new ImageIcon("resource/account/banner/banner3-entry-25.png"));
         loginPanel.add(operationPanel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 7, new Insets(35, 0, 5, 45)).setAnchor(GridBagConstraints.SOUTHEAST));
-        this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.35, 1, 0, 0).getGBC());
+        this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.35, 1, 0, 0, new Insets(0, 0, 0, 0)).getGBC()); //Image wont go in
         this.add(loginPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.65, 1, 1, 0, new Insets(0, 25, 0, 60)).setAnchor(GridBagConstraints.NORTHWEST));
         this.setBorder(new EmptyBorder(25, 25, 25, 25));
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return emailField.getText();
     }
     public String getPassword(){
         return String.valueOf(passwordField.getPassword());
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        JTextField perfoemedField = (JTextField) e.getSource();
-        if (perfoemedField.equals(emailField) || perfoemedField.equals(passwordField)) {
-            loginButton.doClick();
-        }
+    public JTextField getEmailField() {
+        return emailField;
     }
 
-    @Override
-    public void insertUpdate(DocumentEvent e) {
-        warningLabel.setText("");
+    public JPasswordField getPasswordField() {
+        return passwordField;
     }
 
-    @Override
-    public void removeUpdate(DocumentEvent e) {
-        warningLabel.setText("");
+    public ButtonGradient getLoginButton() {
+        return loginButton;
     }
 
-    @Override
-    public void changedUpdate(DocumentEvent e) {
+    public JLabel getWarningLabel() {
+        return warningLabel;
+    }
+
+    public JLabel getRegisterLabel1() {
+        return registerLabel1;
+    }
+
+    public JLabel getRegisterLabel2() {
+        return registerLabel2;
     }
 }

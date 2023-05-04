@@ -22,19 +22,16 @@ public class EntryController extends Controller implements ActionListener, Compo
     private User myUser;
     public static User currentUser;
 
-    public EntryController(EntryView view) {
+    public EntryController(EntryView view){
         this.view = view;
     }
-
-    public EntryView getView() {
+    public EntryView getView(){
         return view;
     }
-
     @Override
     protected void start() {
         this.initialize();
     }
-
     @Override
     protected void initialize() {
         this.initializeListener();
@@ -46,23 +43,24 @@ public class EntryController extends Controller implements ActionListener, Compo
         this.getView().optionMenuItem1.addActionListener(this);
         this.getView().helpMenuItem1.addActionListener(this);
         this.getView().loginPanel.registerLabel2.addMouseListener(this);
+//        this.getView().loginPanel.registerButton.addActionListener(this);
         this.getView().loginPanel.loginButton.addActionListener(this);
         this.getView().registerPanel.registerButton.addActionListener(this);
-        this.getView().registerPanel.loginLabel2.addMouseListener(this);
+        this.getView().registerPanel.loginButton.addActionListener(this);
         this.getView().contentPanel.addComponentListener(this);
     }
 
-    protected void changeCard(String name) {
-        CardLayout cl = (CardLayout) (this.getView().contentPanel.getLayout());
+    protected void changeCard(String name){
+        CardLayout cl = (CardLayout)(this.getView().contentPanel.getLayout());
         cl.show(this.getView().contentPanel, name);
     }
 
-    private void RegisterDetail(RegisterPanel reg) {
+    private void RegisterDetail(RegisterPanel reg){
         //temporary placeholder
         try {
             FewQuery db = RVDB.getDB();
             UserRepository userRepository = new UserRepository(db);
-            if (userRepository.getUserByEmail(reg.getEmail()) == null) {
+            if(userRepository.getUserByEmail(reg.getEmail()) == null) {
                 myUser = new User();
                 myUser.setEmail(reg.getEmail());
                 myUser.setPasswordHash(FewPassword.getSalt(reg.getPassword()));
@@ -73,16 +71,15 @@ public class EntryController extends Controller implements ActionListener, Compo
                 userRepository.createUser(myUser);
                 currentUser = myUser;
                 this.changeFrame(this.getView(), new Dashboard());
-            } else {
+            }else{
                 this.getView().registerPanel.warningLabel.setText("E-mail already in use!");
             }
-        } catch (Exception ex) {
+        } catch (Exception ex){
             this.getView().registerPanel.warningLabel.setText("Invalid Information!");
             JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-    private void userLogin(String email, String password) {
+    private void userLogin(String email, String password){
         SwingWorker worker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
@@ -94,13 +91,13 @@ public class EntryController extends Controller implements ActionListener, Compo
                         if (FewPassword.checkPassword(password, myUser.getPasswordHash())) {
                             currentUser = myUser;
                             changeFrame(getView(), new Dashboard());
-                        } else {
+                        }else{
                             getView().loginPanel.warningLabel.setText("Invalid Password!");
                         }
-                    } else {
+                    }else{
                         getView().loginPanel.warningLabel.setText("User not found!");
                     }
-                } catch (Exception ex) {
+                } catch (Exception ex){
                     getView().loginPanel.warningLabel.setText("Invalid Email and/or Password!");
                     JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -110,34 +107,36 @@ public class EntryController extends Controller implements ActionListener, Compo
         worker.execute();
 
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(this.getView().optionMenuItem1) && currentUser != null) {
             this.getView().dispose();
             String[] arguments = new String[]{""};
             BaseWindow.main(arguments);
-        } else if (e.getSource().equals(this.getView().helpMenuItem1)) {
+        } else if (e.getSource().equals(this.getView().helpMenuItem1)){
             new AboutDialog(this.getView());
-        } else if (e.getSource().equals(this.getView().loginPanel.loginButton)) {
-            if (getView().loginPanel.getEmail().length() > 3 && getView().loginPanel.getPassword().length() > 1) {
+        }
+        else if (e.getSource().equals(this.getView().loginPanel.loginButton)){
+            if (getView().loginPanel.getEmail().length() > 3 && getView().loginPanel.getPassword().length() > 1){
                 this.userLogin(this.getView().loginPanel.getEmail(), this.getView().loginPanel.getPassword());
             } else {
                 getView().loginPanel.warningLabel.setText("Email and/or Password must not be blank!");
             }
-        } else if (e.getSource().equals(this.getView().registerPanel.registerButton)) {
+        } else if (e.getSource().equals(this.getView().registerPanel.registerButton)){
             this.RegisterDetail(this.getView().registerPanel);
+        } else if (e.getSource().equals(this.getView().registerPanel.loginButton)){
+            this.changeCard("Login");
         }
     }
 
     @Override
     public void componentResized(ComponentEvent e) {
-        if (e.getSource().equals(this.getView().contentPanel)) {
+        if(e.getSource().equals(this.getView().contentPanel)){
             resizeContentPanel();
         }
     }
 
-    protected void resizeContentPanel() {
+    protected void resizeContentPanel(){
         Dimension size = this.getView().getSize();
         int width = size.width;
         int height = size.height;
@@ -163,10 +162,8 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource().equals(getView().loginPanel.registerLabel2)) {
+        if (e.getSource().equals(getView().loginPanel.registerLabel2)){
             this.changeCard("Register");
-        } else if (e.getSource().equals(getView().registerPanel.loginLabel2)) {
-            this.changeCard("Login");
         }
     }
 
@@ -182,19 +179,11 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if (e.getSource().equals(getView().loginPanel.registerLabel2)) {
-            getView().loginPanel.registerLabel2.setForeground(new Color(25, 93, 196));
-        } else if (e.getSource().equals(getView().registerPanel.loginLabel2)) {
-            getView().registerPanel.loginLabel2.setForeground(new Color(25, 93, 196));
-        }
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        if (e.getSource().equals(getView().loginPanel.registerLabel2)) {
-            getView().loginPanel.registerLabel2.setForeground(new Color(94, 135, 197));
-        } else if (e.getSource().equals(getView().registerPanel.loginLabel2)) {
-            getView().registerPanel.loginLabel2.setForeground(new Color(94, 135, 197));
-        }
+
     }
 }
