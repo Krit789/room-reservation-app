@@ -31,6 +31,7 @@ public class RoundedPanel extends JPanel {
         this.backgroundColor = backgroundColor;
         setOpaque(false);
     }
+
     public RoundedPanel(int arcWidth, int arcHeight, Color color1, Color color2) {
         this.arcWidth = arcWidth;
         this.arcHeight = arcHeight;
@@ -50,9 +51,9 @@ public class RoundedPanel extends JPanel {
         graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         int width = getWidth();
         int height = getHeight();
-        if(backgroundColor != null) {
+        if (backgroundColor != null) {
             graphics2D.setColor(backgroundColor);
-        }else{
+        } else if (color1 != null && color2 != null) {
             GradientPaint gra = new GradientPaint(0, 0, color1, width, 0, color2);
             graphics2D.setPaint(gra);
         }
