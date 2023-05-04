@@ -8,6 +8,7 @@ import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.Controller;
+import net.itkmitl.room.portal.account.components.LoginPanel;
 import net.itkmitl.room.portal.account.components.RegisterPanel;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
@@ -21,9 +22,13 @@ public class EntryController extends Controller implements ActionListener, Compo
     private final EntryView view;
     private User myUser;
     public static User currentUser;
+    private LoginPanel loginPanel;
+    private RegisterPanel registerPanel;
 
     public EntryController(EntryView view) {
         this.view = view;
+        loginPanel = getView().loginPanel;
+        registerPanel = getView().registerPanel;
     }
 
     public EntryView getView() {
@@ -45,10 +50,10 @@ public class EntryController extends Controller implements ActionListener, Compo
     protected void initializeListener() {
         this.getView().optionMenuItem1.addActionListener(this);
         this.getView().helpMenuItem1.addActionListener(this);
-        this.getView().loginPanel.registerLabel2.addMouseListener(this);
-        this.getView().loginPanel.loginButton.addActionListener(this);
-        this.getView().registerPanel.registerButton.addActionListener(this);
-        this.getView().registerPanel.loginLabel2.addMouseListener(this);
+        loginPanel.getRegisterLabel2().addMouseListener(this);
+        loginPanel.getLoginButton().addActionListener(this);
+        registerPanel.registerButton.addActionListener(this);
+        registerPanel.loginLabel2.addMouseListener(this);
         this.getView().contentPanel.addComponentListener(this);
     }
 
@@ -74,10 +79,10 @@ public class EntryController extends Controller implements ActionListener, Compo
                 currentUser = myUser;
                 this.changeFrame(this.getView(), new Dashboard());
             } else {
-                this.getView().registerPanel.warningLabel.setText("E-mail already in use!");
+                registerPanel.warningLabel.setText("E-mail already in use!");
             }
         } catch (Exception ex) {
-            this.getView().registerPanel.warningLabel.setText("Invalid Information!");
+            registerPanel.warningLabel.setText("Invalid Information!");
             JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -95,13 +100,13 @@ public class EntryController extends Controller implements ActionListener, Compo
                             currentUser = myUser;
                             changeFrame(getView(), new Dashboard());
                         } else {
-                            getView().loginPanel.warningLabel.setText("Invalid Password!");
+                            getView().loginPanel.getWarningLabel().setText("Invalid Password!");
                         }
                     } else {
-                        getView().loginPanel.warningLabel.setText("User not found!");
+                        getView().loginPanel.getWarningLabel().setText("User not found!");
                     }
                 } catch (Exception ex) {
-                    getView().loginPanel.warningLabel.setText("Invalid Email and/or Password!");
+                    getView().loginPanel.getWarningLabel().setText("Invalid Email and/or Password!");
                     JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
                 }
                 return null;
@@ -113,26 +118,32 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(this.getView().optionMenuItem1) && currentUser != null) {
+        Object objectPerformed = e.getSource();
+        if (objectPerformed.equals(this.getView().optionMenuItem1) && currentUser != null) {
             this.getView().dispose();
             String[] arguments = new String[]{""};
             BaseWindow.main(arguments);
-        } else if (e.getSource().equals(this.getView().helpMenuItem1)) {
+        } else if (objectPerformed.equals(this.getView().helpMenuItem1)) {
             new AboutDialog(this.getView());
-        } else if (e.getSource().equals(this.getView().loginPanel.loginButton)) {
+        } else if (objectPerformed.equals(loginPanel.getLoginButton())) {
             if (getView().loginPanel.getEmail().length() > 3 && getView().loginPanel.getPassword().length() > 1) {
-                this.userLogin(this.getView().loginPanel.getEmail(), this.getView().loginPanel.getPassword());
+                this.userLogin(loginPanel.getEmail(), loginPanel.getPassword());
             } else {
-                getView().loginPanel.warningLabel.setText("Email and/or Password must not be blank!");
+                getView().loginPanel.getWarningLabel().setText("Email and/or Password must not be blank!");
             }
-        } else if (e.getSource().equals(this.getView().registerPanel.registerButton)) {
-            this.RegisterDetail(this.getView().registerPanel);
+        } else if (objectPerformed.equals(registerPanel.registerButton)) {
+            this.RegisterDetail(registerPanel);
+        }
+        // Login TextField and PasswordField
+        else if (objectPerformed.equals(loginPanel.getEmailField()) || objectPerformed.equals(loginPanel.getPasswordField())) {
+            loginPanel.getLoginButton().doClick();
         }
     }
 
     @Override
     public void componentResized(ComponentEvent e) {
-        if (e.getSource().equals(this.getView().contentPanel)) {
+        Object objectPerformed = e.getSource();
+        if (objectPerformed.equals(this.getView().contentPanel)) {
             resizeContentPanel();
         }
     }
@@ -162,9 +173,10 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource().equals(getView().loginPanel.registerLabel2)) {
+        Object objectPerformed = e.getSource();
+        if (objectPerformed.equals(getView().loginPanel.getRegisterLabel2())) {
             this.changeCard("Register");
-        } else if (e.getSource().equals(getView().registerPanel.loginLabel2)) {
+        } else if (objectPerformed.equals(getView().registerPanel.loginLabel2)) {
             this.changeCard("Login");
         }
     }
@@ -181,18 +193,20 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        if (e.getSource().equals(getView().loginPanel.registerLabel2)) {
-            getView().loginPanel.registerLabel2.setForeground(new Color(25, 93, 196));
-        } else if (e.getSource().equals(getView().registerPanel.loginLabel2)) {
+        Object objectPerformed = e.getSource();
+        if (objectPerformed.equals(getView().loginPanel.getRegisterLabel2())) {
+            getView().loginPanel.getRegisterLabel2().setForeground(new Color(25, 93, 196));
+        } else if (objectPerformed.equals(getView().registerPanel.loginLabel2)) {
             getView().registerPanel.loginLabel2.setForeground(new Color(25, 93, 196));
         }
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        if (e.getSource().equals(getView().loginPanel.registerLabel2)) {
-            getView().loginPanel.registerLabel2.setForeground(new Color(94, 135, 197));
-        } else if (e.getSource().equals(getView().registerPanel.loginLabel2)) {
+        Object objectPerformed = e.getSource();
+        if (objectPerformed.equals(getView().loginPanel.getRegisterLabel2())) {
+            getView().loginPanel.getRegisterLabel2().setForeground(new Color(94, 135, 197));
+        } else if (objectPerformed.equals(getView().registerPanel.loginLabel2)) {
             getView().registerPanel.loginLabel2.setForeground(new Color(94, 135, 197));
         }
     }
