@@ -1,13 +1,23 @@
 package net.itkmitl.room.portal.components;
 
+import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.libs.peeranat.FewDB;
+import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.phatsanphon.entity.Room;
+import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
+import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LeftSelectorPanel extends JPanel {
     public JLabel parentCategory;
-    private JButton backButton;
-    public ArrayList<LeftSelectorBox> boxHolder = new ArrayList<LeftSelectorBox>();
+    public JButton backButton;
+    public ArrayList<LeftSelectorBox> leftBoxHolder = new ArrayList<LeftSelectorBox>();
+    public Set<String> buildingList = new HashSet<>();
 
     public LeftSelectorPanel(){
         super();
@@ -17,7 +27,7 @@ public class LeftSelectorPanel extends JPanel {
                 new Dimension(534, (int) this.getBounds().getSize().getHeight())
         );
         this.setOpaque(false);
-        parentCategory = new JLabel("Test Category");
+        parentCategory = new JLabel("Building");
         parentCategory.setFont(new Font("Calibri", Font.BOLD, 18));
         parentCategory.setForeground(Color.WHITE);
         backButton = new JButton("Back");
@@ -26,15 +36,35 @@ public class LeftSelectorPanel extends JPanel {
         backButton.setBorderPainted(false);
         backButton.setForeground(Color.WHITE);
         this.add(parentCategory);
-
-        //test importing floor data(idk how this database work so have this for now)
-        for(int i = 0; i < 5; i++) {
-            LeftSelectorBox box = new LeftSelectorBox("Test Faculty " + i, i);
-            this.add(box);
-            boxHolder.add(box);
+        try {
+            FewQuery db = RVDB.getDB();
+            RoomRepository roomRepository = new RoomRepository(db);
+            this.getBuilding(roomRepository);
+            int i = 0;
+            for(String buildingName: buildingList) {
+                LeftSelectorBox box = new LeftSelectorBox(buildingName, i);
+                this.add(box);
+                leftBoxHolder.add(box);
+                i++;
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+        //test importing floor data(idk how this database work so have this for now)
+
         //would be in a loop for all component to add
 
         this.add(backButton);
+    }
+    public void getBuilding(RoomRepository roomRepository){
+        try {
+            ArrayList<Room> roomsList = roomRepository.getRooms();
+            for (Room room : roomsList) {
+                buildingList.add(room.getBuilding());
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

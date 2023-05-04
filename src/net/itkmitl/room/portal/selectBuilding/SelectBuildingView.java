@@ -42,4 +42,8 @@ public class SelectBuildingView extends View {
     public LeftSelectorPanel getSelectorPanel(){
         return (LeftSelectorPanel) this.leftSelectorPanel;
     }
+
+    public MainPanel getMainPanel() {
+        return (MainPanel) mainPanel;
+    }
 }
