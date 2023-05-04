@@ -14,7 +14,7 @@ public class ReservationPanel extends RoundedPanel {
 
     public JLabel reservationTextLabel;
 
-    public static final String[] ROUTES = {"History", "Booking", "Calendar"};
+    public static final String[] ROUTES = {"History", "Booking"};
 
     public ReservationPanel() {
         super(new GridLayout(1, 3));
