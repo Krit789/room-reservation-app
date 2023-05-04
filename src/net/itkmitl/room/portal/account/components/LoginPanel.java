@@ -104,12 +104,12 @@ public class LoginPanel extends RoundedPanel implements ActionListener, Document
 
     @Override
     public void insertUpdate(DocumentEvent e) {
-        warningLabel.setText("");
+        warningLabel.setText(" ");
     }
 
     @Override
     public void removeUpdate(DocumentEvent e) {
-        warningLabel.setText("");
+        warningLabel.setText(" ");
     }
 
     @Override
