@@ -29,16 +29,17 @@ public class RegisterPanel extends RoundedPanel {
         telField = new BetterJTextField("Phone Number");
 
         registerHeader = new JLabel("Register");
-        registerHeader.setFont(new Font("SansSerif", Font.BOLD, 48));
+        registerHeader.setFont(new Font("Cousine", Font.BOLD, 48));
 
         loginLabel1 = new JLabel("Already have a account?");
         loginLabel2 = new JLabel("<html><p><u>Login Here!</u></p></html>");
-        loginLabel1.setFont(new Font("SansSerif", Font.PLAIN, textSize));
-        loginLabel2.setFont(new Font("SansSerif", Font.PLAIN, textSize));
+        loginLabel1.setFont(new Font("Cousine", Font.BOLD, textSize));
+        loginLabel1.setForeground(Color.LIGHT_GRAY);
+        loginLabel2.setFont(new Font("Cousine", Font.BOLD, textSize));
 
         registerButton = new ButtonGradient();
         registerButton.setText("Register");
-        registerButton.setFont(new Font("SansSerif", Font.PLAIN, textSize));
+        registerButton.setFont(new Font("Cousine", Font.BOLD, textSize));
         registerButton.setColor1(new Color(44, 102, 188));
         registerButton.setColor2(new Color(94, 135, 197));
 
@@ -75,8 +76,8 @@ public class RegisterPanel extends RoundedPanel {
         fieldPanel.add(operationPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 11, new Insets(5, 0, 5, 45)).getGBC());
         fieldPanel.setBackground(Color.white);
         ImagePanel imagePanel = new ImagePanel(new ImageIcon("resource/account/banner/banner3-entry-25.png"));
-        this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.35, 1, 0, 0).getGBC());
-        this.add(fieldPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.65, 1, 1, 0, new Insets(0, 25, 0, 60)).setAnchor(GridBagConstraints.NORTHWEST));
+        this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.37, 1, 0, 0).getGBC());
+        this.add(fieldPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.63, 1, 1, 0, new Insets(0, 25, 0, 60)).setAnchor(GridBagConstraints.NORTHWEST));
         this.setBorder(new EmptyBorder(25, 25, 25, 25));
     }
 

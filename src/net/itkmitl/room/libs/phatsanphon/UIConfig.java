@@ -4,6 +4,8 @@ import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.File;
 
 public class UIConfig {
     public static void setLookAndFeel() {

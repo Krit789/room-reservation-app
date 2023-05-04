@@ -20,7 +20,7 @@ public class BetterJPasswordField extends JPasswordField implements MouseListene
 
     public BetterJPasswordField(String placeholderText) {
         this.placeholderText = placeholderText;
-        this.setFont(new Font("Sanserif", Font.PLAIN, 24));
+        this.setFont(new Font("Cousine", Font.PLAIN, 24));
         Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, borderColor);
         setBorder(border);
         setEchoChar((char) 0);

@@ -1,6 +1,7 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
 import net.itkmitl.room.db.RVDB;
 import net.itkmitl.room.enums.EnumDBSchema;
@@ -149,7 +150,7 @@ public class OOBEController implements ActionListener, DocumentListener {
                     admin.setFirstname("Laew Tae");
                     admin.setLastname("Hong");
                     admin.setRole(EnumUserRole.ADMIN);
-                    admin.setEmail("");
+                    admin.setEmail("admin@lth.org");
                     admin.setActive(true);
                     admin.setTelephoneNumber("0999999999");
                     myUser.createUser(admin);
@@ -266,7 +267,7 @@ public class OOBEController implements ActionListener, DocumentListener {
             System.setProperty("apple.awt.application.name", "Laew Tae Hong");
             System.setProperty("apple.awt.application.appearance", "system");
             try {
-                UIManager.setLookAndFeel(new FlatIntelliJLaf());
+                UIManager.setLookAndFeel(new FlatMacLightLaf());
             } catch (Exception ignored) {
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
             }

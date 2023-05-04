@@ -5,31 +5,54 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.font.TextAttribute;
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 import javax.swing.*;
 
+import net.itkmitl.room.portal.account.EntryController;
 import net.itkmitl.room.portal.account.components.OutPane;
 
 public abstract class View extends JFrame {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8075338715312313006L;
-	public OutPane outerPane;
+     *
+     */
+    private static final long serialVersionUID = -8075338715312313006L;
+    public OutPane outerPane;
     public JMenuBar menuBar;
-    public JMenu fileMenu, windowMenu, optionMenu, helpMenu;
-    public JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
+    public JMenu fileMenu, optionMenu, helpMenu;
+    public JMenuItem fileMenuItem3;
     public JMenuItem optionMenuItem1, helpMenuItem1;
-//    public JMenuItem windowMenuItem1, windowMenuItem2, windowMenuItem3;
     public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private ArrayList<Image> multiIcon;
 
     public View() {
         this.initializeOuterPane();
         this.initializeMenuBar();
+        initializeFont();
         this.initializeFrame();
         this.initialize();
+    }
+
+    protected void initializeFont() {
+        try {
+            Font cousine = Font.createFont(Font.TRUETYPE_FONT, new File("resource/fonts/Cousine-Regular.ttf"));
+            cousine = cousine.deriveFont(16f);
+
+            Font cousineBold = Font.createFont(Font.TRUETYPE_FONT, new File("resource/fonts/Cousine-Bold.ttf"));
+            cousineBold = cousineBold.deriveFont(16f);
+
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(cousine);
+            ge.registerFont(cousineBold);
+        } catch (Exception e) {
+            System.out.println("UIConfig.java: " + e.getMessage());
+        }
     }
 
     protected void initializeMenuBar() {
@@ -37,13 +60,10 @@ public abstract class View extends JFrame {
         // Menu Components declaration
         menuBar = new JMenuBar();
         fileMenu = new JMenu("File");
-        optionMenu = new JMenu("Options");
-        windowMenu = new JMenu("Window");
         helpMenu = new JMenu("Help");
+        optionMenu = new JMenu("Option");
 
         // 'File' Menu Components declaration
-        fileMenuItem1 = new JMenuItem("New");
-        fileMenuItem2 = new JMenuItem("View Rooms");
         fileMenuItem3 = new JMenuItem("Exit");
         fileMenuItem3.addActionListener(new ActionListener() {
             @Override
@@ -51,32 +71,20 @@ public abstract class View extends JFrame {
                 System.exit(0);
             }
         });
-
         // 'Options' Menu Components declaration
         optionMenuItem1 = new JMenuItem("Switch to Admin Mode");
-
-        // 'Window' Menu Components declaration
-//        windowMenuItem1 = new JMenuItem("1");
-//        windowMenuItem2 = new JMenuItem("2");
-//        windowMenuItem3 = new JMenuItem("3");
 
         // 'Help' Menu Components declaration
         helpMenuItem1 = new JMenuItem("About Us");
 
         // Adding Sub menu to menu items
         menuBar.add(fileMenu);
-        fileMenu.add(fileMenuItem1);
-        fileMenu.add(fileMenuItem2);
-        fileMenu.add(new JSeparator());
         fileMenu.add(fileMenuItem3);
 
-        menuBar.add(optionMenu);
-        optionMenu.add(optionMenuItem1);
-
-//        menuBar.add(windowMenu);
-//        windowMenu.add(windowMenuItem1);
-//        windowMenu.add(windowMenuItem2);
-//        windowMenu.add(windowMenuItem3);
+        if (EntryController.currentUser != null && EntryController.currentUser.getRole().getLevel() > 10) {
+            menuBar.add(optionMenu);
+            optionMenu.add(optionMenuItem1);
+        }
 
         menuBar.add(helpMenu);
         helpMenu.add(helpMenuItem1);
@@ -95,7 +103,7 @@ public abstract class View extends JFrame {
         });
     }
 
-    protected void repaintOuterPane(){
+    protected void repaintOuterPane() {
         Dimension size = outerPane.getSize();
         int width = size.width;
         int height = size.height;
@@ -108,6 +116,7 @@ public abstract class View extends JFrame {
         outerPane.revalidate();
         outerPane.repaint();
     }
+
     protected void initializeFrame() {
         this.setTitle("Laew Tae Hong");
         multiIcon = new ArrayList<>();

@@ -241,14 +241,27 @@ public class EntryController extends Controller implements ActionListener, Compo
         }
     }
 
+    private boolean emailValidator(){
+        if ((loginPanel.getEmail().length() > 5 && (!loginPanel.getEmail().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")))) {
+            loginPanel.getWarningLabel().setText("Invalid E-Mail!");
+            loginPanel.getLoginButton().setEnabled(false);
+            return true;
+        }
+        loginPanel.getLoginButton().setEnabled(true);
+        return false;
+    }
     @Override
     public void insertUpdate(DocumentEvent e) {
-        loginPanel.getWarningLabel().setText(" ");
+        if (!emailValidator()) {
+            loginPanel.getWarningLabel().setText(" ");
+        }
     }
 
     @Override
     public void removeUpdate(DocumentEvent e) {
-        loginPanel.getWarningLabel().setText(" ");
+        if (!emailValidator()) {
+            loginPanel.getWarningLabel().setText(" ");
+        }
     }
 
     @Override

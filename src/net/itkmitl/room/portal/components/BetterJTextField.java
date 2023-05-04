@@ -15,7 +15,7 @@ public class BetterJTextField extends JTextField implements MouseListener, Focus
     private Boolean selected;
     public BetterJTextField(String placeholderText) {
         this.placeholderText = placeholderText;
-        this.setFont(new Font("Sanserif", Font.PLAIN, 24));
+        this.setFont(new Font("Cousine", Font.PLAIN, 24));
         Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, borderColor);
         setBorder(border);
         setText(placeholderText);

@@ -30,11 +30,14 @@ public class DashboardController extends Controller implements ActionListener {
     @Override
     public void initialize() {
         this.initializeListener();
+
     }
 
     @Override
     public void initializeListener() {
-        this.getView().optionMenuItem1.addActionListener(this);
+        if (currentUser.getRole().getLevel() >= 10){
+            this.getView().optionMenuItem1.addActionListener(this);
+        }
         this.getView().helpMenuItem1.addActionListener(this);
         buttonBox[0].addActionListener(this);
         buttonBox[1].addActionListener(this);
