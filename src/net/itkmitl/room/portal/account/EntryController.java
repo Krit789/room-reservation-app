@@ -24,8 +24,8 @@ public class EntryController extends Controller implements ActionListener, Compo
     private final EntryView view;
     private User myUser;
     public static User currentUser;
-    private LoginPanel loginPanel;
-    private RegisterPanel registerPanel;
+    private final LoginPanel loginPanel;
+    private final RegisterPanel registerPanel;
 
     public EntryController(EntryView view) {
         this.view = view;
@@ -41,6 +41,7 @@ public class EntryController extends Controller implements ActionListener, Compo
     protected void start() {
         this.initialize();
     }
+
 
     @Override
     protected void initialize() {
@@ -58,8 +59,8 @@ public class EntryController extends Controller implements ActionListener, Compo
         loginPanel.getEmailField().getDocument().addDocumentListener(this);
         loginPanel.getPasswordField().addActionListener(this);
         loginPanel.getPasswordField().getDocument().addDocumentListener(this);
-        registerPanel.registerButton.addActionListener(this);
-        registerPanel.loginLabel2.addMouseListener(this);
+        registerPanel.getRegisterButton().addActionListener(this);
+        registerPanel.getLoginLabel2().addMouseListener(this);
         this.getView().contentPanel.addComponentListener(this);
     }
 
@@ -85,10 +86,10 @@ public class EntryController extends Controller implements ActionListener, Compo
                 currentUser = myUser;
                 this.changeFrame(this.getView(), new Dashboard());
             } else {
-                registerPanel.warningLabel.setText("E-mail already in use!");
+                registerPanel.getWarningLabel().setText("E-mail already in use!");
             }
         } catch (Exception ex) {
-            registerPanel.warningLabel.setText("Invalid Information!");
+            registerPanel.getWarningLabel().setText("Invalid Information!");
             JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -137,7 +138,7 @@ public class EntryController extends Controller implements ActionListener, Compo
             } else {
                 getView().loginPanel.getWarningLabel().setText("Email and/or Password must not be blank!");
             }
-        } else if (objectPerformed.equals(registerPanel.registerButton)) {
+        } else if (objectPerformed.equals(registerPanel.getRegisterButton())) {
             this.RegisterDetail(registerPanel);
         }
         // Login TextField and PasswordField
@@ -193,8 +194,8 @@ public class EntryController extends Controller implements ActionListener, Compo
         Object objectPerformed = e.getSource();
         if (objectPerformed.equals(getView().loginPanel.getRegisterLabel2())) {
             getView().loginPanel.getRegisterLabel2().setForeground(new Color(25, 93, 196));
-        } else if (objectPerformed.equals(getView().registerPanel.loginLabel2)) {
-            getView().registerPanel.loginLabel2.setForeground(new Color(25, 93, 196));
+        } else if (objectPerformed.equals(getView().registerPanel.getLoginLabel2())) {
+            getView().registerPanel.getLoginLabel2().setForeground(new Color(25, 93, 196));
         }
     }
 
@@ -203,7 +204,7 @@ public class EntryController extends Controller implements ActionListener, Compo
         Object objectPerformed = e.getSource();
         if (objectPerformed.equals(getView().loginPanel.getRegisterLabel2())) {
             this.changeCard("Register");
-        } else if (objectPerformed.equals(getView().registerPanel.loginLabel2)) {
+        } else if (objectPerformed.equals(getView().registerPanel.getLoginLabel2())) {
             this.changeCard("Login");
         }
     }
@@ -213,8 +214,8 @@ public class EntryController extends Controller implements ActionListener, Compo
         Object objectPerformed = e.getSource();
         if (objectPerformed.equals(getView().loginPanel.getRegisterLabel2())) {
             getView().loginPanel.getRegisterLabel2().setForeground(new Color(94, 135, 197));
-        } else if (objectPerformed.equals(getView().registerPanel.loginLabel2)) {
-            getView().registerPanel.loginLabel2.setForeground(new Color(94, 135, 197));
+        } else if (objectPerformed.equals(getView().registerPanel.getLoginLabel2())) {
+            getView().registerPanel.getLoginLabel2().setForeground(new Color(94, 135, 197));
         }
     }
 

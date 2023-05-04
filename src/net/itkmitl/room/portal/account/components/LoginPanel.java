@@ -9,13 +9,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class LoginPanel extends RoundedPanel {
-    private JTextField emailField;
-    private JLabel emailText, passwordText, loginHeader, registerLabel1;
-    private JLabel warningLabel, registerLabel2;
-    private JPasswordField passwordField;
-    private JPanel loginPanel, operationPanel;
-    private ButtonGradient loginButton;
-    private ImagePanel imagePanel;
+    private final JTextField emailField;
+    private final JLabel emailText, passwordText, loginHeader, registerLabel1;
+    private final JLabel warningLabel, registerLabel2;
+    private final JPasswordField passwordField;
+    private final JPanel loginPanel, operationPanel;
+    private final ButtonGradient loginButton;
+    private final ImagePanel imagePanel;
 
 
     public LoginPanel() {
