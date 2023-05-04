@@ -1,9 +1,11 @@
 package net.itkmitl.room.portal.dashboard.components;
 
+import net.itkmitl.room.portal.components.TransparentPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class BoxIcon extends JPanel {
+public class BoxIcon extends TransparentPanel {
 
     private ImageIcon image;
 

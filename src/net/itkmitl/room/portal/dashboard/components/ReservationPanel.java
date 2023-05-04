@@ -18,7 +18,9 @@ public class ReservationPanel extends RoundedPanel {
     public static JButton[] buttonBox = new JButton[2];
 
     public ReservationPanel() {
-        super(new GridLayout(1, 3));
+        super(30, 30);
+        this.setBackground(Color.white);
+        this.setLayout(new GridLayout(1, 3));
         this.setMaximumSize(new Dimension(1300, 200));
         this.setAlignmentX(CENTER_ALIGNMENT);
         this.setOpaque(false);
