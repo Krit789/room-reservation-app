@@ -4,7 +4,7 @@ import net.itkmitl.room.portal.components.RoundedPanel;
 
 import java.awt.*;
 
-import javax.swing.JLabel;
+import javax.swing.*;
 
 public class ReservationPanel extends RoundedPanel {
     /**
@@ -15,6 +15,7 @@ public class ReservationPanel extends RoundedPanel {
     public JLabel reservationTextLabel;
 
     public static final String[] ROUTES = {"History", "Booking"};
+    public static JButton[] buttonBox = new JButton[2];
 
     public ReservationPanel() {
         super(new GridLayout(1, 3));
