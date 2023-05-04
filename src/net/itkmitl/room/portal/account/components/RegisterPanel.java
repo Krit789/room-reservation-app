@@ -21,35 +21,44 @@ public class RegisterPanel extends RoundedPanel {
     public RegisterPanel() {
         super(30, 30, Color.WHITE);
         this.setLayout(new GridBagLayout());
-        emailField = new JTextField("");
-        passwordField = new JPasswordField("");
-        confirmPasswordField = new JPasswordField("");
+
+        int textSize = 16, fieldSize = 18;
         firstNameField = new JTextField("");
+        firstNameField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
         lastNameField = new JTextField("");
+        lastNameField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
+        emailField = new JTextField("");
+        emailField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
+        passwordField = new JPasswordField("");
+        passwordField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
+        confirmPasswordField = new JPasswordField("");
+        confirmPasswordField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
         telField = new JTextField("");
+        telField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
+
         emailText = new JLabel("E-Mail");
-        emailText.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        emailText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
         passwordText = new JLabel("Password");
-        passwordText.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        passwordText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
         confirmPasswordText = new JLabel("Confirm Password");
-        confirmPasswordText.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        confirmPasswordText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
         firstNameText = new JLabel("First Name");
-        firstNameText.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        firstNameText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
         lastNameText = new JLabel("Last Name");
-        lastNameText.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        lastNameText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
         telText = new JLabel("Phone Number");
-        telText.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        telText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
         registerHeader = new JLabel("Register");
         registerHeader.setFont(new Font("SansSerif", Font.BOLD, 48));
 
         loginLabel1 = new JLabel("Already have a account?");
         loginLabel2 = new JLabel("<html><p><u>Login Here!</u></p></html>");
-        loginLabel1.setFont(new Font("SansSerif", Font.PLAIN, 16));
-        loginLabel2.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        loginLabel1.setFont(new Font("SansSerif", Font.PLAIN, textSize));
+        loginLabel2.setFont(new Font("SansSerif", Font.PLAIN, textSize));
 
         registerButton = new ButtonGradient();
         registerButton.setText("Register");
-        registerButton.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        registerButton.setFont(new Font("SansSerif", Font.PLAIN, textSize));
         registerButton.setColor1(new Color(44, 102, 188));
         registerButton.setColor2(new Color(94, 135, 197));
 
@@ -58,10 +67,7 @@ public class RegisterPanel extends RoundedPanel {
 
         fieldPanel = new JPanel();
         fieldPanel.setLayout(new GridBagLayout());
-        fieldPanel.add(registerHeader, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 0, 0, new Insets(15, 0, 40, 45)).setAnchor(GridBagConstraints.WEST));
-
-//        namePanel = new JPanel();
-//        namePanel.setLayout(new GridBagLayout());
+        fieldPanel.add(registerHeader, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 0, 0, new Insets(15, 0, 40, 0)).setAnchor(GridBagConstraints.WEST));
 
         twoColumnPanel = new JPanel();
         twoColumnPanel.setLayout(new GridBagLayout());
@@ -69,18 +75,17 @@ public class RegisterPanel extends RoundedPanel {
 
         twoColumnPanel.add(firstNameText, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 0, 0, 0, new Insets(5, 0, 0, 5)).getGBC());
         twoColumnPanel.add(firstNameField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 0, 0, 1, new Insets(5, 0, 5, 5)).getGBC());
-        twoColumnPanel.add(lastNameText, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 0, 1, 0, new Insets(5, 0, 0, 5)).getGBC());
-        twoColumnPanel.add(lastNameField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 0, 1, 1, new Insets(5, 0, 5, 5)).getGBC());
+        twoColumnPanel.add(lastNameText, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 0, 1, 0, new Insets(5, 0, 0, 45)).getGBC());
+        twoColumnPanel.add(lastNameField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 0, 1, 1, new Insets(5, 0, 5, 45)).getGBC());
 
-        // Convert Everything to two column panel
         twoColumnPanel.add(emailText, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5,  0, 2, new Insets(5, 0, 0, 5)).getGBC());
         twoColumnPanel.add(emailField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5,  0, 3, new Insets(5, 0, 5, 5)).getGBC());
-        twoColumnPanel.add(telText, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 1, 2, new Insets(5, 0, 0, 5)).getGBC());
-        twoColumnPanel.add(telField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 1, 3, new Insets(5, 0, 5, 5)).getGBC());
+        twoColumnPanel.add(telText, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 1, 2, new Insets(5, 0, 0, 45)).getGBC());
+        twoColumnPanel.add(telField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 1, 3, new Insets(5, 0, 5, 45)).getGBC());
         twoColumnPanel.add(passwordText, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5,  0, 4, new Insets(5, 0, 0, 5)).getGBC());
         twoColumnPanel.add(passwordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5,  0, 5, new Insets(5, 0, 5, 5)).getGBC());
-        twoColumnPanel.add(confirmPasswordText, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5,  1, 4, new Insets(5, 0, 0, 5)).getGBC());
-        twoColumnPanel.add(confirmPasswordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5,  1, 5, new Insets(5, 0, 5, 5)).getGBC());
+        twoColumnPanel.add(confirmPasswordText, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5,  1, 4, new Insets(5, 0, 0, 45)).getGBC());
+        twoColumnPanel.add(confirmPasswordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5,  1, 5, new Insets(5, 0, 5, 45)).getGBC());
 
         operationPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         operationPanel.setBackground(Color.white);
@@ -93,7 +98,7 @@ public class RegisterPanel extends RoundedPanel {
 
         operationPanel.add(Box.createRigidArea(new Dimension(35, 0)));
         operationPanel.add(registerButton);
-        fieldPanel.add(operationPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 11, new Insets(5, 0, 5, 5)).getGBC());
+        fieldPanel.add(operationPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 11, new Insets(5, 0, 5, 45)).getGBC());
         fieldPanel.setBackground(Color.white);
         ImagePanel imagePanel = new ImagePanel(new ImageIcon("resource/account/banner/banner3-entry-25.png"));
         this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.35, 1, 0, 0).getGBC());

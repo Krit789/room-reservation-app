@@ -28,7 +28,7 @@ public class LoginPanel extends RoundedPanel {
 
         // Email and Password Configuration
         int textSize = 16, fieldSize = 18;
-        emailText = new JLabel("Email", SwingConstants.RIGHT);
+        emailText = new JLabel("E-Mail", SwingConstants.RIGHT);
         emailText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
         emailField = new JTextField();
         emailField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
@@ -40,7 +40,7 @@ public class LoginPanel extends RoundedPanel {
         loginHeader = new JLabel("Login", SwingConstants.CENTER);
         loginHeader.setFont(new Font("SansSerif", Font.BOLD, 48));
 
-        warningLabel = new JLabel("", SwingConstants.RIGHT);
+        warningLabel = new JLabel(" ", SwingConstants.RIGHT);
         warningLabel.setForeground(Color.red);
 
         loginPanel = new JPanel();
@@ -66,7 +66,7 @@ public class LoginPanel extends RoundedPanel {
         operationPanel.add(loginButton);
         imagePanel = new ImagePanel(new ImageIcon("resource/account/banner/banner3-entry-25.png"));
         loginPanel.add(operationPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 7, new Insets(5, 0, 5, 45)).getGBC());
-        this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.35, 1, 0, 0, new Insets(0, 0, 0, 0)).getGBC());
+        this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.35, 1, 0, 0).getGBC());
         this.add(loginPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.65, 1, 1, 0, new Insets(0, 25, 0, 60)).setAnchor(GridBagConstraints.NORTHWEST));
         this.setBorder(new EmptyBorder(25, 25, 25, 25));
     }
