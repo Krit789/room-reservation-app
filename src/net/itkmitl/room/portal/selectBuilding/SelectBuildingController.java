@@ -30,17 +30,18 @@ public class SelectBuildingController extends Controller implements ActionListen
     }
     @Override
     public void initializeListener() {
-        for(int i = this.getView().getSelectorPanel().boxHolder.size() - 1; i >= 0; i--) {
-            this.getView().getSelectorPanel().boxHolder.get(i).addActionListener(this);
+        for(int i = this.getView().getSelectorPanel().leftBoxHolder.size() - 1; i >= 0; i--) {
+            this.getView().getSelectorPanel().leftBoxHolder.get(i).addActionListener(this);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() instanceof LeftSelectorBox){
-            for(int i = this.getView().getSelectorPanel().boxHolder.size() - 1; i >= 0; i--) {
-                if(e.getSource().equals(this.getView().getSelectorPanel().boxHolder.get(i))){
-                    this.getView().testLabel.setText("Box ID = " + this.getView().getSelectorPanel().boxHolder.get(i).boxID);
+            for(int i = this.getView().getSelectorPanel().leftBoxHolder.size() - 1; i >= 0; i--) {
+                if(e.getSource().equals(this.getView().getSelectorPanel().leftBoxHolder.get(i))){
+                    this.getView().testLabel.setText("Box ID = " + this.getView().getSelectorPanel().leftBoxHolder.get(i).boxID);
+
                     //put roomBox query thingy here
                 }
             }
