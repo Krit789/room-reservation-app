@@ -12,14 +12,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginPanel extends RoundedPanel {
-    private JTextField emailField;
-    private JLabel emailText, passwordText, loginHeader, registerLabel1;
-    private JLabel warningLabel, registerLabel2;
-    private JPasswordField passwordField;
-    private JPanel loginPanel, operationPanel;
-    private ButtonGradient loginButton;
-    private ImagePanel imagePanel;
+public class LoginPanel extends RoundedPanel implements ActionListener, DocumentListener {
+    protected JTextField emailField;
+    protected JLabel emailText, passwordText, loginHeader, registerLabel1;
+    public JLabel warningLabel, registerLabel2;
+    protected JPasswordField passwordField;
+    protected JPanel loginPanel, operationPanel;
+    public ButtonGradient loginButton;
+    public ImagePanel imagePanel;
 
 
     public LoginPanel() {
@@ -42,10 +42,10 @@ public class LoginPanel extends RoundedPanel {
         passwordText.setFont(new Font("SansSerif", Font.PLAIN, textSize));
         passwordField = new JPasswordField();
         passwordField.setFont(new Font("SansSerif", Font.PLAIN, fieldSize));
-//        emailField.addActionListener(this);
-//        emailField.getDocument().addDocumentListener(this);
-//        passwordField.addActionListener(this);
-//        passwordField.getDocument().addDocumentListener(this);
+        emailField.addActionListener(this);
+        emailField.getDocument().addDocumentListener(this);
+        passwordField.addActionListener(this);
+        passwordField.getDocument().addDocumentListener(this);
 
         loginHeader = new JLabel("Login", SwingConstants.CENTER);
         loginHeader.setFont(new Font("SansSerif", Font.BOLD, 48));
@@ -94,49 +94,25 @@ public class LoginPanel extends RoundedPanel {
         return String.valueOf(passwordField.getPassword());
     }
 
-    public JTextField getEmailField() {
-        return emailField;
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTextField perfoemedField = (JTextField) e.getSource();
+        if (perfoemedField.equals(emailField) || perfoemedField.equals(passwordField)) {
+            loginButton.doClick();
+        }
     }
 
-    public JPasswordField getPasswordField() {
-        return passwordField;
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        warningLabel.setText("");
     }
 
-    public ButtonGradient getLoginButton() {
-        return loginButton;
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        warningLabel.setText("");
     }
 
-    public JLabel getWarningLabel() {
-        return warningLabel;
+    @Override
+    public void changedUpdate(DocumentEvent e) {
     }
-
-    public JLabel getRegisterLabel1() {
-        return registerLabel1;
-    }
-
-    public JLabel getRegisterLabel2() {
-        return registerLabel2;
-    }
-    //
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//        JTextField perfoemedField = (JTextField) e.getSource();
-//        if (perfoemedField.equals(emailField) || perfoemedField.equals(passwordField)) {
-//            loginButton.doClick();
-//        }
-//    }
-//
-//    @Override
-//    public void insertUpdate(DocumentEvent e) {
-//        warningLabel.setText("");
-//    }
-//
-//    @Override
-//    public void removeUpdate(DocumentEvent e) {
-//        warningLabel.setText("");
-//    }
-//
-//    @Override
-//    public void changedUpdate(DocumentEvent e) {
-//    }
 }
