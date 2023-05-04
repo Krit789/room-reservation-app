@@ -17,7 +17,6 @@ public class LoginPanel extends RoundedPanel {
     private final ButtonGradient loginButton;
     private final ImagePanel imagePanel;
 
-
     public LoginPanel() {
         super(30, 30, Color.WHITE);
         this.setLayout(new GridBagLayout());
