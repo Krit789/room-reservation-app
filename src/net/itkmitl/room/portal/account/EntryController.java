@@ -12,6 +12,7 @@ import net.itkmitl.room.portal.account.components.LoginPanel;
 import net.itkmitl.room.portal.account.components.RegisterPanel;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
+import net.itkmitl.room.portal.components.FakeUser;
 import net.itkmitl.room.portal.dashboard.Dashboard;
 
 import javax.swing.*;
@@ -23,7 +24,7 @@ import java.awt.event.*;
 public class EntryController extends Controller implements ActionListener, ComponentListener, DocumentListener, MouseListener {
     private final EntryView view;
     private User myUser;
-    public static User currentUser;
+    public static User currentUser = FakeUser.getAdmin();
     private final LoginPanel loginPanel;
     private final RegisterPanel registerPanel;
 
