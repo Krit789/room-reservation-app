@@ -8,6 +8,7 @@ import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.Controller;
+import net.itkmitl.room.portal.account.components.LoginPanel;
 import net.itkmitl.room.portal.account.components.RegisterPanel;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
@@ -59,27 +60,43 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     private void RegisterDetail(RegisterPanel reg) {
         //temporary placeholder
-        try {
-            FewQuery db = RVDB.getDB();
-            UserRepository userRepository = new UserRepository(db);
-            if (userRepository.getUserByEmail(reg.getEmail()) == null) {
-                myUser = new User();
-                myUser.setEmail(reg.getEmail());
-                myUser.setPasswordHash(FewPassword.getSalt(reg.getPassword()));
-                myUser.setFirstname(reg.getFirstName());
-                myUser.setLastname(reg.getLastName());
-                myUser.setTelephoneNumber(reg.getTelephone());
-                myUser.setRole(EnumUserRole.STUDENT);
-                userRepository.createUser(myUser);
-                currentUser = myUser;
-                this.changeFrame(this.getView(), new Dashboard());
-            } else {
-                this.getView().registerPanel.warningLabel.setText("E-mail already in use!");
+        SwingWorker worker = new SwingWorker() {
+
+            @Override
+            protected Object doInBackground() throws Exception {
+                try {
+                    FewQuery db = RVDB.getDB();
+                    UserRepository userRepository = new UserRepository(db);
+                    getView().registerPanel.warningLabel.setIcon(new ImageIcon("resource/icons/loading-32px.gif"));
+                    if (userRepository.getUserByEmail(reg.getEmail()) == null) {
+                        myUser = new User();
+                        myUser.setEmail(reg.getEmail());
+                        myUser.setPasswordHash(FewPassword.getSalt(reg.getPassword()));
+                        myUser.setFirstname(reg.getFirstName());
+                        myUser.setLastname(reg.getLastName());
+                        myUser.setTelephoneNumber(reg.getTelephone());
+                        myUser.setRole(EnumUserRole.STUDENT);
+                        userRepository.createUser(myUser);
+                        currentUser = myUser;
+                        changeFrame(getView(), new Dashboard());
+                    } else {
+                        getView().registerPanel.warningLabel.setIcon(null);
+                        getView().registerPanel.warningLabel.setText("E-mail already in use!");
+                    }
+                } catch (Exception ex) {
+                    getView().registerPanel.warningLabel.setIcon(null);
+                    getView().registerPanel.warningLabel.setText("Invalid Information!");
+                    JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
+                }
+                return null;
             }
-        } catch (Exception ex) {
-            this.getView().registerPanel.warningLabel.setText("Invalid Information!");
-            JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
-        }
+
+            @Override
+            protected void done() {
+                getView().registerPanel.warningLabel.setIcon(null);
+            }
+        };
+        worker.execute();
     }
 
     private void userLogin(String email, String password) {
@@ -87,6 +104,7 @@ public class EntryController extends Controller implements ActionListener, Compo
             @Override
             protected Object doInBackground() throws Exception {
                 try {
+                    getView().loginPanel.warningLabel.setIcon(new ImageIcon("resource/icons/loading-32px.gif"));
                     FewQuery db = RVDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
                     myUser = userRepository.getUserByEmail(email);
@@ -101,10 +119,16 @@ public class EntryController extends Controller implements ActionListener, Compo
                         getView().loginPanel.warningLabel.setText("User not found!");
                     }
                 } catch (Exception ex) {
+                    getView().loginPanel.warningLabel.setIcon(null);
                     getView().loginPanel.warningLabel.setText("Invalid Email and/or Password!");
                     JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
                 }
                 return null;
+            }
+
+            @Override
+            protected void done() {
+                getView().loginPanel.warningLabel.setIcon(null);
             }
         };
         worker.execute();

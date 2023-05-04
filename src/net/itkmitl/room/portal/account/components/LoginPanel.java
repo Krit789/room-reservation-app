@@ -67,7 +67,7 @@ public class LoginPanel extends RoundedPanel implements ActionListener, Document
         loginPanel.add(emailField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 2, new Insets(0, 0, 5, 45)).getGBC());
         loginPanel.add(passwordText, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 3, new Insets(5, 0, 5, 45)).setAnchor(GridBagConstraints.WEST));
         loginPanel.add(passwordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 4, new Insets(0, 0, 5, 45)).getGBC());
-        loginPanel.add(warningLabel, new GBCBuilder(GridBagConstraints.CENTER, 1, 0, 6, new Insets(5, 0, 5, 45)).getGBC());
+        loginPanel.add(warningLabel, new GBCBuilder(GridBagConstraints.CENTER, 1, 0, 6, new Insets(5, 0, 0, 45)).getGBC());
         operationPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         operationPanel.setBackground(Color.white);
         registerLabel1 = new JLabel("Don't have an account?");
@@ -81,7 +81,7 @@ public class LoginPanel extends RoundedPanel implements ActionListener, Document
         operationPanel.add(Box.createRigidArea(new Dimension(35, 0)));
         operationPanel.add(loginButton);
         imagePanel = new ImagePanel(new ImageIcon("resource/account/banner/banner3-entry-25.png"));
-        loginPanel.add(operationPanel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 7, new Insets(35, 0, 5, 45)).setAnchor(GridBagConstraints.SOUTHEAST));
+        loginPanel.add(operationPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 7, new Insets(5, 0, 5, 45)).getGBC());
         this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.35, 1, 0, 0).getGBC());
         this.add(loginPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.65, 1, 1, 0, new Insets(0, 25, 0, 60)).setAnchor(GridBagConstraints.NORTHWEST));
         this.setBorder(new EmptyBorder(25, 25, 25, 25));
