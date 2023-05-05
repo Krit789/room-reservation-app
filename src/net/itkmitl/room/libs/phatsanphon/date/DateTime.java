@@ -15,7 +15,8 @@ public class DateTime {
 
 	public DateTime(Date date) {
 		this.dateTime = date;
-		calendar.setTime(dateTime);
+		this.calendar = Calendar.getInstance();
+		this.calendar.setTime(dateTime);
 	}
 
 	public DateTime(int year, int month, int date) {
