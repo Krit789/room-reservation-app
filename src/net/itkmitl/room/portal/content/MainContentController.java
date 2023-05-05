@@ -7,6 +7,7 @@ import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.LeftSelectorBox;
 import net.itkmitl.room.portal.components.MainRoomSelectionBox;
+import net.itkmitl.room.portal.content.components.Selector;
 
 
 import javax.swing.*;
@@ -102,9 +103,9 @@ public class MainContentController extends Controller implements ActionListener 
         } else if (e.getActionCommand().equals("Back to Dashboard")){
             this.changeCard("Dashboard");
         } else if (e.getSource() instanceof LeftSelectorBox) {
-            System.out.println("Building = " + e.getActionCommand());
+//            System.out.println("Building = " + e.getActionCommand());
             this.changeBuildingCard(e.getActionCommand());
-        } else if (e.getSource() instanceof MainRoomSelectionBox) {
+        } else if (e.getSource() instanceof JButton) {
             System.out.println(e.getActionCommand());
         }
     }
