@@ -4,12 +4,14 @@ import net.itkmitl.room.libs.phatsanphon.entity.Room;
 
 import javax.swing.*;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MainRoomSelectionBox extends RoundedPanel{
+public class MainRoomSelectionBox extends RoundedPanel implements ActionListener {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 3939071942263200950L;
+     *
+     */
+    private static final long serialVersionUID = 3939071942263200950L;
     public JButton name;
     private Room boxRoom;
     //key is floor, Value is arraylist of room in floor
@@ -19,9 +21,16 @@ public class MainRoomSelectionBox extends RoundedPanel{
         super(30, 40, Color.WHITE);
         name = new JButton(room.getName());
         name.setActionCommand(String.format("reserveRoom_%d" ,room.getId()));
+        name.addActionListener(this);
         name.setOpaque(false);
         name.setContentAreaFilled(false);
+        boxRoom = room;
 //        name.setBorderPainted(false);
         add(name);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println(boxRoom.getId());
     }
 }
