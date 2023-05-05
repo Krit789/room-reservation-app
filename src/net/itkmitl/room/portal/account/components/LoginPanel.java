@@ -41,7 +41,6 @@ public class LoginPanel extends RoundedPanel {
         this.setLayout(new GridBagLayout());
         loginButton = new ButtonGradient();
         loginButton.setText("Login");
-//        loginButton.setFont(UIConfig.cousine);
         loginButton.setFont(new Font("Cousine", Font.BOLD, 16));
         loginButton.setColor1(new Color(44, 102, 188));
         loginButton.setColor2(new Color(94, 135, 197));

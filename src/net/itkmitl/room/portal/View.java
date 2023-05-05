@@ -90,7 +90,7 @@ public abstract class View extends JFrame {
         menuBar.add(fileMenu);
         fileMenu.add(fileMenuItem3);
 
-        if (((User) store.select("user") != null) && ((User) store.select("user")).getRole().getLevel() > 10) {
+        if ((store.select("user") != null) && (((User) store.select("user")).getRole().getLevel() > 10)) {
             menuBar.add(optionMenu);
             optionMenu.add(optionMenuItem1);
         }
