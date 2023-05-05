@@ -1,5 +1,16 @@
 package net.itkmitl.room.portal.admin.controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingWorker;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumRoomState;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
@@ -8,16 +19,8 @@ import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
-import net.itkmitl.room.portal.admin.components.DatabaseLoader;
 import net.itkmitl.room.portal.admin.views.RoomDataView;
 import net.itkmitl.room.portal.components.LoadingDialog;
-
-import javax.swing.*;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Date;
 
 public class RoomDataController implements ActionListener, InternalFrameListener {
     RoomDataView view;
@@ -71,7 +74,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
     }
 
     public void databaseLoader(int roomID) {
-        SwingWorker worker = new SwingWorker() {
+    	SwingWorker<?, ?> worker = new SwingWorker<>() {
             LoadingDialog ld = new LoadingDialog();
 
             @Override
@@ -101,7 +104,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
     }
 
     public void databaseCommiter(Room room, int mode) {
-        SwingWorker worker = new SwingWorker() {
+    	SwingWorker<?, ?> worker = new SwingWorker<>() {
             LoadingDialog ld = new LoadingDialog();
 
             @Override

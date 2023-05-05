@@ -1,23 +1,28 @@
 package net.itkmitl.room.portal;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.font.TextAttribute;
 import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.WindowConstants;
 
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.store.AppStore;
-import net.itkmitl.room.portal.account.EntryController;
 import net.itkmitl.room.portal.account.components.OutPane;
 
 public abstract class View extends JFrame {

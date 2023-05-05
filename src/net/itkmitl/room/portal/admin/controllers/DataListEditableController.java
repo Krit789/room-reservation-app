@@ -1,18 +1,14 @@
 package net.itkmitl.room.portal.admin.controllers;
 
+import java.awt.event.ActionEvent;
+
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+
 import net.itkmitl.room.libs.jarukrit.ProgramError;
-import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
-import net.itkmitl.room.portal.admin.components.DatabaseLoader;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
 import net.itkmitl.room.portal.admin.views.DataListEditableView;
-
-import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseListener;
-import java.beans.PropertyVetoException;
 
 public class DataListEditableController extends DataListTableController {
     public DataListEditableView view;

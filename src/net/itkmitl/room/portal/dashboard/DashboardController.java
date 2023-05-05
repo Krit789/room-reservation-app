@@ -1,17 +1,16 @@
 package net.itkmitl.room.portal.dashboard;
 
+import static net.itkmitl.room.portal.dashboard.components.ReservationPanel.buttonBox;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.Controller;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
-import net.itkmitl.room.portal.components.FakeUser;
 import net.itkmitl.room.portal.selectBuilding.SelectBuilding;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import static net.itkmitl.room.portal.dashboard.components.ReservationPanel.buttonBox;
 
 public class DashboardController extends Controller implements ActionListener {
     private final DashboardView view;

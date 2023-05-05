@@ -1,31 +1,24 @@
-package net.itkmitl.room.portal.selectBuilding;
+package net.itkmitl.room.portal.content.components;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import net.itkmitl.room.portal.View;
+import net.itkmitl.room.portal.CardView;
 import net.itkmitl.room.portal.components.Header;
 import net.itkmitl.room.portal.components.LeftPanel;
 import net.itkmitl.room.portal.components.LeftSelectorPanel;
 import net.itkmitl.room.portal.components.MainPanel;
 
-public class SelectBuildingView extends View {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8933348497379521870L;
-	public JPanel leftPanel, innerPanel, mainPanel, header, leftSelectorPanel;
+import javax.swing.*;
+import java.awt.*;
+
+public class Selector extends CardView {
+    public JPanel leftPanel, innerPanel, mainPanel, header, leftSelectorPanel;
     public JLabel testLabel;//delete later
 
-    public SelectBuildingView() {
+    public Selector() {
         super();
     }
 
     @Override
-    protected void initialize() {
+    public void initialize() {
         leftPanel = new LeftPanel();
         innerPanel = new MainPanel();
         mainPanel = new JPanel(new BorderLayout());
@@ -40,8 +33,6 @@ public class SelectBuildingView extends View {
         mainPanel.add(header, BorderLayout.NORTH);
         mainPanel.add(innerPanel, BorderLayout.CENTER);
 
-        this.outerPane.setBackground(new Color(255, 255, 255));
-
         this.add(leftPanel, BorderLayout.WEST);
         this.add(mainPanel, BorderLayout.CENTER);
         leftPanel.add(leftSelectorPanel, BorderLayout.CENTER);
@@ -54,3 +45,4 @@ public class SelectBuildingView extends View {
         return (MainPanel) mainPanel;
     }
 }
+

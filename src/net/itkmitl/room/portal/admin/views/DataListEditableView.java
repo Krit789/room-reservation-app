@@ -1,11 +1,8 @@
 package net.itkmitl.room.portal.admin.views;
 
-import net.itkmitl.room.portal.components.GBCBuilder;
-
-import javax.swing.*;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JInternalFrame;
 
 public class DataListEditableView extends DataListTableView{
     public final JButton createButton, editSelectedButton, deletedSelectedButton;

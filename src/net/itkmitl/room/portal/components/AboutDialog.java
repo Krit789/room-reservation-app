@@ -24,7 +24,7 @@ import javax.swing.event.ListSelectionListener;
 
 public class AboutDialog implements ActionListener, ListSelectionListener {
     private final JDialog aboutDialog;
-    private final JList nameList;
+    private final JList<?> nameList;
     private final JScrollPane scrollPane;
     private final JPanel aboutPanel, titlePanel, okPanel, listPanel;
     private final JLabel title, menuDesc, role, logo;
@@ -62,7 +62,7 @@ public class AboutDialog implements ActionListener, ListSelectionListener {
         // Programmer List
         listPanel = new JPanel();
         listPanel.setLayout(new BorderLayout());
-        nameList = new JList(new String[]{"Jarukrit Sripaploen", "Napat Wetchapun", "Tanakrit Supprasit", "Peeranat Matsor", "Phatsanphon Nakaranurak", "Saruta Torat"});
+        nameList = new JList<>(new String[]{"Jarukrit Sripaploen", "Napat Wetchapun", "Tanakrit Supprasit", "Peeranat Matsor", "Phatsanphon Nakaranurak", "Saruta Torat"});
         nameList.setVisibleRowCount(3);
         nameList.setToolTipText("Click on the list to reveal each person's roles");
         nameList.addListSelectionListener(this);
@@ -91,7 +91,7 @@ public class AboutDialog implements ActionListener, ListSelectionListener {
     }
 
     public void valueChanged(ListSelectionEvent e) {
-        switch (((JList) e.getSource()).getSelectedIndex()) {
+        switch (((JList<?>) e.getSource()).getSelectedIndex()) {
             case 0:
                 // Jarukrit
                 role.setText("65070030   Admin Frontend Developer");

@@ -51,12 +51,12 @@ public class ReservationDataView {
         dataPanel.add(idField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 0, new Insets(0, 0, 5, 10)).getGBC());
 
         userIDLabel = new JLabel("User");
-        userIDSelect = new JComboBox();
+        userIDSelect = new JComboBox<>();
         dataPanel.add(userIDLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 1, new Insets(0, 10, 5, 5)).getGBC());
         dataPanel.add(userIDSelect, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 1, new Insets(0, 0, 5, 10)).getGBC());
 
         roomIDLabel = new JLabel("Room");
-        roomIDSelect = new JComboBox();
+        roomIDSelect = new JComboBox<>();
         dataPanel.add(roomIDLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 2, new Insets(0, 10, 5, 5)).getGBC());
         dataPanel.add(roomIDSelect, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 2, new Insets(0, 0, 5, 10)).getGBC());
 

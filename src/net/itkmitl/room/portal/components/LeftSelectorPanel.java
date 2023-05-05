@@ -1,20 +1,29 @@
 package net.itkmitl.room.portal.components;
 
-import net.itkmitl.room.db.LaewTaeDB;
-import net.itkmitl.room.libs.peeranat.FewDB;
-import net.itkmitl.room.libs.peeranat.query.FewQuery;
-import net.itkmitl.room.libs.phatsanphon.entity.Room;
-import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
-import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import net.itkmitl.room.db.LaewTaeDB;
+import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.phatsanphon.entity.Room;
+import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
+
 public class LeftSelectorPanel extends JPanel {
-    public JLabel parentCategory;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 634260063969366698L;
+	public JLabel parentCategory;
     public JButton backButton;
     public ArrayList<LeftSelectorBox> leftBoxHolder = new ArrayList<LeftSelectorBox>();
     public Set<String> buildingList = new HashSet<>();

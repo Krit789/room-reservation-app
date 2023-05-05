@@ -1,13 +1,21 @@
 package net.itkmitl.room.portal.dashboard.components;
 
-import net.itkmitl.room.portal.components.TransparentPanel;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+
+import net.itkmitl.room.portal.components.TransparentPanel;
 
 public class BoxIcon extends TransparentPanel {
 
-    private ImageIcon image;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3043535217335143086L;
+	private ImageIcon image;
 
     public BoxIcon(ImageIcon image) {
         this.image = image;

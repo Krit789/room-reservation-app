@@ -1,13 +1,21 @@
 package net.itkmitl.room.portal.account.components;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 public class ImagePanel extends JPanel {
 
-    private ImageIcon image;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8862608090477009970L;
+	private ImageIcon image;
 
     public ImagePanel(ImageIcon image) {
         this.image = image;
@@ -24,7 +32,7 @@ public class ImagePanel extends JPanel {
         super.paintComponent(g);
         int original_width = image.getImage().getWidth(this);
         int original_height = image.getImage().getHeight(this);
-        int bound_width = getWidth();
+//        int bound_width = getWidth();
         int bound_height = getHeight();
         int new_width = original_width;
         int new_height = original_height;

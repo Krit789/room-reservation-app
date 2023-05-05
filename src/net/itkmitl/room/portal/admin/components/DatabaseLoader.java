@@ -1,5 +1,18 @@
 package net.itkmitl.room.portal.admin.components;
 
+import java.awt.Dimension;
+import java.beans.PropertyVetoException;
+import java.sql.SQLNonTransientConnectionException;
+import java.sql.SQLSyntaxErrorException;
+import java.util.ArrayList;
+
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+import javax.swing.table.DefaultTableModel;
+
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
@@ -19,18 +32,7 @@ import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.controllers.DataListEditableController;
 import net.itkmitl.room.portal.admin.controllers.DataListTableController;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
-import net.itkmitl.room.portal.admin.views.DataListTableView;
 import net.itkmitl.room.portal.components.LoadingDialog;
-
-import javax.swing.*;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
-import java.beans.PropertyVetoException;
-import java.sql.SQLNonTransientConnectionException;
-import java.sql.SQLSyntaxErrorException;
-import java.util.ArrayList;
 
 public class DatabaseLoader implements InternalFrameListener {
     private boolean editableTable;
@@ -61,7 +63,7 @@ public class DatabaseLoader implements InternalFrameListener {
 
     public void databaseLoader(int whichTable, int type, String searchQuery, boolean editableTable, DataListTableController table) {
         this.editableTable = editableTable;
-        SwingWorker worker = new SwingWorker<>() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             Object[] data;
             LoadingDialog ld = new LoadingDialog();
 

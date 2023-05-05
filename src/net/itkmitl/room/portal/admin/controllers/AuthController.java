@@ -1,19 +1,21 @@
 package net.itkmitl.room.portal.admin.controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.UIManager;
+
 import com.formdev.flatlaf.FlatIntelliJLaf;
+
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
-import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.views.AuthView;
-import net.itkmitl.room.portal.components.LoadingDialog;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AuthController implements ActionListener {
     private AuthView view;
@@ -37,7 +39,7 @@ public class AuthController implements ActionListener {
     }
 
     private void authenticateUser(String email, String password) {
-        SwingWorker worker = new SwingWorker<>() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             String errorMessage;
 
             @Override

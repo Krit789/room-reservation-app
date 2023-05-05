@@ -1,13 +1,28 @@
 package net.itkmitl.room.portal.admin.views;
 
-import net.itkmitl.room.portal.components.GBCBuilder;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import java.awt.*;
-
-import javax.swing.*;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+
+import net.itkmitl.room.portal.components.GBCBuilder;
 
 public class DataListTableView {
     protected final JInternalFrame frame;
@@ -51,7 +66,11 @@ public class DataListTableView {
         pageSubtitle.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         table = new JTable() {
-            @Override
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 7614361499285925400L;
+			@Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             };

@@ -1,5 +1,22 @@
 package net.itkmitl.room.portal.account;
 
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumUserRole;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
@@ -13,14 +30,7 @@ import net.itkmitl.room.portal.account.components.LoginPanel;
 import net.itkmitl.room.portal.account.components.RegisterPanel;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
-import net.itkmitl.room.portal.components.FakeUser;
 import net.itkmitl.room.portal.dashboard.Dashboard;
-
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import java.awt.*;
-import java.awt.event.*;
 
 public class EntryController extends Controller implements ActionListener, ComponentListener, DocumentListener, MouseListener {
     private final EntryView view;
@@ -73,7 +83,7 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     private void RegisterDetail(RegisterPanel reg) {
         //temporary placeholder
-        SwingWorker worker = new SwingWorker() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
 
             @Override
             protected Object doInBackground() throws Exception {
@@ -113,8 +123,8 @@ public class EntryController extends Controller implements ActionListener, Compo
     }
 
     private void userLogin(String email, String password) {
-        SwingWorker worker = new SwingWorker() {
-            @Override
+    	SwingWorker<?, ?> worker = new SwingWorker<>() {
+    		@Override
             protected Object doInBackground() throws Exception {
                 try {
                     getView().loginPanel.getWarningLabel().setIcon(new ImageIcon("resource/icons/loading-32px.gif"));

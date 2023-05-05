@@ -3,6 +3,7 @@ package net.itkmitl.room.portal.admin;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -16,18 +17,29 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JSeparator;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatIntelliJLaf;
-
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+
 import net.itkmitl.room.GUIStarter;
-import net.itkmitl.room.portal.admin.components.OOBE.OOBEController;
 import net.itkmitl.room.portal.admin.controllers.AuthController;
 import net.itkmitl.room.portal.admin.controllers.OperationWindowController;
 import net.itkmitl.room.portal.admin.controllers.PreferenceWindowController;
@@ -76,7 +88,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         baseFrame.setMinimumSize(new Dimension(640, 480));
         baseFrame.setSize(1280, 720);
         baseFrame.addComponentListener(this);
-        baseFrame.setExtendedState(baseFrame.getExtendedState() | baseFrame.MAXIMIZED_BOTH);
+        baseFrame.setExtendedState(baseFrame.getExtendedState() | Frame.MAXIMIZED_BOTH);
 
         // Menu Components declaration
         menuBar = new JMenuBar();
@@ -207,12 +219,11 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     private PreferenceWindowView spawnPreference() {
         final PreferenceWindowController[] pref = {null};
         final PreferenceWindowView[] view = {null};
-        SwingWorker worker = new SwingWorker() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             LoadingDialog ld = new LoadingDialog();
 
             @Override
             protected String doInBackground() {
-                String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
                 pref[0] = new PreferenceWindowController();

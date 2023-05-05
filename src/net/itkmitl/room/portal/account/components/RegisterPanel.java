@@ -1,12 +1,26 @@
 package net.itkmitl.room.portal.account.components;
 
 
-import net.itkmitl.room.portal.components.*;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.Arrays;
+
+import javax.swing.Box;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import net.itkmitl.room.portal.components.BetterJPasswordField;
+import net.itkmitl.room.portal.components.BetterJTextField;
+import net.itkmitl.room.portal.components.ButtonGradient;
+import net.itkmitl.room.portal.components.GBCBuilder;
+import net.itkmitl.room.portal.components.RoundedPanel;
 
 public class RegisterPanel extends RoundedPanel {
     private final JPanel fieldPanel, operationPanel, twoColumnPanel;

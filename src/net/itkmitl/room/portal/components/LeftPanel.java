@@ -4,7 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LeftPanel extends JPanel {
-    public JLabel nameLabel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 561892552360870497L;
+	public JLabel nameLabel;
 
     public LeftPanel() {
         super(new BorderLayout());

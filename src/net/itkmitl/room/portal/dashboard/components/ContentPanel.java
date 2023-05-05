@@ -1,10 +1,8 @@
 package net.itkmitl.room.portal.dashboard.components;
 
-import net.itkmitl.room.portal.components.RoundedPanel;
-import net.itkmitl.room.portal.components.TransparentPanel;
-
 import javax.swing.BoxLayout;
-import java.awt.*;
+
+import net.itkmitl.room.portal.components.TransparentPanel;
 
 public class ContentPanel extends TransparentPanel {
     /**
