@@ -1,5 +1,6 @@
 package net.itkmitl.room.portal.content.components;
 
+import com.sun.tools.javac.Main;
 import net.itkmitl.room.portal.CardView;
 import net.itkmitl.room.portal.components.MainPanel;
 import net.itkmitl.room.portal.dashboard.components.*;
@@ -53,5 +54,11 @@ public class Dashboard extends CardView {
 
         this.add(mainPanel, BorderLayout.CENTER);
         this.add(rightPanel, BorderLayout.EAST);
+    }
+    public MainPanel getMainPanel(){
+        return (MainPanel)this.mainPanel;
+    }
+    public ReservationPanel getReservationPanel() {
+        return (ReservationPanel) this.reservationPanel;
     }
 }
