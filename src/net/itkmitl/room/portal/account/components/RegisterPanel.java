@@ -34,6 +34,14 @@ public class RegisterPanel extends RoundedPanel {
     private final BetterJPasswordField passwordField, confirmPasswordField;
     private final ButtonGradient registerButton;
 
+    public BetterJPasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public BetterJPasswordField getConfirmPasswordField() {
+        return confirmPasswordField;
+    }
+
     public RegisterPanel() {
         super(30, 30, Color.WHITE);
         this.setLayout(new GridBagLayout());
@@ -62,8 +70,9 @@ public class RegisterPanel extends RoundedPanel {
         registerButton.setColor1(new Color(44, 102, 188));
         registerButton.setColor2(new Color(94, 135, 197));
 
-        warningLabel = new JLabel("");
+        warningLabel = new JLabel(" ");
         warningLabel.setForeground(Color.red);
+        warningLabel.setFont(new Font("Cousine", Font.BOLD, textSize));
 
         fieldPanel = new JPanel();
         fieldPanel.setLayout(new GridBagLayout());
@@ -97,11 +106,15 @@ public class RegisterPanel extends RoundedPanel {
         ImagePanel imagePanel = new ImagePanel(new ImageIcon("resource/account/banner/banner3-entry-25.png"));
         this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.37, 1, 0, 0).getGBC());
         this.add(fieldPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.63, 1, 1, 0, new Insets(0, 25, 0, 60)).setAnchor(GridBagConstraints.NORTHWEST));
+        registerButton.setEnabled(false);
         this.setBorder(new EmptyBorder(25, 25, 25, 25));
     }
 
     public String getEmail() {
         return emailField.getText();
+    }
+    public BetterJTextField getEmailField() {
+        return emailField;
     }
 
     public String getPassword() {
