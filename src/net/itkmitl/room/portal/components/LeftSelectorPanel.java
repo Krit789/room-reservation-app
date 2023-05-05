@@ -1,6 +1,6 @@
 package net.itkmitl.room.portal.components;
 
-import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.FewDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
@@ -37,7 +37,7 @@ public class LeftSelectorPanel extends JPanel {
         backButton.setForeground(Color.WHITE);
         this.add(parentCategory);
         try {
-            FewQuery db = RVDB.getDB();
+            FewQuery db = LaewTaeDB.getDB();
             RoomRepository roomRepository = new RoomRepository(db);
             this.getBuilding(roomRepository);
             int i = 0;

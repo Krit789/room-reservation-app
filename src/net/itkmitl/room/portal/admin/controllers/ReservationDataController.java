@@ -1,6 +1,6 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
@@ -104,7 +104,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
 
 
                 try {
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     ReservationRepository reservationRepository = new ReservationRepository(db);
                     UserRepository userRepository = new UserRepository(db);
                     RoomRepository roomRepository = new RoomRepository(db);
@@ -154,7 +154,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
                 try {
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     ReservationRepository myReservation = new ReservationRepository(db);
                     switch (mode) {
                         case 0: // Update
@@ -217,7 +217,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
 
 
                 try {
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
                     RoomRepository roomRepository = new RoomRepository(db);
                     ArrayList<User> userList = userRepository.getUsers();

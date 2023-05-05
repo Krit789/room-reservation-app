@@ -1,6 +1,6 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumRoomState;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
@@ -80,7 +80,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
                 try {
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     Room myRoom = new RoomRepository(db).getRoomById(roomID);
                     data = new Object[]{true, myRoom};
                 } catch (Exception ex) {
@@ -110,7 +110,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
                 try {
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     RoomRepository myRoom = new RoomRepository(db);
                     switch (mode) {
                         case 0: // Update

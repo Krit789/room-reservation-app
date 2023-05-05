@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
 
-import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumDBSchema;
 
 public class FewDB {
@@ -61,10 +61,10 @@ public class FewDB {
 
 
     public static void createTable(EnumDBSchema schema) throws Exception{
-        RVDB.getDB().unsafeQuery(schema.getRaw());
+        LaewTaeDB.getDB().unsafeQuery(schema.getRaw());
     }
 
     public static void createDatabase(String databaseName) throws Exception {
-        RVDB.getDBwithoutDB().unsafeQuery(String.format("CREATE DATABASE IF NOT EXISTS %s;", databaseName));
+        LaewTaeDB.getDBwithoutDB().unsafeQuery(String.format("CREATE DATABASE IF NOT EXISTS %s;", databaseName));
     }
 }

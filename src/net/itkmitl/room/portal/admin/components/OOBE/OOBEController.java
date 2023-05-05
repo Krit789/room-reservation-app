@@ -3,7 +3,7 @@ package net.itkmitl.room.portal.admin.components.OOBE;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
-import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumDBSchema;
 import net.itkmitl.room.enums.EnumUserRole;
 import net.itkmitl.room.libs.jarukrit.ConfigManager;
@@ -140,7 +140,7 @@ public class OOBEController implements ActionListener, DocumentListener {
                     view.fn.firstPassWordField.setText("Waiting For Database");
                     view.fn.firstPassWordField.setFont(new Font("SansSerif", Font.ITALIC, 16));
                     view.fn.firstPassWordField.setForeground(new Color(115, 115, 115));
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     UserRepository myUser = new UserRepository(db);
                     User admin = new User();
                     final String uuid = UUID.randomUUID().toString().replace("-", "");

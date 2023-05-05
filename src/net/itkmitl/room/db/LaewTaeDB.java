@@ -4,7 +4,7 @@ import net.itkmitl.room.libs.jarukrit.ConfigManager;
 import net.itkmitl.room.libs.peeranat.FewDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 
-public class RVDB {
+public class LaewTaeDB {
 
     public static FewQuery getDB() throws Exception {
         return new FewQuery(FewDB.getConnection(new ConfigManager().getConnectionConfig()));

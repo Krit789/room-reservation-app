@@ -1,6 +1,6 @@
 package net.itkmitl.room.libs.phatsanphon.entity;
 
-import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 
 /**
@@ -10,12 +10,12 @@ public abstract class Entity {
     private final FewQuery db;
 
     public Entity(FewQuery query) throws Exception {
-        db = RVDB.getDB();
+        db = LaewTaeDB.getDB();
         this.processQuery(query);
     };
 
     public Entity() throws Exception {
-        db = RVDB.getDB();
+        db = LaewTaeDB.getDB();
     }
 
     protected FewQuery getDB() {
