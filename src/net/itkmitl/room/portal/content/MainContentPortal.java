@@ -1,25 +1,25 @@
-package net.itkmitl.room.portal.dashboard;
+package net.itkmitl.room.portal.content;
 
 import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.Portal;
 import net.itkmitl.room.portal.components.FakeUser;
 
-public class Dashboard extends Portal {
-    private final DashboardController controller;
+public class MainContentPortal extends Portal {
+    private final MainContentController controller;
     private AppStore store = AppStore.getAppStore();
 
-    public Dashboard() {
+    public MainContentPortal() {
         super();
 
         store.dispatch("user", FakeUser.getUser());
 
-        DashboardView view = new DashboardView();
-        this.controller = new DashboardController(view);
+        MainContentView view = new MainContentView();
+        this.controller = new MainContentController(view);
     }
 
     public static void main(String[] args) {
-        Dashboard dashboard = new Dashboard();
-        dashboard.run();
+        MainContentPortal mainContent = new MainContentPortal();
+        mainContent.run();
     }
 
     @Override
