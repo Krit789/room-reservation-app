@@ -6,10 +6,12 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.HashMap;
 
+import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
+
 public class FewQuery {
 
     private Connection connection;
-    private HashMap<String, FewMySQLValue> fields;
+    private HashMap<String, FewSimpleValue> fields;
     private int queryCount;
     private ResultSet result;
     private ResultSetMetaData resultMeta;
@@ -93,7 +95,7 @@ public class FewQuery {
         }
     }
 
-    public void bindValue(String fieldName, FewMySQLValue ref) {
+    public void bindValue(String fieldName, FewSimpleValue ref) {
         if (this.fields.containsKey(fieldName)) {
             this.fields.replace(fieldName, ref);
         } else {
@@ -101,7 +103,7 @@ public class FewQuery {
         }
     }
 
-    public FewMySQLValue getValue(String fieldName) {
+    public FewSimpleValue getValue(String fieldName) {
         if (this.fields.containsKey(fieldName)) {
             return fields.get(fieldName);
         } else {
@@ -118,7 +120,7 @@ public class FewQuery {
             }
             for (int col = 1; col <= this.resultMeta.getColumnCount(); col++) {
                 String fieldName = this.resultMeta.getColumnName(col);
-                this.fields.put(fieldName, new FewMySQLValue(result.getObject(col)));
+                this.fields.put(fieldName, new FewSimpleValue(result.getObject(col)));
             }
         } catch (Exception e) {
             System.out.println("ERROR: Unable to fetch (" + e.getMessage() + ")");

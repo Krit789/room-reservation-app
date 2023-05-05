@@ -1,13 +1,20 @@
 package net.itkmitl.room.portal.dashboard.components;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.store.AppStore;
-import net.itkmitl.room.portal.components.FakeUser;
 import net.itkmitl.room.portal.components.GBCBuilder;
-
-import java.awt.*;
-
-import javax.swing.*;
 
 public class RightPanel extends JPanel {
     /**
@@ -22,7 +29,7 @@ public class RightPanel extends JPanel {
     public RightPanel() {
         super();
 
-        User user = store.select("user");
+        User user = (User) store.select("user");
 
         this.setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
