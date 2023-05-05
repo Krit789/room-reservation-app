@@ -20,7 +20,7 @@ public class User extends Entity {
         super(query);
     }
 
-    public User()  throws Exception{
+    public User() throws Exception {
 
     }
 
@@ -97,7 +97,7 @@ public class User extends Entity {
         return createdOn;
     }
 
-    private void setCreatedOn(long createdOn) {
+    public void setCreatedOn(long createdOn) {
         this.createdOn = new DateTime(createdOn * 1000);
     }
 

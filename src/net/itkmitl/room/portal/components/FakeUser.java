@@ -1,7 +1,6 @@
 package net.itkmitl.room.portal.components;
 
 import net.itkmitl.room.enums.EnumUserRole;
-import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 
 public class FakeUser {
@@ -14,6 +13,9 @@ public class FakeUser {
             fakeUser.setEmail("dummy@email.com");
             fakeUser.setRole(EnumUserRole.STUDENT);
             fakeUser.setActive(true);
+            fakeUser.setPasswordHash("sfkso;fsjfklsadfjapfjadfk;sdajnkfds;of");
+            fakeUser.setCreatedOn(1683223440L);
+
             return fakeUser;
         } catch (Exception e) {
 

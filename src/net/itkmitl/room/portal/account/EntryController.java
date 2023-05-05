@@ -7,6 +7,7 @@ import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
+import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.Controller;
 import net.itkmitl.room.portal.account.components.LoginPanel;
 import net.itkmitl.room.portal.account.components.RegisterPanel;
@@ -24,7 +25,8 @@ import java.awt.event.*;
 public class EntryController extends Controller implements ActionListener, ComponentListener, DocumentListener, MouseListener {
     private final EntryView view;
     private User myUser;
-    public static User currentUser = FakeUser.getAdmin();
+    private AppStore store = AppStore.getAppStore();
+
     private final LoginPanel loginPanel;
     private final RegisterPanel registerPanel;
 
@@ -88,7 +90,7 @@ public class EntryController extends Controller implements ActionListener, Compo
                         myUser.setTelephoneNumber(reg.getTelephone());
                         myUser.setRole(EnumUserRole.STUDENT);
                         userRepository.createUser(myUser);
-                        currentUser = myUser;
+                        store.dispatch("user", myUser);
                         changeFrame(getView(), new Dashboard());
                     } else {
                         getView().registerPanel.getWarningLabel().setIcon(null);
@@ -121,7 +123,7 @@ public class EntryController extends Controller implements ActionListener, Compo
                     myUser = userRepository.getExactUserByEmail(email);
                     if (myUser != null) {
                         if (FewPassword.checkPassword(password, myUser.getPasswordHash())) {
-                            currentUser = myUser;
+                            store.dispatch("user", myUser);
                             changeFrame(getView(), new Dashboard());
                         } else {
                             getView().loginPanel.getWarningLabel().setText("Invalid Password!");
@@ -149,7 +151,7 @@ public class EntryController extends Controller implements ActionListener, Compo
     @Override
     public void actionPerformed(ActionEvent e) {
         Object objectPerformed = e.getSource();
-        if (objectPerformed.equals(this.getView().optionMenuItem1) && currentUser != null) {
+        if (objectPerformed.equals(this.getView().optionMenuItem1) && ((User) store.select("user")) != null) {
             this.getView().dispose();
             String[] arguments = new String[]{""};
             BaseWindow.main(arguments);
@@ -242,7 +244,7 @@ public class EntryController extends Controller implements ActionListener, Compo
         }
     }
 
-    private boolean emailValidator(){
+    private boolean emailValidator() {
         if ((loginPanel.getEmail().length() > 5 && (!loginPanel.getEmail().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")))) {
             loginPanel.getWarningLabel().setText("Invalid E-Mail!");
             loginPanel.getLoginButton().setEnabled(false);
@@ -251,6 +253,7 @@ public class EntryController extends Controller implements ActionListener, Compo
         loginPanel.getLoginButton().setEnabled(true);
         return false;
     }
+
     @Override
     public void insertUpdate(DocumentEvent e) {
         if (!emailValidator()) {

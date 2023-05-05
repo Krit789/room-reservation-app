@@ -23,7 +23,7 @@ public class ReservationRepository extends Repository<Reservation> {
     /**
      * @return ArrayList<Reservation>
      */
-    public ArrayList<Reservation> getReservations() throws Exception{
+    public ArrayList<Reservation> getReservations() throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.select("*").table("reservation");
@@ -37,7 +37,7 @@ public class ReservationRepository extends Repository<Reservation> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Reservation> getReservations(ReservationQuery queryBy, String query) throws Exception{
+    public ArrayList<Reservation> getReservations(ReservationQuery queryBy, String query) throws Exception {
         if (queryBy == ReservationQuery.ID) {
             Reservation data = this.getReservationById(Integer.parseInt(query));
 
@@ -74,7 +74,7 @@ public class ReservationRepository extends Repository<Reservation> {
      * @param roomId int
      * @return ArrayList<Reservation>
      */
-    public ArrayList<Reservation> getReservationsByRoomId(int roomId) throws Exception{
+    public ArrayList<Reservation> getReservationsByRoomId(int roomId) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.where("room_id", roomId)
@@ -96,7 +96,7 @@ public class ReservationRepository extends Repository<Reservation> {
         return this.maps(this.getQuery().query(select));
     }
 
-    public ArrayList<Reservation> getReservationsByReason(String reason)  throws Exception {
+    public ArrayList<Reservation> getReservationsByReason(String reason) throws Exception {
         String query = String.format("SELECT * FROM `reservation` WHERE reason LIKE '%%%s%%'", reason);
 
         return this.maps(this.getQuery().unsafeQuery(query));
@@ -105,7 +105,7 @@ public class ReservationRepository extends Repository<Reservation> {
     /**
      * @param id int
      */
-    public void deleteReservationById(int id)  throws Exception {
+    public void deleteReservationById(int id) throws Exception {
         FewDeleteMySQL delete = new FewDeleteMySQL();
 
         delete.where("id", id).table("reservation");

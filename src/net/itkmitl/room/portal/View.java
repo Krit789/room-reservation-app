@@ -15,6 +15,8 @@ import java.util.Objects;
 
 import javax.swing.*;
 
+import net.itkmitl.room.libs.phatsanphon.entity.User;
+import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.account.EntryController;
 import net.itkmitl.room.portal.account.components.OutPane;
 
@@ -23,6 +25,7 @@ public abstract class View extends JFrame {
      *
      */
     private static final long serialVersionUID = -8075338715312313006L;
+    private AppStore store = AppStore.getAppStore();
     public OutPane outerPane;
     public JMenuBar menuBar;
     public JMenu fileMenu, optionMenu, helpMenu;
@@ -37,6 +40,7 @@ public abstract class View extends JFrame {
         initializeFont();
         this.initializeFrame();
         this.initialize();
+        this.setVisible(true);
     }
 
     protected void initializeFont() {
@@ -81,7 +85,7 @@ public abstract class View extends JFrame {
         menuBar.add(fileMenu);
         fileMenu.add(fileMenuItem3);
 
-        if (EntryController.currentUser != null && EntryController.currentUser.getRole().getLevel() > 10) {
+        if (((User) store.select("user") != null) && ((User) store.select("user")).getRole().getLevel() > 10) {
             menuBar.add(optionMenu);
             optionMenu.add(optionMenuItem1);
         }
@@ -136,7 +140,6 @@ public abstract class View extends JFrame {
         this.setJMenuBar(menuBar);
         this.setBackground(Color.white);
         this.setContentPane(outerPane);
-        this.setVisible(true);
     }
 
     protected abstract void initialize();
