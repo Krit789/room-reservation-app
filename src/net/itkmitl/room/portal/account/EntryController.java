@@ -10,10 +10,7 @@ import java.awt.event.ComponentListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -30,6 +27,7 @@ import net.itkmitl.room.portal.account.components.LoginPanel;
 import net.itkmitl.room.portal.account.components.RegisterPanel;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
+import net.itkmitl.room.portal.components.BetterJTextField;
 import net.itkmitl.room.portal.dashboard.Dashboard;
 
 public class EntryController extends Controller implements ActionListener, ComponentListener, DocumentListener, MouseListener {
@@ -39,6 +37,7 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     private final LoginPanel loginPanel;
     private final RegisterPanel registerPanel;
+    private String currentCard = "Login";
 
     public EntryController(EntryView view) {
         this.view = view;
@@ -69,8 +68,10 @@ public class EntryController extends Controller implements ActionListener, Compo
         loginPanel.getLoginButton().addActionListener(this);
         loginPanel.getEmailField().addActionListener(this);
         loginPanel.getEmailField().getDocument().addDocumentListener(this);
-        loginPanel.getPasswordField().addActionListener(this);
         loginPanel.getPasswordField().getDocument().addDocumentListener(this);
+        registerPanel.getEmailField().getDocument().addDocumentListener(this);
+        registerPanel.getPasswordField().getDocument().addDocumentListener(this);
+        registerPanel.getConfirmPasswordField().getDocument().addDocumentListener(this);
         registerPanel.getRegisterButton().addActionListener(this);
         registerPanel.getLoginLabel2().addMouseListener(this);
         this.getView().contentPanel.addComponentListener(this);
@@ -79,6 +80,7 @@ public class EntryController extends Controller implements ActionListener, Compo
     protected void changeCard(String name) {
         CardLayout cl = (CardLayout) (this.getView().contentPanel.getLayout());
         cl.show(this.getView().contentPanel, name);
+        currentCard = name;
     }
 
     private void RegisterDetail(RegisterPanel reg) {
@@ -123,8 +125,8 @@ public class EntryController extends Controller implements ActionListener, Compo
     }
 
     private void userLogin(String email, String password) {
-    	SwingWorker<?, ?> worker = new SwingWorker<>() {
-    		@Override
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
+            @Override
             protected Object doInBackground() throws Exception {
                 try {
                     getView().loginPanel.getWarningLabel().setIcon(new ImageIcon("resource/icons/loading-32px.gif"));
@@ -254,32 +256,144 @@ public class EntryController extends Controller implements ActionListener, Compo
         }
     }
 
-    private boolean emailValidator() {
-        if ((loginPanel.getEmail().length() > 5 && (!loginPanel.getEmail().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")))) {
-            loginPanel.getWarningLabel().setText("Invalid E-Mail!");
-            loginPanel.getLoginButton().setEnabled(false);
-            return true;
+    private int emailValidator() {
+        JTextField email = null;
+        int type = 0;
+        if (currentCard.equals("Login")) {
+            email = loginPanel.getEmailField();
+            type = 0;
+        } else if (currentCard.equals("Register")) {
+            email = registerPanel.getEmailField();
+            type = 1;
         }
-        loginPanel.getLoginButton().setEnabled(true);
-        return false;
+        if (email.getText().length() < 5) {
+            switch (type) {
+                case 0: // Login
+//                    loginPanel.getWarningLabel().setText(" ");
+//                    loginPanel.getLoginButton().setEnabled(false);
+                    break;
+                case 1: // Registration
+//                    registerPanel.getWarningLabel().setText(" ");
+//                    registerPanel.getRegisterButton().setEnabled(false);
+            }
+            return -2;
+        } else if (!email.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+            switch (type) {
+                case 0: // Login
+//                    loginPanel.getWarningLabel().setText("Invalid E-Mail!");
+//                    loginPanel.getLoginButton().setEnabled(false);
+                    break;
+                case 1: // Registration
+//                    registerPanel.getWarningLabel().setText("Invalid E-Mail!");
+//                    registerPanel.getRegisterButton().setEnabled(false);
+            }
+            return -1;
+        } else {
+            switch (type) {
+                case 0: // Login
+//                    loginPanel.getLoginButton().setEnabled(true);
+//                    loginPanel.getWarningLabel().setText(" ");
+                    break;
+                case 1: // Registration
+//                    registerPanel.getRegisterButton().setEnabled(true);
+//                    registerPanel.getWarningLabel().setText(" ");
+                    break;
+            }
+            return 0;
+        }
+    }
+
+    private int passwordValidator(){
+        JPasswordField password = null;
+        JPasswordField confirmPassword = null;
+        int type = 0;
+        if (currentCard.equals("Login")) {
+            password = loginPanel.getPasswordField();
+            type = 0;
+        } else if (currentCard.equals("Register")) {
+            password = registerPanel.getPasswordField();
+            confirmPassword = registerPanel.getConfirmPasswordField();
+            type = 1;
+        }
+        if (String.valueOf(password.getPassword()).length() < 4) {
+            switch (type) {
+                case 0: // Login
+//                    loginPanel.getWarningLabel().setText("Password must be at least 4 character long");
+//                    loginPanel.getLoginButton().setEnabled(false);
+                    break;
+                case 1: // Registration
+//                    registerPanel.getWarningLabel().setText("Password must be at least 4 character long");
+//                    registerPanel.getRegisterButton().setEnabled(false);
+            }
+            return -1;
+        } else if (type == 1 && String.valueOf(password.getPassword()).equals(String.valueOf(confirmPassword.getPassword()))) {
+//                    registerPanel.getWarningLabel().setText("Both Password and Confirm Password must be the same!");
+//                    registerPanel.getRegisterButton().setEnabled(false);
+            return -2;
+        } else {
+            return 1;
+        }
+
+    }
+
+    private void allValidator(){
+        int result1 = emailValidator();
+        int result2 = passwordValidator();
+        String outText = null;
+        boolean enable = false;
+        if (currentCard.equals("Login")) {
+            if (result1 == 0 && result2 == 1){
+                enable = true;
+                outText = " ";
+            } else if (result1 == -1 && result2 == 1) {
+                enable = false;
+                outText = "Invalid E-Mail!";
+            } else if ((result1 == -1 || result1 == -2) && result2 == -1) {
+                enable = false;
+                outText = "Invalid E-Mail and Password must be at least 4 character long";
+            } else if (result1 == 0 && result2 == -1) {
+                enable = false;
+                outText = "Password must be at least 4 character long";
+            }
+            loginPanel.getWarningLabel().setText(outText);
+            loginPanel.getLoginButton().setEnabled(enable);
+        } else if (currentCard.equals("Register")) {
+            if (result1 == 0 && result2 == 1){
+                enable = true;
+                outText = " ";
+            } else if (result1 == -1 && result2 == 1) {
+                enable = false;
+                outText = "Invalid E-Mail!";
+            } else if ((result1 == -1 || result1 == -2) && result2 == -1) {
+                enable = false;
+                outText = "Invalid E-Mail and Password must be at least 4 character long";
+            }else if ((result1 == -1 || result1 == -2) && result2 == -2) {
+                enable = false;
+                outText = "Invalid E-Mail and Password and Confirm Password must be the same";
+            } else if (result1 == 0 && result2 == -1) {
+                enable = false;
+                outText = "Password must be at least 4 character long";
+            } else if (result1 == 0 && result2 == -2) {
+                enable = false;
+                outText = "Password and Confirm Password must be the same";
+            }
+            registerPanel.getWarningLabel().setText(outText);
+            registerPanel.getRegisterButton().setEnabled(enable);
+        }
     }
 
     @Override
     public void insertUpdate(DocumentEvent e) {
-        if (!emailValidator()) {
-            loginPanel.getWarningLabel().setText(" ");
-        }
+        allValidator();
     }
 
     @Override
     public void removeUpdate(DocumentEvent e) {
-        if (!emailValidator()) {
-            loginPanel.getWarningLabel().setText(" ");
-        }
+        allValidator();
     }
 
     @Override
     public void changedUpdate(DocumentEvent e) {
-
+        allValidator();
     }
 }
