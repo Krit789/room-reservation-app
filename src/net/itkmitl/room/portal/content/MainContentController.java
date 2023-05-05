@@ -3,6 +3,7 @@ package net.itkmitl.room.portal.content;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.Controller;
+import net.itkmitl.room.portal.components.LeftSelectorBox;
 import net.itkmitl.room.portal.dashboard.DashboardView;
 import net.itkmitl.room.portal.selectBuilding.SelectBuilding;
 
@@ -43,6 +44,10 @@ public class MainContentController extends Controller implements ActionListener 
         buttonBox[0].addActionListener(this);
         buttonBox[1].addActionListener(this);
         this.getView().getSelector().getSelectorPanel().backButton.addActionListener(this);
+
+        for(int i = this.getView().getSelector().getSelectorPanel().leftBoxHolder.size() - 1; i > 0; i--) {
+            this.getView().getSelector().getSelectorPanel().leftBoxHolder.get(i).addActionListener(this);
+        }
     }
 
     @Override
@@ -53,6 +58,9 @@ public class MainContentController extends Controller implements ActionListener 
             this.changeCard("Selector");
         } else if (e.getActionCommand().equals("Back to Dashboard")){
             this.changeCard("Dashboard");
+        } else if (e.getSource() instanceof LeftSelectorBox) {
+            this.getView().getSelector().testLabel.setText("Building = " + e.getActionCommand());
+            System.out.println("hi");
         }
     }
     protected void changeCard(String name) {

@@ -23,7 +23,8 @@ public class Selector extends CardView {
         innerPanel = new MainPanel();
         mainPanel = new JPanel(new BorderLayout());
         leftSelectorPanel = new LeftSelectorPanel();
-        mainPanel.setOpaque(false);
+        mainPanel.setOpaque(true);
+        mainPanel.setBackground(Color.white);
 
         header = new Header("Select a Building", "But I need to tell you something");
 
