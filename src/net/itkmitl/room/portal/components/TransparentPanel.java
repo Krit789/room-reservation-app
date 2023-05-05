@@ -7,4 +7,10 @@ public class TransparentPanel extends JPanel {
     {
         setOpaque(false);
     }
+    public TransparentPanel(){
+        this.setLayout(new BorderLayout());
+    }
+    public TransparentPanel(LayoutManager lm){
+        this.setLayout(lm);
+    }
 }
