@@ -3,6 +3,8 @@ package net.itkmitl.room.portal.content;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.Controller;
+import net.itkmitl.room.portal.admin.BaseWindow;
+import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.LeftSelectorBox;
 
 
@@ -66,6 +68,13 @@ public class MainContentController extends Controller implements ActionListener 
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(this.getView().optionMenuItem1) && ((User) store.select("user")).getRole().getLevel() >= 10) {
+            this.getView().dispose();
+            String[] arguments = new String[]{""};
+            BaseWindow.main(arguments);
+        } else if (e.getSource().equals(this.getView().helpMenuItem1)) {
+            new AboutDialog(this.getView());
+        }
         if (e.getActionCommand().equals("History")) {
             System.out.println("go to history page");
         } else if (e.getActionCommand().equals("Booking")) {
