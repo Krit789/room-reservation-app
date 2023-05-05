@@ -44,9 +44,7 @@ public class FewQuery {
                 }
             }
             
-            statement.close();
             return this;
-
         } catch (Exception e) {
             System.out.println("ERROR: Unable to prepare query (" + e.getMessage() + ")");
             throw e;
@@ -74,7 +72,6 @@ public class FewQuery {
                 }
             }
             
-            statement.close();
             return this;
         } catch (Exception e) {
             System.out.println("ERROR: Unable to prepare query (" + e.getMessage() + ")");
@@ -125,9 +122,7 @@ public class FewQuery {
             }
         } catch (Exception e) {
             System.out.println("ERROR: Unable to fetch (" + e.getMessage() + ")");
-        } finally {
-			close();
-		}
+        } 
         return true;
     }
 

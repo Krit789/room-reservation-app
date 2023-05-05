@@ -178,6 +178,7 @@ public class DatabaseLoader implements InternalFrameListener {
                             break;
                     }
                 } catch (NullPointerException ex) {
+                	ex.printStackTrace();
                     data = new Object[]{Boolean.valueOf(false), String.format("\"%s\" type \"%d\" was not found in the records", searchQuery, type)};
                 } catch (SQLSyntaxErrorException | SQLNonTransientConnectionException ex) {
                     data = new Object[]{Boolean.valueOf(false), ex.getMessage()};

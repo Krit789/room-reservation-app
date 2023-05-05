@@ -85,3 +85,4 @@ target/*
 .settings/*
 /.classpath
 /.project
+/config.yml
