@@ -1,10 +1,10 @@
-package net.itkmitl.room.libs.peeranat.query;
+package net.itkmitl.room.libs.peeranat.simplevalue;
 
-public class FewMySQLValue {
+public class FewSimpleValue {
 
     private Object val;
 
-    public FewMySQLValue(Object val) {
+    public FewSimpleValue(Object val) {
         this.val = val;
     }
 
