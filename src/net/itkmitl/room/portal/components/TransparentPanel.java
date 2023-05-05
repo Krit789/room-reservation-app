@@ -1,5 +1,8 @@
 package net.itkmitl.room.portal.components;
 
+import java.awt.BorderLayout;
+import java.awt.LayoutManager;
+
 import javax.swing.JPanel;
 
 public class TransparentPanel extends JPanel {
