@@ -63,8 +63,7 @@ public class FewConfig {
 			String value = this.data.get(key).toString();
 			return value != null ? value : defaultValue;
 		} catch (Exception e) {
-			throw new RuntimeException(
-					key + " is not a String, the correct data type is " + data.get(key).getClass().getName());
+			throw new RuntimeException(key + " is not a String, the correct data type is " + data.get(key).getClass().getName());
 		}
 	}
 
@@ -75,8 +74,7 @@ public class FewConfig {
 		try {
 			return (Double) this.data.get(key);
 		} catch (Exception e) {
-			throw new RuntimeException(
-					key + " is not a String, the correct data type is " + data.get(key).getClass().getName());
+			throw new RuntimeException(key + " is not a String, the correct data type is " + data.get(key).getClass().getName());
 		}
 	}
 
@@ -85,8 +83,7 @@ public class FewConfig {
 			Double value = (Double) this.data.get(key);
 			return value != null ? value : defaultValue;
 		} catch (Exception e) {
-			throw new RuntimeException(
-					key + " is not a String, the correct data type is " + data.get(key).getClass().getName());
+			throw new RuntimeException(key + " is not a String, the correct data type is " + data.get(key).getClass().getName());
 		}
 	}
 
@@ -97,8 +94,7 @@ public class FewConfig {
 		try {
 			return (Integer) this.data.get(key);
 		} catch (Exception e) {
-			throw new RuntimeException(
-					key + " is not a Integer, the correct data type is " + data.get(key).getClass().getName());
+			throw new RuntimeException(key + " is not a Integer, the correct data type is " + data.get(key).getClass().getName());
 		}
 	}
 
@@ -107,8 +103,7 @@ public class FewConfig {
 			Integer value = (Integer) this.data.get(key);
 			return value != null ? value : defaultValue;
 		} catch (Exception e) {
-			throw new RuntimeException(
-					key + " is not a Integer, the correct data type is " + data.get(key).getClass().getName());
+			throw new RuntimeException(key + " is not a Integer, the correct data type is " + data.get(key).getClass().getName());
 		}
 	}
 
@@ -119,8 +114,7 @@ public class FewConfig {
 		try {
 			return (Boolean) this.data.get(key);
 		} catch (Exception e) {
-			throw new RuntimeException(
-					key + " is not a Boolean, the correct data type is " + data.get(key).getClass().getName());
+			throw new RuntimeException(key + " is not a Boolean, the correct data type is " + data.get(key).getClass().getName());
 		}
 	}
 
@@ -141,8 +135,7 @@ public class FewConfig {
 		try {
 			return (Float) this.data.get(key);
 		} catch (Exception e) {
-			throw new RuntimeException(
-					key + " is not a Float, the correct data type is " + data.get(key).getClass().getName());
+			throw new RuntimeException(key + " is not a Float, the correct data type is " + data.get(key).getClass().getName());
 		}
 	}
 
@@ -164,8 +157,7 @@ public class FewConfig {
 		try {
 			return (List<T>) this.data.get(key);
 		} catch (Exception e) {
-			throw new RuntimeException(key + " is not a List<" + clazz.getName() + ">, the correct data type is "
-					+ data.get(key).getClass().getName());
+			throw new RuntimeException(key + " is not a List<" + clazz.getName() + ">, the correct data type is " + data.get(key).getClass().getName());
 		}
 	}
 

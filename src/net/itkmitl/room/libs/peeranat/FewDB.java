@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import net.itkmitl.room.db.RVDB;
 import net.itkmitl.room.enums.EnumDBSchema;
-import net.itkmitl.room.libs.peeranat.query.FewQuery;
 
 public class FewDB {
 

@@ -1,11 +1,8 @@
 package net.itkmitl.room.libs.phatsanphon;
 
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import javax.swing.UIManager;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
+import com.formdev.flatlaf.themes.FlatMacLightLaf;
 
 public class UIConfig {
     public static void setLookAndFeel() {
