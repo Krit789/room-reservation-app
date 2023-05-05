@@ -1,6 +1,6 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumUserRole;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
@@ -83,7 +83,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
-                FewQuery db = RVDB.getDB();
+                FewQuery db = LaewTaeDB.getDB();
                 try {
                     User myUser = new UserRepository(db).getUserById(userID);
                     data = new Object[]{true, myUser};
@@ -113,7 +113,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
-                FewQuery db = RVDB.getDB();
+                FewQuery db = LaewTaeDB.getDB();
                 UserRepository myUser = new UserRepository(db);
                 switch (mode) {
                     case 0: // Update

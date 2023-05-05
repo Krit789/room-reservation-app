@@ -3,7 +3,7 @@ package net.itkmitl.room.portal.admin.components.OOBE;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
-import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumDBSchema;
 import net.itkmitl.room.enums.EnumUserRole;
 import net.itkmitl.room.libs.jarukrit.ConfigManager;
@@ -90,16 +90,16 @@ public class OOBEController implements ActionListener, DocumentListener {
                     view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 6, new Insets(0, 0, 5, 5)).getGBC());
                     view.dbt.resultPanel.revalidate();
 
-                    FewDB.createTable(EnumDBSchema.FEEDBACK_INDEX);
-                    FewDB.createTable(EnumDBSchema.RESERVATION_INDEX);
-                    view.dbt.resultPanel.add(view.dbt.tableIndexLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 7, new Insets(5,5,5,5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 7, new Insets(0, 0, 5, 5)).getGBC());
-                    view.dbt.resultPanel.revalidate();
-
-                    FewDB.createTable(EnumDBSchema.FEEDBACK_RELATIONSHIP);
-                    FewDB.createTable(EnumDBSchema.RESERVATION_RELATIONSHIP);
-                    view.dbt.resultPanel.add(view.dbt.tableRelationshipLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 8, new Insets(5,5,0,5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 8, new Insets(0, 0, 5, 5)).getGBC());
+//                    FewDB.createTable(EnumDBSchema.FEEDBACK_INDEX);
+//                    FewDB.createTable(EnumDBSchema.RESERVATION_INDEX);
+//                    view.dbt.resultPanel.add(view.dbt.tableIndexLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 7, new Insets(5,5,5,5)).getGBC());
+//                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 7, new Insets(0, 0, 5, 5)).getGBC());
+//                    view.dbt.resultPanel.revalidate();
+//
+//                    FewDB.createTable(EnumDBSchema.FEEDBACK_RELATIONSHIP);
+//                    FewDB.createTable(EnumDBSchema.RESERVATION_RELATIONSHIP);
+//                    view.dbt.resultPanel.add(view.dbt.tableRelationshipLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 8, new Insets(5,5,0,5)).getGBC());
+//                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 8, new Insets(0, 0, 5, 5)).getGBC());
 
                     view.dbt.setDescription("We have established connection with your database, operations completed without errors!");
 
@@ -115,8 +115,6 @@ public class OOBEController implements ActionListener, DocumentListener {
                     view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 4, new Insets(0, 0, 5, 5)).getGBC());
                     view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 5, new Insets(0, 0, 5, 5)).getGBC());
                     view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 6, new Insets(0, 0, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 7, new Insets(0, 0, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 8, new Insets(0, 0, 5, 5)).getGBC());
                     view.dbt.revalidate();
                     JOptionPane.showMessageDialog(view.getFrame(), ex.getMessage(), "Unable to Proceed", JOptionPane.ERROR_MESSAGE);
                 } catch (SQLSyntaxErrorException ex) {
@@ -142,7 +140,7 @@ public class OOBEController implements ActionListener, DocumentListener {
                     view.fn.firstPassWordField.setText("Waiting For Database");
                     view.fn.firstPassWordField.setFont(new Font("SansSerif", Font.ITALIC, 16));
                     view.fn.firstPassWordField.setForeground(new Color(115, 115, 115));
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     UserRepository myUser = new UserRepository(db);
                     User admin = new User();
                     final String uuid = UUID.randomUUID().toString().replace("-", "");

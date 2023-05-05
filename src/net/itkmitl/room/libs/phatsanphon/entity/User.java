@@ -103,8 +103,6 @@ public class User extends Entity {
 
     @Override
     public void processQuery(FewQuery query) {
-        System.out.println(query.getValue("created_on").asString());
-
         this.setId(query.getValue("id").asInt());
         this.setEmail(query.getValue("email").asString());
         this.setPasswordHash(query.getValue("password_hash").asString());

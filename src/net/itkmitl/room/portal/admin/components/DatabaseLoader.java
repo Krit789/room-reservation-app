@@ -1,6 +1,6 @@
 package net.itkmitl.room.portal.admin.components;
 
-import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
@@ -71,7 +71,7 @@ public class DatabaseLoader implements InternalFrameListener {
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
                 try {
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     DataListTableModel model = new DataListTableModel();
                     DefaultTableModel dtm;
                     switch (whichTable) {
@@ -178,6 +178,7 @@ public class DatabaseLoader implements InternalFrameListener {
                             break;
                     }
                 } catch (NullPointerException ex) {
+                	ex.printStackTrace();
                     data = new Object[]{Boolean.valueOf(false), String.format("\"%s\" type \"%d\" was not found in the records", searchQuery, type)};
                 } catch (SQLSyntaxErrorException | SQLNonTransientConnectionException ex) {
                     data = new Object[]{Boolean.valueOf(false), ex.getMessage()};

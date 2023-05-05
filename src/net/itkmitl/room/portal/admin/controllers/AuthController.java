@@ -1,7 +1,7 @@
 package net.itkmitl.room.portal.admin.controllers;
 
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
@@ -43,7 +43,7 @@ public class AuthController implements ActionListener {
             @Override
             protected String doInBackground() {
                 try {
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
 
                     User myUser = userRepository.getExactUserByEmail(email);

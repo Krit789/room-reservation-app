@@ -1,18 +1,22 @@
 package net.itkmitl.room;
 
-import net.itkmitl.room.libs.store.AppStore;
+import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.enums.EnumDBSchema;
+import net.itkmitl.room.libs.peeranat.FewDB;
+import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.phatsanphon.date.DateTime;
+import net.itkmitl.room.libs.phatsanphon.entity.*;
+import net.itkmitl.room.libs.phatsanphon.repository.*;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 public class ApplicationMain {
     public static void main(String[] args) {
-        AppStore appState = AppStore.getAppStore();
-        appState.dispatch("number", 1);
+//        FewQuery db = RVDB.getDB();
+//        UserRepository userRepository = new UserRepository(db);
 
-        System.out.println("Before 1: " + appState.select("number"));
-
-        AppStore appState2 = AppStore.getAppStore();
-        appState2.dispatch("number", 2);
-
-        System.out.println("After 1: " + appState.select("number"));
-        System.out.println("After 2: " + appState2.select("number"));
+//        User data = userRepository.getUserById(41);
+//        System.out.println(data.getCreatedOn());
     }
 }

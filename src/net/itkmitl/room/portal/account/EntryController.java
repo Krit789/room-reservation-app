@@ -1,6 +1,6 @@
 package net.itkmitl.room.portal.account;
 
-import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumUserRole;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
@@ -78,7 +78,7 @@ public class EntryController extends Controller implements ActionListener, Compo
             @Override
             protected Object doInBackground() throws Exception {
                 try {
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
                     getView().registerPanel.getWarningLabel().setIcon(new ImageIcon("resource/icons/loading-32px.gif"));
                     if (userRepository.getExactUserByEmail(reg.getEmail()) == null) {
@@ -118,7 +118,7 @@ public class EntryController extends Controller implements ActionListener, Compo
             protected Object doInBackground() throws Exception {
                 try {
                     getView().loginPanel.getWarningLabel().setIcon(new ImageIcon("resource/icons/loading-32px.gif"));
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
                     myUser = userRepository.getExactUserByEmail(email);
                     if (myUser != null) {

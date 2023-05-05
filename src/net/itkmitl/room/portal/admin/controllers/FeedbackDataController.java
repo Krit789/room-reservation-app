@@ -1,6 +1,6 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import net.itkmitl.room.db.RVDB;
+import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
@@ -95,7 +95,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
                 try {
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     FeedbackRepository feedbackRepository = new FeedbackRepository(db);
                     UserRepository userRepository = new UserRepository(db);
                     RoomRepository roomRepository = new RoomRepository(db);
@@ -145,7 +145,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
                 try {
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     FeedbackRepository myFeedback = new FeedbackRepository(db);
                     switch (mode) {
                         case 0: // Update
@@ -193,7 +193,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
                 try {
-                    FewQuery db = RVDB.getDB();
+                    FewQuery db = LaewTaeDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
                     RoomRepository roomRepository = new RoomRepository(db);
                     ArrayList<User> userList = userRepository.getUsers();

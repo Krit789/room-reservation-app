@@ -83,3 +83,6 @@ target/*
 
 # Eclipse setting directory
 .settings/*
+/.classpath
+/.project
+/config.yml
