@@ -44,6 +44,7 @@ public class LeftSelectorPanel extends JPanel {
         backButton.setContentAreaFilled(false);
         backButton.setBorderPainted(false);
         backButton.setForeground(Color.WHITE);
+        backButton.setActionCommand("Back to Dashboard");
         this.add(parentCategory);
         try {
             FewQuery db = LaewTaeDB.getDB();

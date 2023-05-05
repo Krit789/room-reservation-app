@@ -29,7 +29,11 @@ public class MainContentView extends View{
     public Dashboard getDashboard() {
         return this.dashboard;
     }
-    public ContentPanel getContentPanel(){
-        return (ContentPanel) this.contentPanel;
+    public TransparentPanel getContentPanel(){
+        return (TransparentPanel) this.contentPanel;
+    }
+
+    public Selector getSelector(){
+        return (Selector) this.selector;
     }
 }

@@ -7,6 +7,7 @@ import net.itkmitl.room.portal.dashboard.DashboardView;
 import net.itkmitl.room.portal.selectBuilding.SelectBuilding;
 
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,6 +42,7 @@ public class MainContentController extends Controller implements ActionListener 
         this.getView().helpMenuItem1.addActionListener(this);
         buttonBox[0].addActionListener(this);
         buttonBox[1].addActionListener(this);
+        this.getView().getSelector().getSelectorPanel().backButton.addActionListener(this);
     }
 
     @Override
@@ -49,10 +51,12 @@ public class MainContentController extends Controller implements ActionListener 
             System.out.println("go to history page");
         } else if (e.getActionCommand().equals("Booking")) {
             this.changeCard("Selector");
+        } else if (e.getActionCommand().equals("Back to Dashboard")){
+            this.changeCard("Dashboard");
         }
     }
     protected void changeCard(String name) {
-        CardLayout cl = (CardLayout) ((this.getView().getContentPanel()).getLayout());
+        CardLayout cl = (CardLayout) (((JPanel)this.getView().getContentPanel()).getLayout());
         cl.show(this.getView().getContentPanel(), name);
     }
 }
