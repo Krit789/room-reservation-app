@@ -23,6 +23,7 @@ public class LeftSelectorPanel extends JPanel {
     public JScrollPane buttonScrollPane;
     public JPanel buttonPanel;
     public ArrayList<LeftSelectorBox> leftBoxHolder = new ArrayList<LeftSelectorBox>();
+
     public Set<String> buildingList = new HashSet<>();
     public static volatile boolean finishedLoading = false;
 
@@ -50,10 +51,13 @@ public class LeftSelectorPanel extends JPanel {
         add(parentCategory);
 
         loadBuilding();
+        RoomLoader.loadRoom();
+
         //test importing floor data(idk how this database work so have this for now)
 
         //would be in a loop for all component to add
     }
+
 
     private void loadBuilding() {
         SwingWorker<?, ?> worker = new SwingWorker() {

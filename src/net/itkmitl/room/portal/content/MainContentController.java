@@ -6,6 +6,7 @@ import net.itkmitl.room.portal.Controller;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.LeftSelectorBox;
+import net.itkmitl.room.portal.components.MainRoomSelectionBox;
 
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static net.itkmitl.room.portal.components.LeftSelectorPanel.finishedLoading;
+import static net.itkmitl.room.portal.content.components.Selector.doneRoomBox;
 import static net.itkmitl.room.portal.dashboard.components.ReservationPanel.buttonBox;
 
 
@@ -100,12 +102,19 @@ public class MainContentController extends Controller implements ActionListener 
         } else if (e.getActionCommand().equals("Back to Dashboard")){
             this.changeCard("Dashboard");
         } else if (e.getSource() instanceof LeftSelectorBox) {
-            this.getView().getSelector().testLabel.setText("Building = " + e.getActionCommand());
+            System.out.println("Building = " + e.getActionCommand());
+            this.changeBuildingCard(e.getActionCommand());
+        } else if (e.getSource() instanceof MainRoomSelectionBox) {
+            System.out.println(e.getActionCommand());
         }
     }
     protected void changeCard(String name) {
         CardLayout cl = (CardLayout) (((JPanel)this.getView().getContentPanel()).getLayout());
         cl.show(this.getView().getContentPanel(), name);
+    }
+    protected void changeBuildingCard(String name){
+        CardLayout cl = (CardLayout) (this.getView().getSelector().cardsOfBuildingsFloorPanel.getLayout());
+        cl.show(this.getView().getSelector().cardsOfBuildingsFloorPanel, name);
     }
     protected ActionListener getAction(){
         return this;

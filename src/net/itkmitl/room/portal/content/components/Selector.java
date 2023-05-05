@@ -1,10 +1,9 @@
 package net.itkmitl.room.portal.content.components;
 
+import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.CardView;
-import net.itkmitl.room.portal.components.Header;
-import net.itkmitl.room.portal.components.LeftPanel;
-import net.itkmitl.room.portal.components.LeftSelectorPanel;
-import net.itkmitl.room.portal.components.MainPanel;
+import net.itkmitl.room.portal.components.*;
+import net.itkmitl.room.portal.components.entity.Floor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,6 +29,7 @@ public class Selector extends CardView {
         leftPanel = new LeftPanel();
         innerPanel = new MainPanel();
         mainPanel = new JPanel(new BorderLayout());
+        cardsOfBuildingsFloorPanel = new JPanel(new CardLayout());
         leftSelectorPanel = new LeftSelectorPanel();
 
         mainPanel.setOpaque(true);
@@ -38,7 +38,24 @@ public class Selector extends CardView {
         header = new Header("Select a Building", "Enjoy seemless reservation experience");
 
         testLabel = new JLabel("Hi");
-        innerPanel.add(testLabel);
+
+        SwingWorker worker = new SwingWorker() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                while (!RoomLoader.done) {
+                    Thread.onSpinWait();
+                }
+                return null;
+            }
+            @Override
+            protected void done(){
+                System.out.println("Done with room data!");
+                populateList();
+            }
+        };
+        worker.execute();
+
+
 
         mainPanel.add(header, BorderLayout.NORTH);
         mainPanel.add(innerPanel, BorderLayout.CENTER);
@@ -107,5 +124,9 @@ public class Selector extends CardView {
     public MainPanel getMainPanel() {
         return (MainPanel) mainPanel;
     }
+    public JPanel getInnerPanel(){
+        return this.innerPanel;
+    }
+
 }
 
