@@ -83,7 +83,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
     }
 
     public void databaseLoader(int reservationID) {
-        SwingWorker worker = new SwingWorker() {
+    	SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
 
             @Override
@@ -133,7 +133,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
     }
 
     public void databaseCommiter(Feedback feedback, int mode) {
-        SwingWorker worker = new SwingWorker() {
+    	SwingWorker<?, ?> worker = new SwingWorker<>() {
             LoadingDialog ld = new LoadingDialog();
 
             @Override
@@ -181,7 +181,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
     }
 
     public void dataPopulator() {
-        SwingWorker worker = new SwingWorker() {
+    	SwingWorker<?, ?> worker = new SwingWorker<>() {
             LoadingDialog ld = new LoadingDialog();
 
             @Override

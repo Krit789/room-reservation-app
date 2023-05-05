@@ -39,7 +39,7 @@ public class FeedbackDataView {
     public JTextField idField, createdOnField;
     public JSlider ratingSlider;
     public JTextArea commentField;
-    public JComboBox userIDSelect, roomIDSelect;
+    public JComboBox<Object> userIDSelect, roomIDSelect;
 
     public FeedbackDataView() {
         frame = new JInternalFrame("Feedback Data", false, true, false, true);

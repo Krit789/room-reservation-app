@@ -13,7 +13,11 @@ import net.itkmitl.room.libs.peeranat.util.FewFile;
 
 public class OutPane extends JPanel {
 
-    private JPanel paneN, paneW, paneS, paneE;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 44403762056895295L;
+	public JPanel paneN, paneW, paneS, paneE;
 
     public OutPane() {
         setLayout(new BorderLayout());
@@ -50,4 +54,5 @@ public class OutPane extends JPanel {
     public static void main(String[] args) {
         new OutPane();
     }
+    
 }

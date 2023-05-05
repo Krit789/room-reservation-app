@@ -40,7 +40,7 @@ public class RightPanel extends JPanel {
         namePanel = new JPanel();
         namePanel.setLayout(new GridBagLayout());
 
-        System.out.println(user.getFirstname());
+//        System.out.println(user.getFirstname());
 
         nameLabel = new JLabel("Hello " + user.getFirstname() + " " + user.getLastname());
         nameLabel.setFont(new Font("SansSerif", Font.BOLD, 20));

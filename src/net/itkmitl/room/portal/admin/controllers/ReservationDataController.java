@@ -1,5 +1,21 @@
 package net.itkmitl.room.portal.admin.controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingWorker;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
@@ -11,23 +27,10 @@ import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
-import net.itkmitl.room.portal.admin.components.DatabaseLoader;
 import net.itkmitl.room.portal.admin.models.RoomComboBoxModel;
 import net.itkmitl.room.portal.admin.models.UserComboBoxModel;
 import net.itkmitl.room.portal.admin.views.ReservationDataView;
 import net.itkmitl.room.portal.components.LoadingDialog;
-
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class ReservationDataController implements ActionListener, InternalFrameListener, ItemListener, ChangeListener {
     public final ReservationDataView view;
@@ -93,7 +96,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
     }
 
     public void databaseLoader(int reservationID) {
-        SwingWorker worker = new SwingWorker() {
+    	SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
 
             @Override
@@ -145,7 +148,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
     }
 
     public void databaseCommiter(Reservation reservation, int mode) {
-        SwingWorker worker = new SwingWorker() {
+    	SwingWorker<?, ?> worker = new SwingWorker<>() {
             LoadingDialog ld = new LoadingDialog();
 
             @Override
@@ -206,7 +209,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
     }
 
     public void dataPopulator() {
-        SwingWorker worker = new SwingWorker() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             LoadingDialog ld = new LoadingDialog();
 
             @Override
