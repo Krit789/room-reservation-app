@@ -62,8 +62,8 @@ public class ReservationDataView {
 
         reasonLabel = new JLabel("Reason");
         reasonField = new JTextArea("");
-        reasonField.setRows(3);
         reasonField.setLineWrap(true);
+        reasonField.setRows(3);
         reasonScrollPane = new JScrollPane(reasonField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         dataPanel.add(reasonLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 3, new Insets(0, 10, 5, 5)).getGBC());
         dataPanel.add(reasonScrollPane, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 3, new Insets(0, 0, 5, 10)).setColumnSpan(1, 3));
