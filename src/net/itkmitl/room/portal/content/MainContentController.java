@@ -1,22 +1,15 @@
 package net.itkmitl.room.portal.content;
 
-import net.itkmitl.room.db.LaewTaeDB;
-import net.itkmitl.room.libs.peeranat.query.FewQuery;
-import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
-import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.Controller;
 import net.itkmitl.room.portal.components.LeftSelectorBox;
-import net.itkmitl.room.portal.dashboard.DashboardView;
-import net.itkmitl.room.portal.selectBuilding.SelectBuilding;
 
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import static net.itkmitl.room.portal.components.LeftSelectorPanel.finishedLoading;
 import static net.itkmitl.room.portal.dashboard.components.ReservationPanel.buttonBox;

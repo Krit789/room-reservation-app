@@ -31,7 +31,6 @@ import net.itkmitl.room.portal.account.components.RegisterPanel;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.content.MainContentPortal;
-import net.itkmitl.room.portal.dashboard.Dashboard;
 
 public class EntryController extends Controller implements ActionListener, ComponentListener, DocumentListener, MouseListener {
     private final EntryView view;
