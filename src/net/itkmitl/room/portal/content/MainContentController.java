@@ -1,18 +1,16 @@
 package net.itkmitl.room.portal.content;
 
-import net.itkmitl.room.libs.phatsanphon.entity.User;
-import net.itkmitl.room.libs.store.AppStore;
-import net.itkmitl.room.portal.Controller;
-import net.itkmitl.room.portal.dashboard.DashboardView;
-import net.itkmitl.room.portal.selectBuilding.SelectBuilding;
+import static net.itkmitl.room.portal.dashboard.components.ReservationPanel.buttonBox;
 
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static net.itkmitl.room.portal.dashboard.components.ReservationPanel.buttonBox;
+import javax.swing.JPanel;
+
+import net.itkmitl.room.libs.phatsanphon.entity.User;
+import net.itkmitl.room.libs.store.AppStore;
+import net.itkmitl.room.portal.Controller;
 
 
 public class MainContentController extends Controller implements ActionListener {

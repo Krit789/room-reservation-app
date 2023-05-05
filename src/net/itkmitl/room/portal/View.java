@@ -119,7 +119,7 @@ public abstract class View extends JFrame {
 
         // Calculate the new padding based on the current size
         int paddingSize = Math.min(width, height) / 5;
-        Insets newInsets = new Insets(paddingSize, paddingSize, paddingSize, paddingSize);
+        new Insets(paddingSize, paddingSize, paddingSize, paddingSize);
 
         // Repaint the panel to update the layout
         outerPane.revalidate();

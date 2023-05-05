@@ -10,7 +10,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Selector extends CardView {
-    public JPanel leftPanel, innerPanel, mainPanel, header, leftSelectorPanel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8564430568200760268L;
+	public JPanel leftPanel, innerPanel, mainPanel, header, leftSelectorPanel;
     public JLabel testLabel;//delete later
 
     public Selector() {

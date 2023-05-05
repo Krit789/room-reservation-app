@@ -17,7 +17,7 @@ public class ReservationDataView {
     public JTextField idField, reservationTimeField;
     public JCheckBox cancelledCheckbox;
     public JTextArea reasonField;
-    public JComboBox userIDSelect, roomIDSelect;
+    public JComboBox<Object> userIDSelect, roomIDSelect;
     public JSpinner startTimeHourField, startTimeMinuteField, endTimeHourField, endTimeMinuteField;
 
     public ReservationDataView() {
