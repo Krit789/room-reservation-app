@@ -32,7 +32,7 @@ public class BookingStatusPanel extends RoundedPanel {
         );
 
         titleLabel = new JLabel("Room Booking Status");
-        titleLabel.setFont(new Font("Cousine", Font.BOLD, 20));
+        titleLabel.setFont(new Font("Cousin", Font.BOLD, 20));
 
         this.add(titleLabel, new GBCBuilder(GridBagConstraints.NONE, 0, 1, 0, 0).setAnchor(GridBagConstraints.NORTH));
     }
