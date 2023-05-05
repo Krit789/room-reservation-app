@@ -11,7 +11,11 @@ public class MainContentPortal extends Portal {
     public MainContentPortal() {
         super();
 
-        store.dispatch("user", FakeUser.getUser());
+        if(store.select("user") == null) {
+            store.dispatch("user", FakeUser.getUser());
+        }else{
+            store.dispatch("user", store.select("user"));
+        }
 
         MainContentView view = new MainContentView();
         this.controller = new MainContentController(view);
