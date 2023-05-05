@@ -65,6 +65,13 @@ public class RoomRepository extends Repository<Room> {
         return this.maps(this.getQuery().unsafeQuery(query));
     }
 
+    public ArrayList<Room> getRoomsByExactBuilding(String building) throws Exception {
+        FewSelectMySQL select = new FewSelectMySQL();
+        select.where("building", building).select("*").table("room");
+
+        return this.maps(this.getQuery().query(select));
+    }
+
     public ArrayList<Room> getRoomsByName(String name) throws Exception {
         String query = String.format("SELECT * FROM `room` WHERE name LIKE '%%%s%%'", name);
 

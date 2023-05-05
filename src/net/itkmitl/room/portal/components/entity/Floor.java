@@ -1,4 +1,4 @@
-package net.itkmitl.room.portal.components;
+package net.itkmitl.room.portal.components.entity;
 
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 
