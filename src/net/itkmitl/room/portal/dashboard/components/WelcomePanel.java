@@ -34,7 +34,7 @@ public class WelcomePanel extends RoundedPanel {
 
         bookingButton = new ButtonGradient();
 
-        t1.setFont(new Font("Cousin", Font.BOLD, 12));
+        t1.setFont(new Font("Cousin", Font.BOLD, 13));
         t1.setForeground(Color.BLACK);
         t1.setBounds(79, 99, 505, 90);
         t1.setHorizontalAlignment(JLabel.LEFT);
@@ -47,7 +47,7 @@ public class WelcomePanel extends RoundedPanel {
         t2.setVerticalAlignment(JLabel.CENTER);
 //        p2.add(t2);
 
-        t3.setFont(new Font("Inter", Font.BOLD, 12));
+        t3.setFont(new Font("Inter", Font.BOLD, 13));
         t3.setForeground(Color.decode("#336B9E"));
         t3.setBounds(79, 99, 505, 90);
         t3.setHorizontalAlignment(JLabel.LEFT);
@@ -62,15 +62,15 @@ public class WelcomePanel extends RoundedPanel {
         txt.setLayout(new GridLayout(4, 1));
 
         welcomeIcon = new BoxIcon(new ImageIcon("resource/icons/image27.png"));
-        welcomeIcon.setSize(260, 260);
+        welcomeIcon.setSize(1, 1);
+//        welcomeIcon.setPreferredSize(new Dimension(500, 500));
 
         bookingButton.getSizeSpeed();
         bookingButton.setColor1(new Color(39, 77, 191, 153));
         bookingButton.setColor2(new Color(45, 125, 216));
         bookingButton.setText("Booking Now!");
-        bookingButton.setFont(new Font("Cousin", Font.BOLD, 11));
-        bookingButton.setHorizontalTextPosition(SwingConstants.LEFT);
-        bookingButton.setPreferredSize(new Dimension(2, 2));
+        bookingButton.setFont(new Font("Cousin", Font.BOLD, 14));
+//        bookingButton.setPreferredSize(new Dimension(50, 50));
 
         this.setLayout(new GridLayout(1,2));
         this.add(txt);
