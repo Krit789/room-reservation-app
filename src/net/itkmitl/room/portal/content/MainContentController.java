@@ -81,7 +81,6 @@ public class MainContentController extends Controller implements ActionListener 
             this.changeCard("Dashboard");
         } else if (e.getSource() instanceof LeftSelectorBox) {
             this.getView().getSelector().testLabel.setText("Building = " + e.getActionCommand());
-            System.out.println("hi");
         }
     }
     protected void changeCard(String name) {

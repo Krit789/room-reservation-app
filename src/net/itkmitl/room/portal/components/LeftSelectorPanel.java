@@ -1,8 +1,6 @@
 package net.itkmitl.room.portal.components;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -13,8 +11,6 @@ import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
-import net.itkmitl.room.portal.content.MainContentController;
-import net.itkmitl.room.portal.content.MainContentPortal;
 
 public class LeftSelectorPanel extends JPanel {
     /**
@@ -23,6 +19,8 @@ public class LeftSelectorPanel extends JPanel {
     private static final long serialVersionUID = 634260063969366698L;
     public JLabel parentCategory;
     public JButton backButton;
+    public JScrollPane buttonScrollPane;
+    public JPanel buttonPanel;
     public ArrayList<LeftSelectorBox> leftBoxHolder = new ArrayList<LeftSelectorBox>();
     public Set<String> buildingList = new HashSet<>();
     public static volatile boolean finishedLoading = false;
@@ -38,6 +36,10 @@ public class LeftSelectorPanel extends JPanel {
         parentCategory = new JLabel("Building");
         parentCategory.setFont(new Font("Calibri", Font.BOLD, 18));
         parentCategory.setForeground(Color.WHITE);
+        buttonPanel = new TransparentPanel(new GridBagLayout());
+        buttonScrollPane = new JScrollPane(buttonPanel ,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        buttonScrollPane.setOpaque(false);
+        buttonScrollPane.getViewport().setOpaque(false);
         backButton = new JButton("Back");
         backButton.setOpaque(false);
         backButton.setContentAreaFilled(false);
@@ -71,8 +73,9 @@ public class LeftSelectorPanel extends JPanel {
                     for (String buildingName : buildingList) {
                         LeftSelectorBox box = new LeftSelectorBox(buildingName, i);
                         box.setActionCommand(buildingName);
-                        add(box);
+                        buttonPanel.add(box, new GBCBuilder(GridBagConstraints.HORIZONTAL,1, 0,i).setAnchor(GridBagConstraints.NORTH));
                         leftBoxHolder.add(box);
+                        buttonPanel.revalidate();
                         i++;
                     }
                 } catch (Exception e) {
@@ -84,6 +87,8 @@ public class LeftSelectorPanel extends JPanel {
             @Override
             protected void done() {
                 JOptionPane.showMessageDialog(null, "Finished Loading Building", "Notice", JOptionPane.INFORMATION_MESSAGE);
+//                buttonHolder.add();
+                add(buttonScrollPane);
                 add(backButton);
                 finishedLoading = true;
             }
