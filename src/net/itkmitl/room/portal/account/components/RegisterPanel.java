@@ -23,7 +23,11 @@ import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
 
 public class RegisterPanel extends RoundedPanel {
-    private final JPanel fieldPanel, operationPanel, twoColumnPanel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6536055055833326316L;
+	private final JPanel fieldPanel, operationPanel, twoColumnPanel;
     private final BetterJTextField emailField, firstNameField, lastNameField, telField;
     private final JLabel registerHeader, loginLabel1;
     private final JLabel loginLabel2, warningLabel;
@@ -42,7 +46,8 @@ public class RegisterPanel extends RoundedPanel {
         super(30, 30, Color.WHITE);
         this.setLayout(new GridBagLayout());
 
-        int textSize = 16, fieldSize = 18;
+        //fieldSize = 18
+        int textSize = 16;
         firstNameField = new BetterJTextField("First Name");
         lastNameField = new BetterJTextField("Last Name");
         emailField = new BetterJTextField("E-Mail");

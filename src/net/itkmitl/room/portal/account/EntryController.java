@@ -28,6 +28,7 @@ import net.itkmitl.room.portal.account.components.RegisterPanel;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.BetterJTextField;
+import net.itkmitl.room.portal.content.MainContentPortal;
 import net.itkmitl.room.portal.dashboard.Dashboard;
 
 public class EntryController extends Controller implements ActionListener, ComponentListener, DocumentListener, MouseListener {
@@ -103,7 +104,7 @@ public class EntryController extends Controller implements ActionListener, Compo
                         myUser.setRole(EnumUserRole.STUDENT);
                         userRepository.createUser(myUser);
                         store.dispatch("user", myUser);
-                        changeFrame(getView(), new Dashboard());
+                        changeFrame(getView(), new MainContentPortal());
                     } else {
                         getView().registerPanel.getWarningLabel().setIcon(null);
                         getView().registerPanel.getWarningLabel().setText("E-mail already in use!");
@@ -136,7 +137,7 @@ public class EntryController extends Controller implements ActionListener, Compo
                     if (myUser != null) {
                         if (FewPassword.checkPassword(password, myUser.getPasswordHash())) {
                             store.dispatch("user", myUser);
-                            changeFrame(getView(), new Dashboard());
+                            changeFrame(getView(), new MainContentPortal());
                         } else {
                             getView().loginPanel.getWarningLabel().setText("Invalid Password!");
                         }

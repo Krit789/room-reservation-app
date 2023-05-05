@@ -10,7 +10,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Selector extends CardView {
-    public JPanel leftPanel, innerPanel, mainPanel, header, leftSelectorPanel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8564430568200760268L;
+	public JPanel leftPanel, innerPanel, mainPanel, header, leftSelectorPanel;
     public JLabel testLabel;//delete later
 
     public Selector() {
@@ -23,7 +27,8 @@ public class Selector extends CardView {
         innerPanel = new MainPanel();
         mainPanel = new JPanel(new BorderLayout());
         leftSelectorPanel = new LeftSelectorPanel();
-        mainPanel.setOpaque(false);
+        mainPanel.setOpaque(true);
+        mainPanel.setBackground(Color.white);
 
         header = new Header("Select a Building", "But I need to tell you something");
 
