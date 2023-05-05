@@ -77,6 +77,8 @@ public class Selector extends CardView {
                     // Horizontal Floor List
                     JPanel floorPanel = new JPanel(new GridBagLayout());
                     JScrollPane floorScrollPane = new JScrollPane(floorPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+                    floorScrollPane.setOpaque(false);
+                    floorScrollPane.setBorder(null);
                     int floorCount = 0;
 
                     // Floor Box, horizontal "Room box" list
@@ -93,11 +95,11 @@ public class Selector extends CardView {
                             System.out.println(myRoom.getBuilding() + " " + myRoom.getFloor() + " " + myRoom.getName());
                             MainRoomSelectionBox roomBox = new MainRoomSelectionBox(myRoom);
                             roomBoxHolder.add(roomBox);
-                            floorBox.roomPanel.add(roomBox, new GBCBuilder(GridBagConstraints.HORIZONTAL,1 ,1, roomCount).getGBC());
+                            floorBox.roomPanel.add(roomBox, new GBCBuilder(GridBagConstraints.HORIZONTAL,1 ,1, roomCount, new Insets(10, 15, 0, 15)).getGBC());
                             roomCount++;
                         }
 
-                        floorPanel.add(floorBox, new GBCBuilder(GridBagConstraints.BOTH, 0.25, 1, floorCount, 0, new Insets(10, 10, 10, 10)).getGBC());
+                        floorPanel.add(floorBox, new GBCBuilder(GridBagConstraints.VERTICAL, 0, 1, floorCount, 0, new Insets(10, 20, 10, 20)).getGBC());
 
                         cardsOfBuildingsFloorPanel.add(buildingName, floorScrollPane);
                         floorScrollPane.setBackground(Color.red);

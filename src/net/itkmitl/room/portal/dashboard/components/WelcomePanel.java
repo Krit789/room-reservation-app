@@ -1,6 +1,7 @@
 package net.itkmitl.room.portal.dashboard.components;
 
 import net.itkmitl.room.portal.components.ButtonGradient;
+import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
 
 import java.awt.*;
@@ -34,13 +35,13 @@ public class WelcomePanel extends RoundedPanel {
 
         bookingButton = new ButtonGradient();
 
-        t1.setFont(new Font("Cousin", Font.BOLD, 13));
+        t1.setFont(new Font("Cousine", Font.BOLD, 13));
         t1.setForeground(Color.BLACK);
         t1.setBounds(79, 99, 505, 90);
         t1.setHorizontalAlignment(JLabel.LEFT);
         t1.setVerticalAlignment(JLabel.CENTER);
 
-        t2.setFont(new Font("Cousin", Font.BOLD, 22));
+        t2.setFont(new Font("Cousine", Font.BOLD, 22));
         t2.setForeground(Color.BLACK);
         t2.setBounds(0, 0, 505, 90);
         t2.setHorizontalAlignment(JLabel.LEFT);
@@ -58,29 +59,29 @@ public class WelcomePanel extends RoundedPanel {
         txt.add(t2);
         txt.add(t3);
         txt.add(bookingButton);
-        txt.setBorder(BorderFactory.createEmptyBorder(60, 60, 60, 60));
+//        txt.setBorder(BorderFactory.createEmptyBorder(, 60, 60, ));
         txt.setLayout(new GridLayout(4, 1));
 
-        welcomeIcon = new BoxIcon(new ImageIcon("resource/icons/image27.png"));
-        welcomeIcon.setSize(1, 1);
-//        welcomeIcon.setPreferredSize(new Dimension(500, 500));
+        welcomeIcon = new BoxIcon(new ImageIcon("resource/account/banner/welcomeImage.png"));
+//        welcomeIcon.setSize(600, 600);
+        welcomeIcon.setPreferredSize(new Dimension(500, 500));
 
-        bookingButton.getSizeSpeed();
+        bookingButton.setSizeSpeed(40f);
         bookingButton.setColor1(new Color(39, 77, 191, 153));
         bookingButton.setColor2(new Color(45, 125, 216));
-        bookingButton.setText("Booking Now!");
-        bookingButton.setFont(new Font("Cousin", Font.BOLD, 14));
+        bookingButton.setText("Book Now!");
+        bookingButton.setFont(new Font("Cousine", Font.BOLD, 18));
 //        bookingButton.setPreferredSize(new Dimension(50, 50));
 
-        this.setLayout(new GridLayout(1,2));
-        this.add(txt);
-        this.add(welcomeIcon);
+        this.setLayout(new GridBagLayout());
+        this.add(txt, new GBCBuilder(GridBagConstraints.NONE, 0,1, 0, 0, new Insets(0, 0,0 ,20)).setAnchor(GridBagConstraints.WEST));
+        this.add(welcomeIcon, new GBCBuilder(GridBagConstraints.NONE, 0,1, 1, 0).setAnchor(GridBagConstraints.EAST));
 //        this.add(t1);
 //        this.add(t2);
 //        this.add(t3);
 
         this.setBackground(new Color(255, 255, 255));
-        this.setMaximumSize(new Dimension(1300, 400));
+//        this.setMaximumSize(new Dimension(1300, 400));
         this.setAlignmentX(CENTER_ALIGNMENT);
 
 

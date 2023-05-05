@@ -1,6 +1,7 @@
 package net.itkmitl.room.portal.components;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class LeftPanel extends JPanel {
@@ -8,7 +9,8 @@ public class LeftPanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 561892552360870497L;
-	public JLabel nameLabel;
+	public JLabel lthIcon, title;
+    public JPanel titleBox;
 
     public LeftPanel() {
         super(new BorderLayout());
@@ -18,11 +20,18 @@ public class LeftPanel extends JPanel {
                 new Dimension(408, (int) this.getBounds().getSize().getHeight())
         );
 
-        nameLabel = new JLabel("LAEW TAE HONG");
-        nameLabel.setFont(new Font("Calibri", Font.BOLD, 25));
-        nameLabel.setAlignmentX(CENTER_ALIGNMENT);
-        nameLabel.setForeground(Color.WHITE);
+        titleBox = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        lthIcon = new JLabel(new ImageIcon("resource/icons/icon-64px.png"));
+        title = new JLabel("LAEW TAE HONG");
+        title.setFont(new Font("Cousine", Font.BOLD, 29));
 
-        this.add(nameLabel, BorderLayout.NORTH);
+        title.setForeground(Color.WHITE);
+        titleBox.setOpaque(false);
+        titleBox.setBorder(new EmptyBorder(30, 30, 30, 0));
+        titleBox.add(lthIcon);
+        titleBox.add(Box.createHorizontalStrut(10));
+        titleBox.add(title);
+
+        this.add(titleBox, BorderLayout.NORTH);
     }
 }

@@ -17,12 +17,12 @@ public class Header extends TransparentPanel {
         super(new GridBagLayout());
         setBorder(new EmptyBorder(25, 25, 25 ,25));
         headerLabel = new JLabel(header);
-        headerLabel.setFont(new Font("Cousine", Font.BOLD, 24));
+        headerLabel.setFont(new Font("Cousine", Font.BOLD, 40));
         descriptionLabel = new JLabel(description);
-        descriptionLabel.setFont(new Font("Cousine", Font.PLAIN, 14));
+        descriptionLabel.setFont(new Font("Cousine", Font.PLAIN, 18));
 
 
         this.add(headerLabel, new GBCBuilder(GridBagConstraints.BOTH,1, 0,0).setAnchor(GridBagConstraints.WEST));
-        this.add(descriptionLabel, new GBCBuilder(GridBagConstraints.BOTH,1, 0,1, new Insets(5, 0, 0, 0)).setAnchor(GridBagConstraints.WEST));
+        this.add(descriptionLabel, new GBCBuilder(GridBagConstraints.BOTH,1, 0,1, new Insets(5, 10, 0, 0)).setAnchor(GridBagConstraints.WEST));
     }
 }

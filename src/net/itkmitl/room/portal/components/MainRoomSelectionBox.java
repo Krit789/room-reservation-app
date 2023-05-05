@@ -3,7 +3,7 @@ package net.itkmitl.room.portal.components;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 
 import javax.swing.*;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,8 +18,9 @@ public class MainRoomSelectionBox extends RoundedPanel implements ActionListener
 //    private J
 
     public MainRoomSelectionBox(Room room){
-        super(30, 40, Color.WHITE);
+        super(40, 60, Color.WHITE);
         name = new JButton(room.getName());
+        name.setFont(new Font("Cousine", Font.PLAIN, 18));
         name.setActionCommand(String.format("reserveRoom_%d" ,room.getId()));
         name.addActionListener(this);
         name.setOpaque(false);
