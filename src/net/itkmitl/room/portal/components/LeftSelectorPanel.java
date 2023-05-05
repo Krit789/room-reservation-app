@@ -13,6 +13,8 @@ import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
+import net.itkmitl.room.portal.content.MainContentController;
+import net.itkmitl.room.portal.content.MainContentPortal;
 
 public class LeftSelectorPanel extends JPanel {
     /**
@@ -23,15 +25,16 @@ public class LeftSelectorPanel extends JPanel {
     public JButton backButton;
     public ArrayList<LeftSelectorBox> leftBoxHolder = new ArrayList<LeftSelectorBox>();
     public Set<String> buildingList = new HashSet<>();
+    public static volatile boolean finishedLoading = false;
 
     public LeftSelectorPanel() {
         super();
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBorder(BorderFactory.createEmptyBorder(0, 50, 20, 50));
-        this.setPreferredSize(
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setBorder(BorderFactory.createEmptyBorder(0, 50, 20, 50));
+        setPreferredSize(
                 new Dimension(534, (int) this.getBounds().getSize().getHeight())
         );
-        this.setOpaque(false);
+        setOpaque(false);
         parentCategory = new JLabel("Building");
         parentCategory.setFont(new Font("Calibri", Font.BOLD, 18));
         parentCategory.setForeground(Color.WHITE);
@@ -41,7 +44,7 @@ public class LeftSelectorPanel extends JPanel {
         backButton.setBorderPainted(false);
         backButton.setForeground(Color.WHITE);
         backButton.setActionCommand("Back to Dashboard");
-        this.add(parentCategory);
+        add(parentCategory);
 
         loadBuilding();
         //test importing floor data(idk how this database work so have this for now)
@@ -80,8 +83,9 @@ public class LeftSelectorPanel extends JPanel {
 
             @Override
             protected void done() {
-                JOptionPane.showMessageDialog(null, "Finished Loading", "Notice", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Finished Loading Building", "Notice", JOptionPane.INFORMATION_MESSAGE);
                 add(backButton);
+                finishedLoading = true;
             }
         };
         worker.execute();
