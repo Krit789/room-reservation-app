@@ -8,7 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class EntryView extends View {
-    protected JPanel contentPanel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8997505387144700741L;
+	protected JPanel contentPanel;
     protected LoginPanel loginPanel;
     protected RegisterPanel registerPanel;
 

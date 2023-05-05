@@ -1,10 +1,16 @@
 package net.itkmitl.room.portal.components;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GridLayout;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Header extends JPanel {
-    public JLabel headerLabel, descriptionLabel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 752500660828855659L;
+	public JLabel headerLabel, descriptionLabel;
 
     public Header(String header, String description) {
         super(new GridLayout(2, 1));

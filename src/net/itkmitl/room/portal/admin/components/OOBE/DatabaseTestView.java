@@ -1,13 +1,24 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
-import net.itkmitl.room.portal.components.GBCBuilder;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagLayout;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 
 public class DatabaseTestView extends JPanel {
-    public JLabel title, description,connectionLabel, credentialLabel, databaseLabel, userTableLabel, roomTableLabel, reservationTableLabel, feedbackTableLabel, tableIndexLabel, tableRelationshipLabel, yesLabel, noLabel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 2479869772958246586L;
+	public JLabel title, description,connectionLabel, credentialLabel, databaseLabel, userTableLabel, roomTableLabel, reservationTableLabel, feedbackTableLabel, tableIndexLabel, tableRelationshipLabel, yesLabel, noLabel;
     private JPanel topPanel;
     public JScrollPane resultPane;
     protected JPanel resultPanel;

@@ -1,11 +1,13 @@
 package net.itkmitl.room.portal.components;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.ArrayList;
+import java.awt.Color;
 
 public class MainSelectionBox extends RoundedPanel{
-    private JLabel timeLabel, nameLabel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3939071942263200950L;
+//	private JLabel timeLabel, nameLabel;
     //key is floor, Value is arraylist of room in floor
 //    private J
 

@@ -1,13 +1,20 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
-import net.itkmitl.room.portal.components.GBCBuilder;
+import java.awt.Dimension;
+import java.awt.Font;
 
-import javax.swing.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 
 public class WelcomePanelView extends JPanel {
-    private JLabel title, description;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1140777242974791493L;
+	private JLabel title, description;
 
     public WelcomePanelView() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

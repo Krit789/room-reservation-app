@@ -1,17 +1,24 @@
 package net.itkmitl.room.portal.components;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
+import javax.swing.JPasswordField;
+import javax.swing.border.Border;
+
+import net.itkmitl.room.libs.peeranat.util.FewPassword;
+
 public class BetterJPasswordField extends JPasswordField implements MouseListener, FocusListener {
-    private Color normalBgColor = Color.WHITE;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7347697827946283962L;
+	private Color normalBgColor = Color.WHITE;
     private Color hoverBgColor = new Color(246, 246, 246);
     private Color borderColor = Color.LIGHT_GRAY;
     private Color activeBorderColor = new Color(94, 135, 197);
@@ -44,12 +51,12 @@ public class BetterJPasswordField extends JPasswordField implements MouseListene
         this.normalBgColor = normalBgColor;
     }
 
-    private void updatePlaceholderVisibility() {
-        if (getText().isEmpty() && !selected) {
+    public void updatePlaceholderVisibility() {
+        if (FewPassword.getText(getPassword()).isEmpty() && !selected) {
             setEchoChar((char) 0);
             setText(placeholderText);
             setForeground(Color.GRAY);
-        } else if (getText().equals(placeholderText)) {
+        } else if (FewPassword.getText(getPassword()).equals(placeholderText)) {
             setEchoChar((char) 0);
             setForeground(Color.GRAY);
         } else {
@@ -87,7 +94,7 @@ public class BetterJPasswordField extends JPasswordField implements MouseListene
     @Override
     public void focusGained(FocusEvent e) {
         selected = true;
-        if (getText().equals(placeholderText) || (getText().isEmpty())) {
+        if (FewPassword.getText(getPassword()).equals(placeholderText) || (FewPassword.getText(getPassword()).isEmpty())) {
             setEchoChar('•');
             setText("");
             setForeground(Color.BLACK);
@@ -99,7 +106,7 @@ public class BetterJPasswordField extends JPasswordField implements MouseListene
 
     @Override
     public void focusLost(FocusEvent e) {
-        if ((getText().isEmpty())) {
+        if ((FewPassword.getText(getPassword()).isEmpty())) {
             setEchoChar((char) 0);
             setText(placeholderText);
             setForeground(Color.GRAY);

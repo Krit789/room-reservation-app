@@ -1,12 +1,24 @@
 package net.itkmitl.room.portal.admin.views;
 
-import com.formdev.flatlaf.FlatIntelliJLaf;
-import net.itkmitl.room.portal.components.GBCBuilder;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+import javax.swing.border.EmptyBorder;
+
+import net.itkmitl.room.portal.components.GBCBuilder;
 
 public class AuthView {
     private JFrame frame;

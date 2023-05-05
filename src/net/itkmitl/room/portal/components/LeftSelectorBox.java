@@ -1,10 +1,16 @@
 package net.itkmitl.room.portal.components;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.JButton;
 
 public class LeftSelectorBox extends JButton {
-    public int boxID;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3861775095110257593L;
+	public int boxID;
     public String type = "Select Box ";
     public LeftSelectorBox(String name, int ID){
         super(name);

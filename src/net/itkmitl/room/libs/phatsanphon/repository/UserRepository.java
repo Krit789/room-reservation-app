@@ -7,7 +7,6 @@ import net.itkmitl.room.libs.peeranat.query.FewInsertMySQL;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.query.FewSelectMySQL;
 import net.itkmitl.room.libs.peeranat.query.FewUpdateMySQL;
-import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.enums.UserQuery;
 

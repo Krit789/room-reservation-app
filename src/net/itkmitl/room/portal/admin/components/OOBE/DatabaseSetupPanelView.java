@@ -1,13 +1,31 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.border.EmptyBorder;
+
 import net.itkmitl.room.portal.components.GBCBuilder;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-
 public class DatabaseSetupPanelView extends JPanel {
-    private JLabel title, description, dbAddressLabel, dbPortLabel, dbNameLabel, dbUserLabel, dbPasswordLabel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7942736605197573612L;
+	private JLabel title, description, dbAddressLabel, dbPortLabel, dbNameLabel, dbUserLabel, dbPasswordLabel;
     private JPanel databasePanel, dbCredPanel, dbConnectionPanel, topPanel;
     protected JTextField dbAddressTextField, dbNameTextField, dbUserTextField;
     protected JPasswordField dbPasswordField;

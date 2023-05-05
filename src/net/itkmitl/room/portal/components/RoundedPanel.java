@@ -4,7 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class RoundedPanel extends JPanel {
-    private int arcWidth;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6903556553578428210L;
+	private int arcWidth;
     private int arcHeight;
     private Color backgroundColor, color1, color2;
     {

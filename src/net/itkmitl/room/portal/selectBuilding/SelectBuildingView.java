@@ -1,16 +1,23 @@
 package net.itkmitl.room.portal.selectBuilding;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import net.itkmitl.room.portal.View;
 import net.itkmitl.room.portal.components.Header;
 import net.itkmitl.room.portal.components.LeftPanel;
 import net.itkmitl.room.portal.components.LeftSelectorPanel;
 import net.itkmitl.room.portal.components.MainPanel;
 
-import javax.swing.*;
-import java.awt.*;
-
 public class SelectBuildingView extends View {
-    public JPanel leftPanel, innerPanel, mainPanel, header, leftSelectorPanel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8933348497379521870L;
+	public JPanel leftPanel, innerPanel, mainPanel, header, leftSelectorPanel;
     public JLabel testLabel;//delete later
 
     public SelectBuildingView() {

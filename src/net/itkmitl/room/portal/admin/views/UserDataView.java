@@ -1,10 +1,26 @@
 package net.itkmitl.room.portal.admin.views;
 
-import net.itkmitl.room.portal.components.GBCBuilder;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+
+import net.itkmitl.room.portal.components.GBCBuilder;
 
 public class UserDataView {
     private JInternalFrame frame;
@@ -21,7 +37,7 @@ public class UserDataView {
     private JLabel emailLabel;
     public JLabel passwordLabel;
     public JTextField idField, firstNameField, lastNameField, telnumField, createdOnField, emailField;
-    public JComboBox roleSelect, activeSelect;
+    public JComboBox<String> roleSelect, activeSelect;
     public JPasswordField passwordField;
     private final String[] roleList = new String[]{"User", "Staff", "Admin"};
     private final String[] activeList = new String[]{"Active", "Inactive"};
@@ -81,12 +97,12 @@ public class UserDataView {
 
 
         activeLabel = new JLabel("Activation");
-        activeSelect = new JComboBox(activeList);
+        activeSelect = new JComboBox<>(activeList);
         dataPanel.add(activeLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 4, new Insets(0, 10, 5, 5)).getGBC());
         dataPanel.add(activeSelect, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.4, 1, 4, new Insets(0, 0, 5, 5)).getGBC());
 
         roleLabel = new JLabel("Role");
-        roleSelect = new JComboBox(roleList);
+        roleSelect = new JComboBox<>(roleList);
         dataPanel.add(roleLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 2, 4, new Insets(0, 10, 5, 5)).getGBC());
         dataPanel.add(roleSelect, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.4, 3, 4, new Insets(0, 0, 5, 5)).getGBC());
 

@@ -1,10 +1,27 @@
 package net.itkmitl.room.portal.admin.views;
 
-import net.itkmitl.room.portal.components.GBCBuilder;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+
+import net.itkmitl.room.portal.components.GBCBuilder;
 
 public class RoomDataView {
     private JInternalFrame frame;
@@ -15,7 +32,7 @@ public class RoomDataView {
     private JLabel idLabel, nameLabel, capacityLabel, floorLabel, buildingLabel, openTimeLabel, closeTimeLabel, stateLabel;
     public JTextField idField, nameField, floorField, buildingField;
     public JSpinner capacitySpinner, openTimeHourField, openTimeMinuteField, closeTimeHourField, closeTimeMinuteField;
-    public JComboBox stateSelect;
+    public JComboBox<?> stateSelect;
     private final String[] stateList = new String[]{"Available", "Unavailable", "Maintenance"};
 
     public RoomDataView() {
@@ -96,7 +113,7 @@ public class RoomDataView {
 
 
         stateLabel = new JLabel("State");
-        stateSelect = new JComboBox(stateList);
+        stateSelect = new JComboBox<>(stateList);
         dataPanel.add(stateLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 4, new Insets(0, 10, 5, 5)).getGBC());
         dataPanel.add(stateSelect, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 4, new Insets(0, 0, 5, 10)).getGBC());
 

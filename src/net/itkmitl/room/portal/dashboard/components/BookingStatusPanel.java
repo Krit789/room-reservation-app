@@ -1,17 +1,25 @@
 package net.itkmitl.room.portal.dashboard.components;
 
 
-import net.itkmitl.room.portal.components.GBCBuilder;
-import net.itkmitl.room.portal.components.RoundedPanel;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
+import net.itkmitl.room.portal.components.GBCBuilder;
+import net.itkmitl.room.portal.components.RoundedPanel;
+
 public class BookingStatusPanel extends RoundedPanel {
 
-    public JLabel titleLabel;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 84550694890228683L;
+	public JLabel titleLabel;
 
     public BookingStatusPanel() {
         super(30, 40, new Color(156, 199, 223), new Color(181, 191, 224));
