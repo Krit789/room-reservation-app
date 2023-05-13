@@ -5,10 +5,8 @@ import java.awt.*;
 import net.itkmitl.room.portal.View;
 import net.itkmitl.room.portal.components.TransparentPanel;
 import net.itkmitl.room.portal.content.components.Dashboard;
-import net.itkmitl.room.portal.content.components.LoadingPane;
+import net.itkmitl.room.portal.content.components.DarkPane;
 import net.itkmitl.room.portal.content.components.Selector;
-
-import javax.swing.*;
 
 public class MainContentView extends View{
     /**
@@ -18,7 +16,7 @@ public class MainContentView extends View{
 	private TransparentPanel contentPanel;
     private Dashboard dashboard;
     private Selector selector;
-    public static LoadingPane glassPane;
+    public static DarkPane glassPane;
 
 
     public MainContentView(){
@@ -29,7 +27,9 @@ public class MainContentView extends View{
         contentPanel = new TransparentPanel(new CardLayout());
         dashboard = new Dashboard();
         selector = new Selector();
-        glassPane = new LoadingPane();
+        glassPane = new DarkPane();
+        glassPane.setText("Loading data...");
+        glassPane.setSpinnerVisibility(true);
         contentPanel.add(dashboard, "Dashboard");
         contentPanel.add(selector, "Selector");
         this.add(contentPanel);

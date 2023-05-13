@@ -105,8 +105,6 @@ public class LeftSelectorPanel extends JPanel {
 
             @Override
             protected void done() {
-//                JOptionPane.showMessageDialog(null, "Finished Loading Building", "Notice", JOptionPane.INFORMATION_MESSAGE);
-//                buttonHolder.add();
                 registerPane();
                 finishedLoading = true;
             }
