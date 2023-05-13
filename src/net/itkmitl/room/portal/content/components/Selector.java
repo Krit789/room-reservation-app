@@ -102,7 +102,6 @@ public class Selector extends CardView {
                         floorPanel.add(floorBox, new GBCBuilder(GridBagConstraints.VERTICAL, 0, 1, floorCount, 0, new Insets(10, 20, 10, 20)).getGBC());
 
                         cardsOfBuildingsFloorPanel.add(buildingName, floorScrollPane);
-                        floorScrollPane.setBackground(Color.red);
 
                         cardsOfBuildingsFloorPanel.revalidate();
                         floorCount++;

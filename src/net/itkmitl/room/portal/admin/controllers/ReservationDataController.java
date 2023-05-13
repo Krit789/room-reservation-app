@@ -247,6 +247,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                 for (RoomComboBoxModel r : roomArrayList) {
                     view.roomIDSelect.addItem(r);
                 }
+                view.getFrame().pack();
                 ld.dialog.dispose();
                 BaseWindow.progressBar.setIndeterminate(false);
             }

@@ -12,7 +12,7 @@ public class MainContentPortal extends Portal {
         super();
 
         if(store.select("user") == null) {
-            store.dispatch("user", FakeUser.getUser());
+            store.dispatch("user", FakeUser.getAdmin());
         }else{
             store.dispatch("user", store.select("user"));
         }

@@ -48,6 +48,8 @@ import net.itkmitl.room.portal.admin.views.PreferenceWindowView;
 import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.LoadingDialog;
+import net.itkmitl.room.portal.content.MainContentPortal;
+import net.itkmitl.room.portal.content.components.Dashboard;
 
 public class BaseWindow extends ComponentAdapter implements ActionListener, InternalFrameListener {
     private final OperationWindowView mainMenu;
@@ -137,8 +139,8 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         menuBar.add(optionMenu);
         optionMenu.add(optionMenuItem4);
         optionMenu.add(new JSeparator());
-        optionMenu.add(optionMenuItem1);
-        optionMenu.add(optionMenuItem2);
+//        optionMenu.add(optionMenuItem1);
+//        optionMenu.add(optionMenuItem2);
         optionMenu.add(optionMenuItem3);
 
         menuBar.add(windowMenu);
@@ -281,7 +283,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         } else if (e.getSource().equals(optionMenuItem4)) {
             baseFrame.dispose();
             String[] arguments = new String[]{""};
-            GUIStarter.main(arguments);
+            MainContentPortal.main(arguments);
         } else if (e.getSource().equals(windowCheckBoxMenuItem1)) {
             windowCheckBoxMenuItem1.setState(!autoCenterMainMenu);
             autoCenterMainMenu = !autoCenterMainMenu;
