@@ -73,6 +73,7 @@ public class BookingStatusPanel extends RoundedPanel {
         piechart.setSize(new Dimension(50, 50));
         piechart.setBackground(new Color(0x0343477, true));
 
+        //calender
         JPanel panel = new JPanel(new GridLayout(7, 7));
 
         GregorianCalendar cal = new GregorianCalendar();
