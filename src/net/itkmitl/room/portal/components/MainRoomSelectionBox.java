@@ -2,6 +2,9 @@ package net.itkmitl.room.portal.components;
 
 import net.itkmitl.room.enums.EnumRoomState;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
+import net.itkmitl.room.portal.View;
+import net.itkmitl.room.portal.content.MainContentView;
+import net.itkmitl.room.portal.content.components.ReservationDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,25 +42,36 @@ public class MainRoomSelectionBox extends RoundedPanel implements ActionListener
         add(name);
     }
 
+    public void openReservationDialog(){
+        ReservationDialog rsvpd = new ReservationDialog(null);
+        MainContentView.glassPane.setSpinnerVisibility(false);
+        MainContentView.glassPane.setText("");
+        MainContentView.glassPane.setVisible(true);
+        MainContentView.glassPane.setEnabled(true);
+        rsvpd.setVisible(true);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("BoxRoom MainRoomSelectionBox " + boxRoom.getId());
+        openReservationDialog();
     }
 
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        openReservationDialog();
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-
+        setBackgroundColor(new Color(140, 187, 255));
+        repaint();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
+        setBackgroundColor(Color.LIGHT_GRAY);
+        repaint();
     }
 
     @Override
