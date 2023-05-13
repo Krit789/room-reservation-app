@@ -4,8 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -16,6 +19,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
@@ -54,6 +58,8 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                     view.getFrame().pack();
                     view.saveButton.addActionListener(this);
                     view.cancelButton.addActionListener(this);
+                    view.startDatePicker.setEnabled(false);
+                    view.endDatePicker.setEnabled(false);
                     databaseLoader(reservationID);
                     break;
                 case 1: // Update
@@ -217,8 +223,6 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
-
-
                 try {
                     FewQuery db = LaewTaeDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
@@ -283,6 +287,9 @@ public class ReservationDataController implements ActionListener, InternalFrameL
             view.reservationTimeField.setText(reservation.getReservationTime().toString());
             view.cancelledCheckbox.setSelected(reservation.isCancelled());
 
+            view.startDatePicker.setDate(reservation.getStartTime().toLocalDate());
+            view.endDatePicker.setDate(reservation.getEndTime().toLocalDate());
+
             switch (mode) {
                 case 0: // View Mode
                     view.userIDSelect.setEnabled(false);
@@ -304,20 +311,28 @@ public class ReservationDataController implements ActionListener, InternalFrameL
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(view.saveButton)) {
-            reservation.setUser(((UserComboBoxModel) view.userIDSelect.getSelectedItem()).getUser());
-            reservation.setRoom(((RoomComboBoxModel) view.roomIDSelect.getSelectedItem()).getRoom());
+            reservation.setUser(((UserComboBoxModel) Objects.requireNonNull(view.userIDSelect.getSelectedItem())).getUser());
+            reservation.setRoom(((RoomComboBoxModel) Objects.requireNonNull(view.roomIDSelect.getSelectedItem())).getRoom());
             reservation.setReason(view.reasonField.getText());
 
-            DateTime startTime = new DateTime(new Date());
+            Date startDate = Date.from(view.startDatePicker.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            DateTime startTime = new DateTime(startDate);
             startTime.setHours((Integer) view.startTimeHourField.getValue());
             startTime.setMinutes((Integer) view.startTimeMinuteField.getValue());
 
-            DateTime endTime = new DateTime(new Date());
+
+            Date endDate = Date.from(view.endDatePicker.getDate().atStartOfDay(ZoneId.systemDefault()).toInstant());
+            DateTime endTime = new DateTime(endDate);
             endTime.setHours((Integer) view.endTimeHourField.getValue());
             endTime.setMinutes((Integer) view.endTimeMinuteField.getValue());
             reservation.setStartTime(startTime);
             reservation.setEndTime(endTime);
             reservation.setCancelled(view.cancelledCheckbox.isSelected());
+
+
+
+            view.startDatePicker.setDate(reservation.getStartTime().toLocalDate());
+            view.endDatePicker.setDate(reservation.getEndTime().toLocalDate());
 
             switch (mode) {
                 case 1: // Update

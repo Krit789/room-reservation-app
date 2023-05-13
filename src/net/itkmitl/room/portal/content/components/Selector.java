@@ -71,7 +71,7 @@ public class Selector extends CardView {
             protected Object doInBackground() throws Exception {
                 for (HashMap.Entry<String, HashMap<String, Floor>> row : RoomLoader.floorList.entrySet()) {
                     String buildingName = row.getKey();
-                    System.out.println(buildingName);
+//                    System.out.println(buildingName);
                     HashMap<String, Floor> buildingsFloor = row.getValue();
                     JPanel allPanel = new JPanel(new BorderLayout());
                     // Horizontal Floor List
@@ -115,7 +115,9 @@ public class Selector extends CardView {
                 doneRoomBox = true;
             }
         };
+
         worker.execute();
+
     }
 
     public LeftSelectorPanel getSelectorPanel() {

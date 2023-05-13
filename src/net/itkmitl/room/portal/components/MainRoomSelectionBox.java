@@ -1,5 +1,6 @@
 package net.itkmitl.room.portal.components;
 
+import net.itkmitl.room.enums.EnumRoomState;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 
 import javax.swing.*;
@@ -20,6 +21,9 @@ public class MainRoomSelectionBox extends RoundedPanel implements ActionListener
     public MainRoomSelectionBox(Room room){
         super(40, 60, Color.WHITE);
         name = new JButton(room.getName());
+        if (!room.getState().equals(EnumRoomState.AVAILABLE)) {
+            name.setText(String.format("%s (%s)", name.getText(), room.getState().getName()));
+        }
         name.setFont(new Font("Cousine", Font.PLAIN, 18));
         name.setActionCommand(String.format("reserveRoom_%d" ,room.getId()));
         name.addActionListener(this);

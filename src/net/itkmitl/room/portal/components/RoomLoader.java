@@ -37,12 +37,9 @@ public class RoomLoader {
                         buildingList.get(room.getBuilding()).add(room);
                     }
                 }
-
                 for (String building : buildingList.keySet()) {
                     floorList.put(building, new HashMap<String, Floor>());
                 }
-
-
                 for (String building : buildingList.keySet()) { // Get Key
                     for (Room room : buildingList.get(building)) { // Get Value
                         if (floorList.get(building).containsKey(room.getFloor())) {
@@ -58,13 +55,9 @@ public class RoomLoader {
                         }
                     }
                 }
-
-
                 buildingList = null;
-
                 return null;
             }
-
             @Override
             protected void done() {
                 System.out.println("room loader finished!");

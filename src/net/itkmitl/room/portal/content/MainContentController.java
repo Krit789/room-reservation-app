@@ -57,7 +57,6 @@ public class MainContentController extends Controller implements ActionListener 
                 }
                 return null;
             }
-
             @Override
             protected void done() {
                 JOptionPane.showMessageDialog(null, "Finished Loading", "Notice", JOptionPane.INFORMATION_MESSAGE);
@@ -66,25 +65,7 @@ public class MainContentController extends Controller implements ActionListener 
                 }
             }
         };
-//        SwingWorker<?, ?> worker2 = new SwingWorker() {
-//            @Override
-//            protected Object doInBackground() throws Exception {
-//                while (!doneRoomBox) {
-//                    Thread.onSpinWait();
-//                }
-//                return null;
-//            }
-//
-//            @Override
-//            protected void done() {
-//                JOptionPane.showMessageDialog(null, "Finished Loading", "Notice", JOptionPane.INFORMATION_MESSAGE);
-//                for (int i = getView().getSelector().roomBoxHolder.size() - 1; i >= 0; i--) {
-//                    getView().getSelector().roomBoxHolder.get(i).name.addActionListener(getAction());
-//                }
-//            }
-//        };
         worker.execute();
-//        worker2.execute();
     }
 
     @Override
@@ -103,12 +84,8 @@ public class MainContentController extends Controller implements ActionListener 
         } else if (e.getActionCommand().equals("Back to Dashboard")){
             this.changeCard("Dashboard");
         } else if (e.getSource() instanceof LeftSelectorBox) {
-//            System.out.println("Building = " + e.getActionCommand());
             this.changeBuildingCard(e.getActionCommand());
         }
-//        else if (e.getSource() instanceof JButton) {
-//            System.out.println(e.getActionCommand());
-//        }
     }
     protected void changeCard(String name) {
         CardLayout cl = (CardLayout) (((JPanel)this.getView().getContentPanel()).getLayout());
