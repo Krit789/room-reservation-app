@@ -4,6 +4,7 @@ import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.CardView;
 import net.itkmitl.room.portal.components.*;
 import net.itkmitl.room.portal.components.entity.Floor;
+import net.itkmitl.room.portal.content.MainContentView;
 
 import javax.swing.*;
 import java.awt.*;

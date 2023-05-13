@@ -1,11 +1,14 @@
 package net.itkmitl.room.portal.content;
 
-import java.awt.CardLayout;
+import java.awt.*;
 
 import net.itkmitl.room.portal.View;
 import net.itkmitl.room.portal.components.TransparentPanel;
 import net.itkmitl.room.portal.content.components.Dashboard;
+import net.itkmitl.room.portal.content.components.LoadingPane;
 import net.itkmitl.room.portal.content.components.Selector;
+
+import javax.swing.*;
 
 public class MainContentView extends View{
     /**
@@ -15,6 +18,8 @@ public class MainContentView extends View{
 	private TransparentPanel contentPanel;
     private Dashboard dashboard;
     private Selector selector;
+    public static LoadingPane glassPane;
+
 
     public MainContentView(){
         super();
@@ -24,9 +29,14 @@ public class MainContentView extends View{
         contentPanel = new TransparentPanel(new CardLayout());
         dashboard = new Dashboard();
         selector = new Selector();
+        glassPane = new LoadingPane();
         contentPanel.add(dashboard, "Dashboard");
         contentPanel.add(selector, "Selector");
         this.add(contentPanel);
+        setGlassPane(glassPane);
+        glassPane.setVisible(true);
+        glassPane.setEnabled(true);
+
     }
 
     public Dashboard getDashboard() {

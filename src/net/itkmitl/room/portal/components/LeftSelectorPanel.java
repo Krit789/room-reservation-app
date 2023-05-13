@@ -12,6 +12,7 @@ import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
+import net.itkmitl.room.portal.content.MainContentView;
 
 public class LeftSelectorPanel extends JPanel {
     /**
@@ -104,7 +105,7 @@ public class LeftSelectorPanel extends JPanel {
 
             @Override
             protected void done() {
-                JOptionPane.showMessageDialog(null, "Finished Loading Building", "Notice", JOptionPane.INFORMATION_MESSAGE);
+//                JOptionPane.showMessageDialog(null, "Finished Loading Building", "Notice", JOptionPane.INFORMATION_MESSAGE);
 //                buttonHolder.add();
                 registerPane();
                 finishedLoading = true;

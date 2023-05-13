@@ -15,6 +15,9 @@ public class RoundedPanel extends JPanel {
         setOpaque(false);
     }
 
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
 
     public RoundedPanel() {
         this(20, 20, Color.WHITE);

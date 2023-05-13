@@ -7,8 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class MainRoomSelectionBox extends RoundedPanel implements ActionListener {
+public class MainRoomSelectionBox extends RoundedPanel implements ActionListener, MouseListener {
     /**
      *
      */
@@ -18,24 +20,56 @@ public class MainRoomSelectionBox extends RoundedPanel implements ActionListener
     //key is floor, Value is arraylist of room in floor
 //    private J
 
-    public MainRoomSelectionBox(Room room){
-        super(40, 60, Color.WHITE);
+    public MainRoomSelectionBox(Room room) {
+        super(40, 60);
         name = new JButton(room.getName());
         if (!room.getState().equals(EnumRoomState.AVAILABLE)) {
             name.setText(String.format("%s (%s)", name.getText(), room.getState().getName()));
+            setBackgroundColor(Color.GRAY);
+        } else {
+            setBackgroundColor(Color.WHITE);
+            name.addActionListener(this);
+            this.addMouseListener(this);
+            name.addMouseListener(this);
         }
         name.setFont(new Font("Cousine", Font.PLAIN, 18));
-        name.setActionCommand(String.format("reserveRoom_%d" ,room.getId()));
-        name.addActionListener(this);
         name.setOpaque(false);
         name.setContentAreaFilled(false);
         boxRoom = room;
-//        name.setBorderPainted(false);
         add(name);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println(boxRoom.getId());
+        System.out.println("BoxRoom MainRoomSelectionBox " + boxRoom.getId());
+    }
+
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        setBackgroundColor(Color.LIGHT_GRAY);
+        repaint();
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        setBackgroundColor(Color.WHITE);
+        repaint();
+
     }
 }

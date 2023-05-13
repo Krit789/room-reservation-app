@@ -59,10 +59,12 @@ public class MainContentController extends Controller implements ActionListener 
             }
             @Override
             protected void done() {
-                JOptionPane.showMessageDialog(null, "Finished Loading", "Notice", JOptionPane.INFORMATION_MESSAGE);
+//                JOptionPane.showMessageDialog(null, "Finished Loading", "Notice", JOptionPane.INFORMATION_MESSAGE);
                 for (int i = getView().getSelector().getSelectorPanel().leftBoxHolder.size() - 1; i >= 0; i--) {
                     getView().getSelector().getSelectorPanel().leftBoxHolder.get(i).addActionListener(getAction());
                 }
+                MainContentView.glassPane.setVisible(false);
+                MainContentView.glassPane.setEnabled(false);
             }
         };
         worker.execute();

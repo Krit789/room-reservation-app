@@ -60,7 +60,7 @@ public class RoomLoader {
             }
             @Override
             protected void done() {
-                System.out.println("room loader finished!");
+//                System.out.println("room loader finished!");
                 done = true;
             }
         };

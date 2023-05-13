@@ -105,17 +105,22 @@ public class ReservationDataView {
         datePickerSettings2.setColor(DatePickerSettings.DateArea.TextFieldBackgroundDisabled, new Color(35, 35, 35));
         datePickerSettings2.setColor(DatePickerSettings.DateArea.DatePickerTextValidDate, new Color(221, 221, 221));
         datePickerSettings2.setColor(DatePickerSettings.DateArea.TextFieldBackgroundInvalidDate, new Color(40, 40, 40));
-        datePickerSettings1.setColor(DatePickerSettings.DateArea.CalendarBackgroundNormalDates, new Color(40, 40, 40));
-        datePickerSettings1.setColor(DatePickerSettings.DateArea.CalendarBackgroundSelectedDate, new Color(86, 86, 86));
-        datePickerSettings1.setColor(DatePickerSettings.DateArea.CalendarTextNormalDates, new Color(221, 221, 221));
+        datePickerSettings2.setColor(DatePickerSettings.DateArea.CalendarBackgroundNormalDates, new Color(40, 40, 40));
+        datePickerSettings2.setColor(DatePickerSettings.DateArea.CalendarBackgroundSelectedDate, new Color(86, 86, 86));
+        datePickerSettings2.setColor(DatePickerSettings.DateArea.CalendarTextNormalDates, new Color(221, 221, 221));
         datePickerSettings2.setBorderCalendarPopup(new LineBorder(new Color(60, 60, 60), 1));
 
         startDatePicker = new DatePicker(datePickerSettings1);
         startDatePicker.getComponentDateTextField().setBorder(new LineBorder(new Color(60, 60, 60), 1));
         startDatePicker.setDateToToday();
+        startDatePicker.getComponentToggleCalendarButton().setIcon(new ImageIcon("resource/icons/calendar-16px.png"));
+        startDatePicker.getComponentToggleCalendarButton().setText("");
         endDatePicker = new DatePicker(datePickerSettings2);
         endDatePicker.getComponentDateTextField().setBorder(new LineBorder(new Color(60, 60, 60), 1));
         endDatePicker.setDateToToday();
+        endDatePicker.getComponentToggleCalendarButton().setIcon(new ImageIcon("resource/icons/calendar-16px.png"));
+        endDatePicker.getComponentToggleCalendarButton().setText("");
+
 
         startTimeLabel = new JLabel("Start Time");
         startTimeHourField = new JSpinner(new SpinnerNumberModel(0, 0, 23, 1));
