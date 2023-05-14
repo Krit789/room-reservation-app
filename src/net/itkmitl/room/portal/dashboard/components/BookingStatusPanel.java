@@ -1,11 +1,9 @@
 package net.itkmitl.room.portal.dashboard.components;
 
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -17,9 +15,6 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.DefaultPieDataset;
-
-
 
 public class BookingStatusPanel extends RoundedPanel {
 
@@ -52,12 +47,13 @@ public class BookingStatusPanel extends RoundedPanel {
 
         JFreeChart chart;
         chart = ChartFactory.createPieChart(
-                        "",
+                "",
                 dataset,
                 true,
                 true,
                 false
-        );;
+        );
+        ;
 
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(250, 250));
@@ -73,13 +69,42 @@ public class BookingStatusPanel extends RoundedPanel {
         piechart = new JPanel();
         piechart.add(chartPanel);
 
-        this.add(piechart, new GBCBuilder(GridBagConstraints.BOTH, 0, 10, 0, 1).setAnchor(GridBagConstraints.CENTER));
+        this.add(piechart, new GridBagConstraints(0, 2, 1, 1, 1.0, 0.8, GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(10, 10, 10, 10), 0, 0));
         piechart.setSize(new Dimension(50, 50));
         piechart.setBackground(new Color(0x0343477, true));
 
+        //calender
+        JPanel panel = new JPanel(new GridLayout(7, 7));
 
+        GregorianCalendar cal = new GregorianCalendar();
 
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
 
+        String[] headers = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+        for (String header : headers) {
+            JLabel label = new JLabel(header, JLabel.CENTER);
+            panel.add(label);
+        }
 
+        int firstDayOfMonth = new GregorianCalendar(year, month, 1).get(Calendar.DAY_OF_WEEK);
+        int numDaysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        for (int i = 1; i < firstDayOfMonth; i++) {
+            panel.add(new JLabel(""));
+        }
+        for (int i = 1; i <= numDaysInMonth; i++) {
+            JLabel label = new JLabel(Integer.toString(i), JLabel.CENTER);
+            if (i == day) {
+                label.setOpaque(true);
+                label.setBackground(new Color(67, 129, 238, 152));
+            }
+            panel.add(label);
+        }
+        this.add(panel, new GridBagConstraints(0, 5, 1, 1, 1.0, 30, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 10, 10, 10), 0, 0));
+        panel.setSize(new Dimension(60, 60));
     }
 }
+
+
+
