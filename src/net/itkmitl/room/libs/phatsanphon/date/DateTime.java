@@ -3,6 +3,7 @@ package net.itkmitl.room.libs.phatsanphon.date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -33,6 +34,11 @@ public class DateTime {
 
 	public LocalDate toLocalDate(){
 		LocalDate date = dateTime.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		return date;
+	}
+
+	public LocalTime toLocalTime(){
+		LocalTime date = dateTime.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
 		return date;
 	}
 

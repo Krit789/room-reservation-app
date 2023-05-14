@@ -5,6 +5,7 @@ import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.View;
 import net.itkmitl.room.portal.content.MainContentView;
 import net.itkmitl.room.portal.content.components.ReservationDialog;
+import net.itkmitl.room.portal.content.components.ReservationDialogController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,12 +44,12 @@ public class MainRoomSelectionBox extends RoundedPanel implements ActionListener
     }
 
     public void openReservationDialog(){
-        ReservationDialog rsvpd = new ReservationDialog(null);
+        ReservationDialogController rsvpd = new ReservationDialogController(null, boxRoom);
         MainContentView.glassPane.setSpinnerVisibility(false);
         MainContentView.glassPane.setText("");
         MainContentView.glassPane.setVisible(true);
         MainContentView.glassPane.setEnabled(true);
-        rsvpd.setVisible(true);
+        rsvpd.view.setVisible(true);
     }
 
     @Override
