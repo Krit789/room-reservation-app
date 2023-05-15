@@ -6,8 +6,6 @@ import net.itkmitl.room.portal.Controller;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.LeftSelectorBox;
-import net.itkmitl.room.portal.components.MainRoomSelectionBox;
-import net.itkmitl.room.portal.content.components.Selector;
 
 
 import javax.swing.*;
@@ -16,19 +14,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static net.itkmitl.room.portal.components.LeftSelectorPanel.finishedLoading;
-import static net.itkmitl.room.portal.content.components.Selector.doneRoomBox;
 import static net.itkmitl.room.portal.dashboard.components.ReservationPanel.buttonBox;
 
 
 public class MainContentController extends Controller implements ActionListener {
     private final MainContentView view;
     private AppStore store = AppStore.getAppStore();
-    public MainContentController(MainContentView view){
+
+    public MainContentController(MainContentView view) {
         this.view = view;
     }
+
     public MainContentView getView() {
         return view;
     }
+
     @Override
     protected void start() {
         this.initialize();
@@ -41,7 +41,7 @@ public class MainContentController extends Controller implements ActionListener 
 
     @Override
     protected void initializeListener() {
-        if (((User)store.select("user")).getRole().getLevel() >= 10){
+        if (((User) store.select("user")).getRole().getLevel() >= 10) {
             this.getView().optionMenuItem1.addActionListener(this);
         }
         this.getView().helpMenuItem1.addActionListener(this);
@@ -49,7 +49,12 @@ public class MainContentController extends Controller implements ActionListener 
         buttonBox[1].addActionListener(this);
         this.getView().getSelector().getSelectorPanel().backButton.addActionListener(this);
         this.getView().getDashboard().getWelcomePanel().bookingButton.addActionListener(this);
-        this.getView().getHistory().backButton.addActionListener(this);
+
+        // History
+        this.getView().getHistory().getLeftPanel().getBackButton().addActionListener(this);
+        this.getView().getHistory().getLeftPanel().getSuccessBtn().addActionListener(this);
+        this.getView().getHistory().getLeftPanel().getPendingBtn().addActionListener(this);
+        this.getView().getHistory().getLeftPanel().getCanceledBtn().addActionListener(this);
 
         SwingWorker<?, ?> worker = new SwingWorker() {
             @Override
@@ -59,6 +64,7 @@ public class MainContentController extends Controller implements ActionListener 
                 }
                 return null;
             }
+
             @Override
             protected void done() {
 //                JOptionPane.showMessageDialog(null, "Finished Loading", "Notice", JOptionPane.INFORMATION_MESSAGE);
@@ -85,21 +91,24 @@ public class MainContentController extends Controller implements ActionListener 
             this.changeCard("History");
         } else if (e.getActionCommand().equals("Booking")) {
             this.changeCard("Selector");
-        } else if (e.getActionCommand().equals("Back to Dashboard")){
+        } else if (e.getActionCommand().equals("Back to Dashboard")) {
             this.changeCard("Dashboard");
         } else if (e.getSource() instanceof LeftSelectorBox) {
             this.changeBuildingCard(e.getActionCommand());
         }
     }
+
     protected void changeCard(String name) {
-        CardLayout cl = (CardLayout) (((JPanel)this.getView().getContentPanel()).getLayout());
+        CardLayout cl = (CardLayout) (((JPanel) this.getView().getContentPanel()).getLayout());
         cl.show(this.getView().getContentPanel(), name);
     }
-    protected void changeBuildingCard(String name){
+
+    protected void changeBuildingCard(String name) {
         CardLayout cl = (CardLayout) (this.getView().getSelector().cardsOfBuildingsFloorPanel.getLayout());
         cl.show(this.getView().getSelector().cardsOfBuildingsFloorPanel, name);
     }
-    protected ActionListener getAction(){
+
+    protected ActionListener getAction() {
         return this;
     }
 }

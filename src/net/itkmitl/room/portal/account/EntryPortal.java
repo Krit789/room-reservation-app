@@ -21,7 +21,6 @@ public class EntryPortal extends Portal {
                 entryPortal.run();
             }
         });
-
     }
 
     @Override

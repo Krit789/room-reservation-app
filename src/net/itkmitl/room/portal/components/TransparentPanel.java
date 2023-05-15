@@ -8,15 +8,12 @@ import javax.swing.JPanel;
 public class TransparentPanel extends JPanel {
     private static final long serialVersionUID = 729961928996065079L;
 
-    {
-        setOpaque(false);
-    }
-
     public TransparentPanel() {
-        setLayout(new BorderLayout());
+        this(new BorderLayout());
     }
 
     public TransparentPanel(LayoutManager lm) {
         setLayout(lm);
+        setOpaque(false);
     }
 }

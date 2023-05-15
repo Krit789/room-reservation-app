@@ -4,14 +4,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.ActionListener;
 
-class HistoryLeftButton extends JButton {
+public class HistoryLeftButton extends JButton {
     private HistoryLeftButtonText textPanel;
 
     public HistoryLeftButton() {
         this("", "");
     }
-
 
     public HistoryLeftButton(String imagePath, String text) {
         textPanel = new HistoryLeftButtonText(imagePath, text) {
@@ -29,6 +29,5 @@ class HistoryLeftButton extends JButton {
     public JPanel getTextPanel() {
         return textPanel;
     }
-
 
 }

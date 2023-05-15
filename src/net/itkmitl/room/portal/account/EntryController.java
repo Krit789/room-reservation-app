@@ -303,7 +303,7 @@ public class EntryController extends Controller implements ActionListener, Compo
         }
     }
 
-    private int passwordValidator(){
+    private int passwordValidator() {
         JPasswordField password = null;
         JPasswordField confirmPassword = null;
         int type = 0;
@@ -336,13 +336,13 @@ public class EntryController extends Controller implements ActionListener, Compo
 
     }
 
-    private void allValidator(){
+    private void allValidator() {
         int result1 = emailValidator();
         int result2 = passwordValidator();
         String outText = null;
         boolean enable = false;
         if (currentCard.equals("Login")) {
-            if (result1 == 0 && result2 == 1){
+            if (result1 == 0 && result2 == 1) {
                 enable = true;
                 outText = " ";
             } else if (result1 == -1 && result2 == 1) {
@@ -358,7 +358,7 @@ public class EntryController extends Controller implements ActionListener, Compo
             loginPanel.getWarningLabel().setText(outText);
             loginPanel.getLoginButton().setEnabled(enable);
         } else if (currentCard.equals("Register")) {
-            if (result1 == 0 && result2 == 1){
+            if (result1 == 0 && result2 == 1) {
                 enable = true;
                 outText = " ";
             } else if (result1 == -1 && result2 == 1) {
@@ -367,7 +367,7 @@ public class EntryController extends Controller implements ActionListener, Compo
             } else if ((result1 == -1 || result1 == -2) && result2 == -1) {
                 enable = false;
                 outText = "Invalid E-Mail and Password must be at least 4 character long";
-            }else if ((result1 == -1 || result1 == -2) && result2 == -2) {
+            } else if ((result1 == -1 || result1 == -2) && result2 == -2) {
                 enable = false;
                 outText = "Invalid E-Mail and Password and Confirm Password must be the same";
             } else if (result1 == 0 && result2 == -1) {

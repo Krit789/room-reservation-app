@@ -10,12 +10,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class ImagePanel extends JPanel {
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -8862608090477009970L;
-	private ImageIcon image;
+    private static final long serialVersionUID = -8862608090477009970L;
+    private ImageIcon image;
 
     public ImagePanel(ImageIcon image) {
         this.image = image;
@@ -54,7 +50,7 @@ public class ImagePanel extends JPanel {
         }
         Graphics2D graphics2D = (Graphics2D) g;
         graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        graphics2D.drawImage(image.getImage(),0,0,new_width, new_height,this);
+        graphics2D.drawImage(image.getImage(), 0, 0, new_width, new_height, this);
     }
 
 }

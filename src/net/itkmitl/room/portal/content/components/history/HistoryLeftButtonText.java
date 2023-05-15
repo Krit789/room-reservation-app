@@ -21,6 +21,7 @@ class HistoryLeftButtonText extends RoundedPanel {
         this.imagePath = imagePath;
         icon = new JLabel(new ImageIcon(this.imagePath));
         text = new JLabel(textIn);
+        text.setFont(new Font("Cousine", Font.PLAIN, 16));
 
         EmptyBorder border = new EmptyBorder(10, 10, 10, 10);
         icon.setBorder(border);

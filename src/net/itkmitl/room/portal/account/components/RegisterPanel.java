@@ -23,11 +23,8 @@ import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
 
 public class RegisterPanel extends RoundedPanel {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 6536055055833326316L;
-	private final JPanel fieldPanel, operationPanel, twoColumnPanel;
+    private static final long serialVersionUID = 6536055055833326316L;
+    private final JPanel fieldPanel, operationPanel, twoColumnPanel;
     private final BetterJTextField emailField, firstNameField, lastNameField, telField;
     private final JLabel registerHeader, loginLabel1;
     private final JLabel loginLabel2, warningLabel;
@@ -85,10 +82,10 @@ public class RegisterPanel extends RoundedPanel {
         twoColumnPanel.add(firstNameField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 0, 0, 0, new Insets(5, 0, 25, 5)).getGBC());
         twoColumnPanel.add(lastNameField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 0, 1, 0, new Insets(5, 10, 25, 45)).getGBC());
 
-        twoColumnPanel.add(emailField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5,  0, 1, new Insets(5, 0, 25, 5)).getGBC());
+        twoColumnPanel.add(emailField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 0, 1, new Insets(5, 0, 25, 5)).getGBC());
         twoColumnPanel.add(telField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 1, 1, new Insets(5, 10, 25, 45)).getGBC());
-        twoColumnPanel.add(passwordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5,  0, 2, new Insets(5, 0, 5, 5)).getGBC());
-        twoColumnPanel.add(confirmPasswordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5,  1, 2, new Insets(5, 10, 5, 45)).getGBC());
+        twoColumnPanel.add(passwordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 0, 2, new Insets(5, 0, 5, 5)).getGBC());
+        twoColumnPanel.add(confirmPasswordField, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.5, 1, 2, new Insets(5, 10, 5, 45)).getGBC());
 
         operationPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         operationPanel.setBackground(Color.white);
@@ -96,7 +93,7 @@ public class RegisterPanel extends RoundedPanel {
         operationPanel.add(loginLabel2);
         loginLabel2.setForeground(new Color(94, 135, 197));
 
-        fieldPanel.add(twoColumnPanel, new GBCBuilder(GridBagConstraints.BOTH, 1,  0, 1).getGBC());
+        fieldPanel.add(twoColumnPanel, new GBCBuilder(GridBagConstraints.BOTH, 1, 0, 1).getGBC());
         fieldPanel.add(warningLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 2, new Insets(5, 0, 5, 5)).getGBC());
 
         operationPanel.add(Box.createRigidArea(new Dimension(35, 0)));
@@ -113,6 +110,7 @@ public class RegisterPanel extends RoundedPanel {
     public String getEmail() {
         return emailField.getText();
     }
+
     public BetterJTextField getEmailField() {
         return emailField;
     }

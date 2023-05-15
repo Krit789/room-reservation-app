@@ -24,11 +24,8 @@ import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
 
 public class LoginPanel extends RoundedPanel {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 4047655800877345668L;
-	private final BetterJTextField emailField;
+    private static final long serialVersionUID = 4047655800877345668L;
+    private final BetterJTextField emailField;
     private final JLabel loginHeader, registerLabel1;
     private final JLabel warningLabel, registerLabel2;
     private final BetterJPasswordField passwordField;
@@ -36,7 +33,7 @@ public class LoginPanel extends RoundedPanel {
     private final ButtonGradient loginButton;
     private final ImagePanel imagePanel;
 
-    public LoginPanel(){
+    public LoginPanel() {
         super(30, 30, Color.WHITE);
         this.setLayout(new GridBagLayout());
         loginButton = new ButtonGradient();
