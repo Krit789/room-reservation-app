@@ -12,6 +12,7 @@ public class History extends CardView {
     public JPanel btnPanel, mainPanel;
 
     public History(){
+        backButton = new ButtonGradient();
         btnPanel = new HistoryLeftPanel();
     }
 }
