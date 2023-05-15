@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -28,7 +29,7 @@ public class FewConfig {
 			this.yaml = new Yaml(options);
 			this.data = this.yaml.load(inputStream);
 		} catch (Exception e) {
-			System.out.println("ERROR: " + e.getMessage());
+			e.printStackTrace();
 		}
 		// If could load default config
 		if (this.data == null) {
@@ -36,136 +37,17 @@ public class FewConfig {
 		}
 	}
 
+	public FewSimpleValue getValue(String key) {
+		if (data.get(key) == null) {
+			return null;
+		}
+		return new FewSimpleValue(data.get(key));
+	}
+
 	public void dumpInfo() {
 		for (Map.Entry<String, Object> values : data.entrySet()) {
 			System.out.println(values.getKey() + ": " + values.getValue());
 		}
-	}
-
-	public Object getRaw(String key) {
-		return this.data.get(key);
-	}
-
-	public String asString(String key) {
-		if (this.data.get(key) == null) {
-			return null;
-		}
-		try {
-			return this.data.get(key).toString();
-		} catch (Exception e) {
-			throw new RuntimeException(
-					key + " is not a String, the correct data type is " + data.get(key).getClass().getName());
-		}
-	}
-
-	public String asString(String key, String defaultValue) {
-		try {
-			String value = this.data.get(key).toString();
-			return value != null ? value : defaultValue;
-		} catch (Exception e) {
-			throw new RuntimeException(key + " is not a String, the correct data type is " + data.get(key).getClass().getName());
-		}
-	}
-
-	public Double asDouble(String key) {
-		if (this.data.get(key) == null) {
-			return null;
-		}
-		try {
-			return (Double) this.data.get(key);
-		} catch (Exception e) {
-			throw new RuntimeException(key + " is not a String, the correct data type is " + data.get(key).getClass().getName());
-		}
-	}
-
-	public Double asDouble(String key, Double defaultValue) {
-		try {
-			Double value = (Double) this.data.get(key);
-			return value != null ? value : defaultValue;
-		} catch (Exception e) {
-			throw new RuntimeException(key + " is not a String, the correct data type is " + data.get(key).getClass().getName());
-		}
-	}
-
-	public Integer asInt(String key) {
-		if (this.data.get(key) == null) {
-			return null;
-		}
-		try {
-			return (Integer) this.data.get(key);
-		} catch (Exception e) {
-			throw new RuntimeException(key + " is not a Integer, the correct data type is " + data.get(key).getClass().getName());
-		}
-	}
-
-	public Integer asInt(String key, Integer defaultValue) {
-		try {
-			Integer value = (Integer) this.data.get(key);
-			return value != null ? value : defaultValue;
-		} catch (Exception e) {
-			throw new RuntimeException(key + " is not a Integer, the correct data type is " + data.get(key).getClass().getName());
-		}
-	}
-
-	public Boolean asBoolean(String key) {
-		if (this.data.get(key) == null) {
-			return null;
-		}
-		try {
-			return (Boolean) this.data.get(key);
-		} catch (Exception e) {
-			throw new RuntimeException(key + " is not a Boolean, the correct data type is " + data.get(key).getClass().getName());
-		}
-	}
-
-	public Boolean asBoolean(String key, Boolean defaultValue) {
-		try {
-			Boolean value = (Boolean) this.data.get(key);
-			return value != null ? value : defaultValue;
-		} catch (Exception e) {
-			throw new RuntimeException(
-					key + " is not a Boolean, the correct data type is " + data.get(key).getClass().getName());
-		}
-	}
-
-	public Float asFloat(String key) {
-		if (this.data.get(key) == null) {
-			return null;
-		}
-		try {
-			return (Float) this.data.get(key);
-		} catch (Exception e) {
-			throw new RuntimeException(key + " is not a Float, the correct data type is " + data.get(key).getClass().getName());
-		}
-	}
-
-	public Float asFloat(String key, Float defaultValue) {
-		try {
-			Float value = (Float) this.data.get(key);
-			return value != null ? value : defaultValue;
-		} catch (Exception e) {
-			throw new RuntimeException(
-					key + " is not a Float, the correct data type is " + data.get(key).getClass().getName());
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T> List<T> asList(String key, Class<T> clazz) {
-		if (this.data.get(key) == null) {
-			return null;
-		}
-		try {
-			return (List<T>) this.data.get(key);
-		} catch (Exception e) {
-			throw new RuntimeException(key + " is not a List<" + clazz.getName() + ">, the correct data type is " + data.get(key).getClass().getName());
-		}
-	}
-
-	public boolean isArray(String key) {
-		if (getRaw(key) instanceof String[]) {
-			return true;
-		}
-		return false;
 	}
 
 	public FewConfig reloadConfig() {

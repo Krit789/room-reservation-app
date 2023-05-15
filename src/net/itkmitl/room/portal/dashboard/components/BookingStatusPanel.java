@@ -42,7 +42,7 @@ public class BookingStatusPanel extends RoundedPanel {
 
 //        Pie chart
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Available", 70);
+        dataset.setValue("Available Room", 70);
         dataset.setValue("Full", 30);
 
         JFreeChart chart;
@@ -62,7 +62,7 @@ public class BookingStatusPanel extends RoundedPanel {
         PiePlot plot = (PiePlot) chart.getPlot();
 
 
-        plot.setSectionPaint("Available", new Color(90, 140, 206));
+        plot.setSectionPaint("Available Room", new Color(90, 140, 206));
         plot.setSectionPaint("Full", new Color(0x101442));
 
 
@@ -70,11 +70,15 @@ public class BookingStatusPanel extends RoundedPanel {
         piechart.add(chartPanel);
 
         this.add(piechart, new GridBagConstraints(0, 2, 1, 1, 1.0, 0.8, GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(10, 10, 10, 10), 0, 0));
-        piechart.setSize(new Dimension(50, 50));
+        piechart.setSize(new Dimension(10, 50));
         piechart.setBackground(new Color(0x0343477, true));
 
         //calender
-        JPanel panel = new JPanel(new GridLayout(7, 7));
+        int numDaysInMonth = 0;
+        int firstDayOfMonth = 0;
+        int numRows = (int) Math.ceil((numDaysInMonth + firstDayOfMonth - 1) / 7.0);
+
+        JPanel panel = new JPanel(new GridLayout(numRows, 7));
 
         GregorianCalendar cal = new GregorianCalendar();
 
@@ -88,8 +92,8 @@ public class BookingStatusPanel extends RoundedPanel {
             panel.add(label);
         }
 
-        int firstDayOfMonth = new GregorianCalendar(year, month, 1).get(Calendar.DAY_OF_WEEK);
-        int numDaysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        firstDayOfMonth = new GregorianCalendar(year, month, 1).get(Calendar.DAY_OF_WEEK);
+        numDaysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
         for (int i = 1; i < firstDayOfMonth; i++) {
             panel.add(new JLabel(""));
         }
@@ -101,8 +105,9 @@ public class BookingStatusPanel extends RoundedPanel {
             }
             panel.add(label);
         }
-        this.add(panel, new GridBagConstraints(0, 5, 1, 1, 1.0, 30, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(10, 10, 10, 10), 0, 0));
-        panel.setSize(new Dimension(60, 60));
+
+        panel.setPreferredSize(new Dimension(1, 1));
+        this.add(panel, new GridBagConstraints(0, 8, 0, 3, 0, 10, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
     }
 }
 

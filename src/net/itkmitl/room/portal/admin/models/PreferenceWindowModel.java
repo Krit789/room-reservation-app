@@ -91,13 +91,13 @@ public class PreferenceWindowModel {
     public void loadFromConfig(){
         try {
             FewConfig config = new FewConfig(configFile);
-            setUsername(config.asString("username"));
-            setPassword(config.asString("password"));
-            setSqlDBName(config.asString("database"));
-            setSqlAddress(config.asString("ip"));
-            setSqlPort(config.asInt("port"));
-            setTimeout(config.asInt("timeout_time"));
-            setNeverTimeout(config.asBoolean("never_timeout"));
+            setUsername(config.getValue("username").asString());
+            setPassword(config.getValue("password").asString());
+            setSqlDBName(config.getValue("database").asString());
+            setSqlAddress(config.getValue("ip").asString());
+            setSqlPort(config.getValue("port").asInt());
+            setTimeout(config.getValue("timeout_time").asInt());
+            setNeverTimeout(config.getValue("never_timeout").asBoolean());
         } catch (Exception e){
             e.printStackTrace();
         }

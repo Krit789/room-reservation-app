@@ -28,10 +28,10 @@ public class ConfigManager {
     public static ArrayList<String> getConnectionConfig() {
     	FewConfig config = new FewConfig(new File("config.yml"));
         ArrayList<String> myConnection = new ArrayList<>();
-        myConnection.add(config.asString("ip") + ":" + config.asString("port"));
-        myConnection.add(config.asString("database"));
-        myConnection.add(config.asString("username"));
-        myConnection.add(config.asString("password"));
+        myConnection.add(config.getValue("ip").asString() + ":" + config.getValue("port").asString());
+        myConnection.add(config.getValue("database").asString());
+        myConnection.add(config.getValue("username").asString());
+        myConnection.add(config.getValue("password").asString());
         return myConnection;
     }
     
