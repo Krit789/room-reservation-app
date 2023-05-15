@@ -49,6 +49,7 @@ public class MainContentController extends Controller implements ActionListener 
         buttonBox[1].addActionListener(this);
         this.getView().getSelector().getSelectorPanel().backButton.addActionListener(this);
         this.getView().getDashboard().getWelcomePanel().bookingButton.addActionListener(this);
+        this.getView().getHistory().backButton.addActionListener(this);
 
         SwingWorker<?, ?> worker = new SwingWorker() {
             @Override
@@ -81,7 +82,7 @@ public class MainContentController extends Controller implements ActionListener 
             new AboutDialog(this.getView());
         }
         if (e.getActionCommand().equals("History")) {
-            System.out.println("go to history page");
+            this.changeCard("History");
         } else if (e.getActionCommand().equals("Booking")) {
             this.changeCard("Selector");
         } else if (e.getActionCommand().equals("Back to Dashboard")){

@@ -6,6 +6,7 @@ import net.itkmitl.room.portal.View;
 import net.itkmitl.room.portal.components.TransparentPanel;
 import net.itkmitl.room.portal.content.components.Dashboard;
 import net.itkmitl.room.portal.content.components.DarkPane;
+import net.itkmitl.room.portal.content.components.History;
 import net.itkmitl.room.portal.content.components.Selector;
 
 public class MainContentView extends View{
@@ -16,6 +17,7 @@ public class MainContentView extends View{
 	private TransparentPanel contentPanel;
     private Dashboard dashboard;
     private Selector selector;
+    private History history;
     public static DarkPane glassPane;
 
 
@@ -27,11 +29,13 @@ public class MainContentView extends View{
         contentPanel = new TransparentPanel(new CardLayout());
         dashboard = new Dashboard();
         selector = new Selector();
+        history = new History();
         glassPane = new DarkPane();
         glassPane.setText("Loading data...");
         glassPane.setSpinnerVisibility(true);
         contentPanel.add(dashboard, "Dashboard");
         contentPanel.add(selector, "Selector");
+        contentPanel.add(history, "History");
         this.add(contentPanel);
         setGlassPane(glassPane);
         glassPane.setVisible(true);
@@ -48,5 +52,8 @@ public class MainContentView extends View{
 
     public Selector getSelector(){
         return (Selector) this.selector;
+    }
+    public History getHistory() {
+        return this.history;
     }
 }
