@@ -4,27 +4,24 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.components.GBCBuilder;
-import net.itkmitl.room.portal.components.MainRoomSelectionBox;
-import net.itkmitl.room.portal.content.MainContentView;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.time.LocalDate;
 
-public class ReservationDialog extends JDialog implements ActionListener, WindowListener {
-    private JPanel titlePanel, selectionPanel, buttonPanel, lengthPanel;
-    private JLabel pageTitle, pageSubtitle, dateLabel, segmentLabel, lengthLabel, hourLabel;
-    private JButton okButton, cancelButton;
-    private DatePicker reservationDatePicker;
+public class ReservationDialog extends JDialog  {
+    private JPanel titlePanel, selectionPanel, buttonPanel, lengthPanel, segmentPanel;
+    private JLabel pageTitle, pageSubtitle, dateLabel, segmentLabel, lengthLabel, hourLabel, reasonLabel;
+    public JLabel segmentLoadingLabel;
+    public JButton okButton, cancelButton;
+    public DatePicker reservationDatePicker;
     public JComboBox<ReservableEntity> segmentBox;
     public JSpinner lengthSpinner;
+    private JScrollPane reasonPane;
+    public JTextArea reasonTextArea;
 
     private final Font regular = new Font("Sansserif", Font.PLAIN, 16);
 
@@ -52,30 +49,49 @@ public class ReservationDialog extends JDialog implements ActionListener, Window
         segmentLabel = new JLabel("Available Segment");
         lengthLabel = new JLabel("Length");
         hourLabel = new JLabel("Hour(s)");
+        reasonLabel = new JLabel("Reason");
 
         dateLabel.setFont(regular);
         segmentLabel.setFont(regular);
         lengthLabel.setFont(regular);
         hourLabel.setFont(regular);
+        reasonLabel.setFont(regular);
 
         DatePickerSettings datePickerSettings1 = new DatePickerSettings();
         Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(44, 84, 144));
         datePickerSettings1.setBorderCalendarPopup(new LineBorder(new Color(44, 84, 144), 1));
         reservationDatePicker = new DatePicker(datePickerSettings1);
         datePickerSettings1.setDateRangeLimits(LocalDate.now(), LocalDate.now().plusDays(7));
+        datePickerSettings1.setEnableYearMenu(false);
+        datePickerSettings1.setAllowEmptyDates(false);
+        datePickerSettings1.setEnableMonthMenu(false);
+        reservationDatePicker.getComponentToggleCalendarButton().setIcon(new ImageIcon("resource/icons/calendar-16px.png"));
+        reservationDatePicker.getComponentToggleCalendarButton().setText("");
         reservationDatePicker.getComponentDateTextField().setBorder(border);
         reservationDatePicker.setDateToToday();
 
-        segmentBox = new JComboBox();
+        segmentBox = new JComboBox<>();
+        segmentBox.setBorder(border);
         lengthSpinner = new JSpinner();
+        lengthSpinner.setBorder(border);
         selectionPanel = new JPanel();
         selectionPanel.setBackground(Color.white);
         selectionPanel.setLayout(new GridBagLayout());
-        selectionPanel.add(dateLabel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 0, new Insets(5, 10, 0, 10)).setAnchor(GridBagConstraints.WEST));
-        selectionPanel.add(reservationDatePicker, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 1, new Insets(0, 10, 0, 10)).getGBC());
-        selectionPanel.add(segmentLabel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 2, new Insets(5, 10, 0, 10)).setAnchor(GridBagConstraints.WEST));
-        selectionPanel.add(segmentBox, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 3, new Insets(10, 10, 5, 10)).getGBC());
-        selectionPanel.add(lengthLabel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 4, new Insets(5, 10, 0, 10)).setAnchor(GridBagConstraints.WEST));
+        selectionPanel.add(dateLabel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 0, new Insets(5, 15, 0, 15)).setAnchor(GridBagConstraints.WEST));
+        selectionPanel.add(reservationDatePicker, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 1, new Insets(0, 15, 0, 15)).getGBC());
+        selectionPanel.add(segmentLabel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 2, new Insets(5, 15, 0, 15)).setAnchor(GridBagConstraints.WEST));
+
+        segmentPanel = new JPanel();
+        segmentPanel.setBackground(Color.white);
+        segmentPanel.setLayout(new GridBagLayout());
+        segmentLoadingLabel = new JLabel();
+        segmentLoadingLabel.setIcon(new ImageIcon("resource/icons/loading-16px.gif"));
+        segmentPanel.add(segmentBox, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 0, new Insets(0, 0, 0, 0)).getGBC());
+        segmentPanel.add(segmentLoadingLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 0, new Insets(0, 5, 0, 0)).getGBC());
+        selectionPanel.add(segmentPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 3, new Insets(10, 15, 5, 15)).getGBC());
+
+
+        selectionPanel.add(lengthLabel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 4, new Insets(5, 15, 0, 15)).setAnchor(GridBagConstraints.WEST));
 
         lengthPanel = new JPanel();
         lengthPanel.setBackground(Color.white);
@@ -83,17 +99,22 @@ public class ReservationDialog extends JDialog implements ActionListener, Window
         lengthPanel.add(lengthSpinner, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 0, 0, new Insets(0, 0, 0, 0)).getGBC());
         lengthPanel.add(hourLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 1, 0, new Insets(0, 5, 0, 0)).getGBC());
 
-        selectionPanel.add(lengthPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 5, new Insets(0, 10, 5, 10)).getGBC());
+        selectionPanel.add(lengthPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 5, new Insets(0, 15, 5, 15)).getGBC());
+
+        reasonTextArea = new JTextArea();
+        reasonTextArea.setRows(4);
+        reasonPane = new JScrollPane(reasonTextArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
+        selectionPanel.add(reasonLabel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 6, new Insets(5, 15, 0, 15)).setAnchor(GridBagConstraints.WEST));
+        selectionPanel.add(reasonPane, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 7, new Insets(0, 15, 5, 15)).getGBC());
 
         add(selectionPanel, BorderLayout.CENTER);
 
         buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.white);
         okButton = new JButton("OK");
+        okButton.setEnabled(false);
         cancelButton = new JButton("Cancel");
-        okButton.addActionListener(this);
-        cancelButton.addActionListener(this);
-        addWindowListener(this);
         buttonPanel.add(okButton);
         buttonPanel.add(cancelButton);
 
@@ -101,56 +122,5 @@ public class ReservationDialog extends JDialog implements ActionListener, Window
         pack();
         setLocationRelativeTo(parent);
     }
-    private void disableGlassPane(){
-        MainContentView.glassPane.setVisible(false);
-        MainContentView.glassPane.setEnabled(false);
-    }
 
-    @Override
-    public void windowOpened(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowClosing(WindowEvent e) {
-        disableGlassPane();
-    }
-
-    @Override
-    public void windowClosed(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowIconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeiconified(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowActivated(WindowEvent e) {
-
-    }
-
-    @Override
-    public void windowDeactivated(WindowEvent e) {
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(okButton)) {
-            dispose();
-            disableGlassPane();
-
-        } else if (e.getSource().equals(cancelButton)) {
-            dispose();
-            disableGlassPane();
-
-        }
-    }
 }
