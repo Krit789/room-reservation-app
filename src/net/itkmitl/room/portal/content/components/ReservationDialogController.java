@@ -99,11 +99,11 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
                 virtualReservationEnd.setDate(currentTimeMilis.getDate());
 
 
-                if (currentTimeMilis.getDate() == r.getStartTime().getDate() && (currentTimeMilis.getTime() >= virtualReservationStart.getTime() && currentTimeMilis.getTime() <= virtualReservationEnd.getTime())) {
+                if (currentTimeMilis.getDate() == r.getStartTime().getDate() && (currentTimeMilis.getTime() >= virtualReservationStart.getTime() && currentTimeMilis.getTime() < virtualReservationEnd.getTime())) {
                     unavailable = true;
                 }
+//                System.out.println(String.format("%s: %s %s", currentTimeMilis,currentTimeMilis.getTime() >= virtualReservationStart.getTime(), currentTimeMilis.getTime() < virtualReservationEnd.getTime()));
             }
-//            System.out.println(String.format("%s, %s && %s && %s && %s", unavailable, currentTimeMilis.addMillis(3600L * 1000L).getHours() <= closeTime.getHours(), currentTimeMilis.addMillis(3600L * 1000L).getMinutes() <= closeTime.getMinutes(), currentTimeMilis.getHours() >= openTime.getHours(), currentTimeMilis.getMinutes() >= openTime.getMinutes()));
             if (!unavailable &&
                     (currentTimeMilis.addMillis(1800L * 1000L).getHours() < room.getCloseTime().getHours() ||
                             (currentTimeMilis.addMillis(1800L * 1000L).getHours() == room.getCloseTime().getHours() &&
@@ -115,7 +115,7 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
 
                 availableTimes.add(new ReservableEntity(new DateTime(currentTimeMilis.getTime()), new DateTime(currentTimeMilis.getTime() + 1800L * 1000L)));
             } else {
-                System.out.println("Unavailable Time " + currentTimeMilis);
+//                System.out.println("Unavailable Time " + currentTimeMilis);
             }
         }
         return availableTimes;
@@ -236,7 +236,9 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
                     Reservation myRsvp = new Reservation();
                     myRsvp.setReservationTime(new DateTime(System.currentTimeMillis()));
                     myRsvp.setStartTime(segment.begin);
-                    myRsvp.setEndTime(segment.end);
+
+                    DateTime endTime = new DateTime(segment.begin.getTime() + (1800L * 1000L * Double.valueOf(2 * ((Number) view.lengthSpinner.getValue()).doubleValue()).longValue()));
+                    myRsvp.setEndTime(endTime);
                     myRsvp.setUser(((User) AppStore.getAppStore().select("user")));
                     myRsvp.setRoom(myRoom);
                     myRsvp.setReason(view.reasonTextArea.getText());
