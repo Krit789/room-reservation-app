@@ -14,6 +14,7 @@ public class HistoryLeftButton extends JButton {
     }
 
     public HistoryLeftButton(String imagePath, String text) {
+
         textPanel = new HistoryLeftButtonText(imagePath, text) {
             @Override
             protected void paintComponent(Graphics g) {
@@ -26,6 +27,7 @@ public class HistoryLeftButton extends JButton {
         textPanel.setBounds(10, 10, 100, 50);
         add(textPanel);
     }
+
 
     public JPanel getTextPanel() {
         return textPanel;
