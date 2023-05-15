@@ -43,7 +43,7 @@ public class OOBEController implements ActionListener, DocumentListener {
 
     public OOBEController() {
         FewConfig config = new FewConfig(new File("config.yml"));
-        if (config.asString("first_run") == null) {
+        if (config.getValue("first_run") == null) {
             view = new OOBEView();
             view.nextButton.addActionListener(this);
             view.backButton.addActionListener(this);
