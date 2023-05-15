@@ -21,11 +21,11 @@ import javax.swing.border.EmptyBorder;
 public class ButtonGradient extends JButton {
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -4638661821951496102L;
+     *
+     */
+    private static final long serialVersionUID = -4638661821951496102L;
 
-	public float getSizeSpeed() {
+    public float getSizeSpeed() {
         return sizeSpeed;
     }
 

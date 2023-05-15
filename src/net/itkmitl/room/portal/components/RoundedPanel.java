@@ -49,9 +49,6 @@ public class RoundedPanel extends JPanel {
         this.color2 = color2;
     }
 
-
-
-
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D graphics2D = (Graphics2D) g;

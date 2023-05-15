@@ -12,9 +12,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Selector extends CardView {
-    /**
-     *
-     */
     private static final long serialVersionUID = -8564430568200760268L;
     public JPanel leftPanel, innerPanel, mainPanel, header, leftSelectorPanel, cardsOfBuildingsFloorPanel;
     public JLabel testLabel;//delete later
@@ -48,15 +45,14 @@ public class Selector extends CardView {
                 }
                 return null;
             }
+
             @Override
-            protected void done(){
+            protected void done() {
                 System.out.println("Done with room data!");
                 populateList();
             }
         };
         worker.execute();
-
-
 
         mainPanel.add(header, BorderLayout.NORTH);
         mainPanel.add(innerPanel, BorderLayout.CENTER);
@@ -66,7 +62,7 @@ public class Selector extends CardView {
         leftPanel.add(leftSelectorPanel, BorderLayout.CENTER);
     }
 
-    public void populateList(){
+    public void populateList() {
         SwingWorker worker = new SwingWorker() {
             @Override
             protected Object doInBackground() throws Exception {
@@ -96,7 +92,7 @@ public class Selector extends CardView {
                             System.out.println(myRoom.getBuilding() + " " + myRoom.getFloor() + " " + myRoom.getName());
                             MainRoomSelectionBox roomBox = new MainRoomSelectionBox(myRoom);
                             roomBoxHolder.add(roomBox);
-                            floorBox.roomPanel.add(roomBox, new GBCBuilder(GridBagConstraints.HORIZONTAL,1 ,1, roomCount, new Insets(10, 15, 0, 15)).getGBC());
+                            floorBox.roomPanel.add(roomBox, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 1, roomCount, new Insets(10, 15, 0, 15)).getGBC());
                             roomCount++;
                         }
 
@@ -111,8 +107,9 @@ public class Selector extends CardView {
                 innerPanel.add(cardsOfBuildingsFloorPanel, BorderLayout.CENTER);
                 return null;
             }
+
             @Override
-            protected void done(){
+            protected void done() {
                 doneRoomBox = true;
             }
         };
@@ -128,7 +125,8 @@ public class Selector extends CardView {
     public MainPanel getMainPanel() {
         return (MainPanel) mainPanel;
     }
-    public JPanel getInnerPanel(){
+
+    public JPanel getInnerPanel() {
         return this.innerPanel;
     }
 
