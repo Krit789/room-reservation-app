@@ -136,7 +136,7 @@ public class ReservationRepository extends Repository<Reservation> {
                 .insert("room_id", reservation.getRoom().getId())
                 .insert("start_time", reservation.getStartTime().getTime())
                 .insert("end_time", reservation.getEndTime().getTime())
-                .insert("reservation_time", System.currentTimeMillis() / 1000L)
+                .insert("reservation_time", System.currentTimeMillis())
                 .insert("reason", reservation.getReason())
                 .insert("is_cancelled", reservation.isCancelled() ? 1 : 0)
                 .table("reservation");
@@ -150,7 +150,7 @@ public class ReservationRepository extends Repository<Reservation> {
         FewUpdateMySQL update = new FewUpdateMySQL();
 
         if (reservation.getId() == 0) {
-            throw new RuntimeException("Please provided an id to update user");
+            throw new RuntimeException("Please provided a id to update reservation record");
         }
 
         update.where("id", reservation.getId())
@@ -159,7 +159,7 @@ public class ReservationRepository extends Repository<Reservation> {
                 .set("reason", reservation.getReason())
                 .set("start_time", reservation.getStartTime().getTime())
                 .set("end_time", reservation.getEndTime().getTime())
-                .set("reservation_time", System.currentTimeMillis() / 1000L)
+                .set("reservation_time", System.currentTimeMillis())
                 .set("is_cancelled", reservation.isCancelled() ? 1 : 0)
                 .table("reservation");
 

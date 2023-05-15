@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.Comparator;
 import java.util.Date;
 
 public class DateTime {
@@ -66,6 +67,12 @@ public class DateTime {
 	 */
 	public long getTime() {
 		return this.getDateTime().getTime();
+	}
+
+	public DateTime addMillis(long millis) {
+		DateTime myTime = new DateTime(this.getTime());
+		myTime.setTime(myTime.getTime() + (1800L * 100L));
+		return myTime;
 	}
 
 	public void setTime(long time) {

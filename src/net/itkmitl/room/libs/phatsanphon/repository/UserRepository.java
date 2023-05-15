@@ -125,7 +125,7 @@ public class UserRepository extends Repository<User> {
                 .insert("email", user.getEmail())
                 .insert("password_hash", user.getPasswordHash())
                 .insert("role", user.getRole().getLevel())
-                .insert("created_on", System.currentTimeMillis() / 1000L)
+                .insert("created_on", System.currentTimeMillis())
                 .table("user");
 
         this.getQuery().query(insert);

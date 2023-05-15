@@ -21,6 +21,7 @@ public class MainRoomSelectionBox extends RoundedPanel implements ActionListener
     private static final long serialVersionUID = 3939071942263200950L;
     public JButton name;
     private Room boxRoom;
+    public static boolean dialogOpen;
     //key is floor, Value is arraylist of room in floor
 //    private J
 
@@ -44,29 +45,52 @@ public class MainRoomSelectionBox extends RoundedPanel implements ActionListener
     }
 
     public void openReservationDialog(){
-        ReservationDialogController rsvpd = new ReservationDialogController(null, boxRoom);
-        MainContentView.glassPane.setSpinnerVisibility(false);
-        MainContentView.glassPane.setText("");
-        MainContentView.glassPane.setVisible(true);
-        MainContentView.glassPane.setEnabled(true);
-        rsvpd.view.setVisible(true);
+        SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                ReservationDialogController rsvpd = new ReservationDialogController(null, boxRoom);
+                MainContentView.glassPane.setSpinnerVisibility(false);
+                MainContentView.glassPane.setText("");
+                MainContentView.glassPane.setVisible(true);
+                MainContentView.glassPane.setEnabled(true);
+                rsvpd.view.setVisible(true);
+                return null;
+            }
+            @Override
+            protected void done(){
+                dialogOpen = false;
+            }
+
+        };
+        worker.execute();
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        openReservationDialog();
+        if (!dialogOpen) {
+            openReservationDialog();
+            dialogOpen = true;
+        }
     }
 
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        openReservationDialog();
+        if (!dialogOpen) {
+            openReservationDialog();
+            dialogOpen = true;
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         setBackgroundColor(new Color(140, 187, 255));
         repaint();
+        if (!dialogOpen) {
+            openReservationDialog();
+            dialogOpen = true;
+        }
     }
 
     @Override

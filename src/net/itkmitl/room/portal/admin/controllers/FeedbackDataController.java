@@ -186,7 +186,6 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
 
             @Override
             protected String doInBackground() {
-                String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
                 try {
@@ -203,8 +202,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                     }
                     data = new Object[]{true, null};
                 } catch (Exception ex) {
-                    errorMessage = ex.getMessage();
-                    data = new Object[]{false, errorMessage};
+                    data = new Object[]{false, ex.getMessage()};
                 }
                 return "";
             }

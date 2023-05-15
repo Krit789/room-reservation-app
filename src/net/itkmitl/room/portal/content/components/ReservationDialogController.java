@@ -2,6 +2,7 @@ package net.itkmitl.room.portal.content.components;
 
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
@@ -11,15 +12,14 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.temporal.TemporalAdjuster;
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class ReservationDialogController {
     public ReservationDialog view;
     private Room myRoom;
     private ArrayList<Object[]> allReservedTime = new ArrayList<>();
-    private ArrayList<Object[]> availableTime = new ArrayList<>();
+    private ArrayList<ReservableEntity> availableTime;
     public ReservationDialogController(JFrame parent, Room room){
         myRoom = room;
         view = new ReservationDialog(parent, room);
@@ -33,13 +33,15 @@ public class ReservationDialogController {
                 FewQuery db = LaewTaeDB.getDB();
                 ReservationRepository rsvprp = new ReservationRepository(db);
                 Long currentTime = System.currentTimeMillis();
-                ArrayList<Reservation> resList = rsvprp.getReservationsByRoomIdAndTimeRange(myRoom.getId(), currentTime / 1000L, (currentTime + TimeUnit.DAYS.toMillis(7) / 1000L));
+                ArrayList<Reservation> resList = rsvprp.getReservationsByRoomIdAndTimeRange(myRoom.getId(), currentTime, (currentTime + TimeUnit.DAYS.toMillis(7)));
                 for (Reservation r: resList){
                     allReservedTime.add(new Object[]{r.getStartTime().getTime(), r.getEndTime().getTime()});
+                    System.out.println(r.getStartTime() + " " + r.getEndTime());
                 }
-                availableTime = getAvailableTimes(allReservedTime, myRoom.getOpenTime().getTime(), myRoom.getCloseTime().getTime());
-                for (Object[] o: availableTime){
-                    view.segmentBox.addItem(new ReservableEntity(o));
+
+                availableTime = getAvailableTimes(resList, myRoom.getOpenTime(), myRoom.getCloseTime(), 7);
+                for (ReservableEntity re: availableTime){
+                    view.segmentBox.addItem(re);
                 }
                 return null;
             }
@@ -51,43 +53,44 @@ public class ReservationDialogController {
         worker.execute();
     }
 
-    public static ArrayList<Object[]> getAvailableTimes(ArrayList<Object[]> existingReservations, long roomOpenTime, long roomCloseTime) {
-        ArrayList<Object[]> availableTimes = new ArrayList<Object[]>();
+    public static ArrayList<ReservableEntity> getAvailableTimes(ArrayList<Reservation> resList, DateTime openTime, DateTime closeTime, int dayLimit) {
+        ArrayList<ReservableEntity> availableTimes = new ArrayList<>();
+        DateTime currentTime = new DateTime(System.currentTimeMillis());
+        currentTime.setHours(openTime.getHours());
+        currentTime.setMinutes(openTime.getMinutes());
 
-        // If there are no existing reservations, the entire room open time is available
-        if (existingReservations.size() == 0) {
-            availableTimes.add(new Object[]{roomOpenTime, roomCloseTime});
-            return availableTimes;
+        DateTime limitTime = new DateTime(System.currentTimeMillis() + (86400L * dayLimit) * 1000L);
+        limitTime.setHours(closeTime.getHours());
+        limitTime.setMinutes(closeTime.getMinutes());
+
+        HashMap<Long, Reservation> resTimeMap = new HashMap<>();
+        for (Reservation r: resList){
+            resTimeMap.put(r.getStartTime().getTime(), r);
         }
 
-        // Sort the existing reservations by start time
-        existingReservations.sort(new Comparator<Object[]>() {
-            public int compare(Object[] reservation1, Object[] reservation2) {
-                return Long.compare((long) reservation1[0], (long) reservation2[0]);
+        // Iterate over each day between the current time and the limit time
+        for (DateTime currentTimeMilis = currentTime; currentTimeMilis.getTime() <= limitTime.getTime(); currentTimeMilis.setTime(currentTimeMilis.getTime() + (3600L * 1000L))) {
+//            if (currentTimeMilis.getHours() >= closeTime.getHours() && currentTimeMilis.getMinutes() >= closeTime.getMinutes()){
+//                currentTimeMilis.setTime(currentTimeMilis.getTime() + (86400L * 1000L));
+//                System.out.println(currentTime.getDate());
+//            }
+
+            boolean unavailable = false;
+            for (Reservation r: resTimeMap.values()) {
+                    if (currentTimeMilis.getDate() == r.getStartTime().getDate() &&
+                        currentTimeMilis.getHours() == r.getStartTime().getHours()
+                    ) {
+                        unavailable = true;
+                        currentTimeMilis.setTime(currentTimeMilis.getTime() + (r.getEndTime().getTime() - r.getStartTime().getTime()));
+                    }
+                }
+            System.out.println(String.format("%s, %s && %s && %s && %s", unavailable, currentTimeMilis.addMillis(3600L * 1000L).getHours() <= closeTime.getHours(), currentTimeMilis.addMillis(3600L * 1000L).getMinutes() <= closeTime.getMinutes(), currentTimeMilis.getHours() >= openTime.getHours(), currentTimeMilis.getMinutes() >= openTime.getMinutes()));
+            if (!unavailable && currentTimeMilis.addMillis(3600L * 1000L).getHours() <= closeTime.getHours() && currentTimeMilis.getHours() >= openTime.getHours()) {
+                availableTimes.add(new ReservableEntity(new DateTime(currentTimeMilis.getTime()), new DateTime(currentTimeMilis.getTime() + 3600L * 1000L)));
             }
-        });
-
-        // Check the gap between the room open time and the first reservation
-        Object[] firstReservation = existingReservations.get(0);
-        if (roomOpenTime < (long) firstReservation[0]) {
-            availableTimes.add(new Object[]{roomOpenTime, (long) firstReservation[0]});
         }
-
-        // Check the gaps between the existing reservations
-        for (int i = 0; i < existingReservations.size() - 1; i++) {
-            Object[] currentReservation = existingReservations.get(i);
-            Object[] nextReservation = existingReservations.get(i+1);
-            if ((long) nextReservation[0] > (long) currentReservation[1]) {
-                availableTimes.add(new Object[]{(long) currentReservation[1], (long) nextReservation[0]});
-            }
-        }
-
-        // Check the gap between the last reservation and the room close time
-        Object[] lastReservation = existingReservations.get(existingReservations.size() - 1);
-        if ((long) lastReservation[1] < roomCloseTime) {
-            availableTimes.add(new Object[]{(long) lastReservation[1], roomCloseTime});
-        }
-
         return availableTimes;
     }
+
+
 }

@@ -6,13 +6,12 @@ public class ReservableEntity {
     public DateTime begin, end;
     private Object[] mytime;
 
-    public ReservableEntity(Object[] mytime){
-        this.mytime = mytime;
-        begin = new DateTime((long) mytime[0]);
-        end = new DateTime((long) mytime[1]);
+    public ReservableEntity(DateTime begin, DateTime end){
+        this.begin = begin;
+        this.end = end;
     }
     @Override
     public String toString(){
-        return begin + " " + end;
+        return String.format("%d:%02d - %d:%02d %d/%d/%d", begin.getHours(), begin.getMinutes(), end.getHours(), end.getMinutes(), begin.getDate(), begin.getMonth(), begin.getYear());
     }
 }

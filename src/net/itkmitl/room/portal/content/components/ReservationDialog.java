@@ -4,6 +4,7 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.components.GBCBuilder;
+import net.itkmitl.room.portal.components.MainRoomSelectionBox;
 import net.itkmitl.room.portal.content.MainContentView;
 
 import javax.swing.*;
@@ -22,7 +23,7 @@ public class ReservationDialog extends JDialog implements ActionListener, Window
     private JLabel pageTitle, pageSubtitle, dateLabel, segmentLabel, lengthLabel, hourLabel;
     private JButton okButton, cancelButton;
     private DatePicker reservationDatePicker;
-    public JComboBox segmentBox;
+    public JComboBox<ReservableEntity> segmentBox;
     public JSpinner lengthSpinner;
 
     private final Font regular = new Font("Sansserif", Font.PLAIN, 16);
