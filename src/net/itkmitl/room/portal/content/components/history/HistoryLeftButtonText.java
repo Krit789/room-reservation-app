@@ -1,12 +1,13 @@
 package net.itkmitl.room.portal.content.components.history;
 
 import net.itkmitl.room.portal.components.RoundedPanel;
+import net.itkmitl.room.portal.components.TransparentPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-class HistoryLeftButtonText extends RoundedPanel {
+class HistoryLeftButtonText extends TransparentPanel {
     private JLabel icon, text;
     private String imagePath;
 
@@ -15,9 +16,6 @@ class HistoryLeftButtonText extends RoundedPanel {
     }
 
     public HistoryLeftButtonText(String imagePath, String textIn) {
-        super(10, 10);
-
-        setLayout(new BorderLayout());
         this.imagePath = imagePath;
         icon = new JLabel(new ImageIcon(this.imagePath));
         text = new JLabel(textIn);
