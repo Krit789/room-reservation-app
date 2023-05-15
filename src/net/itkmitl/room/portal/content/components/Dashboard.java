@@ -71,4 +71,7 @@ public class Dashboard extends CardView {
     public ReservationPanel getReservationPanel() {
         return (ReservationPanel) this.reservationPanel;
     }
+    public WelcomePanel getWelcomePanel(){
+        return (WelcomePanel) this.welcomePanel;
+    }
 }
