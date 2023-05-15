@@ -79,8 +79,8 @@ public class FewSimpleValue {
         }
     }
 
-    public long asLong() {
-        return asFloat(Float.valueOf("0L"));
+    public Long asLong() {
+        return asLong((long) 0);
     }
 
     public Long asLong(Long defaultValue) {
