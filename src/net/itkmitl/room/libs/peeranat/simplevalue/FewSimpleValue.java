@@ -79,6 +79,19 @@ public class FewSimpleValue {
         }
     }
 
+    public long asLong() {
+        return asFloat(Float.valueOf("0L"));
+    }
+
+    public Long asLong(Long defaultValue) {
+        try {
+            Long value = (Long) getRaw();
+            return value != null ? value : defaultValue;
+        } catch (Exception e) {
+            throw new RuntimeException("It's not a String, the correct data type is " + val.getClass().getName());
+        }
+    }
+
     @SuppressWarnings("unchecked")
     public <T> List<T> asList(Class<T> clazz) {
         try {
