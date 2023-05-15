@@ -14,15 +14,19 @@ import java.util.List;
 
 public class FewRoom {
 
-    public static Collection<Room> getRoomByState(EnumRoomState state) throws Exception {
-        RoomRepository roomRepository = new RoomRepository(LaewTaeDB.getDB());
-        List<Room> newRoom = new ArrayList<>();
-        for (Room room : roomRepository.getRooms()) {
-            if (room.getState() == state) {
-                newRoom.add(room);
+    public static Collection<Room> getRoomByState(EnumRoomState state) {
+        try {
+            RoomRepository roomRepository = new RoomRepository(LaewTaeDB.getDB());
+            List<Room> newRoom = new ArrayList<>();
+            for (Room room : roomRepository.getRooms()) {
+                if (room.getState() == state) {
+                    newRoom.add(room);
+                }
             }
+            return Collections.unmodifiableList(newRoom);
+        } catch (Exception e) {
+            return null;
         }
-        return Collections.unmodifiableList(newRoom);
     }
-
 }
+

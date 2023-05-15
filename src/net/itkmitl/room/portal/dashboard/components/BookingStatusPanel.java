@@ -3,11 +3,15 @@ package net.itkmitl.room.portal.dashboard.components;
 
 import java.awt.*;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.GregorianCalendar;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+import net.itkmitl.room.enums.EnumRoomState;
+import net.itkmitl.room.libs.peeranat.util.FewRoom;
+import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
 import org.jfree.chart.ChartFactory;
@@ -41,9 +45,18 @@ public class BookingStatusPanel extends RoundedPanel {
         this.add(titleLabel, new GBCBuilder(GridBagConstraints.NONE, 0, 1, 0, 0).setAnchor(GridBagConstraints.NORTH));
 
 //        Pie chart
+
+        Collection<Room> roomAvailable = FewRoom.getRoomByState(EnumRoomState.AVAILABLE);
+        Collection<Room> roomUnavailable = FewRoom.getRoomByState(EnumRoomState.UNAVAILABLE);
+        Collection<Room> roomMaintenance = FewRoom.getRoomByState(EnumRoomState.MAINTENANCE);
+
+        int allOfRoom = roomAvailable.size() + roomUnavailable.size() + roomMaintenance.size();
+        int roomAvailableNum = (roomAvailable.size() * 100) * 100;
+        int roomUnavailableNum = (roomUnavailable.size() + roomMaintenance.size() * 100) * 100;
+
         DefaultPieDataset dataset = new DefaultPieDataset();
-        dataset.setValue("Available Room", 70);
-        dataset.setValue("Full", 30);
+        dataset.setValue("Available Room", roomAvailableNum);
+        dataset.setValue("Full", roomUnavailableNum);
 
         JFreeChart chart;
         chart = ChartFactory.createPieChart(
