@@ -48,6 +48,7 @@ public class MainContentController extends Controller implements ActionListener 
         buttonBox[0].addActionListener(this);
         buttonBox[1].addActionListener(this);
         this.getView().getSelector().getSelectorPanel().backButton.addActionListener(this);
+        this.getView().getDashboard().getWelcomePanel().bookingButton.addActionListener(this);
 
         SwingWorker<?, ?> worker = new SwingWorker() {
             @Override

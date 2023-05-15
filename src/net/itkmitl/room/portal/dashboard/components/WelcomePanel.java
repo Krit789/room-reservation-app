@@ -15,7 +15,7 @@ public class WelcomePanel extends RoundedPanel {
     private JPanel p1, p2, p3;
     private JPanel leftPanel, rightPanel, txt, iconPanel;
     private BoxIcon welcomeIcon;
-    private ButtonGradient bookingButton;
+    public ButtonGradient bookingButton;
 
 
     private static final long serialVersionUID = -4015833019658837000L;
@@ -71,6 +71,7 @@ public class WelcomePanel extends RoundedPanel {
         bookingButton.setColor2(new Color(45, 125, 216));
         bookingButton.setText("Book Now!");
         bookingButton.setFont(new Font("Cousine", Font.BOLD, 18));
+        bookingButton.setActionCommand("Booking");
 //        bookingButton.setPreferredSize(new Dimension(50, 50));
 
         this.setLayout(new GridBagLayout());
