@@ -12,7 +12,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.time.LocalDate;
 
-public class ReservationDialog extends JDialog  {
+public class ReservationDialog extends JDialog {
     private JPanel titlePanel, selectionPanel, buttonPanel, lengthPanel, segmentPanel;
     private JLabel pageTitle, pageSubtitle, dateLabel, segmentLabel, lengthLabel, hourLabel, reasonLabel;
     public JLabel segmentLoadingLabel;
@@ -20,6 +20,7 @@ public class ReservationDialog extends JDialog  {
     public DatePicker reservationDatePicker;
     public JComboBox<ReservableEntity> segmentBox;
     public JSpinner lengthSpinner;
+    public SpinnerNumberModel snm;
     private JScrollPane reasonPane;
     public JTextArea reasonTextArea;
 
@@ -73,7 +74,10 @@ public class ReservationDialog extends JDialog  {
         segmentBox = new JComboBox<>();
         segmentBox.setBorder(border);
         lengthSpinner = new JSpinner();
+        snm = new SpinnerNumberModel(1, 1, 3, 0.5);
+        lengthSpinner.setModel(snm);
         lengthSpinner.setBorder(border);
+        lengthSpinner.setEditor(new JSpinner.DefaultEditor(lengthSpinner));
         selectionPanel = new JPanel();
         selectionPanel.setBackground(Color.white);
         selectionPanel.setLayout(new GridBagLayout());
@@ -120,6 +124,7 @@ public class ReservationDialog extends JDialog  {
 
         add(buttonPanel, BorderLayout.SOUTH);
         pack();
+        setResizable(false);
         setLocationRelativeTo(parent);
     }
 

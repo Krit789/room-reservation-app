@@ -49,7 +49,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
                 view.pageTitle.setText("User Records Viewer");
                 view.dataPanel.add(view.resetPasswordButton, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 4, 6, new Insets(10, 0, 10, 10)).getGBC());
                 view.getFrame().pack();
-                view.saveButton.addActionListener(this);
+                view.saveButton.setEnabled(false);
                 view.cancelButton.addActionListener(this);
                 databaseLoader(userID);
                 break;
@@ -210,6 +210,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
                     view.resetPasswordButton.setEnabled(false);
                     break;
             }
+            view.getFrame().pack();
         } else {
             view.getFrame().dispose();
             JOptionPane.showMessageDialog(BaseWindow.baseFrame, data[1].toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);

@@ -4,7 +4,6 @@ import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 
 public class ReservableEntity {
     public DateTime begin, end;
-    private Object[] mytime;
 
     public ReservableEntity(DateTime begin, DateTime end){
         this.begin = begin;
@@ -12,6 +11,6 @@ public class ReservableEntity {
     }
     @Override
     public String toString(){
-        return String.format("%d:%02d - %d:%02d %d/%d/%d", begin.getHours(), begin.getMinutes(), end.getHours(), end.getMinutes(), begin.getDate(), begin.getMonth(), begin.getYear());
+        return String.format("%d:%02d - %d:%02d", begin.getHours(), begin.getMinutes(), end.getHours(), end.getMinutes());
     }
 }

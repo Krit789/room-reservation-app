@@ -56,9 +56,9 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                     view.getFrame().setTitle("View Reservation");
                     view.pageTitle.setText("Reservation Records Viewer");
                     view.getFrame().pack();
-                    view.saveButton.addActionListener(this);
                     view.cancelButton.addActionListener(this);
                     view.startDatePicker.setEnabled(false);
+                    view.saveButton.setEnabled(false);
                     view.endDatePicker.setEnabled(false);
                     databaseLoader(reservationID);
                     break;
@@ -302,6 +302,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                     view.cancelledCheckbox.setEnabled(false);
                     break;
             }
+            view.getFrame().pack();
         } else {
             view.getFrame().dispose();
             JOptionPane.showMessageDialog(BaseWindow.baseFrame, data[1].toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);

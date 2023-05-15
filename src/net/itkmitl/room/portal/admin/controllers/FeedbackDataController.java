@@ -47,7 +47,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                     view.getFrame().setTitle("View Feedback");
                     view.pageTitle.setText("Feedback Records Viewer");
                     view.getFrame().pack();
-                    view.saveButton.addActionListener(this);
+                    view.saveButton.setEnabled(false);
                     view.cancelButton.addActionListener(this);
                     databaseLoader(feedbackID);
                     break;
@@ -254,6 +254,8 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                     view.ratingSpinner.setEnabled(false);
                     break;
             }
+            view.getFrame().pack();
+
         } else {
             view.getFrame().dispose();
             JOptionPane.showMessageDialog(BaseWindow.baseFrame, data[1].toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);

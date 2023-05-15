@@ -13,29 +13,33 @@ import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.content.MainContentView;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import javax.swing.border.Border;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class ReservationDialogController implements ActionListener, DateChangeListener, WindowListener {
+public class ReservationDialogController implements ActionListener, DateChangeListener, WindowListener, ChangeListener, ItemListener {
     public ReservationDialog view;
     private Room myRoom;
-    private ArrayList<Object[]> allReservedTime = new ArrayList<>();
+    private ArrayList<Reservation> resList;
     private ArrayList<ReservableEntity> availableTime;
 
     public ReservationDialogController(JFrame parent, Room room) {
         myRoom = room;
         view = new ReservationDialog(parent, room);
+        dataFetch();
         view.segmentBox.setEnabled(false);
         view.okButton.addActionListener(this);
         view.cancelButton.addActionListener(this);
         view.addWindowListener(this);
-        dataFetch();
         view.reservationDatePicker.addDateChangeListener(this);
+        view.lengthSpinner.addChangeListener(this);
+        view.segmentBox.addItemListener(this);
     }
 
     public void dataFetch() {
@@ -46,12 +50,9 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
                     FewQuery db = LaewTaeDB.getDB();
                     ReservationRepository rsvprp = new ReservationRepository(db);
                     Long currentTime = System.currentTimeMillis();
-                    ArrayList<Reservation> resList = rsvprp.getReservationsByRoomIdAndTimeRange(myRoom.getId(), currentTime, (currentTime + TimeUnit.DAYS.toMillis(7)));
-                    for (Reservation r : resList) {
-                        allReservedTime.add(new Object[]{r.getStartTime().getTime(), r.getEndTime().getTime()});
-                        System.out.println(r.getStartTime() + " " + r.getEndTime());
-                    }
-                    availableTime = getAvailableTimes(resList, myRoom.getOpenTime(), myRoom.getCloseTime(), 7);
+                    resList = rsvprp.getReservationsByRoomIdAndTimeRange(myRoom.getId(), currentTime, (currentTime + (86400L * 1000 * 8)));
+                    System.out.println(resList.size());
+                    availableTime = getAvailableTimes(resList, myRoom, 7);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -68,39 +69,95 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
         worker.execute();
     }
 
-    public static ArrayList<ReservableEntity> getAvailableTimes(ArrayList<Reservation> resList, DateTime openTime, DateTime closeTime, int dayLimit) {
+    public static ArrayList<ReservableEntity> getAvailableTimes(ArrayList<Reservation> resList, Room room, int dayLimit) {
         ArrayList<ReservableEntity> availableTimes = new ArrayList<>();
         DateTime currentTime = new DateTime(System.currentTimeMillis());
         currentTime.setSeconds(0);
-//        currentTime.setHours(openTime.getHours());
-        currentTime.setMinutes(openTime.getMinutes());
+        currentTime.setMinutes(room.getOpenTime().getMinutes());
 
         DateTime limitTime = new DateTime(System.currentTimeMillis() + (86400L * dayLimit) * 1000L);
-        limitTime.setHours(closeTime.getHours());
-        limitTime.setMinutes(closeTime.getMinutes());
+        limitTime.setHours(room.getCloseTime().getHours());
+        limitTime.setMinutes(room.getCloseTime().getMinutes());
 
         HashMap<Long, Reservation> resTimeMap = new HashMap<>();
         for (Reservation r : resList) {
-            resTimeMap.put(r.getStartTime().getTime(), r);
+            if (!r.isCancelled()) {
+                resTimeMap.put(r.getStartTime().getTime(), r);
+            }
         }
 
-        for (DateTime currentTimeMilis = currentTime; currentTimeMilis.getTime() <= limitTime.getTime(); currentTimeMilis.setTime(currentTimeMilis.getTime() + (3600L * 1000L))) {
+        for (DateTime currentTimeMilis = currentTime; currentTimeMilis.getTime() <= limitTime.getTime(); currentTimeMilis.setTime(currentTimeMilis.getTime() + (1800L * 1000L))) {
             boolean unavailable = false;
             for (Reservation r : resTimeMap.values()) {
-                if (currentTimeMilis.getDate() == r.getStartTime().getDate() &&
-                        currentTimeMilis.getHours() == r.getStartTime().getHours()
-                ) {
+                DateTime virtualReservationStart = r.getStartTime();
+                virtualReservationStart.setYear(currentTimeMilis.getYear());
+                virtualReservationStart.setMonth(currentTimeMilis.getMonth());
+                virtualReservationStart.setDate(currentTimeMilis.getDate());
+                DateTime virtualReservationEnd = r.getEndTime();
+                virtualReservationEnd.setYear(currentTimeMilis.getYear());
+                virtualReservationEnd.setMonth(currentTimeMilis.getMonth());
+                virtualReservationEnd.setDate(currentTimeMilis.getDate());
+
+
+                if (currentTimeMilis.getDate() == r.getStartTime().getDate() && (currentTimeMilis.getTime() >= virtualReservationStart.getTime() && currentTimeMilis.getTime() <= virtualReservationEnd.getTime())) {
                     unavailable = true;
-                    currentTimeMilis.setTime(currentTimeMilis.getTime() + (r.getEndTime().getTime() - r.getStartTime().getTime()));
                 }
             }
 //            System.out.println(String.format("%s, %s && %s && %s && %s", unavailable, currentTimeMilis.addMillis(3600L * 1000L).getHours() <= closeTime.getHours(), currentTimeMilis.addMillis(3600L * 1000L).getMinutes() <= closeTime.getMinutes(), currentTimeMilis.getHours() >= openTime.getHours(), currentTimeMilis.getMinutes() >= openTime.getMinutes()));
-            if (!unavailable && currentTimeMilis.addMillis(3600L * 1000L).getHours() <= closeTime.getHours() && currentTimeMilis.getHours() >= openTime.getHours()) {
-                availableTimes.add(new ReservableEntity(new DateTime(currentTimeMilis.getTime()), new DateTime(currentTimeMilis.getTime() + 3600L * 1000L)));
+            if (!unavailable &&
+                    (currentTimeMilis.addMillis(1800L * 1000L).getHours() < room.getCloseTime().getHours() ||
+                            (currentTimeMilis.addMillis(1800L * 1000L).getHours() == room.getCloseTime().getHours() &&
+                                    currentTimeMilis.addMillis(1800L * 1000L).getMinutes() <= room.getCloseTime().getMinutes()))
+
+                    && (currentTimeMilis.getHours() > room.getOpenTime().getHours() ||
+                            (currentTimeMilis.getHours() == room.getOpenTime().getHours() &&
+                                    currentTimeMilis.getMinutes() >= room.getOpenTime().getMinutes()))) {
+
+                availableTimes.add(new ReservableEntity(new DateTime(currentTimeMilis.getTime()), new DateTime(currentTimeMilis.getTime() + 1800L * 1000L)));
+            } else {
+                System.out.println("Unavailable Time " + currentTimeMilis);
             }
         }
         return availableTimes;
     }
+
+
+    public boolean checkAvailableTime(ArrayList<Reservation> resList, DateTime timeToCheck, double hourAhead, Room room) {
+
+        HashMap<Long, Reservation> resTimeMap = new HashMap<>();
+        for (Reservation r : resList) {
+            if (!r.isCancelled()) {
+                resTimeMap.put(r.getStartTime().getTime(), r);
+            }
+        }
+        boolean unavailable = false;
+        for (Reservation r : resTimeMap.values()) {
+            DateTime ttc = new DateTime(timeToCheck.getTime());
+            DateTime virtualReservationStart = r.getStartTime();
+            virtualReservationStart.setYear(timeToCheck.getYear());
+            virtualReservationStart.setMonth(timeToCheck.getMonth());
+            virtualReservationStart.setDate(timeToCheck.getDate());
+            DateTime virtualReservationEnd = r.getEndTime();
+            virtualReservationEnd.setYear(timeToCheck.getYear());
+            virtualReservationEnd.setMonth(timeToCheck.getMonth());
+            virtualReservationEnd.setDate(timeToCheck.getDate());
+
+            for (int i = 0; i < (int) (hourAhead * 2); i++) {
+                if (ttc.getDate() == virtualReservationStart.getDate() && ttc.getTime() >= virtualReservationStart.getTime() && ttc.getTime() <= virtualReservationEnd.getTime()) {
+                    unavailable = true;
+                }
+                long addedTime = 1800L * 1000;
+                ttc.setTime(ttc.getTime() + addedTime);
+//                System.out.println("Checked: " + ttc + " " + addedTime);
+            }
+
+        }
+        if (timeToCheck.getHours() < room.getOpenTime().getHours() || timeToCheck.getHours() > room.getCloseTime().getHours() || (timeToCheck.getHours() == room.getCloseTime().getHours() && timeToCheck.getMinutes() > room.getCloseTime().getMinutes())) {
+            unavailable = true;
+        }
+        return unavailable;
+    }
+
 
     private void updateReservationSegment() {
         view.okButton.setEnabled(false);
@@ -121,6 +178,7 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
             view.segmentLoadingLabel.setToolTipText("Fetch Successful");
             view.okButton.setEnabled(true);
         }
+        validateTime();
     }
 
     @Override
@@ -171,7 +229,7 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
     public void makeReservation(ReservableEntity segment) {
         SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
             @Override
-            protected Object doInBackground() throws Exception {
+            protected Object doInBackground() {
                 try {
                     FewQuery db = LaewTaeDB.getDB();
                     ReservationRepository rsvprp = new ReservationRepository(db);
@@ -209,6 +267,28 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
         } else if (e.getSource().equals(view.cancelButton)) {
             view.dispose();
             disableGlassPane();
+        }
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        validateTime();
+    }
+
+    private void validateTime() {
+        DateTime myTime = ((ReservableEntity) Objects.requireNonNull(view.segmentBox.getSelectedItem())).begin;
+        if (checkAvailableTime(resList, new DateTime(myTime.getTime()), ((Number) view.lengthSpinner.getValue()).doubleValue(), myRoom)) {
+            view.okButton.setEnabled(false);
+            view.lengthSpinner.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(255, 50, 100)));
+        } else {
+            view.okButton.setEnabled(true);
+            view.lengthSpinner.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(44, 84, 144)));
+        }
+    }
+
+    public void itemStateChanged(ItemEvent event) {
+        if (event.getStateChange() == ItemEvent.SELECTED) {
+            validateTime();
         }
     }
 }

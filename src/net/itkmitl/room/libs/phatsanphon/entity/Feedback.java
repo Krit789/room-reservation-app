@@ -26,7 +26,7 @@ public class Feedback extends Entity {
         this.setUser(query.getValue("user_id").asInt());
         this.setRoom(query.getValue("room_id").asInt());
         this.setComment(query.getValue("comment").asString());
-        this.setRating(query.getValue("rating").asDouble());
+        this.setRating(query.getValue("rating").asFloat());
         this.setCreatedOn(query.getValue("created_on").asLong());
     }
 

@@ -87,6 +87,7 @@ public class ReservationRepository extends Repository<Reservation> {
     }
 
     public ArrayList<Reservation> getReservationsByRoomIdAndTimeRange(int roomId, long beginTime, long endTime) throws Exception {
+        System.out.println(String.format("SELECT * FROM `reservation` WHERE `room_id` = %d AND `start_time` BETWEEN %s AND %s AND `end_time` BETWEEN %s AND %s;", roomId, beginTime, endTime, beginTime, endTime));
         return this.maps(this.getQuery().unsafeQuery(String.format("SELECT * FROM `reservation` WHERE `room_id` = %d AND `start_time` BETWEEN %s AND %s AND `end_time` BETWEEN %s AND %s;", roomId, beginTime, endTime, beginTime, endTime)));
     }
 
