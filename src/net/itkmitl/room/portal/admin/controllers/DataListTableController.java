@@ -1,25 +1,19 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
+import net.itkmitl.room.portal.admin.BaseWindow;
+import net.itkmitl.room.portal.admin.components.DatabaseLoader;
+import net.itkmitl.room.portal.admin.models.DataListTableModel;
+import net.itkmitl.room.portal.admin.views.*;
 
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import net.itkmitl.room.portal.admin.BaseWindow;
-import net.itkmitl.room.portal.admin.components.DatabaseLoader;
-import net.itkmitl.room.portal.admin.models.DataListTableModel;
-import net.itkmitl.room.portal.admin.views.DataListTableView;
-import net.itkmitl.room.portal.admin.views.FeedbackDataView;
-import net.itkmitl.room.portal.admin.views.ReservationDataView;
-import net.itkmitl.room.portal.admin.views.RoomDataView;
-import net.itkmitl.room.portal.admin.views.UserDataView;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
 
 public class DataListTableController implements ListSelectionListener, InternalFrameListener, ActionListener {
     public DataListTableView view;
@@ -63,7 +57,7 @@ public class DataListTableController implements ListSelectionListener, InternalF
             } else if (type.contains("feedback")) {
                 whichTable = 4;
             }
-            if (this instanceof DataListEditableController){
+            if (this instanceof DataListEditableController) {
                 dbl.databaseLoader(whichTable, Character.getNumericValue(model.getPageTitle().charAt(1)), query, false, this);
                 ((DataListEditableController) this).view.viewEntryButton.setEnabled(false);
                 ((DataListEditableController) this).view.editSelectedButton.setEnabled(false);
@@ -85,7 +79,7 @@ public class DataListTableController implements ListSelectionListener, InternalF
             } else if (model.getPageTitle().contains("Feedback")) {
                 whichTable = 4;
             }
-            if (this instanceof DataListEditableController){
+            if (this instanceof DataListEditableController) {
                 dbl.databaseLoader(whichTable, 99, "", false, this);
                 ((DataListEditableController) this).view.viewEntryButton.setEnabled(false);
                 ((DataListEditableController) this).view.editSelectedButton.setEnabled(false);
@@ -248,7 +242,7 @@ public class DataListTableController implements ListSelectionListener, InternalF
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(view.reloadButton)){
+        if (e.getSource().equals(view.reloadButton)) {
             view.reloadButton.setEnabled(false);
             view.reloadButton.revalidate();
             reloadData();

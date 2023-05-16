@@ -13,7 +13,7 @@ public enum EnumDBSchema {
     FEEDBACK_INDEX("ALTER TABLE `feedback` ADD KEY `user_relation_1` (`user_id`), ADD KEY `room_relation_1` (`room_id`);"),
     RESERVATION_INDEX("ALTER TABLE `reservation` ADD KEY `user_relation` (`user_id`), ADD KEY `room_relation` (`room_id`)");
 
-    private String raw;
+    private final String raw;
 
     EnumDBSchema(String raw) {
         this.raw = raw;

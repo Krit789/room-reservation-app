@@ -6,10 +6,11 @@ public class DataListTableModel {
     private String title, pageTitle, pageSubtitle;
     private DefaultTableModel dtm;
 
-    public DataListTableModel(){
-        this("Table", "Untitled Page", "3 Data Rows", new DefaultTableModel(new Object[][]{{1, 2 ,3 ,true},{1, 2 ,3 ,true},{1, 2 ,3 ,true}}, new String[]{"A", "B", "C", "D"}));
+    public DataListTableModel() {
+        this("Table", "Untitled Page", "3 Data Rows", new DefaultTableModel(new Object[][]{{1, 2, 3, true}, {1, 2, 3, true}, {1, 2, 3, true}}, new String[]{"A", "B", "C", "D"}));
     }
-    public DataListTableModel(String title, String pageTitle, String pageSubtitle, DefaultTableModel dtm){
+
+    public DataListTableModel(String title, String pageTitle, String pageSubtitle, DefaultTableModel dtm) {
         this.title = title;
         this.pageTitle = pageTitle;
         this.pageSubtitle = pageSubtitle;

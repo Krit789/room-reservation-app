@@ -10,8 +10,9 @@ import java.io.Serial;
 class HistoryLeftButtonText extends TransparentPanel {
     @Serial
     private static final long serialVersionUID = -4015833019658837000L;
-    private JLabel icon, text;
-    private String imagePath;
+    private final JLabel icon;
+    private final JLabel text;
+    private final String imagePath;
 
     public HistoryLeftButtonText() {
         this("", "");

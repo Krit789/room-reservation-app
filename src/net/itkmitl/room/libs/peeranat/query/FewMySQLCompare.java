@@ -13,11 +13,11 @@ public enum FewMySQLCompare {
     IS_NOT_NULL("IS NOT NULL"),
     ;
 
+    private final String value;
+
     FewMySQLCompare(String value) {
         this.value = value;
     }
-
-    private String value;
 
     String getValue() {
         return this.value;

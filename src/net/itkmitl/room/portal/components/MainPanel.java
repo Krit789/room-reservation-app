@@ -1,10 +1,9 @@
 package net.itkmitl.room.portal.components;
 
-import java.awt.BorderLayout;
-import java.util.ArrayList;
-
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.util.ArrayList;
 
 public class MainPanel extends JPanel {
     /**

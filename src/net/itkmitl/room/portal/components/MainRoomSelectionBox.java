@@ -2,9 +2,7 @@ package net.itkmitl.room.portal.components;
 
 import net.itkmitl.room.enums.EnumRoomState;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
-import net.itkmitl.room.portal.View;
 import net.itkmitl.room.portal.content.MainContentView;
-import net.itkmitl.room.portal.content.components.ReservationDialog;
 import net.itkmitl.room.portal.content.components.ReservationDialogController;
 
 import javax.swing.*;
@@ -19,9 +17,9 @@ public class MainRoomSelectionBox extends RoundedPanel implements ActionListener
      *
      */
     private static final long serialVersionUID = 3939071942263200950L;
-    public JButton name;
-    private Room boxRoom;
     public static boolean dialogOpen;
+    public JButton name;
+    private final Room boxRoom;
     //key is floor, Value is arraylist of room in floor
 //    private J
 
@@ -44,7 +42,7 @@ public class MainRoomSelectionBox extends RoundedPanel implements ActionListener
         add(name);
     }
 
-    public void openReservationDialog(){
+    public void openReservationDialog() {
         SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
             @Override
             protected Object doInBackground() throws Exception {
@@ -56,8 +54,9 @@ public class MainRoomSelectionBox extends RoundedPanel implements ActionListener
                 rsvpd.view.setVisible(true);
                 return null;
             }
+
             @Override
-            protected void done(){
+            protected void done() {
                 dialogOpen = false;
             }
 

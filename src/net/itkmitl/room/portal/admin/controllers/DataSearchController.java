@@ -13,8 +13,8 @@ import java.util.Enumeration;
 
 public class DataSearchController implements ActionListener, DocumentListener {
     protected DataSearchView view;
-    private DataSearchModel model;
-    private DatabaseLoader dbl;
+    private final DataSearchModel model;
+    private final DatabaseLoader dbl;
 
     public DataSearchController() {
         this(new DataSearchModel());
@@ -100,7 +100,7 @@ public class DataSearchController implements ActionListener, DocumentListener {
             try {
                 Integer.parseInt(view.searchField.getText());
             } catch (Exception ex) {
-                if (!view.searchField.getText().equals("")){
+                if (!view.searchField.getText().equals("")) {
                     view.errorLabel.setText(String.format("'%s' can only contains numbers!", getSelectedButtonText(view.searchType)));
 
                 }

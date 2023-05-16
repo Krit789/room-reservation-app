@@ -7,7 +7,8 @@ public enum EnumRoomState {
     MAINTENANCE("Maintenance"),
     ;
 
-    private String name;
+    private final String name;
+
     EnumRoomState(String name) {
         this.name = name;
     }

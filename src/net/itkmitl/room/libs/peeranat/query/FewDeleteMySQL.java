@@ -2,27 +2,36 @@ package net.itkmitl.room.libs.peeranat.query;
 
 import java.util.ArrayList;
 
-public class FewDeleteMySQL extends FewMySQLBuilder {
+public class FewDeleteMySQL implements FewMySQLBuilder {
 
-    private ArrayList<FewMySQLWhere> wheres;
+    private String table;
+    private final ArrayList<FewMySQLWhere> wheres;
     private int limit;
 
-    public FewDeleteMySQL(){
+    public FewDeleteMySQL() {
         wheres = new ArrayList<>();
+    }
+
+    public FewDeleteMySQL table(String table) {
+        this.table = table;
+        return this;
     }
 
     public FewDeleteMySQL where(String column, Object value) {
         this.wheres.add(new FewMySQLWhere(column, FewMySQLCompare.EQUAL, value, FewMySQLOperator.AND));
         return this;
     }
+
     public FewDeleteMySQL where(String column, FewMySQLCompare compare, Object value) {
         this.wheres.add(new FewMySQLWhere(column, compare, value, FewMySQLOperator.AND));
         return this;
     }
+
     public FewDeleteMySQL where(String column, FewMySQLCompare compare, Object value, FewMySQLOperator operator) {
         this.wheres.add(new FewMySQLWhere(column, compare, value, operator));
         return this;
     }
+
     public FewDeleteMySQL limit(int limit) {
         this.limit = limit;
         return this;
@@ -34,11 +43,11 @@ public class FewDeleteMySQL extends FewMySQLBuilder {
         sb.append('`');
         sb.append(this.table);
         sb.append('`');
-        if(wheres.size() > 0) {
+        if (wheres.size() > 0) {
             sb.append(" WHERE ");
             boolean isAlreadyWhere = false;
-            for(FewMySQLWhere simpleWhere : wheres) {
-                if(isAlreadyWhere) {
+            for (FewMySQLWhere simpleWhere : wheres) {
+                if (isAlreadyWhere) {
                     sb.append(' ');
                     sb.append(simpleWhere.getOperator().getValue());
                     sb.append(' ');
@@ -47,7 +56,7 @@ public class FewDeleteMySQL extends FewMySQLBuilder {
                 isAlreadyWhere = true;
             }
         }
-        if(limit > 0) {
+        if (limit > 0) {
             sb.append(" LIMIT ");
             sb.append(limit);
         }

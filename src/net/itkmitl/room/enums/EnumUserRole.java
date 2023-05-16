@@ -6,20 +6,12 @@ public enum EnumUserRole {
     STAFF(10, "เจ้าหน้าที่"), // Can check reserver logs
     ADMIN(99, "บร๊ะเจ้า"); // Can access config and back office
 
-    private int level;
-    private String name;
+    private final int level;
+    private final String name;
 
     EnumUserRole(int level, String name) {
         this.level = level;
         this.name = name;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public static EnumUserRole searchRoleByLevel(int level) {
@@ -30,5 +22,13 @@ public enum EnumUserRole {
         }
         //Default student
         return STUDENT;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public String getName() {
+        return name;
     }
 }

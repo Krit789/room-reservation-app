@@ -1,36 +1,20 @@
 package net.itkmitl.room.portal.admin.views;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import net.itkmitl.room.portal.components.GBCBuilder;
 
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-
-import net.itkmitl.room.portal.components.GBCBuilder;
+import java.awt.*;
 
 public class DataListTableView {
+    public final JLabel pageTitle, pageSubtitle;
+    public final JButton viewEntryButton, reloadButton;
     protected final JInternalFrame frame;
     protected final JPanel titlePanel, northPanel, northButtonPanel;
-    public final JLabel pageTitle, pageSubtitle;
-    public JTable table;
     protected final JScrollPane scrollPane;
-    public final JButton viewEntryButton, reloadButton;
+    public JTable table;
 
     public DataListTableView() {
         frame = new JInternalFrame("Table", true, true, true, true);
@@ -43,7 +27,7 @@ public class DataListTableView {
         northPanel = new JPanel();
         northPanel.setLayout(new GridBagLayout());
         titlePanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        northPanel.add(titlePanel, new GBCBuilder(GridBagConstraints.NONE,1,0.9,0,0, new Insets(0,5,0,0)).setAnchor(GridBagConstraints.WEST));
+        northPanel.add(titlePanel, new GBCBuilder(GridBagConstraints.NONE, 1, 0.9, 0, 0, new Insets(0, 5, 0, 0)).setAnchor(GridBagConstraints.WEST));
         northButtonPanel = new JPanel();
         northButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
@@ -54,8 +38,8 @@ public class DataListTableView {
         northButtonPanel.add(new JLabel("Operations"));
         northButtonPanel.add(reloadButton);
         northButtonPanel.add(viewEntryButton);
-        northPanel.add(new JSeparator(), new GBCBuilder(GridBagConstraints.HORIZONTAL,1,0.01,0,1).getGBC());
-        northPanel.add(northButtonPanel, new GBCBuilder(GridBagConstraints.NONE,1,0.09,0,2, new Insets(0,5,0,5)).setAnchor(GridBagConstraints.WEST));
+        northPanel.add(new JSeparator(), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.01, 0, 1).getGBC());
+        northPanel.add(northButtonPanel, new GBCBuilder(GridBagConstraints.NONE, 1, 0.09, 0, 2, new Insets(0, 5, 0, 5)).setAnchor(GridBagConstraints.WEST));
         frame.add(northPanel, BorderLayout.NORTH);
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
         titlePanel.add(pageTitle);
@@ -67,13 +51,15 @@ public class DataListTableView {
 
         table = new JTable() {
             /**
-			 *
-			 */
-			private static final long serialVersionUID = 7614361499285925400L;
-			@Override
+             *
+             */
+            private static final long serialVersionUID = 7614361499285925400L;
+
+            @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
-            };
+            }
+
             @Override
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
                 Component component = super.prepareRenderer(renderer, row, column);

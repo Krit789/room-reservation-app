@@ -1,17 +1,5 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
@@ -27,16 +15,25 @@ import net.itkmitl.room.portal.admin.models.UserComboBoxModel;
 import net.itkmitl.room.portal.admin.views.FeedbackDataView;
 import net.itkmitl.room.portal.components.LoadingDialog;
 
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 public class FeedbackDataController implements ActionListener, InternalFrameListener, ChangeListener {
     public final FeedbackDataView view;
-    private Feedback feedback;
-    private Object[] data;
     private final int mode;
     private final ArrayList<UserComboBoxModel> userArrayList = new ArrayList<>();
     private final ArrayList<RoomComboBoxModel> roomArrayList = new ArrayList<>();
     private final DataListEditableController dlec;
+    private Feedback feedback;
+    private Object[] data;
 
-    public FeedbackDataController(int mode, int feedbackID, DataListEditableController dlec){
+    public FeedbackDataController(int mode, int feedbackID, DataListEditableController dlec) {
         this.mode = mode;
         this.dlec = dlec;
         view = new FeedbackDataView();
@@ -83,7 +80,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
     }
 
     public void databaseLoader(int reservationID) {
-    	SwingWorker<?, ?> worker = new SwingWorker<>() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
 
             @Override
@@ -97,21 +94,18 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                     UserRepository userRepository = new UserRepository(db);
                     RoomRepository roomRepository = new RoomRepository(db);
                     Feedback myFeedback = feedbackRepository.getFeedbackById(reservationID);
-                    switch (mode) {
-                        case 0: // View Only
-                            userArrayList.add(new UserComboBoxModel(myFeedback.getUser()));
-                            roomArrayList.add(new RoomComboBoxModel(myFeedback.getRoom()));
-                            break;
-                        default:
-                            ArrayList<User> user_list = userRepository.getUsers();
-                            ArrayList<Room> room_list = roomRepository.getRooms();
-                            for (User u : user_list) {
-                                userArrayList.add(new UserComboBoxModel(u));
-                            }
-                            for (Room r : room_list) {
-                                roomArrayList.add(new RoomComboBoxModel(r));
-                            }
-                            break;
+                    if (mode == 0) { // View Only
+                        userArrayList.add(new UserComboBoxModel(myFeedback.getUser()));
+                        roomArrayList.add(new RoomComboBoxModel(myFeedback.getRoom()));
+                    } else {
+                        ArrayList<User> user_list = userRepository.getUsers();
+                        ArrayList<Room> room_list = roomRepository.getRooms();
+                        for (User u : user_list) {
+                            userArrayList.add(new UserComboBoxModel(u));
+                        }
+                        for (Room r : room_list) {
+                            roomArrayList.add(new RoomComboBoxModel(r));
+                        }
                     }
 
                     data = new Object[]{true, myFeedback};
@@ -133,8 +127,8 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
     }
 
     public void databaseCommiter(Feedback feedback, int mode) {
-    	SwingWorker<?, ?> worker = new SwingWorker<>() {
-            LoadingDialog ld = new LoadingDialog();
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
+            final LoadingDialog ld = new LoadingDialog();
 
             @Override
             protected String doInBackground() {
@@ -181,8 +175,8 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
     }
 
     public void dataPopulator() {
-    	SwingWorker<?, ?> worker = new SwingWorker<>() {
-            LoadingDialog ld = new LoadingDialog();
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
+            final LoadingDialog ld = new LoadingDialog();
 
             @Override
             protected String doInBackground() {
@@ -245,14 +239,12 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
             view.ratingSpinner.getModel().setValue(feedback.getRating());
             view.ratingSlider.setValue((int) (feedback.getRating() * 2));
 
-            switch (mode) {
-                case 0:
-                    view.userIDSelect.setEnabled(false);
-                    view.roomIDSelect.setEnabled(false);
-                    view.commentField.setEditable(false);
-                    view.ratingSlider.setEnabled(false);
-                    view.ratingSpinner.setEnabled(false);
-                    break;
+            if (mode == 0) {
+                view.userIDSelect.setEnabled(false);
+                view.roomIDSelect.setEnabled(false);
+                view.commentField.setEditable(false);
+                view.ratingSlider.setEnabled(false);
+                view.ratingSpinner.setEnabled(false);
             }
             view.getFrame().pack();
 
@@ -305,7 +297,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
             BaseWindow.windowList.remove(e.getInternalFrame());
             // System.out.println("Removal Success: " + e.getInternalFrame().getTitle() + " " + e.getInternalFrame().getClass().getCanonicalName() + " " + this.getClass().getSimpleName());
         } catch (Exception ex) {
-             System.out.println("Removal Failure: " + e.getInternalFrame().getTitle() + " " + e.getSource().toString() + " " + e.getInternalFrame().getClass().getCanonicalName() + " " + this.getClass().getSimpleName());
+            System.out.println("Removal Failure: " + e.getInternalFrame().getTitle() + " " + e.getSource().toString() + " " + e.getInternalFrame().getClass().getCanonicalName() + " " + this.getClass().getSimpleName());
 //            ex.printStackTrace();
         }
     }

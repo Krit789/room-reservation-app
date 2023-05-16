@@ -1,16 +1,5 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Date;
-
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingWorker;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumRoomState;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
@@ -21,6 +10,13 @@ import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.views.RoomDataView;
 import net.itkmitl.room.portal.components.LoadingDialog;
+
+import javax.swing.*;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
 
 public class RoomDataController implements ActionListener, InternalFrameListener {
     RoomDataView view;
@@ -67,15 +63,15 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                     break;
             }
             view.getFrame().addInternalFrameListener(this);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(BaseWindow.baseFrame, ex.getMessage(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }
 
     public void databaseLoader(int roomID) {
-    	SwingWorker<?, ?> worker = new SwingWorker<>() {
-            LoadingDialog ld = new LoadingDialog();
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
+            final LoadingDialog ld = new LoadingDialog();
 
             @Override
             protected String doInBackground() {
@@ -104,8 +100,8 @@ public class RoomDataController implements ActionListener, InternalFrameListener
     }
 
     public void databaseCommiter(Room room, int mode) {
-    	SwingWorker<?, ?> worker = new SwingWorker<>() {
-            LoadingDialog ld = new LoadingDialog();
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
+            final LoadingDialog ld = new LoadingDialog();
 
             @Override
             protected String doInBackground() {
@@ -144,7 +140,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                             }
                             break;
                     }
-                } catch (Exception ex){
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(BaseWindow.baseFrame, ex.toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
                 }
 
@@ -172,7 +168,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
             Room myUser = (Room) data[1];
             room = (Room) data[1];
             view.pageSubtitle.setText("Room records for Room ID " + myUser.getId());
-            view.idField.setText(room.getId() + "");
+            view.idField.setText(String.valueOf(room.getId()));
             view.nameField.setText(room.getName());
             view.capacitySpinner.setModel(new SpinnerNumberModel(room.getCapacity(), 0, 65535, 1));
             view.buildingField.setText(room.getBuilding());
@@ -191,18 +187,16 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                 view.stateSelect.setSelectedIndex(2);
             }
 
-            switch (mode) {
-                case 0:
-                    view.nameField.setEnabled(false);
-                    view.capacitySpinner.setEnabled(false);
-                    view.buildingField.setEnabled(false);
-                    view.floorField.setEnabled(false);
-                    view.stateSelect.setEnabled(false);
-                    view.openTimeHourField.setEnabled(false);
-                    view.openTimeMinuteField.setEnabled(false);
-                    view.closeTimeHourField.setEnabled(false);
-                    view.closeTimeMinuteField.setEnabled(false);
-                    break;
+            if (mode == 0) {
+                view.nameField.setEnabled(false);
+                view.capacitySpinner.setEnabled(false);
+                view.buildingField.setEnabled(false);
+                view.floorField.setEnabled(false);
+                view.stateSelect.setEnabled(false);
+                view.openTimeHourField.setEnabled(false);
+                view.openTimeMinuteField.setEnabled(false);
+                view.closeTimeHourField.setEnabled(false);
+                view.closeTimeMinuteField.setEnabled(false);
             }
             view.getFrame().pack();
         } else {

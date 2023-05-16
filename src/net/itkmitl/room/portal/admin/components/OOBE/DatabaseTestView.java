@@ -1,33 +1,24 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagLayout;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 public class DatabaseTestView extends JPanel {
     /**
-	 *
-	 */
-	private static final long serialVersionUID = 2479869772958246586L;
-	public JLabel title, description,connectionLabel, credentialLabel, databaseLabel, userTableLabel, roomTableLabel, reservationTableLabel, feedbackTableLabel, tableIndexLabel, tableRelationshipLabel, yesLabel, noLabel;
-    private JPanel topPanel;
+     *
+     */
+    private static final long serialVersionUID = 2479869772958246586L;
+    public JLabel title, description, connectionLabel, credentialLabel, databaseLabel, userTableLabel, roomTableLabel, reservationTableLabel, feedbackTableLabel, tableIndexLabel, tableRelationshipLabel, yesLabel, noLabel;
     public JScrollPane resultPane;
     protected JPanel resultPanel;
+    private final JPanel topPanel;
 
     public DatabaseTestView() {
         this.setLayout(new BorderLayout());
         topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
-        this.setBorder(new EmptyBorder(15, 10 ,0 ,15));
+        this.setBorder(new EmptyBorder(15, 10, 0, 15));
         title = new JLabel("Database Connection Test");
         title.setFont(new Font("SansSerif", Font.BOLD, 18));
         description = new JLabel("<html><p style=\"width:225px\">" +
@@ -57,7 +48,7 @@ public class DatabaseTestView extends JPanel {
 
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description.setText(String.format("<html><p style=\"width:225px\">%s</p></html>", description));
     }
 }

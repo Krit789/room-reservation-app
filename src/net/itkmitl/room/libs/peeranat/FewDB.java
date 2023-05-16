@@ -1,11 +1,11 @@
 package net.itkmitl.room.libs.peeranat;
 
+import net.itkmitl.room.db.LaewTaeDB;
+import net.itkmitl.room.enums.EnumDBSchema;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.ArrayList;
-
-import net.itkmitl.room.db.LaewTaeDB;
-import net.itkmitl.room.enums.EnumDBSchema;
 
 public class FewDB {
 
@@ -28,7 +28,7 @@ public class FewDB {
     }
 
     public static Connection getConnection(ArrayList<String> CM) throws Exception {
-        if (CM.size() == 4){
+        if (CM.size() == 4) {
             return getConnection(CM.get(0), CM.get(1), CM.get(2), CM.get(3));
         }
         System.out.println("Connection Config length is invalid!");
@@ -52,7 +52,7 @@ public class FewDB {
     }
 
     public static Connection getConnectionWithoutDB(ArrayList<String> CM) throws Exception {
-        if (CM.size() == 4){
+        if (CM.size() == 4) {
             return getConnectionWithoutDB(CM.get(0), CM.get(2), CM.get(3));
         }
         System.out.println("Connection Config length is invalid!");
@@ -60,7 +60,7 @@ public class FewDB {
     }
 
 
-    public static void createTable(EnumDBSchema schema) throws Exception{
+    public static void createTable(EnumDBSchema schema) throws Exception {
         LaewTaeDB.getDB().unsafeQuery(schema.getRaw());
     }
 

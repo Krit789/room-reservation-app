@@ -1,6 +1,6 @@
 package net.itkmitl.room.libs.phatsanphon.entity;
 
-import net.itkmitl.room.enums.*;
+import net.itkmitl.room.enums.EnumRoomState;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 

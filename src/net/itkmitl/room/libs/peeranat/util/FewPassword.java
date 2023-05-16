@@ -13,6 +13,6 @@ public class FewPassword {
     }
 
     public static String getText(char[] password) {
-    	return String.valueOf(password);
+        return String.valueOf(password);
     }
 }

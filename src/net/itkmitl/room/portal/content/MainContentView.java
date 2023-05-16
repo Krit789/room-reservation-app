@@ -11,11 +11,11 @@ import java.awt.*;
 
 public class MainContentView extends View {
     private static final long serialVersionUID = 3256816243621773023L;
+    public static DarkPane glassPane;
     private TransparentPanel contentPanel;
     private Dashboard dashboard;
     private Selector selector;
     private History history;
-    public static DarkPane glassPane;
 
 
     public MainContentView() {
@@ -46,11 +46,11 @@ public class MainContentView extends View {
     }
 
     public TransparentPanel getContentPanel() {
-        return (TransparentPanel) this.contentPanel;
+        return this.contentPanel;
     }
 
     public Selector getSelector() {
-        return (Selector) this.selector;
+        return this.selector;
     }
 
     public History getHistory() {

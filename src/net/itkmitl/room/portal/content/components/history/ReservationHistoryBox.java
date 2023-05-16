@@ -4,7 +4,6 @@ import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.RoundedPanel;
 import net.itkmitl.room.portal.content.MainContentView;
-import net.itkmitl.room.portal.content.components.ReservationDialogController;
 import net.itkmitl.room.portal.content.components.dashboard.BoxIcon;
 
 import javax.swing.*;
@@ -17,14 +16,16 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
     @Serial
     private static final long serialVersionUID = -4015833019658837000L;
     public ButtonGradient feedBackBtn, cancelBtn;
-    private JLabel timeLabel, dateLabel, nameLabel;
-    private JPanel dataPanel;
-    private BoxIcon icon;
+    private final JLabel timeLabel;
+    private final JLabel dateLabel;
+    private final JLabel nameLabel;
+    private final JPanel dataPanel;
+    private final BoxIcon icon;
     private FeedBackDialogue feedBackPage;
     private boolean dialogOpen;
     private Room boxRoom;
 
-    public ReservationHistoryBox(String name, String time, String date, boolean isComplete/*, Room room*/){
+    public ReservationHistoryBox(String name, String time, String date, boolean isComplete/*, Room room*/) {
         super(30, 40, Color.white);
 //        this.room = room;
         setPreferredSize(new Dimension(1250, 190));
@@ -62,6 +63,7 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
             add(cancelBtn, BorderLayout.EAST);
         }
     }
+
     public static Window findWindow(Component c) {
         if (c == null) {
             return JOptionPane.getRootFrame();
@@ -72,7 +74,7 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
         }
     }
 
-    public void openFeedbackDialog(){
+    public void openFeedbackDialog() {
         SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
             @Override
             protected Object doInBackground() throws Exception {
@@ -84,8 +86,9 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
                 rsvpd.view.setVisible(true);
                 return null;
             }
+
             @Override
-            protected void done(){
+            protected void done() {
                 dialogOpen = false;
             }
 
@@ -93,16 +96,17 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
         worker.execute();
 
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals("Feedback")){
-            if(!dialogOpen) {
+        if (e.getActionCommand().equals("Feedback")) {
+            if (!dialogOpen) {
                 openFeedbackDialog();
                 dialogOpen = true;
             }
         } else if (e.getActionCommand().equals("Cancel")) {
             JOptionPane.showConfirmDialog(findWindow(this), "Cancellation Successful", "", JOptionPane.CLOSED_OPTION);
-            
+
         }
     }
 }

@@ -18,10 +18,10 @@ import static net.itkmitl.room.portal.content.components.dashboard.ReservationPa
 
 public class MainContentController extends Controller implements ActionListener {
     public static MainContentView view = null;
-    private AppStore store = AppStore.getAppStore();
+    private final AppStore store = AppStore.getAppStore();
 
     public MainContentController(MainContentView view) {
-        this.view = view;
+        MainContentController.view = view;
     }
 
     public MainContentView getView() {
@@ -97,7 +97,7 @@ public class MainContentController extends Controller implements ActionListener 
     }
 
     protected void changeCard(String name) {
-        CardLayout cl = (CardLayout) (((JPanel) this.getView().getContentPanel()).getLayout());
+        CardLayout cl = (CardLayout) (this.getView().getContentPanel().getLayout());
         cl.show(this.getView().getContentPanel(), name);
     }
 

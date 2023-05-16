@@ -1,44 +1,6 @@
 package net.itkmitl.room.portal.admin;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.beans.PropertyVetoException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JSeparator;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-
 import net.itkmitl.room.libs.phatsanphon.UIConfig;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.store.AppStore;
@@ -51,26 +13,38 @@ import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.LoadingDialog;
 import net.itkmitl.room.portal.content.MainContentController;
-import net.itkmitl.room.portal.content.MainContentPortal;
-import net.itkmitl.room.portal.content.MainContentView;
+
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.beans.PropertyVetoException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BaseWindow extends ComponentAdapter implements ActionListener, InternalFrameListener {
-    private final OperationWindowView mainMenu;
     public static JFrame baseFrame;
+    public static JMenu windowMenu;
+    public static JProgressBar progressBar;
+    public static JLabel statusLabel;
+    public static HashMap<JInternalFrame, JMenuItem> windowList = new HashMap<>();
+    private static JDesktopPane desktop;
+    private final OperationWindowView mainMenu;
     private final JPanel statusBar;
     private final JMenuBar menuBar;
-    public static JMenu windowMenu;
     private final JMenu fileMenu, optionMenu, helpMenu;
     private final JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
     private final JMenuItem optionMenuItem3, optionMenuItem4;
     private final JMenuItem windowMenuItem2, windowMenuItem3;
     private final JCheckBoxMenuItem windowCheckBoxMenuItem1;
     private final JMenuItem aboutMenuItem1;
-    private static JDesktopPane desktop;
-    public static JProgressBar progressBar;
-    public static JLabel statusLabel;
-    private ArrayList<Image> multiIcon;
-    public static HashMap<JInternalFrame, JMenuItem> windowList = new HashMap<>();
+    private final ArrayList<Image> multiIcon;
     private boolean isPreferenceOpen = false;
 
     private boolean autoCenterMainMenu = true;
@@ -192,6 +166,36 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         mainMenu = spawnMainMenu();
     }
 
+    public static JDesktopPane getDesktop() {
+        return desktop;
+    }
+
+    public static void main(String[] args) {
+        try {
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
+            System.setProperty("apple.awt.application.name", "Laew Tae Hong");
+            System.setProperty("apple.awt.application.appearance", "system");
+            try {
+                UIManager.setLookAndFeel(new FlatMacDarkLaf());
+            } catch (Exception ignored) {
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+            }
+        } catch (Exception ignored) {
+        }
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                if (AppStore.getAppStore().select("user") != null && ((User) AppStore.getAppStore().select("user")).getRole().getLevel() > 10) {
+                    new BaseWindow();
+                } else {
+                    new AuthController();
+                }
+            }
+        });
+
+    }
+
     private OperationWindowView spawnMainMenu() {
         OperationWindowController oper = new OperationWindowController();
         OperationWindowView view = oper.getView();
@@ -221,7 +225,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         final PreferenceWindowController[] pref = {null};
         final PreferenceWindowView[] view = {null};
         SwingWorker<?, ?> worker = new SwingWorker<>() {
-            LoadingDialog ld = new LoadingDialog();
+            final LoadingDialog ld = new LoadingDialog();
 
             @Override
             protected String doInBackground() {
@@ -265,7 +269,6 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         view[0].getFrame().requestFocus();
         return view[0];
     }
-
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(aboutMenuItem1)) {
@@ -379,36 +382,6 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     }
 
     public void internalFrameDeactivated(InternalFrameEvent e) {
-    }
-
-    public static JDesktopPane getDesktop() {
-        return desktop;
-    }
-
-    public static void main(String[] args) {
-        try {
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("apple.awt.application.name", "Laew Tae Hong");
-            System.setProperty("apple.awt.application.appearance", "system");
-            try {
-                UIManager.setLookAndFeel(new FlatMacDarkLaf());
-            } catch (Exception ignored) {
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-            }
-        } catch (Exception ignored) {
-        }
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                if (AppStore.getAppStore().select("user") != null && ((User) AppStore.getAppStore().select("user")).getRole().getLevel() > 10) {
-                    new BaseWindow();
-                } else {
-                    new AuthController();
-                }
-            }
-        });
-
     }
 
 

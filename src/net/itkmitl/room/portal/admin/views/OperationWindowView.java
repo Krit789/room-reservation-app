@@ -139,6 +139,7 @@ public class OperationWindowView {
         feedbackTabPanel.add(lookupFeedbackLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.7, 1, 2, new Insets(0, 10, 0, 0)).getGBC());
 
     }
+
     public JInternalFrame getFrame() {
         return frame;
     }

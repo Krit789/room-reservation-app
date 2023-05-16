@@ -14,10 +14,10 @@ import java.util.HashMap;
 public class Selector extends CardView {
     @Serial
     private static final long serialVersionUID = -8564430568200760268L;
+    public static boolean doneRoomBox = false;
     public JPanel leftPanel, innerPanel, mainPanel, header, leftSelectorPanel, cardsOfBuildingsFloorPanel;
     public JLabel testLabel;//delete later
     public ArrayList<MainRoomSelectionBox> roomBoxHolder = new ArrayList<MainRoomSelectionBox>();
-    public static boolean doneRoomBox = false;
 
     public Selector() {
         super();

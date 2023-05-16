@@ -1,12 +1,11 @@
 package net.itkmitl.room.portal.admin.views;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
+import javax.swing.*;
 
-public class DataListEditableView extends DataListTableView{
+public class DataListEditableView extends DataListTableView {
     public final JButton createButton, editSelectedButton, deletedSelectedButton;
-    public DataListEditableView(){
+
+    public DataListEditableView() {
         super();
         frame.setFrameIcon(new ImageIcon("resource/icons/tableedit-16px.png"));
         frame.setTitle("Editable Table");
@@ -27,6 +26,7 @@ public class DataListEditableView extends DataListTableView{
         northButtonPanel.add(deletedSelectedButton);
         frame.pack();
     }
+
     @Override
     public JInternalFrame getFrame() {
         return frame;

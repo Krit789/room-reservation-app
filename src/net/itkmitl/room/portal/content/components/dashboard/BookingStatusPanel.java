@@ -22,7 +22,6 @@ import java.awt.*;
 import java.io.Serial;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class BookingStatusPanel extends RoundedPanel {
@@ -73,19 +72,19 @@ public class BookingStatusPanel extends RoundedPanel {
                 false
         );
 
-        StandardChartTheme theme = (StandardChartTheme)org.jfree.chart.StandardChartTheme.createJFreeTheme();
-        theme.setChartBackgroundPaint(new Color(0,0,0,0));
+        StandardChartTheme theme = (StandardChartTheme) org.jfree.chart.StandardChartTheme.createJFreeTheme();
+        theme.setChartBackgroundPaint(new Color(0, 0, 0, 0));
         theme.setRegularFont(new Font("Sansserif", Font.BOLD, 12));
-        theme.setLegendBackgroundPaint(new Color(255,255,255,125));
-        theme.setPlotBackgroundPaint(new Color(0,0,0,0));
+        theme.setLegendBackgroundPaint(new Color(255, 255, 255, 125));
+        theme.setPlotBackgroundPaint(new Color(0, 0, 0, 0));
 //        theme.setAxisLabelPaint(new Color(255,255,255));
-        theme.setLegendItemPaint(new Color(0,0,0));
-        theme.setPlotOutlinePaint(new Color(0,0,0, 0));
+        theme.setLegendItemPaint(new Color(0, 0, 0));
+        theme.setPlotOutlinePaint(new Color(0, 0, 0, 0));
         theme.apply(chart);
         chart.setAntiAlias(true);
 
         chart.setTextAntiAlias(true);
-        chart.setBorderPaint(new Color(0,0,0,0));
+        chart.setBorderPaint(new Color(0, 0, 0, 0));
 
         LegendTitle legend = chart.getLegend();
         legend.setFrame(new BlockBorder(Color.white));
@@ -110,13 +109,13 @@ public class BookingStatusPanel extends RoundedPanel {
         chartPanel.repaint();
     }
 
-    private void clock(){
+    private void clock() {
         JLabel clock = new JLabel("00:00:00");
         clock.setFont(new Font("Sansserif", Font.BOLD, 48));
         SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
             @Override
             protected Object doInBackground() throws Exception {
-                while (true){
+                while (true) {
                     synchronized (this) {
                         DateTime dt = new DateTime(System.currentTimeMillis());
                         clock.setText(String.format("%d:%02d:%02d", dt.getHours(), dt.getMinutes(), dt.getSeconds()));
@@ -125,7 +124,7 @@ public class BookingStatusPanel extends RoundedPanel {
                 }
             }
         };
-        this.add(clock, new GBCBuilder(GridBagConstraints.CENTER,1,1,0,3).getGBC());
+        this.add(clock, new GBCBuilder(GridBagConstraints.CENTER, 1, 1, 0, 3).getGBC());
         worker.execute();
     }
 

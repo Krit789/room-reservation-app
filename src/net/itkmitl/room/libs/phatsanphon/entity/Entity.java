@@ -12,7 +12,7 @@ public abstract class Entity {
     public Entity(FewQuery query) throws Exception {
         db = LaewTaeDB.getDB();
         this.processQuery(query);
-    };
+    }
 
     public Entity() throws Exception {
         db = LaewTaeDB.getDB();

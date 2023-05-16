@@ -11,11 +11,17 @@ import java.io.Serial;
 public class WelcomePanel extends RoundedPanel {
     @Serial
     private static final long serialVersionUID = -4015833019658837000L;
-    private JLabel t1, t2, t3, rightLabel;
-    private JPanel p1, p2, p3;
-    private JPanel leftPanel, rightPanel, txt, iconPanel;
-    private BoxIcon welcomeIcon;
     public ButtonGradient bookingButton;
+    private final JLabel t1;
+    private final JLabel t2;
+    private final JLabel t3;
+    private JLabel rightLabel;
+    private JPanel p1, p2, p3;
+    private JPanel leftPanel;
+    private JPanel rightPanel;
+    private final JPanel txt;
+    private JPanel iconPanel;
+    private final BoxIcon welcomeIcon;
 
     public WelcomePanel() {
         super();

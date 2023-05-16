@@ -1,14 +1,13 @@
 package net.itkmitl.room.portal.admin.views;
 
-import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.admin.models.PreferenceWindowModel;
+import net.itkmitl.room.portal.components.GBCBuilder;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class PreferenceWindowView {
-    private final JInternalFrame frame;
     public final JTabbedPane settingTab;
     public final JPanel databasePanel, instancePanel, titlePanel, frameButtonPanel, dbCredPanel, dbConnectionPanel, timeoutPanel, configPanel;
     public final JButton okButton, cancelButton, applyButton, configPickerButton;
@@ -17,8 +16,9 @@ public class PreferenceWindowView {
     public final JCheckBox timeoutCheckBox;
     public final JSpinner dbPortSpinner, timeoutSpinner;
     public final JPasswordField dbPasswordField;
-    public PreferenceWindowModel model;
     public final JFileChooser fileChooser;
+    private final JInternalFrame frame;
+    public PreferenceWindowModel model;
 
     public PreferenceWindowView() {
         this(new PreferenceWindowModel());

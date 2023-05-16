@@ -19,7 +19,7 @@ public class Repository<T extends Entity> {
         return this.query;
     }
 
-    protected ArrayList<T> maps(FewQuery result) throws Exception{
+    protected ArrayList<T> maps(FewQuery result) throws Exception {
         ArrayList<T> objects = new ArrayList<>();
 
         while (result.nextBind()) {

@@ -4,7 +4,7 @@ import java.util.List;
 
 public class FewSimpleValue {
 
-    private Object val;
+    private final Object val;
 
     public FewSimpleValue(Object val) {
         this.val = val;
@@ -102,10 +102,7 @@ public class FewSimpleValue {
     }
 
     public boolean isArray() {
-        if (getRaw() instanceof String[]) {
-            return true;
-        }
-        return false;
+        return getRaw() instanceof String[];
     }
 
 }

@@ -7,7 +7,7 @@ import java.io.Serial;
 public class HistoryLeftButton extends JButton {
     @Serial
     private static final long serialVersionUID = -4015833019658837000L;
-    private HistoryLeftButtonText textPanel;
+    private final HistoryLeftButtonText textPanel;
 
     public HistoryLeftButton() {
         this("", "");

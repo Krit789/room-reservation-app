@@ -1,25 +1,5 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
-
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingWorker;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-
-import com.github.lgooddatepicker.components.DatePickerSettings;
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
@@ -36,14 +16,28 @@ import net.itkmitl.room.portal.admin.models.UserComboBoxModel;
 import net.itkmitl.room.portal.admin.views.ReservationDataView;
 import net.itkmitl.room.portal.components.LoadingDialog;
 
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Objects;
+
 public class ReservationDataController implements ActionListener, InternalFrameListener, ItemListener, ChangeListener {
     public final ReservationDataView view;
-    private Reservation reservation;
-    private Object[] data;
     private final int mode;
     private final ArrayList<UserComboBoxModel> userArrayList = new ArrayList<>();
     private final ArrayList<RoomComboBoxModel> roomArrayList = new ArrayList<>();
     private final DataListEditableController dlec;
+    private Reservation reservation;
+    private Object[] data;
 
     public ReservationDataController(int mode, int reservationID, DataListEditableController dlec) {
         this.mode = mode;
@@ -102,7 +96,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
     }
 
     public void databaseLoader(int reservationID) {
-    	SwingWorker<?, ?> worker = new SwingWorker<>() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
 
             @Override
@@ -118,21 +112,18 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                     UserRepository userRepository = new UserRepository(db);
                     RoomRepository roomRepository = new RoomRepository(db);
                     Reservation myReservation = reservationRepository.getReservationById(reservationID);
-                    switch (mode) {
-                        case 0: // View Only
-                            userArrayList.add(new UserComboBoxModel(myReservation.getUser()));
-                            roomArrayList.add(new RoomComboBoxModel(myReservation.getRoom()));
-                            break;
-                        default:
-                            ArrayList<User> user_list = userRepository.getUsers();
-                            ArrayList<Room> room_list = roomRepository.getRooms();
-                            for (User u : user_list) {
-                                userArrayList.add(new UserComboBoxModel(u));
-                            }
-                            for (Room r : room_list) {
-                                roomArrayList.add(new RoomComboBoxModel(r));
-                            }
-                            break;
+                    if (mode == 0) { // View Only
+                        userArrayList.add(new UserComboBoxModel(myReservation.getUser()));
+                        roomArrayList.add(new RoomComboBoxModel(myReservation.getRoom()));
+                    } else {
+                        ArrayList<User> user_list = userRepository.getUsers();
+                        ArrayList<Room> room_list = roomRepository.getRooms();
+                        for (User u : user_list) {
+                            userArrayList.add(new UserComboBoxModel(u));
+                        }
+                        for (Room r : room_list) {
+                            roomArrayList.add(new RoomComboBoxModel(r));
+                        }
                     }
 
                     data = new Object[]{true, myReservation};
@@ -154,8 +145,8 @@ public class ReservationDataController implements ActionListener, InternalFrameL
     }
 
     public void databaseCommiter(Reservation reservation, int mode) {
-    	SwingWorker<?, ?> worker = new SwingWorker<>() {
-            LoadingDialog ld = new LoadingDialog();
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
+            final LoadingDialog ld = new LoadingDialog();
 
             @Override
             protected String doInBackground() {
@@ -216,7 +207,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
 
     public void dataPopulator() {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
-            LoadingDialog ld = new LoadingDialog();
+            final LoadingDialog ld = new LoadingDialog();
 
             @Override
             protected String doInBackground() {
@@ -264,7 +255,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
             Reservation myReservation = (Reservation) data[1];
             reservation = (Reservation) data[1];
             view.pageSubtitle.setText("Reservation records for Reservation ID " + myReservation.getId());
-            view.idField.setText(reservation.getId() + "");
+            view.idField.setText(String.valueOf(reservation.getId()));
             for (UserComboBoxModel u : userArrayList) {
                 view.userIDSelect.addItem(u);
                 if (u.getUser().getId() == reservation.getUser().getId()) {
@@ -290,17 +281,15 @@ public class ReservationDataController implements ActionListener, InternalFrameL
             view.startDatePicker.setDate(reservation.getStartTime().toLocalDate());
             view.endDatePicker.setDate(reservation.getEndTime().toLocalDate());
 
-            switch (mode) {
-                case 0: // View Mode
-                    view.userIDSelect.setEnabled(false);
-                    view.roomIDSelect.setEnabled(false);
-                    view.reasonField.setEditable(false);
-                    view.startTimeHourField.setEnabled(false);
-                    view.startTimeMinuteField.setEnabled(false);
-                    view.endTimeHourField.setEnabled(false);
-                    view.endTimeMinuteField.setEnabled(false);
-                    view.cancelledCheckbox.setEnabled(false);
-                    break;
+            if (mode == 0) { // View Mode
+                view.userIDSelect.setEnabled(false);
+                view.roomIDSelect.setEnabled(false);
+                view.reasonField.setEditable(false);
+                view.startTimeHourField.setEnabled(false);
+                view.startTimeMinuteField.setEnabled(false);
+                view.endTimeHourField.setEnabled(false);
+                view.endTimeMinuteField.setEnabled(false);
+                view.cancelledCheckbox.setEnabled(false);
             }
             view.getFrame().pack();
         } else {
@@ -329,7 +318,6 @@ public class ReservationDataController implements ActionListener, InternalFrameL
             reservation.setStartTime(startTime);
             reservation.setEndTime(endTime);
             reservation.setCancelled(view.cancelledCheckbox.isSelected());
-
 
 
             view.startDatePicker.setDate(reservation.getStartTime().toLocalDate());
@@ -448,7 +436,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                 endModel.setMaximum(59);
                 view.endTimeMinuteField.setValue(Math.max((Integer) view.endTimeMinuteField.getValue(), (Integer) view.startTimeMinuteField.getValue()));
                 if ((Integer) view.startTimeHourField.getValue() > (Integer) view.endTimeHourField.getValue() ||
-                        ((Integer) view.startTimeHourField.getValue() == (Integer) view.endTimeHourField.getValue() &&
+                        (view.startTimeHourField.getValue() == view.endTimeHourField.getValue() &&
                                 (Integer) view.startTimeMinuteField.getValue() > (Integer) view.endTimeMinuteField.getValue())) {
                     view.startTimeHourField.setValue(view.endTimeHourField.getValue());
                     view.startTimeMinuteField.setValue(view.endTimeMinuteField.getValue());
@@ -469,7 +457,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                 endModel.setMaximum(myRoom.getCloseTime().getMinutes());
                 view.endTimeMinuteField.setValue(Math.min((Integer) view.endTimeMinuteField.getValue(), myRoom.getCloseTime().getMinutes()));
 
-                if ((Integer) view.startTimeHourField.getValue() == (Integer) view.endTimeHourField.getValue()) {
+                if (view.startTimeHourField.getValue() == view.endTimeHourField.getValue()) {
                     SpinnerNumberModel startModel = (SpinnerNumberModel) view.startTimeMinuteField.getModel();
                     startModel.setMaximum((Integer) view.endTimeMinuteField.getValue());
                     view.startTimeMinuteField.setValue(Math.min((Integer) view.endTimeMinuteField.getValue(), (Integer) view.startTimeMinuteField.getValue()));
@@ -481,7 +469,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
             }
 
             if ((Integer) view.endTimeHourField.getValue() < (Integer) view.startTimeHourField.getValue() ||
-                    ((Integer) view.endTimeHourField.getValue() == (Integer) view.startTimeHourField.getValue() &&
+                    (view.endTimeHourField.getValue() == view.startTimeHourField.getValue() &&
                             (Integer) view.endTimeMinuteField.getValue() < (Integer) view.startTimeMinuteField.getValue())) {
                 view.endTimeHourField.setValue(view.startTimeHourField.getValue());
                 view.endTimeMinuteField.setValue(view.startTimeMinuteField.getValue());

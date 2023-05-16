@@ -1,45 +1,33 @@
 package net.itkmitl.room.portal.admin.views;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.util.Hashtable;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSlider;
-import javax.swing.JSpinner;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.portal.components.GBCBuilder;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.util.Hashtable;
+
 public class FeedbackDataView {
-    private JInternalFrame frame;
-    private JPanel dataPanelPad, titlePanel, buttonPanel, ratingPanel;
     public JSpinner ratingSpinner;
     public JPanel dataPanel;
-    private JScrollPane commentScrollPane;
     public JButton saveButton, cancelButton;
     public JLabel pageTitle, pageSubtitle;
-    private JLabel idLabel, userIDLabel, roomIDLabel, commentLabel, createdOnLabel, ratingLabel;
     public JTextField idField, createdOnField;
     public JSlider ratingSlider;
     public JTextArea commentField;
     public JComboBox<Object> userIDSelect, roomIDSelect;
+    private final JInternalFrame frame;
+    private final JPanel dataPanelPad;
+    private final JPanel titlePanel;
+    private final JPanel buttonPanel;
+    private final JPanel ratingPanel;
+    private final JScrollPane commentScrollPane;
+    private final JLabel idLabel;
+    private final JLabel userIDLabel;
+    private final JLabel roomIDLabel;
+    private final JLabel commentLabel;
+    private final JLabel createdOnLabel;
+    private final JLabel ratingLabel;
 
     public FeedbackDataView() {
         frame = new JInternalFrame("Feedback Data", false, true, false, true);
@@ -100,7 +88,7 @@ public class FeedbackDataView {
         ratingLabel = new JLabel("Rating");
         ratingPanel = new JPanel();
         ratingPanel.setLayout(new GridBagLayout());
-        ratingSlider = new JSlider(JSlider.HORIZONTAL, 0, 10 ,0);
+        ratingSlider = new JSlider(JSlider.HORIZONTAL, 0, 10, 0);
         Hashtable<Integer, JLabel> labelTable = new Hashtable<>();
         labelTable.put(0, new JLabel("0.0"));
         labelTable.put(1, new JLabel("0.5"));

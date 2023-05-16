@@ -6,7 +6,7 @@ public enum FewMySQLOperator {
     OR("OR"),
     ;
 
-    private String value;
+    private final String value;
 
     FewMySQLOperator(String value) {
         this.value = value;

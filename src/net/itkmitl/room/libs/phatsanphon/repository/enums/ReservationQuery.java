@@ -5,8 +5,17 @@ public enum ReservationQuery {
 
     private int query;
 
-    private ReservationQuery(int query) {
+    ReservationQuery(int query) {
         this.setQuery(query);
+    }
+
+    public static ReservationQuery getQueryByID(int id) {
+        for (ReservationQuery query : values()) {
+            if (query.getQuery() == id) {
+                return query;
+            }
+        }
+        return null;
     }
 
     public int getQuery() {
@@ -15,14 +24,5 @@ public enum ReservationQuery {
 
     private void setQuery(int query) {
         this.query = query;
-    }
-
-    public static ReservationQuery getQueryByID(int id) {
-    	for (ReservationQuery query : values()) {
-    		if (query.getQuery() == id) {
-    			return query;
-    		}
-    	}
-    	return null;
     }
 }

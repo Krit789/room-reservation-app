@@ -1,26 +1,12 @@
 package net.itkmitl.room.portal.account.components;
 
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.util.Arrays;
+import net.itkmitl.room.portal.components.*;
 
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
-import net.itkmitl.room.portal.components.BetterJPasswordField;
-import net.itkmitl.room.portal.components.BetterJTextField;
-import net.itkmitl.room.portal.components.ButtonGradient;
-import net.itkmitl.room.portal.components.GBCBuilder;
-import net.itkmitl.room.portal.components.RoundedPanel;
+import java.awt.*;
+import java.util.Arrays;
 
 public class RegisterPanel extends RoundedPanel {
     private static final long serialVersionUID = 6536055055833326316L;
@@ -30,14 +16,6 @@ public class RegisterPanel extends RoundedPanel {
     private final JLabel loginLabel2, warningLabel;
     private final BetterJPasswordField passwordField, confirmPasswordField;
     private final ButtonGradient registerButton;
-
-    public BetterJPasswordField getPasswordField() {
-        return passwordField;
-    }
-
-    public BetterJPasswordField getConfirmPasswordField() {
-        return confirmPasswordField;
-    }
 
     public RegisterPanel() {
         super(30, 30, Color.WHITE);
@@ -102,6 +80,14 @@ public class RegisterPanel extends RoundedPanel {
         this.add(fieldPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.63, 1, 1, 0, new Insets(0, 25, 0, 60)).setAnchor(GridBagConstraints.NORTHWEST));
         registerButton.setEnabled(false);
         this.setBorder(new EmptyBorder(25, 25, 25, 25));
+    }
+
+    public BetterJPasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public BetterJPasswordField getConfirmPasswordField() {
+        return confirmPasswordField;
     }
 
     public String getEmail() {

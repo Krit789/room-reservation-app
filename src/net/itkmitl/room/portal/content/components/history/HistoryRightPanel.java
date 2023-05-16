@@ -1,6 +1,5 @@
 package net.itkmitl.room.portal.content.components.history;
 
-import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.CardView;
 import net.itkmitl.room.portal.components.TransparentPanel;
 
@@ -11,10 +10,9 @@ import java.io.Serial;
 public class HistoryRightPanel extends CardView {
     @Serial
     private static final long serialVersionUID = -4015833019658837000L;
-    private JLabel text;
     public JScrollPane historyHolder;
     public TransparentPanel reservationHistoryPanel;
-
+    private JLabel text;
     private ReservationHistoryBox boxes;
 
     public HistoryRightPanel() {

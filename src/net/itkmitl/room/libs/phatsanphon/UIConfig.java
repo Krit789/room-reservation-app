@@ -1,16 +1,16 @@
 package net.itkmitl.room.libs.phatsanphon;
 
-import javax.swing.UIManager;
-
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+
+import javax.swing.*;
 
 public class UIConfig {
     public static void setLookAndFeel() {
         try {
             UIManager.setLookAndFeel(new FlatMacLightLaf());
-            System.setProperty( "apple.laf.useScreenMenuBar", "true" );
-            System.setProperty( "apple.awt.application.name", "Laew Tae Hong Management" );
-            System.setProperty( "apple.awt.application.appearance", "system" );
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
+            System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
+            System.setProperty("apple.awt.application.appearance", "system");
             return;
         } catch (Exception ignored) {
         }

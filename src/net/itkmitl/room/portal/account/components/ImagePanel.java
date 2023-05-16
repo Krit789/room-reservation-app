@@ -1,17 +1,11 @@
 package net.itkmitl.room.portal.account.components;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 public class ImagePanel extends JPanel {
     private static final long serialVersionUID = -8862608090477009970L;
-    private ImageIcon image;
+    private final ImageIcon image;
 
     public ImagePanel(ImageIcon image) {
         this.image = image;

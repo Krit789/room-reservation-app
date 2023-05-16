@@ -10,8 +10,9 @@ import java.awt.event.MouseListener;
 
 public class DarkPane extends JPanel implements MouseListener {
     private static final Color BACKGROUND_COLOR = new Color(0, 0, 0, 192);
-    private JPanel textPanel;
-    private JLabel spinner, label;
+    private final JPanel textPanel;
+    private final JLabel spinner;
+    private final JLabel label;
 
     public DarkPane() {
         setOpaque(false);

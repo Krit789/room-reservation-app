@@ -11,8 +11,11 @@ import java.io.Serial;
 public class HistoryLeftPanel extends RoundedPanel {
     @Serial
     private static final long serialVersionUID = -4015833019658837000L;
-    private JPanel btnPanel, southPanel;
-    private HistoryLeftButton successBtn, pendingBtn, canceledBtn;
+    private final JPanel btnPanel;
+    private final JPanel southPanel;
+    private final HistoryLeftButton successBtn;
+    private final HistoryLeftButton pendingBtn;
+    private final HistoryLeftButton canceledBtn;
     private ButtonGradient backButton;
 
     public HistoryLeftPanel() {

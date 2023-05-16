@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FewSelectMySQL extends FewMySQLBuilder {
+public class FewSelectMySQL implements FewMySQLBuilder {
 
-
-    private ArrayList<String> selects;
-    private ArrayList<FewMySQLWhere> wheres;
-    private Map<String, FewMySQLOrder> orderBy;
+    private String table;
+    private final ArrayList<String> selects;
+    private final ArrayList<FewMySQLWhere> wheres;
+    private final Map<String, FewMySQLOrder> orderBy;
 
     private int limit;
     private int offset;
@@ -21,30 +21,41 @@ public class FewSelectMySQL extends FewMySQLBuilder {
         this.orderBy = new HashMap<>();
     }
 
+    public FewSelectMySQL table(String table) {
+        this.table = table;
+        return this;
+    }
+
     public FewSelectMySQL select(String... vars) {
         selects.addAll(Arrays.asList(vars));
         return this;
     }
+
     public FewSelectMySQL where(String column, Object value) {
         this.wheres.add(new FewMySQLWhere(column, FewMySQLCompare.EQUAL, value, FewMySQLOperator.AND));
         return this;
     }
+
     public FewSelectMySQL where(String column, FewMySQLCompare compare, Object value) {
         this.wheres.add(new FewMySQLWhere(column, compare, value, FewMySQLOperator.AND));
         return this;
     }
+
     public FewSelectMySQL where(String column, FewMySQLCompare compare, Object value, FewMySQLOperator operator) {
         this.wheres.add(new FewMySQLWhere(column, compare, value, operator));
         return this;
     }
+
     public FewSelectMySQL limit(int limit) {
         this.limit = limit;
         return this;
     }
+
     public FewSelectMySQL offset(int offset) {
         this.offset = offset;
         return this;
     }
+
     public FewSelectMySQL orderBy(String column, FewMySQLOrder orderBy) {
         this.orderBy.put(column, orderBy);
         return this;

@@ -1,8 +1,8 @@
 package net.itkmitl.room.libs.store;
 
-import java.util.HashMap;
-
 import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
+
+import java.util.HashMap;
 
 public class AppStore {
     private static AppStore instance;
@@ -21,10 +21,10 @@ public class AppStore {
     }
 
     public Object select(String key) {
-    	return selectRaw(key).getRaw();
+        return selectRaw(key).getRaw();
     }
 
-	public FewSimpleValue selectRaw(String key) {
+    public FewSimpleValue selectRaw(String key) {
         return new FewSimpleValue(AppStore.store.get(key));
     }
 }

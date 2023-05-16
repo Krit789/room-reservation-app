@@ -1,14 +1,10 @@
 package net.itkmitl.room.libs.phatsanphon.repository;
 
-import java.util.ArrayList;
-
-import net.itkmitl.room.libs.peeranat.query.FewDeleteMySQL;
-import net.itkmitl.room.libs.peeranat.query.FewInsertMySQL;
-import net.itkmitl.room.libs.peeranat.query.FewQuery;
-import net.itkmitl.room.libs.peeranat.query.FewSelectMySQL;
-import net.itkmitl.room.libs.peeranat.query.FewUpdateMySQL;
+import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.enums.UserQuery;
+
+import java.util.ArrayList;
 
 public class UserRepository extends Repository<User> {
 
@@ -89,9 +85,9 @@ public class UserRepository extends Repository<User> {
     public User getExactUserByEmail(String email) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
         select.select("*")
-              .where("email", email)
-              .limit(1)
-              .table("user");
+                .where("email", email)
+                .limit(1)
+                .table("user");
         return this.map(this.getQuery().query(select));
     }
 

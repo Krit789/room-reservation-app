@@ -1,15 +1,9 @@
 package net.itkmitl.room.portal.account.components;
 
-import java.awt.BorderLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.RenderingHints;
-
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-
 import net.itkmitl.room.libs.peeranat.util.FewFile;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class OutPane extends JPanel {
     private static final long serialVersionUID = 44403762056895295L;
@@ -38,6 +32,10 @@ public class OutPane extends JPanel {
 
     }
 
+    public static void main(String[] args) {
+        new OutPane();
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -45,10 +43,6 @@ public class OutPane extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2d.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-    }
-
-    public static void main(String[] args) {
-        new OutPane();
     }
 
 }

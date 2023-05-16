@@ -5,8 +5,17 @@ public enum RoomQuery {
 
     private int query;
 
-    private RoomQuery(int query) {
+    RoomQuery(int query) {
         this.setQuery(query);
+    }
+
+    public static RoomQuery getQueryByID(int id) {
+        for (RoomQuery query : values()) {
+            if (query.getQuery() == id) {
+                return query;
+            }
+        }
+        return null;
     }
 
     public int getQuery() {
@@ -15,14 +24,5 @@ public enum RoomQuery {
 
     private void setQuery(int query) {
         this.query = query;
-    }
-
-    public static RoomQuery getQueryByID(int id) {
-    	for (RoomQuery query : values()) {
-    		if (query.getQuery() == id) {
-    			return query;
-    		}
-    	}
-    	return null;
     }
 }

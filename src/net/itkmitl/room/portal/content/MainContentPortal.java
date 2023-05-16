@@ -2,15 +2,13 @@ package net.itkmitl.room.portal.content;
 
 import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.Portal;
-import net.itkmitl.room.portal.admin.BaseWindow;
-import net.itkmitl.room.portal.admin.controllers.AuthController;
 import net.itkmitl.room.portal.components.FakeUser;
 
 import javax.swing.*;
 
 public class MainContentPortal extends Portal {
     private final MainContentController controller;
-    private AppStore store = AppStore.getAppStore();
+    private final AppStore store = AppStore.getAppStore();
 
     public MainContentPortal() {
         super();

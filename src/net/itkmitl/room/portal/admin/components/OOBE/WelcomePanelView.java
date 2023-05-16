@@ -1,24 +1,20 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
-import java.awt.Dimension;
-import java.awt.Font;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 public class WelcomePanelView extends JPanel {
     /**
-	 *
-	 */
-	private static final long serialVersionUID = 1140777242974791493L;
-	private JLabel title, description;
+     *
+     */
+    private static final long serialVersionUID = 1140777242974791493L;
+    private final JLabel title;
+    private final JLabel description;
 
     public WelcomePanelView() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBorder(new EmptyBorder(15, 10 ,0 ,15));
+        this.setBorder(new EmptyBorder(15, 10, 0, 15));
         title = new JLabel("Welcome to Laew Tae Hong");
         title.setFont(new Font("SansSerif", Font.BOLD, 18));
         description = new JLabel("<html><p style=\"width:225px\">" +

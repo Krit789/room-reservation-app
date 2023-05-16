@@ -1,18 +1,5 @@
 package net.itkmitl.room.portal.admin.components;
 
-import java.awt.Dimension;
-import java.beans.PropertyVetoException;
-import java.sql.SQLNonTransientConnectionException;
-import java.sql.SQLSyntaxErrorException;
-import java.util.ArrayList;
-
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-import javax.swing.table.DefaultTableModel;
-
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
@@ -33,6 +20,16 @@ import net.itkmitl.room.portal.admin.controllers.DataListEditableController;
 import net.itkmitl.room.portal.admin.controllers.DataListTableController;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
 import net.itkmitl.room.portal.components.LoadingDialog;
+
+import javax.swing.*;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.beans.PropertyVetoException;
+import java.sql.SQLNonTransientConnectionException;
+import java.sql.SQLSyntaxErrorException;
+import java.util.ArrayList;
 
 public class DatabaseLoader implements InternalFrameListener {
     private boolean editableTable;
@@ -65,7 +62,7 @@ public class DatabaseLoader implements InternalFrameListener {
         this.editableTable = editableTable;
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             Object[] data;
-            LoadingDialog ld = new LoadingDialog();
+            final LoadingDialog ld = new LoadingDialog();
 
             @Override
             protected String doInBackground() throws Exception {
@@ -80,17 +77,14 @@ public class DatabaseLoader implements InternalFrameListener {
                         case 1:
                             ArrayList<User> users_list;
                             UserRepository userRepository = new UserRepository(db);
-                            switch (type) {
-                                case 99:
-                                    users_list = userRepository.getUsers();
-                                    model.setTitle("User Data");
-                                    model.setPageTitle("User DataTable");
-                                    break;
-                                default:
-                                    users_list = new UserRepository(db).getUsers(UserQuery.getQueryByID(type), searchQuery);
-                                    model.setTitle(String.format("Results for \"%s\" in user", searchQuery));
-                                    model.setPageTitle(String.format("(%d) Query Search for User", UserQuery.getQueryByID(type).getQuery()));
-                                    break;
+                            if (type == 99) {
+                                users_list = userRepository.getUsers();
+                                model.setTitle("User Data");
+                                model.setPageTitle("User DataTable");
+                            } else {
+                                users_list = new UserRepository(db).getUsers(UserQuery.getQueryByID(type), searchQuery);
+                                model.setTitle(String.format("Results for \"%s\" in user", searchQuery));
+                                model.setPageTitle(String.format("(%d) Query Search for User", UserQuery.getQueryByID(type).getQuery()));
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (User Table)");
                             model.setPageSubtitle(users_list.size() + " records was retrieved from database.");
@@ -104,17 +98,14 @@ public class DatabaseLoader implements InternalFrameListener {
                         case 2:
                             ArrayList<Room> room_list;
                             RoomRepository roomRepository = new RoomRepository(db);
-                            switch (type) {
-                                case 99:
-                                    room_list = roomRepository.getRooms();
-                                    model.setTitle("Room Data");
-                                    model.setPageTitle("Room DataTable");
-                                    break;
-                                default:
-                                    room_list = roomRepository.getRooms(RoomQuery.getQueryByID(type), searchQuery);
-                                    model.setTitle(String.format("Results for \"%s\" in room", searchQuery));
-                                    model.setPageTitle(String.format("(%d) Query Search for Room", RoomQuery.getQueryByID(type).getQuery()));
-                                    break;
+                            if (type == 99) {
+                                room_list = roomRepository.getRooms();
+                                model.setTitle("Room Data");
+                                model.setPageTitle("Room DataTable");
+                            } else {
+                                room_list = roomRepository.getRooms(RoomQuery.getQueryByID(type), searchQuery);
+                                model.setTitle(String.format("Results for \"%s\" in room", searchQuery));
+                                model.setPageTitle(String.format("(%d) Query Search for Room", RoomQuery.getQueryByID(type).getQuery()));
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (Room Table)");
                             model.setPageSubtitle(room_list.size() + " records was retrieved from database.");
@@ -128,18 +119,15 @@ public class DatabaseLoader implements InternalFrameListener {
                         case 3:
                             ArrayList<Reservation> reservations_list;
                             ReservationRepository reservationRepository = new ReservationRepository(db);
-                            switch (type) {
-                                case 99:
-                                    reservations_list = reservationRepository.getReservations();
-                                    model.setTitle("Reservation Data");
-                                    model.setPageTitle("Reservation DataTable");
-                                    break;
-                                default:
-                                    reservations_list = reservationRepository.getReservations(ReservationQuery.getQueryByID(type), searchQuery);
-                                    model.setTitle(String.format("Results for \"%s\" in reservation", searchQuery));
-                                    model.setPageTitle("Query Search for Reservation");
-                                    model.setPageTitle(String.format("(%d) Query Search for Reservation", ReservationQuery.getQueryByID(type).getQuery()));
-                                    break;
+                            if (type == 99) {
+                                reservations_list = reservationRepository.getReservations();
+                                model.setTitle("Reservation Data");
+                                model.setPageTitle("Reservation DataTable");
+                            } else {
+                                reservations_list = reservationRepository.getReservations(ReservationQuery.getQueryByID(type), searchQuery);
+                                model.setTitle(String.format("Results for \"%s\" in reservation", searchQuery));
+                                model.setPageTitle("Query Search for Reservation");
+                                model.setPageTitle(String.format("(%d) Query Search for Reservation", ReservationQuery.getQueryByID(type).getQuery()));
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (Reservation Table)");
                             model.setPageSubtitle(reservations_list.size() + " records was retrieved from database.");
@@ -153,18 +141,14 @@ public class DatabaseLoader implements InternalFrameListener {
                         case 4:
                             ArrayList<Feedback> feedbacks_list;
                             FeedbackRepository feedbackRepository = new FeedbackRepository(db);
-                            switch (type) {
-                                case 99:
-                                    feedbacks_list = feedbackRepository.getFeedbacks();
-                                    model.setTitle("Feedback Data");
-                                    model.setPageTitle("Feedback DataTable");
-                                    break;
-                                default:
-                                    feedbacks_list = feedbackRepository.getFeedbacks(FeedbackQuery.getQueryByID(type), searchQuery);
-                                    model.setTitle(String.format("Results for \"%s\" in feedback", searchQuery));
-                                    model.setPageTitle(String.format("(%d) Query Search for Feedback", FeedbackQuery.getQueryByID(type).getQuery()));
-
-                                    break;
+                            if (type == 99) {
+                                feedbacks_list = feedbackRepository.getFeedbacks();
+                                model.setTitle("Feedback Data");
+                                model.setPageTitle("Feedback DataTable");
+                            } else {
+                                feedbacks_list = feedbackRepository.getFeedbacks(FeedbackQuery.getQueryByID(type), searchQuery);
+                                model.setTitle(String.format("Results for \"%s\" in feedback", searchQuery));
+                                model.setPageTitle(String.format("(%d) Query Search for Feedback", FeedbackQuery.getQueryByID(type).getQuery()));
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (Feedback Table)");
                             model.setPageSubtitle(feedbacks_list.size() + " records was retrieved from database.");
@@ -180,7 +164,7 @@ public class DatabaseLoader implements InternalFrameListener {
                             break;
                     }
                 } catch (NullPointerException ex) {
-                	ex.printStackTrace();
+                    ex.printStackTrace();
                     data = new Object[]{Boolean.valueOf(false), String.format("\"%s\" type \"%d\" was not found in the records", searchQuery, type)};
                 } catch (SQLSyntaxErrorException | SQLNonTransientConnectionException ex) {
                     data = new Object[]{Boolean.valueOf(false), ex.getMessage()};
