@@ -94,7 +94,7 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
                 virtualReservationEnd = r.getEndTime();
 
 
-                if (currentTimeMilis.getDate() == r.getStartTime().getDate() && (currentTimeMilis.getTime() >= virtualReservationStart.getTime() && currentTimeMilis.getTime() <= virtualReservationEnd.getTime())) {
+                if (currentTimeMilis.getDate() == r.getStartTime().getDate() && (currentTimeMilis.getTime() >= virtualReservationStart.getTime() && currentTimeMilis.getTime() < virtualReservationEnd.getTime())) {
                     unavailable = true;
                 }
 //                System.out.println(String.format("%s: %s %s", currentTimeMilis,currentTimeMilis.getTime() >= virtualReservationStart.getTime(), currentTimeMilis.getTime() < virtualReservationEnd.getTime()));
@@ -110,8 +110,8 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
 
                 availableTimes.add(new ReservableEntity(new DateTime(currentTimeMilis.getTime()), new DateTime(currentTimeMilis.getTime() + 1800L * 1000L)));
             } else if (unavailable) {
-                System.out.println("Unavailable Time " + currentTimeMilis + " : " + (currentTimeMilis.getTime() >= virtualReservationStart.getTime()) + " && " + (currentTimeMilis.getTime() <= virtualReservationEnd.getTime()));
-                System.out.println("(" + currentTimeMilis.getTime()  + " >= " + virtualReservationStart.getTime() + ") && (" + currentTimeMilis.getTime() + " <= " + virtualReservationEnd.getTime()+")");
+                System.out.println("Unavailable Time (" + room.getName() + ")" + currentTimeMilis + " : " + (currentTimeMilis.getTime() >= virtualReservationStart.getTime()) + " && " + (currentTimeMilis.getTime() <= virtualReservationEnd.getTime()));
+                System.out.println("(" + currentTimeMilis.getTime()  + " >= " + virtualReservationStart.getTime() + ") && (" + currentTimeMilis.getTime() + " < " + virtualReservationEnd.getTime()+")");
             }
         }
         return availableTimes;
