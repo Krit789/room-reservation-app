@@ -88,7 +88,7 @@ public class OOBEController implements ActionListener, DocumentListener {
     private void initializeDatabase() {
         worker = new SwingWorker<>() {
             @Override
-            protected Object doInBackground() throws Exception {
+            protected Object doInBackground() {
                 try {
                     FewDB.createDatabase(view.dbsp.dbNameTextField.getText());
                     view.dbt.setDescription("We have established connection with your database, please wait while we're processing the following operations.");
@@ -122,17 +122,6 @@ public class OOBEController implements ActionListener, DocumentListener {
                     view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 6, new Insets(0, 0, 5, 5)).getGBC());
                     view.dbt.resultPanel.revalidate();
 
-//                    FewDB.createTable(EnumDBSchema.FEEDBACK_INDEX);
-//                    FewDB.createTable(EnumDBSchema.RESERVATION_INDEX);
-//                    view.dbt.resultPanel.add(view.dbt.tableIndexLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 7, new Insets(5,5,5,5)).getGBC());
-//                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 7, new Insets(0, 0, 5, 5)).getGBC());
-//                    view.dbt.resultPanel.revalidate();
-//
-//                    FewDB.createTable(EnumDBSchema.FEEDBACK_RELATIONSHIP);
-//                    FewDB.createTable(EnumDBSchema.RESERVATION_RELATIONSHIP);
-//                    view.dbt.resultPanel.add(view.dbt.tableRelationshipLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 8, new Insets(5,5,0,5)).getGBC());
-//                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 8, new Insets(0, 0, 5, 5)).getGBC());
-
                     view.dbt.setDescription("We have established connection with your database, operations completed without errors!");
 
                     view.nextButton.setEnabled(true);
@@ -151,14 +140,15 @@ public class OOBEController implements ActionListener, DocumentListener {
                     JOptionPane.showMessageDialog(view.getFrame(), ex.getMessage(), "Unable to Proceed", JOptionPane.ERROR_MESSAGE);
                 } catch (SQLSyntaxErrorException ex) {
                     view.dbt.setDescription("We have established connection with your database, but there was a SQL error if you have previously use Laew Tae Hong before you can ignore and continue.");
-                    JOptionPane.showMessageDialog(view.getFrame(), ex.getMessage(), "Warning!", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(view.getFrame(), ex.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
                     view.nextButton.setEnabled(true);
+                }  catch (Exception ex) {
+                    view.dbt.setDescription("We have ran into a fatal error.");
+                    JOptionPane.showMessageDialog(view.getFrame(), ex.getMessage(), "Fatal Error", JOptionPane.WARNING_MESSAGE);
+                    ex.printStackTrace();
+                    view.nextButton.setEnabled(false);
                 }
                 return null;
-            }
-
-            @Override
-            protected void done() {
             }
         };
         worker.execute();

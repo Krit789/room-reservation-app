@@ -46,6 +46,7 @@ public class FeedBackDialogue extends JDialog {
         centerPanel.setLayout(new GridBagLayout());
 
         ratingPanel = new JPanel(new FlowLayout());
+        ratingPanel.setBackground(Color.white);
         ratingGroup = new ButtonGroup();
         ratingLabel = new JLabel("Rate");
         ratingLabel.setFont(regular);

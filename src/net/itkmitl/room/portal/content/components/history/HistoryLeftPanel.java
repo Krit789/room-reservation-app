@@ -2,6 +2,7 @@ package net.itkmitl.room.portal.content.components.history;
 
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.RoundedPanel;
+import net.itkmitl.room.portal.components.TransparentPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -21,8 +22,10 @@ public class HistoryLeftPanel extends RoundedPanel {
     public HistoryLeftPanel() {
         super(40, 40);
         setLayout(new BorderLayout());
-        btnPanel = new JPanel(new GridBagLayout());
-        southPanel = new JPanel(new FlowLayout());
+        btnPanel = new TransparentPanel();
+        btnPanel.setLayout(new GridBagLayout());
+        southPanel = new TransparentPanel();
+        southPanel.setLayout(new FlowLayout());
 
         successBtn = new HistoryLeftButton("resource/content/history/checkmark.png", "Success");
         pendingBtn = new HistoryLeftButton("resource/content/history/loading.png", "Pending");

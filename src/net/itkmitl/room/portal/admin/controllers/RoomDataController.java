@@ -12,13 +12,15 @@ import net.itkmitl.room.portal.admin.views.RoomDataView;
 import net.itkmitl.room.portal.components.LoadingDialog;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
-public class RoomDataController implements ActionListener, InternalFrameListener {
+public class RoomDataController implements ActionListener, InternalFrameListener, ChangeListener {
     RoomDataView view;
     Room room;
     Object[] data;
@@ -46,6 +48,8 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                     view.getFrame().pack();
                     view.saveButton.addActionListener(this);
                     view.cancelButton.addActionListener(this);
+                    view.openTimeHourField.addChangeListener(this);
+                    view.openTimeMinuteField.addChangeListener(this);
                     databaseLoader(roomID);
                     break;
                 case 2: // Create
@@ -55,6 +59,8 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                     view.pageTitle.setText("Room Records Creator");
                     view.pageSubtitle.setText("Create new room records");
                     view.saveButton.setText("Create");
+                    view.openTimeHourField.addChangeListener(this);
+                    view.openTimeMinuteField.addChangeListener(this);
                     view.getFrame().pack();
                     break;
                 case 3: // Delete
@@ -291,5 +297,34 @@ public class RoomDataController implements ActionListener, InternalFrameListener
     @Override
     public void internalFrameDeactivated(InternalFrameEvent e) {
 
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        JSpinner spinner = (JSpinner) e.getSource();
+        int value = (int) spinner.getValue();
+        int otherValue = (int) view.closeTimeHourField.getValue();
+        int otherValue2 = (int) view.closeTimeMinuteField.getValue();
+
+        if (e.getSource().equals(view.openTimeHourField)){
+            SpinnerNumberModel startModel = (SpinnerNumberModel) view.openTimeHourField.getModel();
+            startModel.setMaximum(otherValue);
+            if ((int) view.openTimeHourField.getValue() > otherValue)
+                startModel.setValue(otherValue);
+
+            SpinnerNumberModel endModel = (SpinnerNumberModel) view.closeTimeHourField.getModel();
+            endModel.setMinimum((int) view.openTimeHourField.getValue());
+            if ((int) view.closeTimeHourField.getValue() < (int) view.openTimeHourField.getValue())
+                startModel.setValue(view.openTimeHourField.getValue());
+
+        } else if (e.getSource().equals(view.openTimeMinuteField)) {
+            if (value == otherValue){
+                SpinnerNumberModel endModel = (SpinnerNumberModel) view.openTimeMinuteField.getModel();
+                endModel.setMaximum(otherValue2);
+            } else {
+                SpinnerNumberModel endModel = (SpinnerNumberModel) view.openTimeMinuteField.getModel();
+                endModel.setMaximum(59);
+            }
+        }
     }
 }

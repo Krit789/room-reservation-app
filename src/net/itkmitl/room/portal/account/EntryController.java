@@ -156,8 +156,7 @@ public class EntryController extends Controller implements ActionListener, Compo
         Object objectPerformed = e.getSource();
         if (objectPerformed.equals(this.getView().optionMenuItem1) && store.select("user") != null) {
             this.getView().dispose();
-            String[] arguments = new String[]{""};
-            BaseWindow.main(arguments);
+            BaseWindow.main(new String[]{""});
         } else if (objectPerformed.equals(this.getView().helpMenuItem1)) {
             new AboutDialog(this.getView());
         } else if (objectPerformed.equals(loginPanel.getLoginButton())) {

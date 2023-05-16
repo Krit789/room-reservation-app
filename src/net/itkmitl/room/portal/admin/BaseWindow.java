@@ -42,6 +42,7 @@ import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.phatsanphon.UIConfig;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.store.AppStore;
+import net.itkmitl.room.portal.account.EntryPortal;
 import net.itkmitl.room.portal.admin.controllers.AuthController;
 import net.itkmitl.room.portal.admin.controllers.OperationWindowController;
 import net.itkmitl.room.portal.admin.controllers.PreferenceWindowController;
@@ -70,7 +71,6 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     private final JMenuItem aboutMenuItem1;
     private final ArrayList<Image> multiIcon;
     private boolean isPreferenceOpen = false;
-
     private boolean autoCenterMainMenu = true;
 
     public BaseWindow() {
@@ -309,7 +309,11 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         } else if (e.getSource().equals(optionMenuItem4)) {
             baseFrame.dispose();
             UIConfig.setLookAndFeel();
-            MainContentController.view.setVisible(true);
+            if (MainContentController.running){
+                MainContentController.view.setVisible(true);
+            } else {
+                EntryPortal.main(new String[]{});
+            }
         } else if (e.getSource().equals(windowCheckBoxMenuItem1)) {
             windowCheckBoxMenuItem1.setState(!autoCenterMainMenu);
             autoCenterMainMenu = !autoCenterMainMenu;

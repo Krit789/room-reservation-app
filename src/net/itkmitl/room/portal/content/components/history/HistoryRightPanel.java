@@ -30,6 +30,7 @@ public class HistoryRightPanel extends CardView {
         add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", false));
         add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true));
         add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true));
+        add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true));
         historyHolder = new JScrollPane(reservationHistoryPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         historyHolder.setAlignmentY(JScrollPane.TOP_ALIGNMENT);
         historyHolder.setOpaque(false);

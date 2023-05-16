@@ -19,6 +19,7 @@ import static net.itkmitl.room.portal.content.components.dashboard.ReservationPa
 public class MainContentController extends Controller implements ActionListener {
     public static MainContentView view = null;
     private final AppStore store = AppStore.getAppStore();
+    public static boolean running = false;
 
     public MainContentController(MainContentView view) {
         MainContentController.view = view;
@@ -43,6 +44,7 @@ public class MainContentController extends Controller implements ActionListener 
         if (((User) store.select("user")).getRole().getLevel() >= 10) {
             this.getView().optionMenuItem1.addActionListener(this);
         }
+        running = true;
         this.getView().helpMenuItem1.addActionListener(this);
         buttonBox[0].addActionListener(this);
         buttonBox[1].addActionListener(this);
