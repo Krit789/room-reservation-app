@@ -75,8 +75,8 @@ public class WelcomePanel extends RoundedPanel {
 //        bookingButton.setPreferredSize(new Dimension(50, 50));
 
         this.setLayout(new GridBagLayout());
-        this.add(txt, new GBCBuilder(GridBagConstraints.NONE, 0,1, 0, 0, new Insets(0, 0,0 ,20)).setAnchor(GridBagConstraints.WEST));
-        this.add(welcomeIcon, new GBCBuilder(GridBagConstraints.NONE, 0,1, 1, 0).setAnchor(GridBagConstraints.EAST));
+        this.add(txt, new GBCBuilder(GridBagConstraints.NONE, 0, 1, 0, 0, new Insets(0, 0, 0, 20)).setAnchor(GridBagConstraints.WEST));
+        this.add(welcomeIcon, new GBCBuilder(GridBagConstraints.NONE, 0, 1, 1, 0).setAnchor(GridBagConstraints.EAST));
 //        this.add(t1);
 //        this.add(t2);
 //        this.add(t3);

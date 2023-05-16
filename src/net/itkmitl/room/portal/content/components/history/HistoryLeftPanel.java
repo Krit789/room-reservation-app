@@ -48,8 +48,7 @@ public class HistoryLeftPanel extends RoundedPanel {
     }
 
     private void southPanel() {
-        backButton = new ButtonGradient();
-        backButton.setText("Back");
+        backButton = new ButtonGradient("Back");
         backButton.setActionCommand("Back to Dashboard");
 
         southPanel.add(backButton);

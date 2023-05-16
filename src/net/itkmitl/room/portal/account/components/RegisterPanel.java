@@ -61,11 +61,8 @@ public class RegisterPanel extends RoundedPanel {
         loginLabel1.setForeground(Color.LIGHT_GRAY);
         loginLabel2.setFont(new Font("Cousine", Font.BOLD, textSize));
 
-        registerButton = new ButtonGradient();
-        registerButton.setText("Register");
+        registerButton = new ButtonGradient("Register", new Color(44, 102, 188), new Color(94, 135, 197));
         registerButton.setFont(new Font("Cousine", Font.BOLD, textSize));
-        registerButton.setColor1(new Color(44, 102, 188));
-        registerButton.setColor2(new Color(94, 135, 197));
 
         warningLabel = new JLabel(" ");
         warningLabel.setForeground(Color.red);

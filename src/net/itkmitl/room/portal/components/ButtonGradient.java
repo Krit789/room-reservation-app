@@ -1,13 +1,6 @@
 package net.itkmitl.room.portal.components;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -19,11 +12,8 @@ import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
 public class ButtonGradient extends JButton {
-
-    /**
-     *
-     */
     private static final long serialVersionUID = -4638661821951496102L;
+    private static Font defaultFont = new Font("Cousine", Font.BOLD, 18);
 
     public float getSizeSpeed() {
         return sizeSpeed;
@@ -49,6 +39,14 @@ public class ButtonGradient extends JButton {
         this.color2 = color2;
     }
 
+    public static Font getDefaultFont() {
+        return defaultFont;
+    }
+
+    public static String getDefaulFontName() {
+        return defaultFont.getFontName();
+    }
+
     private Color color1 = Color.decode("#0099F7");
     private Color color2 = Color.decode("#F11712");
     private final Timer timer;
@@ -61,11 +59,28 @@ public class ButtonGradient extends JButton {
     private float sizeSpeed = 6f;
     private float alphaPressed = 0.5f;
 
+    // ..............Constructor..............
     public ButtonGradient() {
+        this(null);
+    }
+
+    public ButtonGradient(String text, Color color) {
+        this(text, color, color);
+    }
+
+    public ButtonGradient(String text, Color color1, Color color2) {
+        this(text);
+        this.color1 = color1;
+        this.color2 = color2;
+    }
+
+    public ButtonGradient(String text) {
+        super(text);
         setContentAreaFilled(false);
         setForeground(Color.WHITE);
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         setBorder(new EmptyBorder(10, 20, 10, 20));
+        setFont(new Font("Cousine", Font.BOLD, 18));
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {

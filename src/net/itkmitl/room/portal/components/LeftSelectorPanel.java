@@ -48,11 +48,8 @@ public class LeftSelectorPanel extends JPanel {
         buttonScrollPane.getViewport().setOpaque(false);
         buttonScrollPane.setBorder(null);
 
-        backButton = new ButtonGradient();
-        backButton.setText("Back");
+        backButton = new ButtonGradient("Back", new Color(44, 102, 188), new Color(94, 135, 197));
         backButton.setFont(new Font("Cousine", Font.BOLD, 18));
-        backButton.setColor1(new Color(44, 102, 188));
-        backButton.setColor2(new Color(94, 135, 197));
         backButton.setSizeSpeed(10f);
         backButton.setOpaque(false);
         backButton.setContentAreaFilled(false);

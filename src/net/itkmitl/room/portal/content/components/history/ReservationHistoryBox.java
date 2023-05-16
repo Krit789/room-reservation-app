@@ -18,17 +18,11 @@ public class ReservationHistoryBox extends RoundedPanel {
         super(30, 40, Color.white);
         setSize(1400, 250);
 
-        feedBackBtn = new ButtonGradient();
-        feedBackBtn.setText("FeedBack");
+        feedBackBtn = new ButtonGradient("FeedBack", Color.green);
         feedBackBtn.setActionCommand("FeedBack");
-        feedBackBtn.setColor1(Color.green);
-        feedBackBtn.setColor2(Color.green);
 
-        cancelBtn = new ButtonGradient();
-        cancelBtn.setText("Cancel");
+        cancelBtn = new ButtonGradient("Cancel", Color.red);
         cancelBtn.setActionCommand("Cancel");
-        cancelBtn.setColor1(Color.red);
-        cancelBtn.setColor2(Color.red);
 
         nameLabel = new JLabel(name);
         nameLabel.setFont(new Font("Cousine", Font.BOLD, 25));

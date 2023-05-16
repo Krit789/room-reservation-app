@@ -36,11 +36,8 @@ public class LoginPanel extends RoundedPanel {
     public LoginPanel() {
         super(30, 30, Color.WHITE);
         this.setLayout(new GridBagLayout());
-        loginButton = new ButtonGradient();
-        loginButton.setText("Login");
+        loginButton = new ButtonGradient("Login", new Color(44, 102, 188), new Color(94, 135, 197));
         loginButton.setFont(new Font("Cousine", Font.BOLD, 16));
-        loginButton.setColor1(new Color(44, 102, 188));
-        loginButton.setColor2(new Color(94, 135, 197));
 
         emailField = new BetterJTextField("E-Mail");
         passwordField = new BetterJPasswordField("Password");

@@ -25,11 +25,8 @@ public class ReservationBox extends RoundedPanel {
         this.setMaximumSize(new Dimension(200, 200));
         this.setBorder(new EmptyBorder(30, 30, 30, 30));
 
-        redirectButton = new ButtonGradient();
-        redirectButton.setText(title.toUpperCase());
+        redirectButton = new ButtonGradient(title.toUpperCase(), new Color(44, 102, 188), new Color(94, 135, 197));
         redirectButton.setFont(new Font("Cousine", Font.BOLD, 18));
-        redirectButton.setColor1(new Color(44, 102, 188));
-        redirectButton.setColor2(new Color(94, 135, 197));
         redirectButton.setSizeSpeed(30f);
         redirectButton.setActionCommand(title);
         if (title.equals("History")) {

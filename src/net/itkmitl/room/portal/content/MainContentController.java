@@ -51,10 +51,10 @@ public class MainContentController extends Controller implements ActionListener 
         this.getView().getDashboard().getWelcomePanel().bookingButton.addActionListener(this);
 
         // History
-        this.getView().getHistory().getLeftPanel().getBackButton().addActionListener(this);
-        this.getView().getHistory().getLeftPanel().getSuccessBtn().addActionListener(this);
-        this.getView().getHistory().getLeftPanel().getPendingBtn().addActionListener(this);
-        this.getView().getHistory().getLeftPanel().getCanceledBtn().addActionListener(this);
+        getView().getHistory().getLeftPanel().getBackButton().addActionListener(this);
+        getView().getHistory().getLeftPanel().getSuccessBtn().addActionListener(this);
+        getView().getHistory().getLeftPanel().getPendingBtn().addActionListener(this);
+        getView().getHistory().getLeftPanel().getCanceledBtn().addActionListener(this);
 
         SwingWorker<?, ?> worker = new SwingWorker() {
             @Override
