@@ -46,7 +46,7 @@ public class HistoryRightPanel extends CardView {
         getReservationList();
 
 
-        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 0, new Insets(15,0,0,0)).getGBC());
+        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true, null), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 0, new Insets(15,0,0,0)).getGBC());
 //        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", false), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 1).getGBC());
 //        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 2).getGBC());
 //        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 3).getGBC());
@@ -65,7 +65,7 @@ public class HistoryRightPanel extends CardView {
                     ArrayList<Reservation> res = reservationRepository.getReservationsByUserId(((User) AppStore.getAppStore().select("user")).getId());
                     int count = 1;
                     for (Reservation r : res) {
-                        reservationHistoryPanel.add(new ReservationHistoryBox(r.getRoom().getName(), String.format("%d:%02d-%d:%02d", r.getStartTime().getHours(), r.getStartTime().getMinutes(), r.getEndTime().getHours(), r.getEndTime().getMinutes()), String.format("%d %s %d", r.getStartTime().getDate(), r.getStartTime().toLocalDate().getMonth().toString(), r.getStartTime().getYear()), System.currentTimeMillis() >= r.getEndTime().getTime()), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, count, new Insets(15,0,0,0)).getGBC());
+                        reservationHistoryPanel.add(new ReservationHistoryBox(r.getRoom().getName(), String.format("%d:%02d-%d:%02d", r.getStartTime().getHours(), r.getStartTime().getMinutes(), r.getEndTime().getHours(), r.getEndTime().getMinutes()), String.format("%d %s %d", r.getStartTime().getDate(), r.getStartTime().toLocalDate().getMonth().toString(), r.getStartTime().getYear()), System.currentTimeMillis() >= r.getEndTime().getTime(), r.getRoom()), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, count, new Insets(15,0,0,0)).getGBC());
                         count++;
                         reservationHistoryPanel.revalidate();
                     }

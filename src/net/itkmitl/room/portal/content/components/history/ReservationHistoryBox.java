@@ -36,11 +36,11 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
     private final BoxIcon icon;
     private FeedBackDialogue feedBackPage;
     private boolean dialogOpen;
-    private Room boxRoom;
+    private Room room;
 
-    public ReservationHistoryBox(String name, String time, String date, boolean isComplete/*, Room room*/) {
+    public ReservationHistoryBox(String name, String time, String date, boolean isComplete, Room room) {
         super(30, 40, Color.white);
-//        this.room = room;
+        this.room = room;
         setPreferredSize(new Dimension(1250, 190));
 
         feedBackBtn = new ButtonGradient("FeedBack", new Color(59, 151, 88));
@@ -91,7 +91,7 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
         SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
             @Override
             protected Object doInBackground() throws Exception {
-                FeedBackDialogueController rsvpd = new FeedBackDialogueController(null, boxRoom);
+                FeedBackDialogueController rsvpd = new FeedBackDialogueController(null, room);
                 MainContentView.glassPane.setSpinnerVisibility(false);
                 MainContentView.glassPane.setText("");
                 MainContentView.glassPane.setVisible(true);
