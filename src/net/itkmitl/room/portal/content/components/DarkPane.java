@@ -33,9 +33,10 @@ public class DarkPane extends JPanel implements MouseListener {
         addMouseListener(this);
     }
 
-    public void setText(String text){
+    public void setText(String text) {
         label.setText(text);
     }
+
     public void setSpinnerVisibility(boolean visible) {
         spinner.setVisible(visible);
     }
@@ -49,6 +50,7 @@ public class DarkPane extends JPanel implements MouseListener {
         g2.fillRect(0, 0, getWidth(), getHeight());
         g2.dispose();
     }
+
     public void mousePressed(MouseEvent e) {
         e.consume();
     }
@@ -72,7 +74,6 @@ public class DarkPane extends JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         e.consume();
     }
-
 
 
 }

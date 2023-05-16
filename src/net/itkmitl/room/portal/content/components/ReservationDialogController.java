@@ -13,15 +13,13 @@ import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.content.MainContentView;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 public class ReservationDialogController implements ActionListener, DateChangeListener, WindowListener, ChangeListener, ItemListener {
     public ReservationDialog view;
@@ -110,8 +108,8 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
                                     currentTimeMilis.addMillis(1800L * 1000L).getMinutes() <= room.getCloseTime().getMinutes()))
 
                     && (currentTimeMilis.getHours() > room.getOpenTime().getHours() ||
-                            (currentTimeMilis.getHours() == room.getOpenTime().getHours() &&
-                                    currentTimeMilis.getMinutes() >= room.getOpenTime().getMinutes()))) {
+                    (currentTimeMilis.getHours() == room.getOpenTime().getHours() &&
+                            currentTimeMilis.getMinutes() >= room.getOpenTime().getMinutes()))) {
 
                 availableTimes.add(new ReservableEntity(new DateTime(currentTimeMilis.getTime()), new DateTime(currentTimeMilis.getTime() + 1800L * 1000L)));
             } else {

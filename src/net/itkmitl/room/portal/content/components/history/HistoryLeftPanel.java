@@ -2,13 +2,15 @@ package net.itkmitl.room.portal.content.components.history;
 
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.RoundedPanel;
-import net.itkmitl.room.portal.components.TransparentPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.Serial;
 
 public class HistoryLeftPanel extends RoundedPanel {
+    @Serial
+    private static final long serialVersionUID = -4015833019658837000L;
     private JPanel btnPanel, southPanel;
     private HistoryLeftButton successBtn, pendingBtn, canceledBtn;
     private ButtonGradient backButton;
@@ -23,13 +25,8 @@ public class HistoryLeftPanel extends RoundedPanel {
         pendingBtn = new HistoryLeftButton("resource/content/history/loading.png", "Pending");
         canceledBtn = new HistoryLeftButton("resource/content/history/cancelled.png", "Cancelled");
 
-//        btnPanel.add(successBtn);
-//        btnPanel.add(pendingBtn);
-//        btnPanel.add(canceledBtn);
-//        btnPanel.setBorder(new EmptyBorder(230,25,230,25));
-
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0; // Set the column index
+        constraints.gridx = 0;
         constraints.gridy = GridBagConstraints.RELATIVE;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1.0;

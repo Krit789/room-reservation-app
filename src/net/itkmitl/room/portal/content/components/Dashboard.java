@@ -1,23 +1,12 @@
 package net.itkmitl.room.portal.content.components;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Font;
-
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.portal.CardView;
 import net.itkmitl.room.portal.components.MainPanel;
-import net.itkmitl.room.portal.content.components.dashboard.ContentPanel;
-import net.itkmitl.room.portal.content.components.dashboard.NotificationPanel;
-import net.itkmitl.room.portal.content.components.dashboard.ReservationPanel;
-import net.itkmitl.room.portal.content.components.dashboard.RightPanel;
-import net.itkmitl.room.portal.content.components.dashboard.WelcomePanel;
+import net.itkmitl.room.portal.content.components.dashboard.*;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 public class Dashboard extends CardView {
     private static final long serialVersionUID = 5559587513984125656L;
@@ -65,13 +54,16 @@ public class Dashboard extends CardView {
         this.add(mainPanel, BorderLayout.CENTER);
         this.add(rightPanel, BorderLayout.EAST);
     }
-    public MainPanel getMainPanel(){
-        return (MainPanel)this.mainPanel;
+
+    public MainPanel getMainPanel() {
+        return (MainPanel) this.mainPanel;
     }
+
     public ReservationPanel getReservationPanel() {
         return (ReservationPanel) this.reservationPanel;
     }
-    public WelcomePanel getWelcomePanel(){
+
+    public WelcomePanel getWelcomePanel() {
         return (WelcomePanel) this.welcomePanel;
     }
 }

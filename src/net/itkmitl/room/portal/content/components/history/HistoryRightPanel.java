@@ -6,14 +6,18 @@ import net.itkmitl.room.portal.components.TransparentPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 
 public class HistoryRightPanel extends CardView {
+    @Serial
+    private static final long serialVersionUID = -4015833019658837000L;
     private JLabel text;
     public JScrollPane historyHolder;
     public TransparentPanel reservationHistoryPanel;
 
     private ReservationHistoryBox boxes;
-    public HistoryRightPanel(){
+
+    public HistoryRightPanel() {
         text = new JLabel("Contents go here!");
         add(text);
         boxes = new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true);

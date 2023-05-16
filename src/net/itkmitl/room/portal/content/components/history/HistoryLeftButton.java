@@ -1,12 +1,12 @@
 package net.itkmitl.room.portal.content.components.history;
 
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
+import java.io.Serial;
 
 public class HistoryLeftButton extends JButton {
+    @Serial
+    private static final long serialVersionUID = -4015833019658837000L;
     private HistoryLeftButtonText textPanel;
 
     public HistoryLeftButton() {

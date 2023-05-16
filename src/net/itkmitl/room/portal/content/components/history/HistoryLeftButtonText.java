@@ -1,13 +1,15 @@
 package net.itkmitl.room.portal.content.components.history;
 
-import net.itkmitl.room.portal.components.RoundedPanel;
 import net.itkmitl.room.portal.components.TransparentPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.Serial;
 
 class HistoryLeftButtonText extends TransparentPanel {
+    @Serial
+    private static final long serialVersionUID = -4015833019658837000L;
     private JLabel icon, text;
     private String imagePath;
 

@@ -1,15 +1,15 @@
 package net.itkmitl.room.portal.content.components.dashboard;
 
-import java.awt.*;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
 import net.itkmitl.room.portal.components.TransparentPanel;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.Serial;
+
 public class NotificationPanel extends RoundedPanel {
+    @Serial
     private static final long serialVersionUID = 4305337873118944635L;
     public JLabel notificationTextLabel, calendarIcon;
     private JPanel panelPanel;

@@ -3,14 +3,15 @@ package net.itkmitl.room.portal.content.components.dashboard;
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.RoundedPanel;
 
-import java.awt.*;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.io.Serial;
 
 import static net.itkmitl.room.portal.content.components.dashboard.ReservationPanel.buttonBox;
 
 public class ReservationBox extends RoundedPanel {
+    @Serial
     private static final long serialVersionUID = 3285944903070661887L;
     public ButtonGradient redirectButton;
     private BoxIcon icon;

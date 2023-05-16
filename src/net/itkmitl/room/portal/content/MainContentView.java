@@ -1,29 +1,27 @@
 package net.itkmitl.room.portal.content;
 
-import java.awt.*;
-
 import net.itkmitl.room.portal.View;
 import net.itkmitl.room.portal.components.TransparentPanel;
-import net.itkmitl.room.portal.content.components.Dashboard;
 import net.itkmitl.room.portal.content.components.DarkPane;
+import net.itkmitl.room.portal.content.components.Dashboard;
 import net.itkmitl.room.portal.content.components.History;
 import net.itkmitl.room.portal.content.components.Selector;
 
-public class MainContentView extends View{
-    /**
-	 *
-	 */
-	private static final long serialVersionUID = 3256816243621773023L;
-	private TransparentPanel contentPanel;
+import java.awt.*;
+
+public class MainContentView extends View {
+    private static final long serialVersionUID = 3256816243621773023L;
+    private TransparentPanel contentPanel;
     private Dashboard dashboard;
     private Selector selector;
     private History history;
     public static DarkPane glassPane;
 
 
-    public MainContentView(){
+    public MainContentView() {
         super();
     }
+
     @Override
     protected void initialize() {
         contentPanel = new TransparentPanel(new CardLayout());
@@ -46,13 +44,15 @@ public class MainContentView extends View{
     public Dashboard getDashboard() {
         return this.dashboard;
     }
-    public TransparentPanel getContentPanel(){
+
+    public TransparentPanel getContentPanel() {
         return (TransparentPanel) this.contentPanel;
     }
 
-    public Selector getSelector(){
+    public Selector getSelector() {
         return (Selector) this.selector;
     }
+
     public History getHistory() {
         return this.history;
     }
