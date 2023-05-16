@@ -1,6 +1,7 @@
 package net.itkmitl.room.portal.account.components;
 
 
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.portal.components.*;
 
 import javax.swing.*;
@@ -75,7 +76,7 @@ public class RegisterPanel extends RoundedPanel {
         operationPanel.add(registerButton);
         fieldPanel.add(operationPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 11, new Insets(5, 0, 5, 45)).getGBC());
         fieldPanel.setBackground(Color.white);
-        ImagePanel imagePanel = new ImagePanel(new ImageIcon("resource/account/banner/banner3-entry-25.png"));
+        ImagePanel imagePanel = new ImagePanel(FewFile.getImage("account/banner/banner3-entry-25.png"));
         this.add(imagePanel, new GBCBuilder(GridBagConstraints.BOTH, 0.37, 1, 0, 0).getGBC());
         this.add(fieldPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.63, 1, 1, 0, new Insets(0, 25, 0, 60)).setAnchor(GridBagConstraints.NORTHWEST));
         registerButton.setEnabled(false);

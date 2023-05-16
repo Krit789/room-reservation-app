@@ -52,14 +52,14 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     public BaseWindow() {
         BaseWindow.baseFrame = new JFrame("Laew Tae Hong Management");
         multiIcon = new ArrayList<>();
-        multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-128px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-64px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-56px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-48px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-40px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-20px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-16px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-208px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-128px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-64px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-56px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-48px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-40px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-20px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-16px.png").getImage());
         baseFrame.setIconImages(multiIcon);
         baseFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         baseFrame.setMinimumSize(new Dimension(640, 480));
@@ -81,7 +81,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         fileMenuItem3.addActionListener(this);
         // 'Options' Menu Components declaration
         optionMenuItem3 = new JMenuItem("Settings");
-        optionMenuItem3.setIcon(new ImageIcon("resource/icons/settingsicon-16px.png"));
+        optionMenuItem3.setIcon(FewFile.getImage("icons/settingsicon-16px.png"));
         optionMenuItem3.addActionListener(this);
         optionMenuItem4 = new JMenuItem("Switch to User Mode");
         optionMenuItem4.addActionListener(this);
@@ -91,9 +91,9 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         windowCheckBoxMenuItem1.setToolTipText("Automatically center Main Menu when Main Window is resized");
         windowCheckBoxMenuItem1.addActionListener(this);
         windowMenuItem2 = new JMenuItem("Cascade Window");
-        windowMenuItem2.setIcon(new ImageIcon("resource/icons/Cascade-16px.png"));
+        windowMenuItem2.setIcon(FewFile.getImage("icons/Cascade-16px.png"));
         windowMenuItem3 = new JMenuItem("Close all Window");
-        windowMenuItem3.setIcon(new ImageIcon("resource/icons/CloseAll-16px.png"));
+        windowMenuItem3.setIcon(FewFile.getImage("icons/CloseAll-16px.png"));
         windowMenuItem3.addActionListener(this);
 
         // 'About' Menu Components declaration

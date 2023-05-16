@@ -39,8 +39,8 @@ public class DatabaseTestView extends JPanel {
         feedbackTableLabel = new JLabel("Feedback Table");
         tableIndexLabel = new JLabel("Table Index");
         tableRelationshipLabel = new JLabel("Table Relationship");
-        yesLabel = new JLabel(new ImageIcon("resource/icons/yes-16px.png"));
-        noLabel = new JLabel(new ImageIcon("resource/icons/no-16px.png"));
+        yesLabel = new JLabel(FewFile.getImage("icons/yes-16px.png"));
+        noLabel = new JLabel(FewFile.getImage("icons/no-16px.png"));
 
         this.add(topPanel, BorderLayout.NORTH);
         resultPane = new JScrollPane(resultPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);

@@ -27,7 +27,7 @@ public class NotificationPanel extends RoundedPanel {
 
         panelPanel = new TransparentPanel();
         panelPanel.setLayout(new FlowLayout());
-        calendarIcon = new JLabel(new ImageIcon("resource/icons/calendar-32px.png"));
+        calendarIcon = new JLabel(FewFile.getImage("icons/calendar-32px.png"));
         notificationTextLabel = new JLabel("You don't have any upcoming reservation");
         panelPanel.add(calendarIcon);
         panelPanel.add(Box.createHorizontalStrut(10));

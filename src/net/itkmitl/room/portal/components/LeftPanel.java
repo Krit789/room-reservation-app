@@ -21,7 +21,7 @@ public class LeftPanel extends JPanel {
         );
 
         titleBox = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        lthIcon = new JLabel(new ImageIcon("resource/icons/icon-64px.png"));
+        lthIcon = new JLabel(FewFile.getImage("icons/icon-64px.png"));
         title = new JLabel("LAEW TAE HONG");
         title.setFont(new Font("Cousine", Font.BOLD, 29));
 

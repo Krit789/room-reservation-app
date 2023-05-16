@@ -30,7 +30,7 @@ public class OperationWindowView {
 
     public OperationWindowView() {
         frame = new JInternalFrame(("Main Menu"), false, false, false, true);
-        frame.setFrameIcon(new ImageIcon("resource/icons/icon-16px.png"));
+        frame.setFrameIcon(FewFile.getImage("icons/icon-16px.png"));
         frame.setSize(512, 300);
         frame.setLayout(new BorderLayout());
         frame.setFocusable(true);

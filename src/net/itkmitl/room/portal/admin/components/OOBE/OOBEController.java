@@ -86,41 +86,41 @@ public class OOBEController implements ActionListener, DocumentListener {
                     view.dbt.resultPanel.add(view.dbt.connectionLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 0, new Insets(0, 5, 5, 5)).getGBC());
                     view.dbt.resultPanel.add(view.dbt.credentialLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 1, new Insets(5, 5, 5, 5)).getGBC());
                     view.dbt.resultPanel.add(view.dbt.databaseLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 2, new Insets(5, 5, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 0, new Insets(0, 0, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 1, new Insets(0, 0, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 2, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 0, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 1, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 2, new Insets(0, 0, 5, 5)).getGBC());
                     view.dbt.resultPanel.revalidate();
 
                     FewDB.createTable(EnumDBSchema.USER);
                     view.dbt.resultPanel.add(view.dbt.userTableLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 3, new Insets(5, 5, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 3, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 3, new Insets(0, 0, 5, 5)).getGBC());
                     view.dbt.resultPanel.revalidate();
 
                     FewDB.createTable(EnumDBSchema.ROOM);
                     view.dbt.resultPanel.add(view.dbt.roomTableLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 4, new Insets(5, 5, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 4, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 4, new Insets(0, 0, 5, 5)).getGBC());
                     view.dbt.resultPanel.revalidate();
 
                     FewDB.createTable(EnumDBSchema.RESERVATION);
                     view.dbt.resultPanel.add(view.dbt.reservationTableLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 5, new Insets(5, 5, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 5, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 5, new Insets(0, 0, 5, 5)).getGBC());
                     view.dbt.resultPanel.revalidate();
 
                     FewDB.createTable(EnumDBSchema.FEEDBACK);
                     view.dbt.resultPanel.add(view.dbt.feedbackTableLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 6, new Insets(5, 5, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 6, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 6, new Insets(0, 0, 5, 5)).getGBC());
                     view.dbt.resultPanel.revalidate();
 
 //                    FewDB.createTable(EnumDBSchema.FEEDBACK_INDEX);
 //                    FewDB.createTable(EnumDBSchema.RESERVATION_INDEX);
 //                    view.dbt.resultPanel.add(view.dbt.tableIndexLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 7, new Insets(5,5,5,5)).getGBC());
-//                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 7, new Insets(0, 0, 5, 5)).getGBC());
+//                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 7, new Insets(0, 0, 5, 5)).getGBC());
 //                    view.dbt.resultPanel.revalidate();
 //
 //                    FewDB.createTable(EnumDBSchema.FEEDBACK_RELATIONSHIP);
 //                    FewDB.createTable(EnumDBSchema.RESERVATION_RELATIONSHIP);
 //                    view.dbt.resultPanel.add(view.dbt.tableRelationshipLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 8, new Insets(5,5,0,5)).getGBC());
-//                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 8, new Insets(0, 0, 5, 5)).getGBC());
+//                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/yes-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 8, new Insets(0, 0, 5, 5)).getGBC());
 
                     view.dbt.setDescription("We have established connection with your database, operations completed without errors!");
 
@@ -129,13 +129,13 @@ public class OOBEController implements ActionListener, DocumentListener {
 
                 } catch (CommunicationsException ex) {
                     view.dbt.setDescription("We failed to establish connection with your database, please recheck your credentials, address and port and then try again.");
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 0, new Insets(0, 0, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 1, new Insets(0, 0, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 2, new Insets(0, 0, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 3, new Insets(0, 0, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 4, new Insets(0, 0, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 5, new Insets(0, 0, 5, 5)).getGBC());
-                    view.dbt.resultPanel.add(new JLabel(new ImageIcon("resource/icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 6, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 0, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 1, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 2, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 3, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 4, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 5, new Insets(0, 0, 5, 5)).getGBC());
+                    view.dbt.resultPanel.add(new JLabel(FewFile.getImage("icons/no-16px.png")), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 6, new Insets(0, 0, 5, 5)).getGBC());
                     view.dbt.revalidate();
                     JOptionPane.showMessageDialog(view.getFrame(), ex.getMessage(), "Unable to Proceed", JOptionPane.ERROR_MESSAGE);
                 } catch (SQLSyntaxErrorException ex) {

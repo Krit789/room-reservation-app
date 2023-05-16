@@ -23,7 +23,7 @@ public class DarkPane extends JPanel implements MouseListener {
         textPanel.setOpaque(false);
         textPanel.setLayout(new FlowLayout());
 
-        spinner = new JLabel(new ImageIcon("resource/icons/loading-32px.gif"));
+        spinner = new JLabel(FewFile.getImage("icons/loading-32px.gif"));
         label = new JLabel();
         label.setFont(new Font("SansSerif", Font.PLAIN, 32));
         label.setForeground(Color.WHITE);

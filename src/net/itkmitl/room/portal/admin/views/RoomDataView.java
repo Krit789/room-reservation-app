@@ -30,7 +30,7 @@ public class RoomDataView {
 
     public RoomDataView() {
         frame = new JInternalFrame("Room Data", false, true, false, true);
-        frame.setFrameIcon(new ImageIcon("resource/icons/tableedit-16px.png"));
+        frame.setFrameIcon(FewFile.getImage("icons/tableedit-16px.png"));
         frame.setLayout(new BorderLayout());
 
         titlePanel = new JPanel();

@@ -18,19 +18,19 @@ public class OOBEView {
     public OOBEView() {
         frame = new JFrame("LTH Setup");
         ArrayList<Image> multiIcon = new ArrayList<>();
-        multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-128px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-64px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-56px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-48px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-40px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-20px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-16px.png").getImage());
-        frame.add(new JLabel(new ImageIcon("resource/account/banner/banner1-50.png")), BorderLayout.NORTH);
+        multiIcon.add(FewFile.getImage("icons/icon-208px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-128px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-64px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-56px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-48px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-40px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-20px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-16px.png").getImage());
+        frame.add(new JLabel(FewFile.getImage("account/banner/banner1-50.png")), BorderLayout.NORTH);
         frame.setIconImages(multiIcon);
 
         frame.setLayout(new BorderLayout());
-        frame.add(new JLabel(new ImageIcon("resource/account/banner/banner2-10.png")), BorderLayout.WEST);
+        frame.add(new JLabel(FewFile.getImage("account/banner/banner2-10.png")), BorderLayout.WEST);
 
         contentPanel = new JPanel();
         contentPanel.setLayout(new CardLayout());

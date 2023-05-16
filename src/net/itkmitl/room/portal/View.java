@@ -118,14 +118,14 @@ public abstract class View extends JFrame {
     protected void initializeFrame() {
         this.setTitle("Laew Tae Hong");
         multiIcon = new ArrayList<>();
-        multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-128px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-64px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-56px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-48px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-40px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-20px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-16px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-208px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-128px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-64px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-56px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-48px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-40px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-20px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-16px.png").getImage());
         this.setIconImages(multiIcon);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setMinimumSize(new Dimension(1280, 720));

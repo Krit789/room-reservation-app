@@ -18,7 +18,7 @@ public class DataListTableView {
 
     public DataListTableView() {
         frame = new JInternalFrame("Table", true, true, true, true);
-        frame.setFrameIcon(new ImageIcon("resource/icons/tableview-16px.png"));
+        frame.setFrameIcon(FewFile.getImage("icons/tableview-16px.png"));
         frame.setLayout(new BorderLayout());
         titlePanel = new JPanel();
         pageTitle = new JLabel();
@@ -32,9 +32,9 @@ public class DataListTableView {
         northButtonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
         reloadButton = new JButton("Reload");
-        reloadButton.setIcon(new ImageIcon("resource/icons/reload-16px.png"));
+        reloadButton.setIcon(FewFile.getImage("icons/reload-16px.png"));
         viewEntryButton = new JButton("View");
-        viewEntryButton.setIcon(new ImageIcon("resource/icons/view-16px.png"));
+        viewEntryButton.setIcon(FewFile.getImage("icons/view-16px.png"));
         northButtonPanel.add(new JLabel("Operations"));
         northButtonPanel.add(reloadButton);
         northButtonPanel.add(viewEntryButton);

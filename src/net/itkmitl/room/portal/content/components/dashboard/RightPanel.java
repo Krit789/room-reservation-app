@@ -35,7 +35,7 @@ public class RightPanel extends JPanel implements ActionListener {
         namePanel = new JPanel();
         namePanel.setLayout(new GridBagLayout());
         editProfile = new JButton();
-        editProfile.setIcon(new ImageIcon("resource/icons/pencil-16px.png"));
+        editProfile.setIcon(FewFile.getImage("icons/pencil-16px.png"));
         editProfile.addActionListener(this);
 
 //        System.out.println(user.getFirstname());

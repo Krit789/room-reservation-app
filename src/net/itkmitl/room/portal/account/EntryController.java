@@ -4,6 +4,7 @@ import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumUserRole;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
@@ -82,7 +83,7 @@ public class EntryController extends Controller implements ActionListener, Compo
                 try {
                     FewQuery db = LaewTaeDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
-                    getView().registerPanel.getWarningLabel().setIcon(new ImageIcon("resource/icons/loading-32px.gif"));
+                    getView().registerPanel.getWarningLabel().setIcon(FewFile.getImage("icons/loading-32px.gif"));
                     if (userRepository.getExactUserByEmail(reg.getEmail()) == null) {
                         myUser = new User();
                         myUser.setEmail(reg.getEmail());
@@ -119,7 +120,7 @@ public class EntryController extends Controller implements ActionListener, Compo
             @Override
             protected Object doInBackground() throws Exception {
                 try {
-                    getView().loginPanel.getWarningLabel().setIcon(new ImageIcon("resource/icons/loading-32px.gif"));
+                    getView().loginPanel.getWarningLabel().setIcon(FewFile.getImage("icons/loading-32px.gif"));
                     FewQuery db = LaewTaeDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
                     myUser = userRepository.getExactUserByEmail(email);

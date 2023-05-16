@@ -257,7 +257,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
             panel.add(titlePanel, BorderLayout.NORTH);
             panel.add(passwordField, BorderLayout.CENTER);
             String[] options = new String[]{"OK", "Cancel"};
-            int option = JOptionPane.showOptionDialog(BaseWindow.baseFrame, panel, "Reset Password", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, new ImageIcon("resource/icons/key-32px.png"), options, options[0]);
+            int option = JOptionPane.showOptionDialog(BaseWindow.baseFrame, panel, "Reset Password", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, FewFile.getImage("icons/key-32px.png"), options, options[0]);
             if (option == 0 && !passwordField.getPassword().equals("")) // pressing OK button
             {
                 user.setPasswordHash(FewPassword.getSalt(new String(passwordField.getPassword())));

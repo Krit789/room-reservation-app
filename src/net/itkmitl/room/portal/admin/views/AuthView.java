@@ -21,17 +21,17 @@ public class AuthView {
     public AuthView() {
         frame = new JFrame("Laew Tae Hong Authentication");
         ArrayList<Image> multiIcon = new ArrayList<>();
-        multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-128px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-64px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-56px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-48px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-40px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-20px.png").getImage());
-        multiIcon.add(new ImageIcon("resource/icons/icon-16px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-208px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-128px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-64px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-56px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-48px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-40px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-20px.png").getImage());
+        multiIcon.add(FewFile.getImage("icons/icon-16px.png").getImage());
         frame.setIconImages(multiIcon);
         frame.setLayout(new BorderLayout());
-        bannerLabel = new JLabel(new ImageIcon("resource/account/banner/banner1-50.png"));
+        bannerLabel = new JLabel(FewFile.getImage("account/banner/banner1-50.png"));
         frame.add(bannerLabel, BorderLayout.NORTH);
         frame.setResizable(false);
         loginPanel = new JPanel();

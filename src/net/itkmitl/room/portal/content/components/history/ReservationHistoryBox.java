@@ -46,7 +46,7 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
         timeLabel.setFont(new Font("Cousine", Font.PLAIN, 20));
         dataPanel = new JPanel(new GridLayout(1, 5));
         dataPanel.setOpaque(false);
-        icon = new BoxIcon(new ImageIcon("resource/icons/round-table.png"));
+        icon = new BoxIcon(FewFile.getImage("icons/round-table.png"));
 
         add(icon, BorderLayout.WEST);
         add(Box.createHorizontalStrut(15));

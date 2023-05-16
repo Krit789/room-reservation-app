@@ -7,19 +7,19 @@ public class DataListEditableView extends DataListTableView {
 
     public DataListEditableView() {
         super();
-        frame.setFrameIcon(new ImageIcon("resource/icons/tableedit-16px.png"));
+        frame.setFrameIcon(FewFile.getImage("icons/tableedit-16px.png"));
         frame.setTitle("Editable Table");
 
         createButton = new JButton("Create");
-        createButton.setIcon(new ImageIcon("resource/icons/create-16px.png"));
+        createButton.setIcon(FewFile.getImage("icons/create-16px.png"));
 
 
         editSelectedButton = new JButton("Edit");
-        editSelectedButton.setIcon(new ImageIcon("resource/icons/update-16px.png"));
+        editSelectedButton.setIcon(FewFile.getImage("icons/update-16px.png"));
 
 
         deletedSelectedButton = new JButton("Delete");
-        deletedSelectedButton.setIcon(new ImageIcon("resource/icons/delete-16px.png"));
+        deletedSelectedButton.setIcon(FewFile.getImage("icons/delete-16px.png"));
 
         northButtonPanel.add(createButton);
         northButtonPanel.add(editSelectedButton);

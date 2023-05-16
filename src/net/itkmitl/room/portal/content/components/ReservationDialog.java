@@ -75,7 +75,7 @@ public class ReservationDialog extends JDialog {
         datePickerSettings1.setEnableYearMenu(false);
         datePickerSettings1.setAllowEmptyDates(false);
         datePickerSettings1.setEnableMonthMenu(false);
-        reservationDatePicker.getComponentToggleCalendarButton().setIcon(new ImageIcon("resource/icons/calendar-16px.png"));
+        reservationDatePicker.getComponentToggleCalendarButton().setIcon(FewFile.getImage("icons/calendar-16px.png"));
         reservationDatePicker.getComponentToggleCalendarButton().setText("");
         reservationDatePicker.getComponentDateTextField().setBorder(border);
         reservationDatePicker.setDateToToday();
@@ -98,7 +98,7 @@ public class ReservationDialog extends JDialog {
         segmentPanel.setBackground(Color.white);
         segmentPanel.setLayout(new GridBagLayout());
         segmentLoadingLabel = new JLabel();
-        segmentLoadingLabel.setIcon(new ImageIcon("resource/icons/loading-16px.gif"));
+        segmentLoadingLabel.setIcon(FewFile.getImage("icons/loading-16px.gif"));
         segmentPanel.add(segmentBox, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.99, 0, 0, new Insets(0, 0, 0, 0)).getGBC());
         segmentPanel.add(segmentLoadingLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 0, new Insets(0, 5, 0, 0)).getGBC());
         selectionPanel.add(segmentPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 3, new Insets(10, 15, 5, 15)).getGBC());

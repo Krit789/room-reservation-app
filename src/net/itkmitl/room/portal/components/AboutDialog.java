@@ -35,7 +35,7 @@ public class AboutDialog implements ActionListener, ListSelectionListener {
         titlePanel.add(title);
         titlePanel.add(menuDesc);
         try {
-            logo1 = new JLabel(new ImageIcon("resource/icons/icon-48px.png"));
+            logo1 = new JLabel(FewFile.getImage("icons/icon-48px.png"));
         } catch (Exception ex) {
             ex.printStackTrace();
             logo1 = new JLabel("Logo");

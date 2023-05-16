@@ -19,7 +19,7 @@ public class DataSearchView {
         frame = new JInternalFrame("Table Search", false, true, false, false);
         frame.setMinimumSize(new Dimension(480, 200));
         frame.setSize(480, 200);
-        frame.setFrameIcon(new ImageIcon("resource/icons/tablesearch-16px.png"));
+        frame.setFrameIcon(FewFile.getImage("icons/tablesearch-16px.png"));
         frame.setLayout(new BorderLayout());
         frame.setFocusable(true);
 

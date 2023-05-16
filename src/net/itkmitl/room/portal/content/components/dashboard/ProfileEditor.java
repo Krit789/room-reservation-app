@@ -37,7 +37,7 @@ public class ProfileEditor extends JDialog implements ActionListener, WindowList
         super(MainContentController.view, "Profile Editor", false);
         this.myUser = myUser;
         setBackground(Color.white);
-        setIconImage(new ImageIcon("resource/icons/tableedit-16px.png").getImage());
+        setIconImage(FewFile.getImage("icons/tableedit-16px.png").getImage());
         setLayout(new BorderLayout());
 
         titlePanel = new JPanel();
@@ -221,7 +221,7 @@ public class ProfileEditor extends JDialog implements ActionListener, WindowList
             panel.add(titlePanel, BorderLayout.NORTH);
             panel.add(passwordField, BorderLayout.CENTER);
             String[] options = new String[]{"OK", "Cancel"};
-            int option = JOptionPane.showOptionDialog(BaseWindow.baseFrame, panel, "Change Password", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, new ImageIcon("resource/icons/key-32px.png"), options, options[0]);
+            int option = JOptionPane.showOptionDialog(BaseWindow.baseFrame, panel, "Change Password", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, FewFile.getImage("icons/key-32px.png"), options, options[0]);
             if (option == 0 && !passwordField.getPassword().equals("") && String.valueOf(passwordField.getPassword()).length() > 4) {
                 myUser.setPasswordHash(FewPassword.getSalt(new String(passwordField.getPassword())));
             } else if (option == 0) {

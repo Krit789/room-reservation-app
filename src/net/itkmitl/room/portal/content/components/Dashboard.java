@@ -35,7 +35,7 @@ public class Dashboard extends CardView {
         contentPanel.setOpaque(false);
 
         JPanel titleBox = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel lthIcon = new JLabel(new ImageIcon("resource/icons/icon-64px.png"));
+        JLabel lthIcon = new JLabel(FewFile.getImage("icons/icon-64px.png"));
         JLabel title = new JLabel("LAEW TAE HONG");
 
         titleBox.setOpaque(false);

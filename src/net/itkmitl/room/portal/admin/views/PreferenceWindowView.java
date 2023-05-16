@@ -32,7 +32,7 @@ public class PreferenceWindowView {
             e.printStackTrace();
         }
         frame = new JInternalFrame("Preferences", false, true, false, false);
-        frame.setFrameIcon(new ImageIcon("resource/icons/settings-16px.png"));
+        frame.setFrameIcon(FewFile.getImage("icons/settings-16px.png"));
         frame.setMinimumSize(new Dimension(512, 400));
         frame.setSize(512, 400);
         frame.setFocusable(true);

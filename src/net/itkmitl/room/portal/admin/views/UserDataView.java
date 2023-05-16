@@ -31,7 +31,7 @@ public class UserDataView {
 
     public UserDataView() {
         frame = new JInternalFrame("User Data", false, true, false, true);
-        frame.setFrameIcon(new ImageIcon("resource/icons/tableedit-16px.png"));
+        frame.setFrameIcon(FewFile.getImage("icons/tableedit-16px.png"));
         frame.setLayout(new BorderLayout());
 
         titlePanel = new JPanel();

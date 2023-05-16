@@ -35,7 +35,7 @@ public class ReservationDataView {
 
     public ReservationDataView() {
         frame = new JInternalFrame("Reservation Data", false, true, false, true);
-        frame.setFrameIcon(new ImageIcon("resource/icons/tableedit-16px.png"));
+        frame.setFrameIcon(FewFile.getImage("icons/tableedit-16px.png"));
         frame.setLayout(new BorderLayout());
 
         titlePanel = new JPanel();
@@ -121,12 +121,12 @@ public class ReservationDataView {
         startDatePicker = new DatePicker(datePickerSettings1);
         startDatePicker.getComponentDateTextField().setBorder(new LineBorder(new Color(60, 60, 60), 1));
         startDatePicker.setDateToToday();
-        startDatePicker.getComponentToggleCalendarButton().setIcon(new ImageIcon("resource/icons/calendar-16px.png"));
+        startDatePicker.getComponentToggleCalendarButton().setIcon(FewFile.getImage("icons/calendar-16px.png"));
         startDatePicker.getComponentToggleCalendarButton().setText("");
         endDatePicker = new DatePicker(datePickerSettings2);
         endDatePicker.getComponentDateTextField().setBorder(new LineBorder(new Color(60, 60, 60), 1));
         endDatePicker.setDateToToday();
-        endDatePicker.getComponentToggleCalendarButton().setIcon(new ImageIcon("resource/icons/calendar-16px.png"));
+        endDatePicker.getComponentToggleCalendarButton().setIcon(FewFile.getImage("icons/calendar-16px.png"));
         endDatePicker.getComponentToggleCalendarButton().setText("");
 
 

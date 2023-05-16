@@ -154,7 +154,7 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
 
     private void updateReservationSegment() {
         view.okButton.setEnabled(false);
-        view.segmentLoadingLabel.setIcon(new ImageIcon("resource/icons/loading-16px.gif"));
+        view.segmentLoadingLabel.setIcon(FewFile.getImage("icons/loading-16px.gif"));
         view.segmentBox.removeAllItems();
         view.segmentBox.setEnabled(false);
         for (ReservableEntity re : availableTime) {
@@ -163,11 +163,11 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
             }
         }
         if (view.segmentBox.getItemCount() == 0) {
-            view.segmentLoadingLabel.setIcon(new ImageIcon("resource/icons/info-16px.png"));
+            view.segmentLoadingLabel.setIcon(FewFile.getImage("icons/info-16px.png"));
             view.segmentLoadingLabel.setToolTipText("No reservation available on selected date");
         } else {
             view.segmentBox.setEnabled(true);
-            view.segmentLoadingLabel.setIcon(new ImageIcon("resource/icons/yes-16px.png"));
+            view.segmentLoadingLabel.setIcon(FewFile.getImage("icons/yes-16px.png"));
             view.segmentLoadingLabel.setToolTipText("Fetch Successful");
             view.okButton.setEnabled(true);
         }

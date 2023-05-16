@@ -39,7 +39,7 @@ public class OutPane extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Image image = new ImageIcon(FewFile.getImage("account/img/Gradient.png")).getImage();
+        Image image = FewFile.getImage("account/img/Gradient.png").getImage();
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
         g2d.drawImage(image, 0, 0, getWidth(), getHeight(), this);
