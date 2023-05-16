@@ -19,9 +19,9 @@ public class HistoryLeftPanel extends RoundedPanel {
         btnPanel = new JPanel(new GridBagLayout());
         southPanel = new JPanel(new FlowLayout());
 
-        successBtn = new HistoryLeftButton("src/net/itkmitl/room/portal/content/components/history/asset/checkmark.png", "Success");
-        pendingBtn = new HistoryLeftButton("src/net/itkmitl/room/portal/content/components/history/asset/loading.png", "Pending");
-        canceledBtn = new HistoryLeftButton("src/net/itkmitl/room/portal/content/components/history/asset/cancelled.png", "Cancelled");
+        successBtn = new HistoryLeftButton("resource/content/history/checkmark.png", "Success");
+        pendingBtn = new HistoryLeftButton("resource/content/history/loading.png", "Pending");
+        canceledBtn = new HistoryLeftButton("resource/content/history/cancelled.png", "Cancelled");
 
 //        btnPanel.add(successBtn);
 //        btnPanel.add(pendingBtn);
@@ -36,7 +36,7 @@ public class HistoryLeftPanel extends RoundedPanel {
         constraints.anchor = GridBagConstraints.NORTHWEST;
 
         btnPanel.setPreferredSize(new Dimension(350, getHeight()));
-                btnPanel.setBorder(new EmptyBorder(20,20,20,20));
+        btnPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         btnPanel.add(successBtn, constraints);
         btnPanel.add(pendingBtn, constraints);
         btnPanel.add(canceledBtn, constraints);

@@ -60,7 +60,7 @@ public class WelcomePanel extends RoundedPanel {
 //        txt.setBorder(BorderFactory.createEmptyBorder(, 60, 60, ));
         txt.setLayout(new GridLayout(4, 1));
 
-        welcomeIcon = new BoxIcon(new ImageIcon("resource/account/banner/welcomeImage.png"));
+        welcomeIcon = new BoxIcon(new ImageIcon("resource/content/dashboard/welcomeImage.png"));
 //        welcomeIcon.setSize(600, 600);
         welcomeIcon.setPreferredSize(new Dimension(500, 500));
 

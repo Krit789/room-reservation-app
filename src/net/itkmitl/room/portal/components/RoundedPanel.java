@@ -1,18 +1,18 @@
 package net.itkmitl.room.portal.components;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class RoundedPanel extends JPanel {
-    /**
-	 *
-	 */
-	private static final long serialVersionUID = -6903556553578428210L;
-	private int arcWidth;
+    private static final long serialVersionUID = -6903556553578428210L;
+    private int arcWidth;
     private int arcHeight;
     private Color backgroundColor, color1, color2;
+
     {
         setOpaque(false);
+        setBorder(new EmptyBorder(5, 5, 5, 5));
     }
 
     public void setBackgroundColor(Color backgroundColor) {

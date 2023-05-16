@@ -27,11 +27,11 @@ public class ReservationBox extends RoundedPanel {
         redirectButton.setSizeSpeed(30f);
         redirectButton.setActionCommand(title);
         if (title.equals("History")) {
-            ImageIcon icon = resizeIcon(new ImageIcon("resource/icons/history.png"), iconWidth, iconHeight);
+            ImageIcon icon = resizeIcon(new ImageIcon("resource/content/dashboard/history.png"), iconWidth, iconHeight);
             this.add(new BoxIcon(icon), BorderLayout.CENTER);
             buttonBox[0] = redirectButton;
         } else if (title.equals("Booking")) {
-            ImageIcon icon = resizeIcon(new ImageIcon("resource/icons/booking.png"), iconWidth, iconHeight);
+            ImageIcon icon = resizeIcon(new ImageIcon("resource/content/dashboard/booking.png"), iconWidth, iconHeight);
             this.add(new BoxIcon(icon), BorderLayout.CENTER);
             buttonBox[1] = redirectButton;
         } else {
