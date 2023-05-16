@@ -1,6 +1,7 @@
 package net.itkmitl.room.portal.components;
 
 import net.itkmitl.room.db.LaewTaeDB;
+import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
@@ -26,34 +27,38 @@ public class RoomLoader {
     public static void loadRoom() {
         SwingWorker worker = new SwingWorker() {
             @Override
-            protected Object doInBackground() throws Exception {
-                FewQuery db = LaewTaeDB.getDB();
-                roomList = new RoomRepository(db).getRooms();
-                for (Room room : roomList) {
-                    if (buildingList.containsKey(room.getBuilding())) {
-                        buildingList.get(room.getBuilding()).add(room);
-                    } else {
-                        buildingList.put(room.getBuilding(), new ArrayList<Room>());
-                        buildingList.get(room.getBuilding()).add(room);
-                    }
-                }
-                for (String building : buildingList.keySet()) {
-                    floorList.put(building, new HashMap<String, Floor>());
-                }
-                for (String building : buildingList.keySet()) { // Get Key
-                    for (Room room : buildingList.get(building)) { // Get Value
-                        if (floorList.get(building).containsKey(room.getFloor())) {
-                            for (Map.Entry<String, Floor> insideMap : floorList.get(building).entrySet()) {
-                                if (insideMap.getKey().equals(room.getFloor())) {
-                                    floorList.get(building).get(room.getFloor()).addRoom(room);
-                                }
-                            }
+            protected Object doInBackground() {
+                try {
+                    FewQuery db = LaewTaeDB.getDB();
+                    roomList = new RoomRepository(db).getRooms();
+                    for (Room room : roomList) {
+                        if (buildingList.containsKey(room.getBuilding())) {
+                            buildingList.get(room.getBuilding()).add(room);
                         } else {
-                            Floor floor = new Floor();
-                            floor.addRoom(room);
-                            floorList.get(building).put(room.getFloor(), floor);
+                            buildingList.put(room.getBuilding(), new ArrayList<Room>());
+                            buildingList.get(room.getBuilding()).add(room);
                         }
                     }
+                    for (String building : buildingList.keySet()) {
+                        floorList.put(building, new HashMap<String, Floor>());
+                    }
+                    for (String building : buildingList.keySet()) { // Get Key
+                        for (Room room : buildingList.get(building)) { // Get Value
+                            if (floorList.get(building).containsKey(room.getFloor())) {
+                                for (Map.Entry<String, Floor> insideMap : floorList.get(building).entrySet()) {
+                                    if (insideMap.getKey().equals(room.getFloor())) {
+                                        floorList.get(building).get(room.getFloor()).addRoom(room);
+                                    }
+                                }
+                            } else {
+                                Floor floor = new Floor();
+                                floor.addRoom(room);
+                                floorList.get(building).put(room.getFloor(), floor);
+                            }
+                        }
+                    }
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ProgramError.getStackTrace(ex), "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 buildingList = null;
                 return null;
