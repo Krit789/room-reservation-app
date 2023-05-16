@@ -1,22 +1,15 @@
 package net.itkmitl.room.portal.content.components.dashboard;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.components.GBCBuilder;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.Serial;
+
 public class RightPanel extends JPanel {
+    @Serial
     private static final long serialVersionUID = 3515411566688472487L;
     private AppStore store = AppStore.getAppStore();
     public JLabel nameLabel;

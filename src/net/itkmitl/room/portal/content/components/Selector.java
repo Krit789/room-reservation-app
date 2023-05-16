@@ -4,14 +4,15 @@ import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.CardView;
 import net.itkmitl.room.portal.components.*;
 import net.itkmitl.room.portal.components.entity.Floor;
-import net.itkmitl.room.portal.content.MainContentView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Selector extends CardView {
+    @Serial
     private static final long serialVersionUID = -8564430568200760268L;
     public JPanel leftPanel, innerPanel, mainPanel, header, leftSelectorPanel, cardsOfBuildingsFloorPanel;
     public JLabel testLabel;//delete later

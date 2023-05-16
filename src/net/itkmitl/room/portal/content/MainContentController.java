@@ -7,7 +7,6 @@ import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.LeftSelectorBox;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

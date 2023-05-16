@@ -3,14 +3,15 @@ package net.itkmitl.room.portal.content.components.dashboard;
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.RoundedPanel;
 
-import java.awt.*;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.io.Serial;
 
 import static net.itkmitl.room.portal.content.components.dashboard.ReservationPanel.buttonBox;
 
 public class ReservationBox extends RoundedPanel {
+    @Serial
     private static final long serialVersionUID = 3285944903070661887L;
     public ButtonGradient redirectButton;
     private BoxIcon icon;
@@ -27,11 +28,11 @@ public class ReservationBox extends RoundedPanel {
         redirectButton.setSizeSpeed(30f);
         redirectButton.setActionCommand(title);
         if (title.equals("History")) {
-            ImageIcon icon = resizeIcon(new ImageIcon("resource/icons/history.png"), iconWidth, iconHeight);
+            ImageIcon icon = resizeIcon(new ImageIcon("resource/content/dashboard/history.png"), iconWidth, iconHeight);
             this.add(new BoxIcon(icon), BorderLayout.CENTER);
             buttonBox[0] = redirectButton;
         } else if (title.equals("Booking")) {
-            ImageIcon icon = resizeIcon(new ImageIcon("resource/icons/booking.png"), iconWidth, iconHeight);
+            ImageIcon icon = resizeIcon(new ImageIcon("resource/content/dashboard/booking.png"), iconWidth, iconHeight);
             this.add(new BoxIcon(icon), BorderLayout.CENTER);
             buttonBox[1] = redirectButton;
         } else {

@@ -94,7 +94,6 @@ public class ReservationDialog extends JDialog {
         segmentPanel.add(segmentLoadingLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.01, 1, 0, new Insets(0, 5, 0, 0)).getGBC());
         selectionPanel.add(segmentPanel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 3, new Insets(10, 15, 5, 15)).getGBC());
 
-
         selectionPanel.add(lengthLabel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 4, new Insets(5, 15, 0, 15)).setAnchor(GridBagConstraints.WEST));
 
         lengthPanel = new JPanel();

@@ -4,19 +4,18 @@ import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
 
-import java.awt.*;
-
 import javax.swing.*;
+import java.awt.*;
+import java.io.Serial;
 
 public class WelcomePanel extends RoundedPanel {
+    @Serial
+    private static final long serialVersionUID = -4015833019658837000L;
     private JLabel t1, t2, t3, rightLabel;
     private JPanel p1, p2, p3;
     private JPanel leftPanel, rightPanel, txt, iconPanel;
     private BoxIcon welcomeIcon;
     public ButtonGradient bookingButton;
-
-
-    private static final long serialVersionUID = -4015833019658837000L;
 
     public WelcomePanel() {
         super();
@@ -60,7 +59,7 @@ public class WelcomePanel extends RoundedPanel {
 //        txt.setBorder(BorderFactory.createEmptyBorder(, 60, 60, ));
         txt.setLayout(new GridLayout(4, 1));
 
-        welcomeIcon = new BoxIcon(new ImageIcon("resource/account/banner/welcomeImage.png"));
+        welcomeIcon = new BoxIcon(new ImageIcon("resource/content/dashboard/welcomeImage.png"));
 //        welcomeIcon.setSize(600, 600);
         welcomeIcon.setPreferredSize(new Dimension(500, 500));
 

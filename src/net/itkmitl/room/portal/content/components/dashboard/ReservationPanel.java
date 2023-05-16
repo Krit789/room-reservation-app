@@ -3,11 +3,12 @@ package net.itkmitl.room.portal.content.components.dashboard;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.TransparentPanel;
 
-import java.awt.*;
-
 import javax.swing.*;
+import java.awt.*;
+import java.io.Serial;
 
 public class ReservationPanel extends TransparentPanel {
+    @Serial
     private static final long serialVersionUID = -2988916769883492575L;
 
     public JLabel reservationTextLabel;

@@ -6,15 +6,19 @@ import net.itkmitl.room.portal.content.components.dashboard.BoxIcon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serial;
 
 public class ReservationHistoryBox extends RoundedPanel {
+    @Serial
+    private static final long serialVersionUID = -4015833019658837000L;
     public ButtonGradient feedBackBtn, cancelBtn;
     private JLabel timeLabel, dateLabel, nameLabel;
     private JPanel dataPanel;
     private BoxIcon icon;
-    public ReservationHistoryBox(String name, String time, String date, boolean isComplete){
+
+    public ReservationHistoryBox(String name, String time, String date, boolean isComplete) {
         super(30, 40, Color.white);
-        setPreferredSize(new Dimension( (int) this.getBounds().getSize().getWidth(), 235));
+        setPreferredSize(new Dimension((int) this.getBounds().getSize().getWidth(), 235));
 
         feedBackBtn = new ButtonGradient("FeedBack", Color.green);
         feedBackBtn.setActionCommand("FeedBack");
@@ -41,9 +45,9 @@ public class ReservationHistoryBox extends RoundedPanel {
         dataPanel.add(dateLabel);
         add(dataPanel, BorderLayout.CENTER);
         add(Box.createHorizontalStrut(15));
-        if(isComplete) {
+        if (isComplete) {
             add(feedBackBtn, BorderLayout.EAST);
-        }else{
+        } else {
             add(cancelBtn, BorderLayout.EAST);
         }
     }

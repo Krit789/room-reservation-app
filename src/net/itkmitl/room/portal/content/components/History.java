@@ -4,11 +4,9 @@ import net.itkmitl.room.portal.CardView;
 import net.itkmitl.room.portal.content.components.history.HistoryLeftPanel;
 import net.itkmitl.room.portal.content.components.history.HistoryRightPanel;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class History extends CardView {
-    public JPanel mainPanel;
     public HistoryLeftPanel leftPanel;
     public HistoryRightPanel rightPanel;
 
