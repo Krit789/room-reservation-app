@@ -17,7 +17,7 @@ import static net.itkmitl.room.portal.content.components.dashboard.ReservationPa
 
 
 public class MainContentController extends Controller implements ActionListener {
-    private final MainContentView view;
+    public static MainContentView view = null;
     private AppStore store = AppStore.getAppStore();
 
     public MainContentController(MainContentView view) {
@@ -80,9 +80,8 @@ public class MainContentController extends Controller implements ActionListener 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(this.getView().optionMenuItem1) && ((User) store.select("user")).getRole().getLevel() >= 10) {
-            this.getView().dispose();
-            String[] arguments = new String[]{""};
-            BaseWindow.main(arguments);
+            this.getView().setVisible(false);
+            BaseWindow.main(new String[]{""});
         } else if (e.getSource().equals(this.getView().helpMenuItem1)) {
             new AboutDialog(this.getView());
         }

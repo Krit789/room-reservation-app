@@ -16,7 +16,6 @@ public class EntryView extends View {
     @Override
     protected void initialize() {
         contentPanel = new JPanel(new CardLayout());
-//        contentPanel.setBorder(BorderFactory.createEmptyBorder(213, 213, 213, 213));
         contentPanel.setOpaque(false);
         loginPanel = new LoginPanel();
         registerPanel = new RegisterPanel();
@@ -25,15 +24,6 @@ public class EntryView extends View {
         this.add(contentPanel);
         this.setBackground(Color.white);
         this.repaint();
-//        repaintOuterPane();
-//        loginPanel.repaint();
-//        loginPanel.revalidate();
-//        registerPanel.repaint();
-//        registerPanel.revalidate();
-//        this.revalidate();
-//        this.repaint();
-//        outerPane.revalidate();
-//        outerPane.repaint();
 
     }
 }

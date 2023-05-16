@@ -39,7 +39,9 @@ import javax.swing.event.InternalFrameListener;
 
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 
-import net.itkmitl.room.GUIStarter;
+import net.itkmitl.room.libs.phatsanphon.UIConfig;
+import net.itkmitl.room.libs.phatsanphon.entity.User;
+import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.admin.controllers.AuthController;
 import net.itkmitl.room.portal.admin.controllers.OperationWindowController;
 import net.itkmitl.room.portal.admin.controllers.PreferenceWindowController;
@@ -48,8 +50,9 @@ import net.itkmitl.room.portal.admin.views.PreferenceWindowView;
 import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.LoadingDialog;
+import net.itkmitl.room.portal.content.MainContentController;
 import net.itkmitl.room.portal.content.MainContentPortal;
-import net.itkmitl.room.portal.content.components.Dashboard;
+import net.itkmitl.room.portal.content.MainContentView;
 
 public class BaseWindow extends ComponentAdapter implements ActionListener, InternalFrameListener {
     private final OperationWindowView mainMenu;
@@ -278,8 +281,8 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
             }
         } else if (e.getSource().equals(optionMenuItem4)) {
             baseFrame.dispose();
-            String[] arguments = new String[]{""};
-            MainContentPortal.main(arguments);
+            UIConfig.setLookAndFeel();
+            MainContentController.view.setVisible(true);
         } else if (e.getSource().equals(windowCheckBoxMenuItem1)) {
             windowCheckBoxMenuItem1.setState(!autoCenterMainMenu);
             autoCenterMainMenu = !autoCenterMainMenu;
@@ -398,11 +401,10 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                if (AuthController.authenticated) {
-                    new BaseWindow(); //start the application
-                } else {
+                if (AppStore.getAppStore().select("user") != null && ((User) AppStore.getAppStore().select("user")).getRole().getLevel() > 10) {
                     new BaseWindow();
-//                    new AuthController();
+                } else {
+                    new AuthController();
                 }
             }
         });
