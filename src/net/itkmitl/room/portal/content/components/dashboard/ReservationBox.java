@@ -11,11 +11,11 @@ import java.io.Serial;
 import static net.itkmitl.room.portal.content.components.dashboard.ReservationPanel.buttonBox;
 
 public class ReservationBox extends RoundedPanel {
+    public static final int iconWidth = 140, iconHeight = 140;
     @Serial
     private static final long serialVersionUID = 3285944903070661887L;
     public ButtonGradient redirectButton;
     private BoxIcon icon;
-    public static final int iconWidth = 140, iconHeight = 140;
 
     public ReservationBox(String title) {
         super(30, 30);

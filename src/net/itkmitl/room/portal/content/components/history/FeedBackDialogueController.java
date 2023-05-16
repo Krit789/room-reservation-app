@@ -11,8 +11,9 @@ import java.awt.event.WindowListener;
 
 public class FeedBackDialogueController implements ActionListener, WindowListener {
     public FeedBackDialogue view;
-    private Room myRoom;
-    public FeedBackDialogueController(JFrame parent, Room room){
+    private final Room myRoom;
+
+    public FeedBackDialogueController(JFrame parent, Room room) {
         myRoom = room;
         view = new FeedBackDialogue(parent/*, room*/);
         dataFetch();
@@ -31,16 +32,18 @@ public class FeedBackDialogueController implements ActionListener, WindowListene
         view.rating45.addActionListener(this);
         view.rating50.addActionListener(this);
     }
+
     private void disableGlassPane() {
         MainContentView.glassPane.setVisible(false);
         MainContentView.glassPane.setEnabled(false);
     }
+
     private void dataFetch() {
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(view.cancelBtn)){
+        if (e.getSource().equals(view.cancelBtn)) {
             view.dispose();
             disableGlassPane();
         } else if (e.getSource() instanceof JRadioButton & !view.submitBtn.isEnabled()) {

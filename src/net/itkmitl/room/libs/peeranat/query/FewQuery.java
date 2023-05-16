@@ -1,17 +1,17 @@
 package net.itkmitl.room.libs.peeranat.query;
 
+import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.util.HashMap;
 
-import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
-
 public class FewQuery {
 
-    private Connection connection;
-    private HashMap<String, FewSimpleValue> fields;
+    private final Connection connection;
+    private final HashMap<String, FewSimpleValue> fields;
     private int queryCount;
     private ResultSet result;
     private ResultSetMetaData resultMeta;
@@ -23,7 +23,7 @@ public class FewQuery {
         this.fields = new HashMap<>();
     }
 
-    public FewQuery query(FewMySQLBuilder query) throws Exception{
+    public FewQuery query(FewMySQLBuilder query) throws Exception {
         try {
             PreparedStatement statement = this.connection.prepareStatement(
                     query.builder(),
@@ -55,7 +55,7 @@ public class FewQuery {
 
     public FewQuery unsafeQuery(String query) throws Exception {
         try {
-        	PreparedStatement statement = this.connection.prepareStatement(
+            PreparedStatement statement = this.connection.prepareStatement(
                     query,
                     PreparedStatement.RETURN_GENERATED_KEYS
             );
@@ -83,13 +83,13 @@ public class FewQuery {
 
     public void close() {
         try {
-			if (this.result == null) {
-				return;
-			}
-			if (this.result.isClosed()) {
-				return;
-			}
-			this.result.close();
+            if (this.result == null) {
+                return;
+            }
+            if (this.result.isClosed()) {
+                return;
+            }
+            this.result.close();
         } catch (Exception e) {
             System.out.println("ERROR: Unable to close query (" + e.getMessage() + ")");
         }
@@ -116,7 +116,7 @@ public class FewQuery {
         try {
             boolean isNext = this.result.next();
             if (!isNext) {
-            	return false;
+                return false;
             }
             for (int col = 1; col <= this.resultMeta.getColumnCount(); col++) {
                 String fieldName = this.resultMeta.getColumnName(col);

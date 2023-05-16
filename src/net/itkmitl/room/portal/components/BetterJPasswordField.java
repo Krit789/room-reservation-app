@@ -1,27 +1,24 @@
 package net.itkmitl.room.portal.components;
 
-import java.awt.Color;
-import java.awt.Font;
+import net.itkmitl.room.libs.peeranat.util.FewPassword;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JPasswordField;
-import javax.swing.border.Border;
-
-import net.itkmitl.room.libs.peeranat.util.FewPassword;
-
 public class BetterJPasswordField extends JPasswordField implements MouseListener, FocusListener {
     /**
-	 *
-	 */
-	private static final long serialVersionUID = 7347697827946283962L;
-	private Color normalBgColor = Color.WHITE;
+     *
+     */
+    private static final long serialVersionUID = 7347697827946283962L;
+    private Color normalBgColor = Color.WHITE;
     private Color hoverBgColor = new Color(246, 246, 246);
     private Color borderColor = Color.LIGHT_GRAY;
-    private Color activeBorderColor = new Color(94, 135, 197);
+    private final Color activeBorderColor = new Color(94, 135, 197);
     private String placeholderText;
     private Boolean selected;
 
@@ -36,6 +33,7 @@ public class BetterJPasswordField extends JPasswordField implements MouseListene
         addMouseListener(this);
         addFocusListener(this);
     }
+
     public void setPlaceholderText(String placeholderText) {
         this.placeholderText = placeholderText;
     }
@@ -43,7 +41,8 @@ public class BetterJPasswordField extends JPasswordField implements MouseListene
     public void setHoverBgColor(Color hoverBgColor) {
         this.hoverBgColor = hoverBgColor;
     }
-        public void setBorderColor(Color borderColor) {
+
+    public void setBorderColor(Color borderColor) {
         this.borderColor = borderColor;
     }
 
@@ -66,6 +65,7 @@ public class BetterJPasswordField extends JPasswordField implements MouseListene
         }
         this.repaint();
     }
+
     @Override
     public void mouseClicked(MouseEvent e) {
 

@@ -2,8 +2,6 @@ package net.itkmitl.room.libs.peeranat.util;
 
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumRoomState;
-import net.itkmitl.room.libs.peeranat.FewDB;
-import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 

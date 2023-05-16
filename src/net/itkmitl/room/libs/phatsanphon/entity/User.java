@@ -84,13 +84,13 @@ public class User extends Entity {
         return role;
     }
 
+    public void setRole(EnumUserRole role) {
+        this.role = role;
+    }
+
     public boolean isStaff() {
         //Because staff level is then more 10
         return role.getLevel() >= 10;
-    }
-
-    public void setRole(EnumUserRole role) {
-        this.role = role;
     }
 
     public DateTime getCreatedOn() {

@@ -1,19 +1,5 @@
 package net.itkmitl.room.portal.account;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumUserRole;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
@@ -27,16 +13,20 @@ import net.itkmitl.room.portal.account.components.LoginPanel;
 import net.itkmitl.room.portal.account.components.RegisterPanel;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
-import net.itkmitl.room.portal.components.BetterJTextField;
 import net.itkmitl.room.portal.content.MainContentPortal;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.awt.event.*;
 
 public class EntryController extends Controller implements ActionListener, ComponentListener, DocumentListener, MouseListener {
     private final EntryView view;
-    private User myUser;
-    private AppStore store = AppStore.getAppStore();
-
     private final LoginPanel loginPanel;
     private final RegisterPanel registerPanel;
+    private User myUser;
+    private final AppStore store = AppStore.getAppStore();
     private String currentCard = "Login";
 
     public EntryController(EntryView view) {
@@ -163,7 +153,7 @@ public class EntryController extends Controller implements ActionListener, Compo
     @Override
     public void actionPerformed(ActionEvent e) {
         Object objectPerformed = e.getSource();
-        if (objectPerformed.equals(this.getView().optionMenuItem1) && ((User) store.select("user")) != null) {
+        if (objectPerformed.equals(this.getView().optionMenuItem1) && store.select("user") != null) {
             this.getView().dispose();
             String[] arguments = new String[]{""};
             BaseWindow.main(arguments);

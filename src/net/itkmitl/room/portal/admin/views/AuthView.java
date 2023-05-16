@@ -1,35 +1,24 @@
 package net.itkmitl.room.portal.admin.views;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.Insets;
-import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.portal.components.GBCBuilder;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.util.ArrayList;
+
 public class AuthView {
-    private JFrame frame;
-    private JPanel loginPanel, buttonPanel;
     public JButton loginButton, cancelButton;
-    private JLabel userLabel, passwordLabel;
     public JLabel alertLabel, bannerLabel;
     public JTextField loginField;
     public JPasswordField passwordField;
+    private final JFrame frame;
+    private final JPanel loginPanel;
+    private final JPanel buttonPanel;
+    private final JLabel userLabel;
+    private final JLabel passwordLabel;
 
-    public AuthView(){
+    public AuthView() {
         frame = new JFrame("Laew Tae Hong Authentication");
         ArrayList<Image> multiIcon = new ArrayList<>();
         multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
@@ -62,7 +51,7 @@ public class AuthView {
         loginPanel.add(alertLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 2, new Insets(0, 0, 10, 10)).getGBC());
 
         buttonPanel = new JPanel();
-        buttonPanel.setBorder(new EmptyBorder(0, 0 ,5 ,5));
+        buttonPanel.setBorder(new EmptyBorder(0, 0, 5, 5));
         buttonPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         loginButton = new JButton("Login");
         cancelButton = new JButton("Cancel");
@@ -78,7 +67,7 @@ public class AuthView {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    public JFrame getFrame(){
+    public JFrame getFrame() {
         return frame;
     }
 }

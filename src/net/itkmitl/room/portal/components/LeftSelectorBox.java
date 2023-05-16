@@ -1,18 +1,17 @@
 package net.itkmitl.room.portal.components;
 
-import java.awt.Color;
-import java.awt.Font;
-
-import javax.swing.JButton;
+import javax.swing.*;
+import java.awt.*;
 
 public class LeftSelectorBox extends JButton {
     /**
-	 *
-	 */
-	private static final long serialVersionUID = -3861775095110257593L;
-	public int boxID;
+     *
+     */
+    private static final long serialVersionUID = -3861775095110257593L;
+    public int boxID;
     public String type = "Select Box ";
-    public LeftSelectorBox(String name, int ID){
+
+    public LeftSelectorBox(String name, int ID) {
         super(name);
         boxID = ID;
         this.setFont(new Font("Cousine", Font.BOLD, 20));

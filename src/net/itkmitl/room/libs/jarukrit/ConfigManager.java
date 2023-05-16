@@ -26,7 +26,7 @@ public class ConfigManager {
     }
 
     public static ArrayList<String> getConnectionConfig() {
-    	FewConfig config = new FewConfig(new File("config.yml"));
+        FewConfig config = new FewConfig(new File("config.yml"));
         ArrayList<String> myConnection = new ArrayList<>();
         myConnection.add(config.getValue("ip").asString() + ":" + config.getValue("port").asString());
         myConnection.add(config.getValue("database").asString());

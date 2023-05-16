@@ -1,46 +1,33 @@
 package net.itkmitl.room.portal.admin.views;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.portal.components.GBCBuilder;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+
 public class UserDataView {
-    private JInternalFrame frame;
-    private JPanel dataPanelPad, titlePanel, buttonPanel, namePanel;
+    private final String[] roleList = new String[]{"User", "Staff", "Admin"};
+    private final String[] activeList = new String[]{"Active", "Inactive"};
     public JPanel dataPanel;
     public JButton saveButton, cancelButton, resetPasswordButton;
     public JLabel pageTitle, pageSubtitle;
-    private JLabel idLabel;
-    private JLabel nameLabel;
-    private JLabel telnumLabel;
-    private JLabel activeLabel;
-    private JLabel createdOnLabel;
-    private JLabel roleLabel;
-    private JLabel emailLabel;
     public JLabel passwordLabel;
     public JTextField idField, firstNameField, lastNameField, telnumField, createdOnField, emailField;
     public JComboBox<String> roleSelect, activeSelect;
     public JPasswordField passwordField;
-    private final String[] roleList = new String[]{"User", "Staff", "Admin"};
-    private final String[] activeList = new String[]{"Active", "Inactive"};
+    private final JInternalFrame frame;
+    private final JPanel dataPanelPad;
+    private final JPanel titlePanel;
+    private final JPanel buttonPanel;
+    private final JPanel namePanel;
+    private final JLabel idLabel;
+    private final JLabel nameLabel;
+    private final JLabel telnumLabel;
+    private final JLabel activeLabel;
+    private final JLabel createdOnLabel;
+    private final JLabel roleLabel;
+    private final JLabel emailLabel;
 
     public UserDataView() {
         frame = new JInternalFrame("User Data", false, true, false, true);
@@ -135,7 +122,7 @@ public class UserDataView {
         frame.pack();
     }
 
-    public JInternalFrame getFrame(){
+    public JInternalFrame getFrame() {
         return frame;
     }
 }

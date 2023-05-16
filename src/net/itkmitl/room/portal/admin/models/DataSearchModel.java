@@ -6,11 +6,11 @@ public class DataSearchModel {
     private String title;
     private ArrayList<String> radioButtonLabel;
 
-    public DataSearchModel(){
+    public DataSearchModel() {
         this(new ArrayList<>(), "Untitled Search");
     }
 
-    public DataSearchModel(ArrayList<String> radioButtonLabel, String title){
+    public DataSearchModel(ArrayList<String> radioButtonLabel, String title) {
         this.radioButtonLabel = radioButtonLabel;
         this.title = title;
     }

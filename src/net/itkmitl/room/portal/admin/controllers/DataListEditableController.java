@@ -1,14 +1,13 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import java.awt.event.ActionEvent;
-
-import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.models.DataListTableModel;
 import net.itkmitl.room.portal.admin.views.DataListEditableView;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import java.awt.event.ActionEvent;
 
 public class DataListEditableController extends DataListTableController {
     public DataListEditableView view;
@@ -50,7 +49,7 @@ public class DataListEditableController extends DataListTableController {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(view.reloadButton)){
+        if (e.getSource().equals(view.reloadButton)) {
             view.reloadButton.setEnabled(false);
             view.reloadButton.revalidate();
             reloadData();
@@ -80,8 +79,7 @@ public class DataListEditableController extends DataListTableController {
                     } else if (e.getSource().equals(view.createButton)) {
                         spawnRoomDataEditor(2, -1, this);
                     }
-                }
-                else if (model.getPageTitle().contains("Reservation")) {
+                } else if (model.getPageTitle().contains("Reservation")) {
                     if (e.getSource().equals(view.viewEntryButton)) {
                         spawnReservationDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
                     } else if (e.getSource().equals(view.editSelectedButton)) {
@@ -93,8 +91,7 @@ public class DataListEditableController extends DataListTableController {
                     } else if (e.getSource().equals(view.createButton)) {
                         spawnReservationDataEditor(2, -1, this);
                     }
-                }
-                else if (model.getPageTitle().contains("Feedback")) {
+                } else if (model.getPageTitle().contains("Feedback")) {
                     if (e.getSource().equals(view.viewEntryButton)) {
                         spawnFeedbackDataEditor(0, Integer.parseInt(view.table.getValueAt(view.table.getSelectedRow(), 0).toString()), null);
                     } else if (e.getSource().equals(view.editSelectedButton)) {
@@ -107,7 +104,7 @@ public class DataListEditableController extends DataListTableController {
                         spawnFeedbackDataEditor(2, -1, this);
                     }
                 }
-            } catch (Exception ex){
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
             }
         }

@@ -2,7 +2,6 @@ package net.itkmitl.room.portal.admin.views;
 
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
-import com.github.lgooddatepicker.components.TimePickerSettings;
 import net.itkmitl.room.portal.components.GBCBuilder;
 
 import javax.swing.*;
@@ -11,19 +10,28 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class ReservationDataView {
-    private JInternalFrame frame;
-    private JPanel dataPanelPad, titlePanel, buttonPanel, timePanel;
     public JPanel dataPanel;
-    private JScrollPane reasonScrollPane;
     public JButton saveButton, cancelButton;
     public JLabel pageTitle, pageSubtitle;
-    private JLabel idLabel, userIDLabel, roomIDLabel, reasonLabel, startTimeLabel, endTimeLabel, reservationTimeLabel;
     public JTextField idField, reservationTimeField;
     public JCheckBox cancelledCheckbox;
     public JTextArea reasonField;
     public JComboBox<Object> userIDSelect, roomIDSelect;
     public JSpinner startTimeHourField, startTimeMinuteField, endTimeHourField, endTimeMinuteField;
     public DatePicker startDatePicker, endDatePicker;
+    private final JInternalFrame frame;
+    private final JPanel dataPanelPad;
+    private final JPanel titlePanel;
+    private final JPanel buttonPanel;
+    private final JPanel timePanel;
+    private final JScrollPane reasonScrollPane;
+    private final JLabel idLabel;
+    private final JLabel userIDLabel;
+    private final JLabel roomIDLabel;
+    private final JLabel reasonLabel;
+    private final JLabel startTimeLabel;
+    private final JLabel endTimeLabel;
+    private final JLabel reservationTimeLabel;
 
     public ReservationDataView() {
         frame = new JInternalFrame("Reservation Data", false, true, false, true);
@@ -169,7 +177,7 @@ public class ReservationDataView {
         frame.add(buttonPanel, BorderLayout.SOUTH);
     }
 
-    public JInternalFrame getFrame(){
+    public JInternalFrame getFrame() {
         return frame;
     }
 }

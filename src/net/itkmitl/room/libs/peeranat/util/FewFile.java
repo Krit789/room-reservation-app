@@ -1,10 +1,9 @@
 package net.itkmitl.room.libs.peeranat.util;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.net.*;
-
-import javax.swing.*;
+import java.net.URL;
 
 public class FewFile {
 

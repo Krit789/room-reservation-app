@@ -11,10 +11,10 @@ import java.io.Serial;
 public class RightPanel extends JPanel {
     @Serial
     private static final long serialVersionUID = 3515411566688472487L;
-    private AppStore store = AppStore.getAppStore();
     public JLabel nameLabel;
     public BookingStatusPanel bookingPanel;
-    private JPanel namePanel;
+    private final AppStore store = AppStore.getAppStore();
+    private final JPanel namePanel;
 
     public RightPanel() {
         super();

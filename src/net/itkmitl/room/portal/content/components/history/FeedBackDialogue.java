@@ -1,6 +1,5 @@
 package net.itkmitl.room.portal.content.components.history;
 
-import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.components.GBCBuilder;
 
 import javax.swing.*;
@@ -8,15 +7,22 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class FeedBackDialogue extends JDialog {
+    private final Font regular = new Font("Sansserif", Font.PLAIN, 16);
     public JRadioButton rating00, rating05, rating10, rating15, rating20, rating25, rating30, rating35, rating40, rating45, rating50;
     public ButtonGroup ratingGroup;
     public JButton submitBtn, cancelBtn;
-    private JLabel pageTitle, pageSubtitle, feedbackLabel, ratingLabel;
-    private JPanel ratingPanel, titlePanel, centerPanel, buttonPanel;
-    private JScrollPane feedbackPane;
     public JTextArea feedbackTextArea;
-    private final Font regular = new Font("Sansserif", Font.PLAIN, 16);
-    public FeedBackDialogue(JFrame parent/*, Room room*/){
+    private final JLabel pageTitle;
+    private final JLabel pageSubtitle;
+    private final JLabel feedbackLabel;
+    private final JLabel ratingLabel;
+    private final JPanel ratingPanel;
+    private final JPanel titlePanel;
+    private final JPanel centerPanel;
+    private final JPanel buttonPanel;
+    private final JScrollPane feedbackPane;
+
+    public FeedBackDialogue(JFrame parent/*, Room room*/) {
         super(parent, "Select Time", true);
         setBackground(Color.white);
         titlePanel = new JPanel();

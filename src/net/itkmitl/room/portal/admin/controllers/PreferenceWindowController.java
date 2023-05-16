@@ -15,10 +15,6 @@ public class PreferenceWindowController implements ChangeListener, ActionListene
     private final PreferenceWindowView view;
     private final PreferenceWindowModel model;
 
-    public PreferenceWindowView getView() {
-        return this.view;
-    }
-
     public PreferenceWindowController() {
         view = new PreferenceWindowView();
         model = new PreferenceWindowModel();
@@ -30,7 +26,7 @@ public class PreferenceWindowController implements ChangeListener, ActionListene
                     return true;
                 } else {
                     String filename = f.getName().toLowerCase();
-                    return filename.endsWith(".yml") ;
+                    return filename.endsWith(".yml");
                 }
             }
 
@@ -46,6 +42,10 @@ public class PreferenceWindowController implements ChangeListener, ActionListene
         view.applyButton.addActionListener(this);
         view.timeoutCheckBox.addActionListener(this);
         view.configPickerButton.addActionListener(this);
+    }
+
+    public PreferenceWindowView getView() {
+        return this.view;
     }
 
     private void pushToModel() {

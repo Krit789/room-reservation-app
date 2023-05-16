@@ -1,25 +1,5 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.SwingWorker;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumUserRole;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
@@ -31,6 +11,14 @@ import net.itkmitl.room.portal.admin.views.UserDataView;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.LoadingDialog;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class UserDataController implements ActionListener, InternalFrameListener {
     UserDataView view;
     User user;
@@ -38,7 +26,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
     int mode;
     DataListEditableController dlec;
 
-    public UserDataController(int mode, int userID, DataListEditableController dlec)  throws Exception {
+    public UserDataController(int mode, int userID, DataListEditableController dlec) throws Exception {
         this.mode = mode;
         this.dlec = dlec;
         view = new UserDataView();
@@ -87,10 +75,10 @@ public class UserDataController implements ActionListener, InternalFrameListener
 
     public void databaseLoader(int userID) {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
-            LoadingDialog ld = new LoadingDialog();
+            final LoadingDialog ld = new LoadingDialog();
 
             @Override
-            protected String doInBackground() throws Exception{
+            protected String doInBackground() throws Exception {
                 String errorMessage;
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
@@ -116,8 +104,8 @@ public class UserDataController implements ActionListener, InternalFrameListener
     }
 
     public void databaseCommiter(User user, int mode) {
-    	SwingWorker<?, ?> worker = new SwingWorker<>() {
-            LoadingDialog ld = new LoadingDialog();
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
+            final LoadingDialog ld = new LoadingDialog();
 
             @Override
             protected String doInBackground() throws Exception {
@@ -180,7 +168,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
             User myUser = (User) data[1];
             user = (User) data[1];
             view.pageSubtitle.setText("User records for User ID " + myUser.getId());
-            view.idField.setText(user.getId() + "");
+            view.idField.setText(String.valueOf(user.getId()));
             view.firstNameField.setText(user.getFirstname());
             view.lastNameField.setText(user.getLastname());
             view.telnumField.setText(user.getTelephoneNumber());
@@ -199,16 +187,14 @@ public class UserDataController implements ActionListener, InternalFrameListener
             }
             view.createdOnField.setText(user.getCreatedOn().toString());
 
-            switch (mode) {
-                case 0:
-                    view.firstNameField.setEnabled(false);
-                    view.lastNameField.setEnabled(false);
-                    view.telnumField.setEnabled(false);
-                    view.activeSelect.setEnabled(false);
-                    view.roleSelect.setEnabled(false);
-                    view.emailField.setEnabled(false);
-                    view.resetPasswordButton.setEnabled(false);
-                    break;
+            if (mode == 0) {
+                view.firstNameField.setEnabled(false);
+                view.lastNameField.setEnabled(false);
+                view.telnumField.setEnabled(false);
+                view.activeSelect.setEnabled(false);
+                view.roleSelect.setEnabled(false);
+                view.emailField.setEnabled(false);
+                view.resetPasswordButton.setEnabled(false);
             }
             view.getFrame().pack();
         } else {

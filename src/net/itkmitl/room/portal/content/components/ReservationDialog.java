@@ -13,18 +13,27 @@ import java.awt.*;
 import java.time.LocalDate;
 
 public class ReservationDialog extends JDialog {
-    private JPanel titlePanel, selectionPanel, buttonPanel, lengthPanel, segmentPanel;
-    private JLabel pageTitle, pageSubtitle, dateLabel, segmentLabel, lengthLabel, hourLabel, reasonLabel;
+    private final Font regular = new Font("Sansserif", Font.PLAIN, 16);
     public JLabel segmentLoadingLabel;
     public JButton okButton, cancelButton;
     public DatePicker reservationDatePicker;
     public JComboBox<ReservableEntity> segmentBox;
     public JSpinner lengthSpinner;
     public SpinnerNumberModel snm;
-    private JScrollPane reasonPane;
     public JTextArea reasonTextArea;
-
-    private final Font regular = new Font("Sansserif", Font.PLAIN, 16);
+    private final JPanel titlePanel;
+    private final JPanel selectionPanel;
+    private final JPanel buttonPanel;
+    private final JPanel lengthPanel;
+    private final JPanel segmentPanel;
+    private final JLabel pageTitle;
+    private final JLabel pageSubtitle;
+    private final JLabel dateLabel;
+    private final JLabel segmentLabel;
+    private final JLabel lengthLabel;
+    private final JLabel hourLabel;
+    private final JLabel reasonLabel;
+    private final JScrollPane reasonPane;
 
     public ReservationDialog(JFrame parent, Room room) {
         super(parent, "Select Time", true);

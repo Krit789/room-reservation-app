@@ -18,7 +18,7 @@ public class NotificationPanel extends RoundedPanel {
     @Serial
     private static final long serialVersionUID = 4305337873118944635L;
     public JLabel notificationTextLabel, calendarIcon;
-    private JPanel panelPanel;
+    private final JPanel panelPanel;
 
     public NotificationPanel() {
         super();

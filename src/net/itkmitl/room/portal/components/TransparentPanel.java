@@ -1,9 +1,7 @@
 package net.itkmitl.room.portal.components;
 
-import java.awt.BorderLayout;
-import java.awt.LayoutManager;
-
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 public class TransparentPanel extends JPanel {
     private static final long serialVersionUID = 729961928996065079L;

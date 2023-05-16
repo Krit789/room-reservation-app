@@ -6,16 +6,16 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class OOBEView {
-    private JFrame frame;
-    private JPanel buttonPanel;
+    public static String[] PANEL = {"Panel1", "Panel2", "Panel3", "Panel4"};
     public JPanel contentPanel;
     public JButton backButton, nextButton, cancelButton;
     public DatabaseSetupPanelView dbsp;
     public DatabaseTestView dbt;
     public FinishView fn;
-    public static String[] PANEL = {"Panel1", "Panel2", "Panel3", "Panel4"};
+    private final JFrame frame;
+    private final JPanel buttonPanel;
 
-    public OOBEView(){
+    public OOBEView() {
         frame = new JFrame("LTH Setup");
         ArrayList<Image> multiIcon = new ArrayList<>();
         multiIcon.add(new ImageIcon("resource/icons/icon-208px.png").getImage());
@@ -64,7 +64,7 @@ public class OOBEView {
         frame.setVisible(true);
     }
 
-    public JFrame getFrame(){
+    public JFrame getFrame() {
         return frame;
     }
 }

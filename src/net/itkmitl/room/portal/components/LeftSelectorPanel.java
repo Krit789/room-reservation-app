@@ -1,32 +1,28 @@
 package net.itkmitl.room.portal.components;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.swing.*;
-
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
-import net.itkmitl.room.portal.content.MainContentView;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class LeftSelectorPanel extends JPanel {
     /**
      *
      */
     private static final long serialVersionUID = 634260063969366698L;
+    public static volatile boolean finishedLoading = false;
     public JLabel parentCategory;
     public ButtonGradient backButton;
     public JScrollPane buttonScrollPane;
     public JPanel buttonPanel;
     public ArrayList<LeftSelectorBox> leftBoxHolder = new ArrayList<LeftSelectorBox>();
-
     public Set<String> buildingList = new HashSet<>();
-    public static volatile boolean finishedLoading = false;
 
     public LeftSelectorPanel() {
         super();
@@ -42,7 +38,7 @@ public class LeftSelectorPanel extends JPanel {
         buttonPanel = new TransparentPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
 
-        buttonScrollPane = new JScrollPane(buttonPanel ,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        buttonScrollPane = new JScrollPane(buttonPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         buttonScrollPane.setAlignmentY(JScrollPane.TOP_ALIGNMENT);
         buttonScrollPane.setOpaque(false);
         buttonScrollPane.getViewport().setOpaque(false);
@@ -109,7 +105,7 @@ public class LeftSelectorPanel extends JPanel {
         worker.execute();
     }
 
-    private void registerPane(){
+    private void registerPane() {
         this.add(buttonScrollPane, new GBCBuilder(GridBagConstraints.BOTH, 1, 0.8, 0, 1).getGBC());
         this.add(backButton, new GBCBuilder(GridBagConstraints.BOTH, 1, 0.1, 0, 2).getGBC());
     }

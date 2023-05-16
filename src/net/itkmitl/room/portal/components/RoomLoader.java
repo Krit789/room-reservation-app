@@ -63,6 +63,7 @@ public class RoomLoader {
                 buildingList = null;
                 return null;
             }
+
             @Override
             protected void done() {
 //                System.out.println("room loader finished!");

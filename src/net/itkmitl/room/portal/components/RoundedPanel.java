@@ -15,10 +15,6 @@ public class RoundedPanel extends JPanel {
         setBorder(new EmptyBorder(5, 5, 5, 5));
     }
 
-    public void setBackgroundColor(Color backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
-
     public RoundedPanel() {
         this(20, 20, Color.WHITE);
     }
@@ -47,6 +43,10 @@ public class RoundedPanel extends JPanel {
         this.backgroundColor = null;
         this.color1 = color1;
         this.color2 = color2;
+    }
+
+    public void setBackgroundColor(Color backgroundColor) {
+        this.backgroundColor = backgroundColor;
     }
 
     @Override

@@ -1,28 +1,27 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyVetoException;
-import java.util.ArrayList;
-
-import javax.swing.JMenuItem;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.components.DatabaseLoader;
 import net.itkmitl.room.portal.admin.models.DataSearchModel;
 import net.itkmitl.room.portal.admin.views.DataSearchView;
 import net.itkmitl.room.portal.admin.views.OperationWindowView;
 
+import javax.swing.*;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyVetoException;
+import java.util.ArrayList;
+
 public class OperationWindowController implements ActionListener, InternalFrameListener {
-    private OperationWindowView view;
-    private DatabaseLoader dbl;
     public static final int USER = 1;
     public static final int ROOM = 2;
     public static final int RESERVATION = 3;
     public static final int FEEDBACK = 4;
+    private final OperationWindowView view;
+    private final DatabaseLoader dbl;
 
     public OperationWindowController() {
         view = new OperationWindowView();

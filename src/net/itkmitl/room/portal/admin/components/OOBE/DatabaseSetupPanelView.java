@@ -1,42 +1,37 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.portal.components.GBCBuilder;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 public class DatabaseSetupPanelView extends JPanel {
     /**
-	 *
-	 */
-	private static final long serialVersionUID = -7942736605197573612L;
-	private JLabel title, description, dbAddressLabel, dbPortLabel, dbNameLabel, dbUserLabel, dbPasswordLabel;
-    private JPanel databasePanel, dbCredPanel, dbConnectionPanel, topPanel;
+     *
+     */
+    private static final long serialVersionUID = -7942736605197573612L;
     protected JTextField dbAddressTextField, dbNameTextField, dbUserTextField;
     protected JPasswordField dbPasswordField;
     protected JSpinner dbPortSpinner;
+    private final JLabel title;
+    private final JLabel description;
+    private final JLabel dbAddressLabel;
+    private final JLabel dbPortLabel;
+    private final JLabel dbNameLabel;
+    private final JLabel dbUserLabel;
+    private final JLabel dbPasswordLabel;
+    private final JPanel databasePanel;
+    private final JPanel dbCredPanel;
+    private final JPanel dbConnectionPanel;
+    private final JPanel topPanel;
 
     public DatabaseSetupPanelView() {
         this.setLayout(new BorderLayout());
 
         topPanel = new JPanel();
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
-        this.setBorder(new EmptyBorder(15, 10 ,0 ,15));
+        this.setBorder(new EmptyBorder(15, 10, 0, 15));
         title = new JLabel("Database Connection Setup");
         title.setFont(new Font("SansSerif", Font.BOLD, 18));
         description = new JLabel("<html><p style=\"width:225px\">" +

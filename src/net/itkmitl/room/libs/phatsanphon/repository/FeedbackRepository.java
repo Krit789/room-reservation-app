@@ -1,10 +1,10 @@
 package net.itkmitl.room.libs.phatsanphon.repository;
 
-import java.util.ArrayList;
-
 import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
 import net.itkmitl.room.libs.phatsanphon.repository.enums.FeedbackQuery;
+
+import java.util.ArrayList;
 
 public class FeedbackRepository extends Repository<Feedback> {
 
@@ -12,7 +12,7 @@ public class FeedbackRepository extends Repository<Feedback> {
         super(Feedback.class, query);
     }
 
-    public ArrayList<Feedback> getFeedbacks() throws Exception{
+    public ArrayList<Feedback> getFeedbacks() throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
         select.select("*").table("feedback");

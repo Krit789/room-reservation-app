@@ -1,5 +1,7 @@
 package net.itkmitl.room.portal.components;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,51 +10,14 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.Serial;
 
-import javax.swing.JButton;
-import javax.swing.Timer;
-import javax.swing.border.EmptyBorder;
-
 public class ButtonGradient extends JButton {
     @Serial
     private static final long serialVersionUID = -4638661821951496102L;
     private static final Font defaultFont = new Font("Cousine", Font.BOLD, 18);
-
-    public float getSizeSpeed() {
-        return sizeSpeed;
-    }
-
-    public void setSizeSpeed(float sizeSpeed) {
-        this.sizeSpeed = sizeSpeed;
-    }
-
-    public Color getColor1() {
-        return color1;
-    }
-
-    public void setColor1(Color color1) {
-        this.color1 = color1;
-    }
-
-    public Color getColor2() {
-        return color2;
-    }
-
-    public void setColor2(Color color2) {
-        this.color2 = color2;
-    }
-
-    public static Font getDefaultFont() {
-        return defaultFont;
-    }
-
-    public static String getDefaulFontName() {
-        return defaultFont.getFontName();
-    }
-
-    private Color color1 = Color.decode("#0099F7");
-    private Color color2 = Color.decode("#F11712");
     private final Timer timer;
     private final Timer timerPressed;
+    private Color color1 = Color.decode("#0099F7");
+    private Color color2 = Color.decode("#F11712");
     private float alpha = 0.3f;
     private boolean mouseOver;
     private boolean pressed;
@@ -60,22 +25,18 @@ public class ButtonGradient extends JButton {
     private float pressedSize;
     private float sizeSpeed = 6f;
     private float alphaPressed = 0.5f;
-
     // ..............Constructor..............
     public ButtonGradient() {
         this(null);
     }
-
     public ButtonGradient(String text, Color color) {
         this(text, color, color);
     }
-
     public ButtonGradient(String text, Color color1, Color color2) {
         this(text);
         this.color1 = color1;
         this.color2 = color2;
     }
-
     public ButtonGradient(String text) {
         super(text);
         setContentAreaFilled(false);
@@ -142,6 +103,38 @@ public class ButtonGradient extends JButton {
                 }
             }
         });
+    }
+
+    public static Font getDefaultFont() {
+        return defaultFont;
+    }
+
+    public static String getDefaulFontName() {
+        return defaultFont.getFontName();
+    }
+
+    public float getSizeSpeed() {
+        return sizeSpeed;
+    }
+
+    public void setSizeSpeed(float sizeSpeed) {
+        this.sizeSpeed = sizeSpeed;
+    }
+
+    public Color getColor1() {
+        return color1;
+    }
+
+    public void setColor1(Color color1) {
+        this.color1 = color1;
+    }
+
+    public Color getColor2() {
+        return color2;
+    }
+
+    public void setColor2(Color color2) {
+        this.color2 = color2;
     }
 
     @Override

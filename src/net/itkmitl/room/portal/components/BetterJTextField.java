@@ -1,29 +1,27 @@
 package net.itkmitl.room.portal.components;
 
-import java.awt.Color;
-import java.awt.Font;
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 public class BetterJTextField extends JTextField implements MouseListener, FocusListener, DocumentListener {
     /**
-	 *
-	 */
-	private static final long serialVersionUID = 7749724868234541103L;
-	private Color normalBgColor = Color.WHITE;
+     *
+     */
+    private static final long serialVersionUID = 7749724868234541103L;
+    private Color normalBgColor = Color.WHITE;
     private Color hoverBgColor = new Color(246, 246, 246);
     private Color borderColor = Color.LIGHT_GRAY;
-    private Color activeBorderColor = new Color(94, 135, 197);
+    private final Color activeBorderColor = new Color(94, 135, 197);
     private String placeholderText;
     private Boolean selected;
+
     public BetterJTextField(String placeholderText) {
         this.placeholderText = placeholderText;
         this.setFont(new Font("Cousine", Font.PLAIN, 24));
@@ -79,6 +77,7 @@ public class BetterJTextField extends JTextField implements MouseListener, Focus
     public void mouseReleased(MouseEvent e) {
 
     }
+
     @Override
     public void mouseEntered(MouseEvent e) {
         setBackground(hoverBgColor);

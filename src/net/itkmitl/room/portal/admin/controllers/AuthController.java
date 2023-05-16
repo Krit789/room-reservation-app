@@ -1,14 +1,6 @@
 package net.itkmitl.room.portal.admin.controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.UIManager;
-
 import com.formdev.flatlaf.FlatIntelliJLaf;
-
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
@@ -17,15 +9,39 @@ import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.views.AuthView;
 
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class AuthController implements ActionListener {
-    private AuthView view;
     public static boolean authenticated = false;
+    private final AuthView view;
     private Object[] data;
 
     public AuthController() {
         view = new AuthView();
         view.loginButton.addActionListener(this);
         view.cancelButton.addActionListener(this);
+    }
+
+    public static void main(String[] args) {
+        try {
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
+            System.setProperty("apple.awt.application.name", "Laew Tae Hong");
+            System.setProperty("apple.awt.application.appearance", "system");
+            try {
+                UIManager.setLookAndFeel(new FlatIntelliJLaf());
+            } catch (Exception ignored) {
+                UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+            }
+        } catch (Exception ignored) {
+        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new AuthController();
+            }
+        });
     }
 
     @Override
@@ -80,25 +96,5 @@ public class AuthController implements ActionListener {
             }
         };
         worker.execute();
-    }
-
-    public static void main(String[] args) {
-        try {
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("apple.awt.application.name", "Laew Tae Hong");
-            System.setProperty("apple.awt.application.appearance", "system");
-            try {
-                UIManager.setLookAndFeel(new FlatIntelliJLaf());
-            } catch (Exception ignored) {
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-            }
-        } catch (Exception ignored) {
-        }
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new AuthController();
-            }
-        });
     }
 }

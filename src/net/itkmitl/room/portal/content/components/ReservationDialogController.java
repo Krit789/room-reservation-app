@@ -23,7 +23,7 @@ import java.util.Objects;
 
 public class ReservationDialogController implements ActionListener, DateChangeListener, WindowListener, ChangeListener, ItemListener {
     public ReservationDialog view;
-    private Room myRoom;
+    private final Room myRoom;
     private ArrayList<Reservation> resList;
     private ArrayList<ReservableEntity> availableTime;
     private DateTime virtualReservationStart;

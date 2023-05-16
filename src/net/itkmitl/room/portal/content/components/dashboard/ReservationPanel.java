@@ -8,13 +8,11 @@ import java.awt.*;
 import java.io.Serial;
 
 public class ReservationPanel extends TransparentPanel {
+    public static final String[] ROUTES = {"History", "Booking"};
     @Serial
     private static final long serialVersionUID = -2988916769883492575L;
-
-    public JLabel reservationTextLabel;
-
-    public static final String[] ROUTES = {"History", "Booking"};
     public static JButton[] buttonBox = new JButton[2];
+    public JLabel reservationTextLabel;
 
     public ReservationPanel() {
 //        this.setBackground(Color.white);

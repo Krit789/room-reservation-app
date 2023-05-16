@@ -5,12 +5,12 @@ import net.itkmitl.room.libs.peeranat.config.FewConfig;
 import java.io.File;
 
 public class PreferenceWindowModel {
+    private static File configFile = new File("config.yml");
     private String username, password;
     private String sqlAddress, sqlDBName;
     private int sqlPort = 3306;
     private int timeout;
     private boolean neverTimeout;
-    private static File configFile = new File("config.yml");
 
     public static File getConfigFile() {
         return configFile;
@@ -59,6 +59,7 @@ public class PreferenceWindowModel {
     public void setSqlDBName(String sqlDBName) {
         this.sqlDBName = sqlDBName;
     }
+
     public int getTimeout() {
         return timeout;
     }
@@ -75,7 +76,7 @@ public class PreferenceWindowModel {
         this.neverTimeout = neverTimeout;
     }
 
-    public void writeToConfig(){
+    public void writeToConfig() {
         FewConfig config = new FewConfig(configFile);
         config.set("username", getUsername());
         config.set("password", getPassword());
@@ -88,7 +89,7 @@ public class PreferenceWindowModel {
         System.out.println("Config Saved Successfully!");
     }
 
-    public void loadFromConfig(){
+    public void loadFromConfig() {
         try {
             FewConfig config = new FewConfig(configFile);
             setUsername(config.getValue("username").asString());
@@ -98,7 +99,7 @@ public class PreferenceWindowModel {
             setSqlPort(config.getValue("port").asInt());
             setTimeout(config.getValue("timeout_time").asInt());
             setNeverTimeout(config.getValue("never_timeout").asBoolean());
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

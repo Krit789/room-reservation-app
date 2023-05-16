@@ -2,16 +2,18 @@ package net.itkmitl.room.portal.components;
 
 import java.awt.*;
 
-public class GBCBuilder{
+public class GBCBuilder {
     private final GridBagConstraints gbc;
-    public GBCBuilder(int fill, double weightx, int gridx, int gridy){
+
+    public GBCBuilder(int fill, double weightx, int gridx, int gridy) {
         gbc = new GridBagConstraints();
         gbc.fill = fill;
         gbc.weightx = weightx;
         gbc.gridx = gridx;
         gbc.gridy = gridy;
     }
-    public GBCBuilder(int fill, double weightx, int gridx, int gridy, Insets insets){
+
+    public GBCBuilder(int fill, double weightx, int gridx, int gridy, Insets insets) {
         gbc = new GridBagConstraints();
         gbc.fill = fill;
         gbc.weightx = weightx;
@@ -21,7 +23,7 @@ public class GBCBuilder{
     }
 
 
-    public GBCBuilder(int fill, double weightx, double weighty, int gridx, int gridy){
+    public GBCBuilder(int fill, double weightx, double weighty, int gridx, int gridy) {
         gbc = new GridBagConstraints();
         gbc.fill = fill;
         gbc.weighty = weighty;
@@ -29,7 +31,8 @@ public class GBCBuilder{
         gbc.gridx = gridx;
         gbc.gridy = gridy;
     }
-    public GBCBuilder(int fill, double weightx, double weighty,int gridx, int gridy, Insets insets){
+
+    public GBCBuilder(int fill, double weightx, double weighty, int gridx, int gridy, Insets insets) {
         gbc = new GridBagConstraints();
         gbc.fill = fill;
         gbc.weighty = weighty;
@@ -38,32 +41,34 @@ public class GBCBuilder{
         gbc.gridy = gridy;
         gbc.insets = insets;
     }
-    public GBCBuilder(){
+
+    public GBCBuilder() {
         gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
     }
-    public GridBagConstraints setInset(Insets insets){
+
+    public GridBagConstraints setInset(Insets insets) {
         gbc.insets = insets;
         return gbc;
     }
 
-    public GridBagConstraints getGBC(){
+    public GridBagConstraints getGBC() {
         return gbc;
     }
 
-    public GridBagConstraints setPadding(int ipady, int ipadx){
+    public GridBagConstraints setPadding(int ipady, int ipadx) {
         gbc.ipady = ipady;
         gbc.ipadx = ipadx;
         return gbc;
     }
 
-    public GridBagConstraints setColumnSpan(int gridwidth, int gridheight){
+    public GridBagConstraints setColumnSpan(int gridwidth, int gridheight) {
         gbc.gridwidth = gridwidth;
         gbc.gridheight = gridheight;
         return gbc;
     }
 
-    public GridBagConstraints setAnchor(int anchor){
+    public GridBagConstraints setAnchor(int anchor) {
         gbc.anchor = anchor;
         return gbc;
     }
