@@ -1,5 +1,6 @@
 package net.itkmitl.room.libs.peeranat.util;
 
+import java.awt.Font;
 import java.io.File;
 import java.net.URL;
 
@@ -10,6 +11,16 @@ public class FewFile {
     public static File getFile(String path) {
         try {
             return new File(ClassLoader.getSystemResource(path).toURI());
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
+        return null;
+    }
+    
+
+    public static Font getFont(String path) {
+        try {
+            return Font.createFont(Font.TRUETYPE_FONT, getResource(path).openStream());
         } catch (Exception e) {
             System.out.println("ERROR: " + e.getMessage());
         }
