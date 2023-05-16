@@ -1,16 +1,36 @@
 package net.itkmitl.room.portal.content.components;
 
-import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.components.DatePickerSettings;
-import net.itkmitl.room.libs.phatsanphon.entity.Room;
-import net.itkmitl.room.portal.components.GBCBuilder;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.time.LocalDate;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTextArea;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.*;
-import java.time.LocalDate;
+
+import com.github.lgooddatepicker.components.DatePicker;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+
+import net.itkmitl.room.libs.peeranat.util.FewFile;
+import net.itkmitl.room.libs.phatsanphon.entity.Room;
+import net.itkmitl.room.portal.components.GBCBuilder;
 
 public class ReservationDialog extends JDialog {
     private final Font regular = new Font("Sansserif", Font.PLAIN, 16);

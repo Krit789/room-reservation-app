@@ -39,10 +39,10 @@ public abstract class View extends JFrame {
 
     protected void initializeFont() {
         try {
-            Font cousine = Font.createFont(Font.TRUETYPE_FONT, FewFile.getFile("/fonts/Cousine-Regular.ttf"));
+            Font cousine = Font.createFont(Font.TRUETYPE_FONT, FewFile.getFile("fonts/Cousine-Regular.ttf"));
             cousine = cousine.deriveFont(16f);
 
-            Font cousineBold = Font.createFont(Font.TRUETYPE_FONT, FewFile.getFile("/fonts/Cousine-Bold.ttf"));
+            Font cousineBold = Font.createFont(Font.TRUETYPE_FONT, FewFile.getFile("fonts/Cousine-Bold.ttf"));
             cousineBold = cousineBold.deriveFont(16f);
 
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();

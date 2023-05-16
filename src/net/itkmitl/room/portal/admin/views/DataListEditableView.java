@@ -1,6 +1,9 @@
 package net.itkmitl.room.portal.admin.views;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 
 public class DataListEditableView extends DataListTableView {
     public final JButton createButton, editSelectedButton, deletedSelectedButton;

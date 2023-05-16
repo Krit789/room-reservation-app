@@ -1,12 +1,21 @@
 package net.itkmitl.room.portal.content.components.dashboard;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
+import java.io.Serial;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.Serial;
 
 public class WelcomePanel extends RoundedPanel {
     @Serial

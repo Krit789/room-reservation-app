@@ -1,7 +1,27 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.sql.SQLSyntaxErrorException;
+import java.util.UUID;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.UIManager;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
+
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumDBSchema;
 import net.itkmitl.room.enums.EnumUserRole;
@@ -9,21 +29,12 @@ import net.itkmitl.room.libs.jarukrit.ConfigManager;
 import net.itkmitl.room.libs.peeranat.FewDB;
 import net.itkmitl.room.libs.peeranat.config.FewConfig;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.GBCBuilder;
-
-import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.sql.SQLSyntaxErrorException;
-import java.util.UUID;
 
 public class OOBEController implements ActionListener, DocumentListener {
     OOBEView view;

@@ -1,12 +1,23 @@
 package net.itkmitl.room.portal.content.components;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+
+import javax.swing.Box;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.portal.CardView;
 import net.itkmitl.room.portal.components.MainPanel;
-import net.itkmitl.room.portal.content.components.dashboard.*;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import net.itkmitl.room.portal.content.components.dashboard.ContentPanel;
+import net.itkmitl.room.portal.content.components.dashboard.NotificationPanel;
+import net.itkmitl.room.portal.content.components.dashboard.ReservationPanel;
+import net.itkmitl.room.portal.content.components.dashboard.RightPanel;
+import net.itkmitl.room.portal.content.components.dashboard.WelcomePanel;
 
 public class Dashboard extends CardView {
     private static final long serialVersionUID = 5559587513984125656L;

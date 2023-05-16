@@ -1,8 +1,17 @@
 package net.itkmitl.room.portal.components;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+
+import javax.swing.Box;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 
 public class LeftPanel extends JPanel {
     /**

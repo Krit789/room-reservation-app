@@ -1,7 +1,34 @@
 package net.itkmitl.room.portal.content.components.dashboard;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingWorker;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
@@ -10,15 +37,6 @@ import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.content.MainContentController;
 import net.itkmitl.room.portal.content.components.ReservationDialogController;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 public class ProfileEditor extends JDialog implements ActionListener, WindowListener {
     private final JPanel dataPanelPad, titlePanel, buttonPanel;

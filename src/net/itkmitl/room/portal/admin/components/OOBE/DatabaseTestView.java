@@ -1,8 +1,18 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagLayout;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 
 public class DatabaseTestView extends JPanel {
     /**

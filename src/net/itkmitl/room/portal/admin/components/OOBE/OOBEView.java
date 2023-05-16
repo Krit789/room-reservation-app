@@ -1,9 +1,20 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
-import javax.swing.*;
-import javax.swing.border.MatteBorder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Image;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+import javax.swing.border.MatteBorder;
+
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 
 public class OOBEView {
     public static String[] PANEL = {"Panel1", "Panel2", "Panel3", "Panel4"};

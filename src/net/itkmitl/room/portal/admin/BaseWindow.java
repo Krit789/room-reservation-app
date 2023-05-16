@@ -1,6 +1,44 @@
 package net.itkmitl.room.portal.admin;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.beans.PropertyVetoException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JSeparator;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+import javax.swing.border.BevelBorder;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
+
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.phatsanphon.UIConfig;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.store.AppStore;
@@ -13,20 +51,6 @@ import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.LoadingDialog;
 import net.itkmitl.room.portal.content.MainContentController;
-
-import javax.swing.*;
-import javax.swing.border.BevelBorder;
-import javax.swing.event.InternalFrameEvent;
-import javax.swing.event.InternalFrameListener;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.beans.PropertyVetoException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class BaseWindow extends ComponentAdapter implements ActionListener, InternalFrameListener {
     public static JFrame baseFrame;
