@@ -18,12 +18,12 @@ public class ReservationHistoryBox extends RoundedPanel {
 
     public ReservationHistoryBox(String name, String time, String date, boolean isComplete) {
         super(30, 40, Color.white);
-        setPreferredSize(new Dimension((int) this.getBounds().getSize().getWidth(), 235));
+        setPreferredSize(new Dimension(1000, 190));
 
-        feedBackBtn = new ButtonGradient("FeedBack", Color.green);
+        feedBackBtn = new ButtonGradient("FeedBack", new Color(59, 151, 88));
         feedBackBtn.setActionCommand("FeedBack");
 
-        cancelBtn = new ButtonGradient("Cancel", Color.red);
+        cancelBtn = new ButtonGradient("Cancel", new Color(217, 76, 78));
         cancelBtn.setActionCommand("Cancel");
 
         nameLabel = new JLabel(name);
