@@ -16,8 +16,8 @@ public class FewFile {
         return null;
     }
 
-    public static Image getImage(String path) {
-        return new ImageIcon("resource/" + path).getImage();
+    public static ImageIcon getImage(String path) {
+        return new ImageIcon(getResource(path));
     }
 
     public static URL getResource(String path) {
