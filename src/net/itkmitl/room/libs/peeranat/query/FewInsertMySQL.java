@@ -3,8 +3,9 @@ package net.itkmitl.room.libs.peeranat.query;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FewInsertMySQL extends FewMySQLBuilder {
+public class FewInsertMySQL implements FewMySQLBuilder {
 
+    private String table;
     private final Map<String, Object> inserts;
 
     public FewInsertMySQL() {
@@ -13,6 +14,11 @@ public class FewInsertMySQL extends FewMySQLBuilder {
 
     public FewInsertMySQL insert(String key, Object value) {
         this.inserts.put(key, value);
+        return this;
+    }
+
+    public FewInsertMySQL table(String table) {
+        this.table = table;
         return this;
     }
 

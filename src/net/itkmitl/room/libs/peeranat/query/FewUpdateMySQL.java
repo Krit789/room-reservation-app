@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class FewUpdateMySQL extends FewMySQLBuilder {
+public class FewUpdateMySQL implements FewMySQLBuilder {
 
+    private String table;
     private final Map<String, Object> toUpdate;
     private final ArrayList<FewMySQLWhere> wheres;
 
@@ -15,6 +16,11 @@ public class FewUpdateMySQL extends FewMySQLBuilder {
     public FewUpdateMySQL() {
         toUpdate = new HashMap<>();
         wheres = new ArrayList<>();
+    }
+
+    public FewUpdateMySQL table(String table) {
+        this.table = table;
+        return this;
     }
 
     public FewUpdateMySQL set(String key, Object value) {

@@ -2,13 +2,19 @@ package net.itkmitl.room.libs.peeranat.query;
 
 import java.util.ArrayList;
 
-public class FewDeleteMySQL extends FewMySQLBuilder {
+public class FewDeleteMySQL implements FewMySQLBuilder {
 
+    private String table;
     private final ArrayList<FewMySQLWhere> wheres;
     private int limit;
 
     public FewDeleteMySQL() {
         wheres = new ArrayList<>();
+    }
+
+    public FewDeleteMySQL table(String table) {
+        this.table = table;
+        return this;
     }
 
     public FewDeleteMySQL where(String column, Object value) {

@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FewSelectMySQL extends FewMySQLBuilder {
+public class FewSelectMySQL implements FewMySQLBuilder {
 
-
+    private String table;
     private final ArrayList<String> selects;
     private final ArrayList<FewMySQLWhere> wheres;
     private final Map<String, FewMySQLOrder> orderBy;
@@ -19,6 +19,11 @@ public class FewSelectMySQL extends FewMySQLBuilder {
         this.selects = new ArrayList<>();
         this.wheres = new ArrayList<>();
         this.orderBy = new HashMap<>();
+    }
+
+    public FewSelectMySQL table(String table) {
+        this.table = table;
+        return this;
     }
 
     public FewSelectMySQL select(String... vars) {
