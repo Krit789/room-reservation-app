@@ -179,7 +179,7 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
         updateReservationSegment();
     }
 
-    private void disableGlassPane() {
+    public static void disableGlassPane() {
         MainContentView.glassPane.setVisible(false);
         MainContentView.glassPane.setEnabled(false);
     }

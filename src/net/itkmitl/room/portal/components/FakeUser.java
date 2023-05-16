@@ -11,6 +11,7 @@ public class FakeUser {
             fakeUser.setFirstname("Dummy");
             fakeUser.setLastname("User");
             fakeUser.setEmail("dummy@email.com");
+            fakeUser.setTelephoneNumber("0909998888");
             fakeUser.setRole(EnumUserRole.STUDENT);
             fakeUser.setActive(true);
             fakeUser.setPasswordHash("sfkso;fsjfklsadfjapfjadfk;sdajnkfds;of");
@@ -30,8 +31,11 @@ public class FakeUser {
             fakeUser.setFirstname("Dummy");
             fakeUser.setLastname("User");
             fakeUser.setEmail("dummy@email.com");
+            fakeUser.setTelephoneNumber("0909998888");
             fakeUser.setRole(EnumUserRole.ADMIN);
             fakeUser.setActive(true);
+            fakeUser.setPasswordHash("sfkso;fsjfklsadfjapfjadfk;sdajnkfds;of");
+            fakeUser.setCreatedOn(1683223440L);
             return fakeUser;
         } catch (Exception e) {
 
