@@ -198,8 +198,8 @@ public class ProfileEditor extends JDialog implements ActionListener, WindowList
             worker.execute();
 
         } else if (e.getSource().equals(cancelButton)) {
-
-
+            dispose();
+            ReservationDialogController.disableGlassPane();
         } else if (e.getSource().equals(resetPasswordButton)) {
             JPanel panel = new JPanel();
             panel.setBackground(Color.white);
