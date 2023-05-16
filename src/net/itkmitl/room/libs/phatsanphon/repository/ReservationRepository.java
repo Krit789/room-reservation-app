@@ -90,6 +90,10 @@ public class ReservationRepository extends Repository<Reservation> {
         return this.maps(this.getQuery().unsafeQuery(String.format("SELECT * FROM `reservation` WHERE `room_id` = %d AND `start_time` BETWEEN %s AND %s AND `end_time` BETWEEN %s AND %s;", roomId, beginTime, endTime, beginTime, endTime)));
     }
 
+    public Reservation getUpcomingReservationsByUserId(int userId) throws Exception {
+        return this.map(this.getQuery().unsafeQuery(String.format("SELECT * FROM `reservation` WHERE `user_id` = %d AND `end_time` > %s ORDER BY `start_time` ASC LIMIT 1;", userId, System.currentTimeMillis())));
+    }
+
     /**
      * @param userId int
      * @return ArrayList<Reservation>

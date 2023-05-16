@@ -59,7 +59,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     public static JMenu windowMenu;
     private final JMenu fileMenu, optionMenu, helpMenu;
     private final JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
-    private final JMenuItem optionMenuItem1, optionMenuItem2, optionMenuItem3, optionMenuItem4;
+    private final JMenuItem optionMenuItem3, optionMenuItem4;
     private final JMenuItem windowMenuItem2, windowMenuItem3;
     private final JCheckBoxMenuItem windowCheckBoxMenuItem1;
     private final JMenuItem aboutMenuItem1;
@@ -68,9 +68,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     public static JLabel statusLabel;
     private ArrayList<Image> multiIcon;
     public static HashMap<JInternalFrame, JMenuItem> windowList = new HashMap<>();
-
     private boolean isPreferenceOpen = false;
-//    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
     private boolean autoCenterMainMenu = true;
 
@@ -105,8 +103,6 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         fileMenuItem3 = new JMenuItem("Exit");
         fileMenuItem3.addActionListener(this);
         // 'Options' Menu Components declaration
-        optionMenuItem1 = new JMenuItem("Connect");
-        optionMenuItem2 = new JMenuItem("Disconnect");
         optionMenuItem3 = new JMenuItem("Settings");
         optionMenuItem3.setIcon(new ImageIcon("resource/icons/settingsicon-16px.png"));
         optionMenuItem3.addActionListener(this);
@@ -314,9 +310,21 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
 
             }
         } else if (e.getSource().equals(windowMenuItem2)) {
+            int location = 0;
             for (JInternalFrame i : desktop.getAllFrames()
             ) {
-//                System.out.println(i.getTitle());
+                try {
+                    i.setSelected(true);
+                    if (i.isIcon()) {
+                        i.setIcon(false);
+                    }
+                    i.setSelected(true);
+                } catch (PropertyVetoException ex) {
+
+                }
+                i.requestFocus();
+                i.setLocation(location, location);
+                location += 50;
             }
         }
     }

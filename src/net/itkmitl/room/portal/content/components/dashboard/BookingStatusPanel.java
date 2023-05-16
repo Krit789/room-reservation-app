@@ -2,13 +2,18 @@ package net.itkmitl.room.portal.content.components.dashboard;
 
 import net.itkmitl.room.enums.EnumRoomState;
 import net.itkmitl.room.libs.peeranat.util.FewRoom;
+import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
+import net.itkmitl.room.portal.components.TransparentPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.StandardChartTheme;
+import org.jfree.chart.block.BlockBorder;
 import org.jfree.chart.plot.PiePlot;
+import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
@@ -17,6 +22,7 @@ import java.awt.*;
 import java.io.Serial;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class BookingStatusPanel extends RoundedPanel {
@@ -34,11 +40,13 @@ public class BookingStatusPanel extends RoundedPanel {
         setPreferredSize(new Dimension(200, 400));
 
         titleLabel = new JLabel("Room Booking Status");
-        titleLabel.setFont(new Font("Cousin", Font.BOLD, 20));
+        titleLabel.setFont(new Font("Cousine", Font.BOLD, 20));
 
         add(titleLabel, new GBCBuilder(GridBagConstraints.NONE, 0, 1, 0, 0).setAnchor(GridBagConstraints.NORTH));
 
         pieChart();
+        clock();
+        this.add(new TransparentPanel(), new GBCBuilder(GridBagConstraints.BOTH, 1, 1, 0, 2).getGBC());
         calendar();
     }
 
@@ -64,24 +72,61 @@ public class BookingStatusPanel extends RoundedPanel {
                 true,
                 false
         );
-        ;
+
+        StandardChartTheme theme = (StandardChartTheme)org.jfree.chart.StandardChartTheme.createJFreeTheme();
+        theme.setChartBackgroundPaint(new Color(0,0,0,0));
+        theme.setRegularFont(new Font("Sansserif", Font.BOLD, 12));
+        theme.setLegendBackgroundPaint(new Color(255,255,255,125));
+        theme.setPlotBackgroundPaint(new Color(0,0,0,0));
+//        theme.setAxisLabelPaint(new Color(255,255,255));
+        theme.setLegendItemPaint(new Color(0,0,0));
+        theme.setPlotOutlinePaint(new Color(0,0,0, 0));
+        theme.apply(chart);
+        chart.setAntiAlias(true);
+
+        chart.setTextAntiAlias(true);
+        chart.setBorderPaint(new Color(0,0,0,0));
+
+        LegendTitle legend = chart.getLegend();
+        legend.setFrame(new BlockBorder(Color.white));
+
         ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new Dimension(250, 250));
+        chartPanel.setPreferredSize(new Dimension(370, 250));
+        chartPanel.setPopupMenu(null);
         chartPanel.setBackground(new Color(0x0000005, true));
 
         PiePlot plot = (PiePlot) chart.getPlot();
 
-
         plot.setSectionPaint("Available Room", new Color(90, 140, 206));
         plot.setSectionPaint("Full", new Color(0x101442));
-
 
         piechart = new JPanel();
         piechart.add(chartPanel);
 
-        this.add(piechart, new GridBagConstraints(0, 2, 1, 1, 1.0, 0.8, GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(10, 10, 10, 10), 0, 0));
+//        this.add(piechart, new GridBagConstraints(0, 2, 1, 1, 1.0, 0.8, GridBagConstraints.NORTH, GridBagConstraints.BOTH, new Insets(10, 10, 10, 10), 0, 0));
+        this.add(piechart, new GBCBuilder(GridBagConstraints.NONE, 1, 1, 0, 1).setAnchor(GridBagConstraints.NORTH));
         piechart.setSize(new Dimension(10, 50));
         piechart.setBackground(new Color(0x0343477, true));
+        chartPanel.repaint();
+    }
+
+    private void clock(){
+        JLabel clock = new JLabel("00:00:00");
+        clock.setFont(new Font("Sansserif", Font.BOLD, 48));
+        SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                while (true){
+                    synchronized (this) {
+                        DateTime dt = new DateTime(System.currentTimeMillis());
+                        clock.setText(String.format("%d:%02d:%02d", dt.getHours(), dt.getMinutes(), dt.getSeconds()));
+                        this.wait(1000);
+                    }
+                }
+            }
+        };
+        this.add(clock, new GBCBuilder(GridBagConstraints.CENTER,1,1,0,3).getGBC());
+        worker.execute();
     }
 
     private void calendar() {
@@ -118,8 +163,9 @@ public class BookingStatusPanel extends RoundedPanel {
             panel.add(label);
         }
 
-        panel.setPreferredSize(new Dimension(1, 1));
-        this.add(panel, new GridBagConstraints(0, 8, 0, 3, 0, 10, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+//        panel.setPreferredSize(new Dimension(1, 1));
+//        this.add(panel, new GridBagConstraints(0, 8, 0, 3, 0, 10, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(2, 2, 2, 2), 0, 0));
+        this.add(panel, new GBCBuilder(GridBagConstraints.BOTH, 1, 1, 0, 4).getGBC());
 
     }
 }
