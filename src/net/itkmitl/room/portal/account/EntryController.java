@@ -316,7 +316,7 @@ public class EntryController extends Controller implements ActionListener, Compo
 //                    registerPanel.getRegisterButton().setEnabled(false);
             }
             return -1;
-        } else if (type == 1 && String.valueOf(password.getPassword()).equals(String.valueOf(confirmPassword.getPassword()))) {
+        } else if (type == 1 && !String.valueOf(password.getPassword()).equals(String.valueOf(confirmPassword.getPassword()))) {
 //                    registerPanel.getWarningLabel().setText("Both Password and Confirm Password must be the same!");
 //                    registerPanel.getRegisterButton().setEnabled(false);
             return -2;
