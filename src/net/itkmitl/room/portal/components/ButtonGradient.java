@@ -80,7 +80,7 @@ public class ButtonGradient extends JButton {
         setForeground(Color.WHITE);
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         setBorder(new EmptyBorder(10, 20, 10, 20));
-        setFont(new Font("Cousine", Font.BOLD, 18));
+        setFont(defaultFont);
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {
