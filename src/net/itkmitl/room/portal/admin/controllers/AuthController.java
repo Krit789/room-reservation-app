@@ -6,6 +6,7 @@ import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
+import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.admin.views.AuthView;
 
@@ -88,6 +89,7 @@ public class AuthController implements ActionListener {
             @Override
             protected void done() {
                 if ((boolean) data[0]) {
+                    AppStore.getAppStore().dispatch("user", data[1]);
                     BaseWindow.main(new String[]{""});
                     view.getFrame().dispose();
                 } else {
