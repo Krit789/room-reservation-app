@@ -6,14 +6,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.Serial;
 
 import javax.swing.JButton;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
 public class ButtonGradient extends JButton {
+    @Serial
     private static final long serialVersionUID = -4638661821951496102L;
-    private static Font defaultFont = new Font("Cousine", Font.BOLD, 18);
+    private static final Font defaultFont = new Font("Cousine", Font.BOLD, 18);
 
     public float getSizeSpeed() {
         return sizeSpeed;
