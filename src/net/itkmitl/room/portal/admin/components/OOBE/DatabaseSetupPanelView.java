@@ -22,7 +22,7 @@ import net.itkmitl.room.portal.components.GBCBuilder;
 
 public class DatabaseSetupPanelView extends JPanel {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -7942736605197573612L;
 	private JLabel title, description, dbAddressLabel, dbPortLabel, dbNameLabel, dbUserLabel, dbPasswordLabel;

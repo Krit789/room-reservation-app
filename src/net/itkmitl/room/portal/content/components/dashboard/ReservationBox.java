@@ -1,23 +1,20 @@
-package net.itkmitl.room.portal.dashboard.components;
+package net.itkmitl.room.portal.content.components.dashboard;
 
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.RoundedPanel;
-import net.itkmitl.room.portal.components.TransparentPanel;
 
 import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import static net.itkmitl.room.portal.dashboard.components.ReservationPanel.buttonBox;
+import static net.itkmitl.room.portal.content.components.dashboard.ReservationPanel.buttonBox;
 
 public class ReservationBox extends RoundedPanel {
-    /**
-     *
-     */
     private static final long serialVersionUID = 3285944903070661887L;
     public ButtonGradient redirectButton;
     private BoxIcon icon;
+    public static final int iconWidth = 140, iconHeight = 140;
 
     public ReservationBox(String title) {
         super(30, 30);
@@ -30,19 +27,22 @@ public class ReservationBox extends RoundedPanel {
         redirectButton.setSizeSpeed(30f);
         redirectButton.setActionCommand(title);
         if (title.equals("History")) {
-            icon = new BoxIcon(new ImageIcon("resource/icons/history.png"));
-            icon.setSize(160, 160);
-            this.add(icon, BorderLayout.CENTER);
+            ImageIcon icon = resizeIcon(new ImageIcon("resource/icons/history.png"), iconWidth, iconHeight);
+            this.add(new BoxIcon(icon), BorderLayout.CENTER);
             buttonBox[0] = redirectButton;
         } else if (title.equals("Booking")) {
-            icon = new BoxIcon(new ImageIcon("resource/icons/booking.png"));
-            icon.setSize(160, 160);
-            this.add(icon, BorderLayout.CENTER);
+            ImageIcon icon = resizeIcon(new ImageIcon("resource/icons/booking.png"), iconWidth, iconHeight);
+            this.add(new BoxIcon(icon), BorderLayout.CENTER);
             buttonBox[1] = redirectButton;
         } else {
             JLabel titleLabel = new JLabel(title, JLabel.CENTER);
             this.add(titleLabel, BorderLayout.NORTH);
         }
         this.add(redirectButton, BorderLayout.SOUTH);
+    }
+
+    private ImageIcon resizeIcon(ImageIcon icon, int width, int height) {
+        Image resizedImage = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+        return new ImageIcon(resizedImage);
     }
 }

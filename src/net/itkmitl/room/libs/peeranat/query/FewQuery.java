@@ -45,7 +45,7 @@ public class FewQuery {
                     this.fields.put(this.resultMeta.getColumnName(col), null);
                 }
             }
-            
+
             return this;
         } catch (Exception e) {
             System.out.println("ERROR: Unable to prepare query (" + e.getMessage() + ")");
@@ -73,12 +73,12 @@ public class FewQuery {
                     this.fields.put(this.resultMeta.getColumnName(col), null);
                 }
             }
-            
+
             return this;
         } catch (Exception e) {
             System.out.println("ERROR: Unable to prepare query (" + e.getMessage() + ")");
             throw e;
-        } 
+        }
     }
 
     public void close() {
@@ -124,7 +124,7 @@ public class FewQuery {
             }
         } catch (Exception e) {
             System.out.println("ERROR: Unable to fetch (" + e.getMessage() + ")");
-        } 
+        }
         return true;
     }
 

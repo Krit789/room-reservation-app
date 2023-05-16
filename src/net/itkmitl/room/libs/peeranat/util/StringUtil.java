@@ -72,7 +72,7 @@ public class StringUtil {
 	public static String getTimeString(long unixTime) {
 		return getTimeString(new Date(unixTime));
 	}
-	
+
 	public static String getTimeAsStringInShort(int time) {
 		// Time is in seconds
 		StringBuilder sb = new StringBuilder();
@@ -81,7 +81,7 @@ public class StringUtil {
 
 		days = (int) Math.ceil(time / 86400);
 		time = time - (days * 86400);
-		
+
 		hours = (int) Math.ceil(time / 3600);
 		time = time - (hours * 3600);
 
@@ -127,7 +127,7 @@ public class StringUtil {
 			return "0 sec";
 		return sb.toString();
 	}
-	
+
 	public static String getTimeAsString(int time) {
 		StringBuilder sb = new StringBuilder();
 
@@ -135,10 +135,10 @@ public class StringUtil {
 
 		days = (int) Math.ceil(time / 86400);
 		time = time - (days * 86400);
-		
+
 		hours = (int) Math.ceil(time / 3600);
 		time = time - (hours * 3600);
-		
+
 		minutes = (int) Math.ceil(time / 60);
 		time = time - (minutes * 60);
 
@@ -154,7 +154,7 @@ public class StringUtil {
 				sb.append(" days ");
 			}
 		}
-		
+
 		if (hours > 0) {
 
 			if (hours == 1) {
@@ -193,7 +193,7 @@ public class StringUtil {
 			return "0 Sec";
 		return sb.toString();
 	}
-	
+
 	public static String getTimeAsStringThaiInShort(int time) {
 		// Time is in seconds
 		StringBuilder sb = new StringBuilder();
@@ -202,7 +202,7 @@ public class StringUtil {
 
 		days = (int) Math.ceil(time / 86400);
 		time = time - (days * 86400);
-		
+
 		hours = (int) Math.ceil(time / 3600);
 		time = time - (hours * 3600);
 
@@ -236,7 +236,7 @@ public class StringUtil {
 			return "0 วินาที";
 		return sb.toString();
 	}
-	
+
 	public static String getTimeAsStringThai(int time) {
 		StringBuilder sb = new StringBuilder();
 
@@ -244,10 +244,10 @@ public class StringUtil {
 
 		days = (int) Math.ceil(time / 86400);
 		time = time - (days * 86400);
-		
+
 		hours = (int) Math.ceil(time / 3600);
 		time = time - (hours * 3600);
-		
+
 		minutes = (int) Math.ceil(time / 60);
 		time = time - (minutes * 60);
 
@@ -257,7 +257,7 @@ public class StringUtil {
 			sb.append(days);
 			sb.append(" วัน ");
 		}
-		
+
 		if (hours > 0) {
 			sb.append(hours);
 			sb.append(" ชั่วโมง ");

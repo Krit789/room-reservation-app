@@ -67,7 +67,7 @@ public class DataListTableView {
 
         table = new JTable() {
             /**
-			 * 
+			 *
 			 */
 			private static final long serialVersionUID = 7614361499285925400L;
 			@Override

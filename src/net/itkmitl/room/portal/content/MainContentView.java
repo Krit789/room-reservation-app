@@ -11,7 +11,7 @@ import net.itkmitl.room.portal.content.components.Selector;
 
 public class MainContentView extends View{
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 3256816243621773023L;
 	private TransparentPanel contentPanel;

@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class RoundedPanel extends JPanel {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -6903556553578428210L;
 	private int arcWidth;

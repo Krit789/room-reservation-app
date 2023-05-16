@@ -16,7 +16,7 @@ public enum RoomQuery {
     private void setQuery(int query) {
         this.query = query;
     }
-    
+
     public static RoomQuery getQueryByID(int id) {
     	for (RoomQuery query : values()) {
     		if (query.getQuery() == id) {

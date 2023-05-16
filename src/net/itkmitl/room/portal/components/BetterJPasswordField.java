@@ -15,7 +15,7 @@ import net.itkmitl.room.libs.peeranat.util.FewPassword;
 
 public class BetterJPasswordField extends JPasswordField implements MouseListener, FocusListener {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 7347697827946283962L;
 	private Color normalBgColor = Color.WHITE;

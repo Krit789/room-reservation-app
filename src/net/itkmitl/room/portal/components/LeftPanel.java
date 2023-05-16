@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class LeftPanel extends JPanel {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 561892552360870497L;
 	public JLabel lthIcon, title;

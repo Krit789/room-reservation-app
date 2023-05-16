@@ -1,12 +1,10 @@
 package net.itkmitl.room.portal.content.components.history;
 
 import net.itkmitl.room.portal.components.ButtonGradient;
-import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
-import net.itkmitl.room.portal.dashboard.components.BoxIcon;
+import net.itkmitl.room.portal.content.components.dashboard.BoxIcon;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class ReservationHistoryBox extends RoundedPanel {

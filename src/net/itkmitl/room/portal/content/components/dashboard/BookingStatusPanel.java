@@ -1,4 +1,4 @@
-package net.itkmitl.room.portal.dashboard.components;
+package net.itkmitl.room.portal.content.components.dashboard;
 
 
 import java.awt.*;
@@ -21,10 +21,6 @@ import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 
 public class BookingStatusPanel extends RoundedPanel {
-
-    /**
-     *
-     */
     private static final long serialVersionUID = 84550694890228683L;
     public JLabel titleLabel;
     private JPanel piechart;

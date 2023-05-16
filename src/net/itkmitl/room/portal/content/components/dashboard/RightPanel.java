@@ -1,4 +1,4 @@
-package net.itkmitl.room.portal.dashboard.components;
+package net.itkmitl.room.portal.content.components.dashboard;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -17,9 +17,6 @@ import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.components.GBCBuilder;
 
 public class RightPanel extends JPanel {
-    /**
-     *
-     */
     private static final long serialVersionUID = 3515411566688472487L;
     private AppStore store = AppStore.getAppStore();
     public JLabel nameLabel;

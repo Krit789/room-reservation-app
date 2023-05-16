@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 public class WelcomePanelView extends JPanel {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1140777242974791493L;
 	private JLabel title, description;

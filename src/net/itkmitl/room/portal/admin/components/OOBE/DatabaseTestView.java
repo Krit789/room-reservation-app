@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 public class DatabaseTestView extends JPanel {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 2479869772958246586L;
 	public JLabel title, description,connectionLabel, credentialLabel, databaseLabel, userTableLabel, roomTableLabel, reservationTableLabel, feedbackTableLabel, tableIndexLabel, tableRelationshipLabel, yesLabel, noLabel;

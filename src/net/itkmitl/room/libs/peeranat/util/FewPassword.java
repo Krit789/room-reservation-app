@@ -11,7 +11,7 @@ public class FewPassword {
     public static boolean checkPassword(String password, String salt) {
         return BCrypt.verifyer().verify(password.toCharArray(), salt).verified;
     }
-    
+
     public static String getText(char[] password) {
     	return String.valueOf(password);
     }

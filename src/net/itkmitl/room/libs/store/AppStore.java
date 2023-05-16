@@ -19,7 +19,7 @@ public class AppStore {
     public void dispatch(String key, Object value) {
         AppStore.store.put(key, value);
     }
-    
+
     public Object select(String key) {
     	return selectRaw(key).getRaw();
     }

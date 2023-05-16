@@ -1,4 +1,4 @@
-package net.itkmitl.room.portal.dashboard.components;
+package net.itkmitl.room.portal.content.components.dashboard;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -10,12 +10,8 @@ import javax.swing.ImageIcon;
 import net.itkmitl.room.portal.components.TransparentPanel;
 
 public class BoxIcon extends TransparentPanel {
-
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3043535217335143086L;
-	private ImageIcon image;
+    private static final long serialVersionUID = -3043535217335143086L;
+    private ImageIcon image;
 
     public BoxIcon(ImageIcon image) {
         this.image = image;
@@ -45,7 +41,7 @@ public class BoxIcon extends TransparentPanel {
         }
         Graphics2D graphics2D = (Graphics2D) g;
         graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        graphics2D.drawImage(image.getImage(),(bound_width - new_width) / 2,0,new_width, new_height,this);
+        graphics2D.drawImage(image.getImage(), (bound_width - new_width) / 2, 0, new_width, new_height, this);
     }
 
 }

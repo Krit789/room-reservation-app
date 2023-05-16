@@ -15,7 +15,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 public class BetterJTextField extends JTextField implements MouseListener, FocusListener, DocumentListener {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 7749724868234541103L;
 	private Color normalBgColor = Color.WHITE;

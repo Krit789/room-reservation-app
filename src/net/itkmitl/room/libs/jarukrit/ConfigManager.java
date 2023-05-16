@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class ConfigManager {
-	
+
     public static void saveConnection(String database, String ip, int port, String username, String password) {
         FewConfig config = new FewConfig(new File("config.yml"));
         config.set("database", database);
@@ -34,5 +34,5 @@ public class ConfigManager {
         myConnection.add(config.getValue("password").asString());
         return myConnection;
     }
-    
+
 }

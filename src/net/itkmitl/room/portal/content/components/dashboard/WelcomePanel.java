@@ -1,4 +1,4 @@
-package net.itkmitl.room.portal.dashboard.components;
+package net.itkmitl.room.portal.content.components.dashboard;
 
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.GBCBuilder;
@@ -7,8 +7,6 @@ import net.itkmitl.room.portal.components.RoundedPanel;
 import java.awt.*;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 public class WelcomePanel extends RoundedPanel {
     private JLabel t1, t2, t3, rightLabel;

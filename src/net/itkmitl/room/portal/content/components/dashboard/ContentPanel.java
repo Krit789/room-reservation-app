@@ -1,13 +1,10 @@
-package net.itkmitl.room.portal.dashboard.components;
+package net.itkmitl.room.portal.content.components.dashboard;
 
 import javax.swing.BoxLayout;
 
 import net.itkmitl.room.portal.components.TransparentPanel;
 
 public class ContentPanel extends TransparentPanel {
-    /**
-     *
-     */
     private static final long serialVersionUID = 6701138923212123618L;
 
     public ContentPanel() {

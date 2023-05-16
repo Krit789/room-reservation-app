@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static net.itkmitl.room.portal.components.LeftSelectorPanel.finishedLoading;
-import static net.itkmitl.room.portal.dashboard.components.ReservationPanel.buttonBox;
+import static net.itkmitl.room.portal.content.components.dashboard.ReservationPanel.buttonBox;
 
 
 public class MainContentController extends Controller implements ActionListener {

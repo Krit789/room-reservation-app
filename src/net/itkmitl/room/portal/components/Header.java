@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 public class Header extends TransparentPanel {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 752500660828855659L;
 	public JLabel headerLabel, descriptionLabel;

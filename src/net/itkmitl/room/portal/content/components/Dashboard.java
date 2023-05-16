@@ -13,11 +13,11 @@ import javax.swing.border.EmptyBorder;
 
 import net.itkmitl.room.portal.CardView;
 import net.itkmitl.room.portal.components.MainPanel;
-import net.itkmitl.room.portal.dashboard.components.ContentPanel;
-import net.itkmitl.room.portal.dashboard.components.NotificationPanel;
-import net.itkmitl.room.portal.dashboard.components.ReservationPanel;
-import net.itkmitl.room.portal.dashboard.components.RightPanel;
-import net.itkmitl.room.portal.dashboard.components.WelcomePanel;
+import net.itkmitl.room.portal.content.components.dashboard.ContentPanel;
+import net.itkmitl.room.portal.content.components.dashboard.NotificationPanel;
+import net.itkmitl.room.portal.content.components.dashboard.ReservationPanel;
+import net.itkmitl.room.portal.content.components.dashboard.RightPanel;
+import net.itkmitl.room.portal.content.components.dashboard.WelcomePanel;
 
 public class Dashboard extends CardView {
     private static final long serialVersionUID = 5559587513984125656L;

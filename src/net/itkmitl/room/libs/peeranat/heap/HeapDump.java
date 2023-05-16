@@ -5,19 +5,19 @@ import java.nio.file.Paths;
 
 public class HeapDump {
 
-	
+
 	public static java.nio.file.Path dumpHeap(String name) throws IOException {
 		return dumpHeap(name, Paths.get("."));
 	}
-    
+
     public static java.nio.file.Path dumpHeap(String name, java.nio.file.Path dir) throws IOException {
-    	
+
     	try {
 			java.nio.file.Files.createDirectories(dir);
-	
+
 	        javax.management.MBeanServer server = java.lang.management.ManagementFactory.getPlatformMBeanServer();
 	        java.nio.file.Path file;
-	
+
 	        try {
 	            Class<?> clazz = Class.forName("openj9.lang.management.OpenJ9DiagnosticsMXBean");
 	            Object openj9Mbean = java.lang.management.ManagementFactory.newPlatformMXBeanProxy(server, "openj9.lang.management:type=OpenJ9Diagnostics", clazz);
@@ -31,12 +31,12 @@ public class HeapDump {
 	            file = dir.resolve(name + ".hprof");
 	            m.invoke(hotspotMBean, file.toString(), true);
 	        }
-	
+
 	        return file;
 	    } catch (Throwable t) {
 	        System.err.println("Could not write heap");
 	        return null;
 	    }
     }
-    
+
 }

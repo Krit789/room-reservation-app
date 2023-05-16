@@ -7,7 +7,7 @@ import javax.swing.JButton;
 
 public class LeftSelectorBox extends JButton {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -3861775095110257593L;
 	public int boxID;

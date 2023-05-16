@@ -18,7 +18,7 @@ import net.itkmitl.room.portal.components.GBCBuilder;
 
 public class FinishView extends JPanel {
     /**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -629579596973815711L;
 	private JLabel title, description, firstPasswordDisplay;
