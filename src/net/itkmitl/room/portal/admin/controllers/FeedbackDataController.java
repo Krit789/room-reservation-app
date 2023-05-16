@@ -303,10 +303,10 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
         try {
             BaseWindow.windowMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
             BaseWindow.windowList.remove(e.getInternalFrame());
-            System.out.println("Removal Success: " + e.getInternalFrame().getTitle() + " " + e.getInternalFrame().getClass().getCanonicalName() + " " + this.getClass().getSimpleName());
+            // System.out.println("Removal Success: " + e.getInternalFrame().getTitle() + " " + e.getInternalFrame().getClass().getCanonicalName() + " " + this.getClass().getSimpleName());
         } catch (Exception ex) {
-            System.out.println("Removal Failure: " + e.getInternalFrame().getTitle() + " " + e.getSource().toString() + " " + e.getInternalFrame().getClass().getCanonicalName() + " " + this.getClass().getSimpleName());
-            ex.printStackTrace();
+             System.out.println("Removal Failure: " + e.getInternalFrame().getTitle() + " " + e.getSource().toString() + " " + e.getInternalFrame().getClass().getCanonicalName() + " " + this.getClass().getSimpleName());
+//            ex.printStackTrace();
         }
     }
 

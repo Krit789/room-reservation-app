@@ -49,7 +49,7 @@ public class Selector extends CardView {
 
             @Override
             protected void done() {
-                System.out.println("Done with room data!");
+//                System.out.println("Done with room data!");
                 populateList();
             }
         };
@@ -90,7 +90,7 @@ public class Selector extends CardView {
                         // Room box, vertical room list
 
                         for (Room myRoom : eachFloor.getRooms().values()) {
-                            System.out.println(myRoom.getBuilding() + " " + myRoom.getFloor() + " " + myRoom.getName());
+//                            System.out.println(myRoom.getBuilding() + " " + myRoom.getFloor() + " " + myRoom.getName());
                             MainRoomSelectionBox roomBox = new MainRoomSelectionBox(myRoom);
                             roomBoxHolder.add(roomBox);
                             floorBox.roomPanel.add(roomBox, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 1, roomCount, new Insets(10, 15, 0, 15)).getGBC());

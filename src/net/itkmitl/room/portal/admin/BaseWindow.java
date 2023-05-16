@@ -316,7 +316,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         } else if (e.getSource().equals(windowMenuItem2)) {
             for (JInternalFrame i : desktop.getAllFrames()
             ) {
-                System.out.println(i.getTitle());
+//                System.out.println(i.getTitle());
             }
         }
     }

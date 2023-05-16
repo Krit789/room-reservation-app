@@ -51,7 +51,6 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
                     ReservationRepository rsvprp = new ReservationRepository(db);
                     Long currentTime = System.currentTimeMillis();
                     resList = rsvprp.getReservationsByRoomIdAndTimeRange(myRoom.getId(), currentTime, (currentTime + (86400L * 1000 * 8)));
-                    System.out.println(resList.size());
                     availableTime = getAvailableTimes(resList, myRoom, 7);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -110,8 +109,8 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
 
                 availableTimes.add(new ReservableEntity(new DateTime(currentTimeMilis.getTime()), new DateTime(currentTimeMilis.getTime() + 1800L * 1000L)));
             } else if (unavailable) {
-                System.out.println("Unavailable Time (" + room.getName() + ")" + currentTimeMilis + " : " + (currentTimeMilis.getTime() >= virtualReservationStart.getTime()) + " && " + (currentTimeMilis.getTime() <= virtualReservationEnd.getTime()));
-                System.out.println("(" + currentTimeMilis.getTime()  + " >= " + virtualReservationStart.getTime() + ") && (" + currentTimeMilis.getTime() + " < " + virtualReservationEnd.getTime()+")");
+//                System.out.println("Unavailable Time (" + room.getName() + ")" + currentTimeMilis + " : " + (currentTimeMilis.getTime() >= virtualReservationStart.getTime()) + " && " + (currentTimeMilis.getTime() <= virtualReservationEnd.getTime()));
+//                System.out.println("(" + currentTimeMilis.getTime()  + " >= " + virtualReservationStart.getTime() + ") && (" + currentTimeMilis.getTime() + " < " + virtualReservationEnd.getTime()+")");
             }
         }
         return availableTimes;

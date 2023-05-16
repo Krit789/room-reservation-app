@@ -87,7 +87,6 @@ public class ReservationRepository extends Repository<Reservation> {
     }
 
     public ArrayList<Reservation> getReservationsByRoomIdAndTimeRange(int roomId, long beginTime, long endTime) throws Exception {
-        System.out.println(String.format("SELECT * FROM `reservation` WHERE `room_id` = %d AND `start_time` BETWEEN %s AND %s AND `end_time` BETWEEN %s AND %s;", roomId, beginTime, endTime, beginTime, endTime));
         return this.maps(this.getQuery().unsafeQuery(String.format("SELECT * FROM `reservation` WHERE `room_id` = %d AND `start_time` BETWEEN %s AND %s AND `end_time` BETWEEN %s AND %s;", roomId, beginTime, endTime, beginTime, endTime)));
     }
 
@@ -163,8 +162,6 @@ public class ReservationRepository extends Repository<Reservation> {
                 .set("reservation_time", System.currentTimeMillis())
                 .set("is_cancelled", reservation.isCancelled() ? 1 : 0)
                 .table("reservation");
-
-        System.out.println(update.builder());
 
         this.getQuery().query(update);
     }

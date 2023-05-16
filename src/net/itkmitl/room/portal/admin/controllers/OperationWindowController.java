@@ -149,10 +149,10 @@ public class OperationWindowController implements ActionListener, InternalFrameL
         try {
             BaseWindow.windowMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
             BaseWindow.windowList.remove(e.getInternalFrame());
-            System.out.println("Removal Success: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
+//            System.out.println("Removal Success: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
         } catch (Exception ex) {
             System.out.println("Removal Failure: " + e.getInternalFrame().getTitle() + " " + this.getClass().getSimpleName());
-            ex.printStackTrace();
+//            ex.printStackTrace();
         }
     }
 
