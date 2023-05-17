@@ -19,6 +19,14 @@ public class RoomRepository extends Repository<Room> {
         return this.maps(this.getQuery().query(select));
     }
 
+    public Room getRandomRoom() throws Exception {
+        ArrayList<Room> rooms = this.getRooms();
+
+        int rando = (int) (Math.random() * (rooms.size() - 1));
+
+        return rooms.get(rando);
+    }
+
     public ArrayList<Room> getRooms(int limit) throws Exception {
         FewSelectMySQL select = new FewSelectMySQL();
 
