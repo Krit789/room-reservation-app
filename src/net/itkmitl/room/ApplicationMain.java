@@ -8,8 +8,10 @@ import java.io.File;
 
 public class ApplicationMain {
     public static void main(String[] args) throws Exception {
-        FewConfig config = new FewConfig(new File("config.yml"));
-        if (config.getValue("first_run") == null) {
+        File cfg = new File("config.yml");
+        if (!cfg.exists()) {
+            OOBEController.main(new String[]{});
+        } else if (cfg.exists() && new FewConfig(cfg).getValue("first_run") == null) {
             OOBEController.main(new String[]{});
         } else {
             EntryPortal.main(new String[]{});

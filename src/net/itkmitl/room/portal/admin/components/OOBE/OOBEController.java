@@ -42,25 +42,34 @@ public class OOBEController implements ActionListener, DocumentListener {
     private int currentPage;
 
     public OOBEController() {
-        FewConfig config = new FewConfig(new File("config.yml"));
-        if (config.getValue("first_run") == null) {
-            view = new OOBEView();
-            view.nextButton.addActionListener(this);
-            view.backButton.addActionListener(this);
-            view.cancelButton.addActionListener(this);
-            view.backButton.setEnabled(false);
-
-            view.dbsp.dbUserTextField.getDocument().addDocumentListener(this);
-            view.dbsp.dbPasswordField.getDocument().addDocumentListener(this);
-            view.dbsp.dbNameTextField.getDocument().addDocumentListener(this);
-            view.dbsp.dbAddressTextField.getDocument().addDocumentListener(this);
-
-            CardLayout c = (CardLayout) view.contentPanel.getLayout();
-            c.show(view.contentPanel, OOBEView.PANEL[currentPage]);
+        File cfg = new File("config.yml");
+        if (cfg.exists()) {
+            FewConfig config = new FewConfig(new File("config.yml"));
+            if (config.getValue("first_run") == null) {
+                initialize();
+            } else {
+                JOptionPane.showMessageDialog(null, "You have already setup Laew Tae Hong, we're forwarding you to admin interface", "Notice", JOptionPane.INFORMATION_MESSAGE);
+                BaseWindow.main(new String[]{});
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "You have already setup Laew Tae Hong, we're forwarding you to admin interface", "Notice", JOptionPane.INFORMATION_MESSAGE);
-            BaseWindow.main(new String[]{});
+            initialize();
         }
+    }
+
+    public void initialize(){
+        view = new OOBEView();
+        view.nextButton.addActionListener(this);
+        view.backButton.addActionListener(this);
+        view.cancelButton.addActionListener(this);
+        view.backButton.setEnabled(false);
+
+        view.dbsp.dbUserTextField.getDocument().addDocumentListener(this);
+        view.dbsp.dbPasswordField.getDocument().addDocumentListener(this);
+        view.dbsp.dbNameTextField.getDocument().addDocumentListener(this);
+        view.dbsp.dbAddressTextField.getDocument().addDocumentListener(this);
+
+        CardLayout c = (CardLayout) view.contentPanel.getLayout();
+        c.show(view.contentPanel, OOBEView.PANEL[currentPage]);
     }
 
     public static void main(String[] args) {
