@@ -22,7 +22,7 @@ public class RoomRepository extends Repository<Room> {
     public Room getRandomRoom() throws Exception {
         ArrayList<Room> rooms = this.getRooms();
 
-        int rando = (int) (Math.random() * (rooms.size() - 1));
+        int rando = (int) Math.round((Math.random() * (rooms.size() - 1)));
 
         return rooms.get(rando);
     }
