@@ -93,7 +93,7 @@ public class LeftSelectorPanel extends JPanel {
                     }
 
                     JButton component = (JButton) buttonPanel.getComponent(0);
-                    component.setText("- " + component.getText());
+                    component.setText("√ " + component.getText());
 
                     buttonPanel.add(Box.createVerticalGlue());
                 } catch (Exception e) {
