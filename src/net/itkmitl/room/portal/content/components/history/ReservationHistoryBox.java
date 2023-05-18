@@ -143,11 +143,13 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
                     toBeCancelled.setCancelled(true);
                     reservationRepository.updateReservation(toBeCancelled);
                     cancelBtn.setText("Cancelled");
+                    cancelBtn.setColor1(Color.gray);
+                    cancelBtn.setColor2(Color.gray);
                     cancelBtn.setEnabled(false);
                 } catch (Exception ex) {
                     cancelBtn.setText("Cancel");
                     cancelBtn.setEnabled(true);
-                    JOptionPane.showConfirmDialog(null, ex.getMessage(), "Something went wrong", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Something went wrong", JOptionPane.ERROR_MESSAGE);
                 }
                 return null;
             }
@@ -169,16 +171,12 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
             MainContentView.glassPane.setVisible(true);
             MainContentView.glassPane.setEnabled(true);
             int option = JOptionPane.showOptionDialog(findWindow(this), "<html><p>Are you sure that you want to cancel this reservation? This action cannot be undone!</p></html>", "Cancel", JOptionPane.NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
-
             if (option == 0) {
-                MainContentView.glassPane.setVisible(false);
-                MainContentView.glassPane.setEnabled(false);
                 cancelReservaion(reservation.getId());
-                JOptionPane.showConfirmDialog(findWindow(this), "Reservation Canceled", "Success", 0);
-            } else {
-                MainContentView.glassPane.setVisible(false);
-                MainContentView.glassPane.setEnabled(false);
+                JOptionPane.showMessageDialog(findWindow(this), "Reservation Cancelled", "Success", JOptionPane.INFORMATION_MESSAGE);
             }
+            MainContentView.glassPane.setVisible(false);
+            MainContentView.glassPane.setEnabled(false);
         }
     }
 }

@@ -68,9 +68,9 @@ public class FeedBackDialogueController implements ActionListener, WindowListene
                     toBeCriticized.setRating(rating);
                     toBeCriticized.setComment(comment);
                     feedbackRepository.createFeedback(toBeCriticized);
-                    JOptionPane.showConfirmDialog(null, "Feedback submitted, Thank you for your input.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Feedback submitted, Thank you for your input.", "Success", JOptionPane.INFORMATION_MESSAGE);
                 } catch (Exception ex) {
-                    JOptionPane.showConfirmDialog(null, ex.getMessage(), "Something went wrong", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Something went wrong", JOptionPane.ERROR_MESSAGE);
                 }
                 return null;
             }

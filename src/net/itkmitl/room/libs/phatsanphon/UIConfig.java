@@ -6,11 +6,14 @@ import javax.swing.*;
 
 public class UIConfig {
     public static void setLookAndFeel() {
+        setLookAndFeel("Laew Tae Hong");
+    }
+    public static void setLookAndFeel(String text){
         try {
-            UIManager.setLookAndFeel(new FlatMacLightLaf());
             System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("apple.awt.application.name", "Laew Tae Hong Management");
+            System.setProperty("apple.awt.application.name", text);
             System.setProperty("apple.awt.application.appearance", "system");
+            UIManager.setLookAndFeel(new FlatMacLightLaf());
             return;
         } catch (Exception ignored) {
         }

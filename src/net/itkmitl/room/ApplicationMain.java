@@ -1,6 +1,7 @@
 package net.itkmitl.room;
 
 import net.itkmitl.room.libs.peeranat.config.FewConfig;
+import net.itkmitl.room.libs.phatsanphon.UIConfig;
 import net.itkmitl.room.portal.account.EntryPortal;
 import net.itkmitl.room.portal.admin.components.OOBE.OOBEController;
 
