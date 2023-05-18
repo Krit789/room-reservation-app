@@ -76,8 +76,15 @@ public class MainContentController extends Controller implements ActionListener,
                     getView().getSelector().getSelectorPanel().leftBoxHolder.get(i).addActionListener(getAction());
                     getView().getSelector().getSelectorPanel().leftBoxHolder.get(i).addMouseListener(getMouse());
                 }
-                selectedBox = getView().getSelector().getSelectorPanel().leftBoxHolder.get(0);
-                selectedBox.setContentAreaFilled(true);
+                if (getView().getSelector().getSelectorPanel().leftBoxHolder.size() > 0) {
+                    selectedBox = getView().getSelector().getSelectorPanel().leftBoxHolder.get(0);
+                    selectedBox.setContentAreaFilled(true);
+                } else {
+                    buttonBox[0].setEnabled(false);
+                    buttonBox[1].setEnabled(false);
+                    getView().getDashboard().getWelcomePanel().bookingButton.setEnabled(false);
+                    JOptionPane.showMessageDialog(null, "No room available on this instance", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
                 MainContentView.glassPane.setVisible(false);
                 MainContentView.glassPane.setEnabled(false);
             }

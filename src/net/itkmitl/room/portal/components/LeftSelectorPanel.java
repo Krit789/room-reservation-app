@@ -56,10 +56,6 @@ public class LeftSelectorPanel extends JPanel {
 
         loadBuilding();
         RoomLoader.loadRoom();
-
-        //test importing floor data(idk how this database work so have this for now)
-
-        //would be in a loop for all component to add
     }
 
 

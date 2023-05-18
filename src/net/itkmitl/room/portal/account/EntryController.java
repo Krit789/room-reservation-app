@@ -81,6 +81,7 @@ public class EntryController extends Controller implements ActionListener, Compo
             @Override
             protected Object doInBackground() {
                 try {
+                    registerPanel.getRegisterButton().setEnabled(false);
                     FewQuery db = LaewTaeDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
                     getView().registerPanel.getWarningLabel().setIcon(FewFile.getImage("icons/loading-32px.gif"));
@@ -115,6 +116,8 @@ public class EntryController extends Controller implements ActionListener, Compo
             @Override
             protected void done() {
                 getView().registerPanel.getWarningLabel().setIcon(null);
+                registerPanel.getRegisterButton().setEnabled(true);
+
             }
         };
         worker.execute();
@@ -125,6 +128,7 @@ public class EntryController extends Controller implements ActionListener, Compo
             @Override
             protected Object doInBackground() {
                 try {
+                    getView().loginPanel.getLoginButton().setEnabled(false);
                     getView().loginPanel.getWarningLabel().setIcon(FewFile.getImage("icons/loading-32px.gif"));
                     int w = getView().loginPanel.getWarningLabel().getIcon().getIconWidth();
                     int h = getView().loginPanel.getWarningLabel().getIcon().getIconHeight();
@@ -154,6 +158,7 @@ public class EntryController extends Controller implements ActionListener, Compo
 
             @Override
             protected void done() {
+                getView().loginPanel.getLoginButton().setEnabled(true);
                 getView().loginPanel.getWarningLabel().setIcon(null);
             }
         };
