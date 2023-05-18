@@ -96,6 +96,8 @@ public class MainContentController extends Controller implements ActionListener,
         if (e.getActionCommand().equals("History")) {
             getView().getHistory().getRightPanel().populate();
             this.changeCard("History");
+        } else if (e.getActionCommand().equals("Booking")) {
+            this.changeCard("Selector");
         } else if (e.getActionCommand().equals("Back to Dashboard")) {
             this.changeCard("Dashboard");
         } else if (e.getSource() instanceof LeftSelectorBox) {
