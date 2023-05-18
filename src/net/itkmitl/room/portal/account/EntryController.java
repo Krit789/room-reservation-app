@@ -79,14 +79,13 @@ public class EntryController extends Controller implements ActionListener, Compo
         SwingWorker<?, ?> worker = new SwingWorker<>() {
 
             @Override
-            protected Object doInBackground() throws Exception {
+            protected Object doInBackground() {
                 try {
                     FewQuery db = LaewTaeDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
                     getView().registerPanel.getWarningLabel().setIcon(FewFile.getImage("icons/loading-32px.gif"));
-                    FontMetrics fm = getView().registerPanel.getWarningLabel().getFontMetrics(getView().registerPanel.getWarningLabel().getFont());
-                    int w = fm.stringWidth("0000");
-                    int h = fm.getHeight();
+                    int w = getView().registerPanel.getWarningLabel().getIcon().getIconWidth();
+                    int h = getView().registerPanel.getWarningLabel().getIcon().getIconHeight();
                     Dimension size = new Dimension(w, h);
                     getView().registerPanel.getWarningLabel().setMinimumSize(size);
                     getView().registerPanel.getWarningLabel().setPreferredSize(size);
@@ -127,9 +126,8 @@ public class EntryController extends Controller implements ActionListener, Compo
             protected Object doInBackground() {
                 try {
                     getView().loginPanel.getWarningLabel().setIcon(FewFile.getImage("icons/loading-32px.gif"));
-                    FontMetrics fm = getView().loginPanel.getWarningLabel().getFontMetrics(getView().loginPanel.getWarningLabel().getFont());
-                    int w = fm.stringWidth("0000");
-                    int h = fm.getHeight();
+                    int w = getView().loginPanel.getWarningLabel().getIcon().getIconWidth();
+                    int h = getView().loginPanel.getWarningLabel().getIcon().getIconHeight();
                     Dimension size = new Dimension(w, h);
                     getView().loginPanel.getWarningLabel().setMinimumSize(size);
                     getView().loginPanel.getWarningLabel().setPreferredSize(size);
