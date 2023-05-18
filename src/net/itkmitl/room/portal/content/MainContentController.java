@@ -6,8 +6,10 @@ import net.itkmitl.room.portal.Controller;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.LeftSelectorBox;
+import net.itkmitl.room.portal.components.MainRoomSelectionBox;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -107,6 +109,17 @@ public class MainContentController extends Controller implements ActionListener 
     protected void changeBuildingCard(String name) {
         CardLayout cl = (CardLayout) (this.getView().getSelector().cardsOfBuildingsFloorPanel.getLayout());
         cl.show(this.getView().getSelector().cardsOfBuildingsFloorPanel, name);
+
+        for (LeftSelectorBox box : this.getView().getSelector().getSelectorPanel().leftBoxHolder) {
+            System.out.println(box.getText() + " " + name);
+            if (box.getText().equals(name)) {
+                box.setText("- " + name);
+            } else {
+                if (box.getText().startsWith("- ")) {
+                    box.setText(box.getText().substring(2, box.getText().length()));
+                }
+            }
+        }
     }
 
     protected ActionListener getAction() {

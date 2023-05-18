@@ -6,6 +6,7 @@ import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -82,6 +83,7 @@ public class LeftSelectorPanel extends JPanel {
                     for (String buildingName : buildingList) {
                         LeftSelectorBox box = new LeftSelectorBox(buildingName, i);
                         box.setActionCommand(buildingName);
+
                         buttonPanel.add(box);
                         buttonPanel.add(Box.createVerticalStrut(5));
 
@@ -89,6 +91,10 @@ public class LeftSelectorPanel extends JPanel {
                         buttonPanel.revalidate();
                         i++;
                     }
+
+                    JButton component = (JButton) buttonPanel.getComponent(0);
+                    component.setText("- " + component.getText());
+
                     buttonPanel.add(Box.createVerticalGlue());
                 } catch (Exception e) {
                     throw new RuntimeException(e);
