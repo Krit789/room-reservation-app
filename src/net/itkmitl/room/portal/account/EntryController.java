@@ -57,9 +57,9 @@ public class EntryController extends Controller implements ActionListener, Compo
         this.getView().helpMenuItem1.addActionListener(this);
         loginPanel.getRegisterLabel2().addMouseListener(this);
         loginPanel.getLoginButton().addActionListener(this);
+        loginPanel.getPasswordField().addActionListener(this);
         loginPanel.getEmailField().addActionListener(this);
         loginPanel.getEmailField().getDocument().addDocumentListener(this);
-        loginPanel.getPasswordField().getDocument().addDocumentListener(this);
         registerPanel.getEmailField().getDocument().addDocumentListener(this);
         registerPanel.getPasswordField().getDocument().addDocumentListener(this);
         registerPanel.getConfirmPasswordField().getDocument().addDocumentListener(this);
@@ -179,7 +179,7 @@ public class EntryController extends Controller implements ActionListener, Compo
             this.RegisterDetail(registerPanel);
         }
         // Login TextField and PasswordField
-        else if (objectPerformed.equals(loginPanel.getEmailField()) || objectPerformed.equals(loginPanel.getPasswordField())) {
+        else if (objectPerformed.equals(loginPanel.getPasswordField()) | objectPerformed.equals(loginPanel.getEmailField())) {
             loginPanel.getLoginButton().doClick();
         }
     }

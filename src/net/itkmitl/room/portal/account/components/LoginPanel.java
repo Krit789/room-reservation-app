@@ -5,7 +5,6 @@ import net.itkmitl.room.portal.components.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class LoginPanel extends RoundedPanel {
@@ -71,11 +70,11 @@ public class LoginPanel extends RoundedPanel {
         return String.valueOf(passwordField.getPassword());
     }
 
-    public JTextField getEmailField() {
+    public BetterJTextField getEmailField() {
         return emailField;
     }
 
-    public JPasswordField getPasswordField() {
+    public BetterJPasswordField getPasswordField() {
         return passwordField;
     }
 
