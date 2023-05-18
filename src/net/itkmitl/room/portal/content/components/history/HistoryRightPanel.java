@@ -16,6 +16,7 @@ import net.itkmitl.room.portal.content.MainContentView;
 import net.itkmitl.room.portal.content.components.History;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.Serial;
 import java.util.ArrayList;
@@ -46,14 +47,15 @@ public class HistoryRightPanel extends CardView {
 //        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true, false, null), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 0, new Insets(15,0,0,0)).getGBC());
     }
 
-    public void populate(){
+    public void populate() {
         reservationHistoryPanel.removeAll();
         getReservationList();
     }
+
     private void getReservationList() {
         SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
             @Override
-            protected Object doInBackground(){
+            protected Object doInBackground() {
                 try {
                     MainContentView.glassPane.setText("Loading History");
                     MainContentView.glassPane.setSpinnerVisibility(true);
@@ -66,16 +68,16 @@ public class HistoryRightPanel extends CardView {
                     int count = 1;
                     for (Reservation r : res) {
                         reservationHistoryPanel.add(new ReservationHistoryBox(
-                                r.getRoom().getName(),
-                                String.format("%d:%02d-%d:%02d", r.getStartTime().getHours(), r.getStartTime().getMinutes(), r.getEndTime().getHours(), r.getEndTime().getMinutes()),
-                                String.format("%d %s %d", r.getStartTime().getDate(), r.getStartTime().toLocalDate().getMonth().toString(), r.getStartTime().getYear()),
-                                System.currentTimeMillis() >= r.getEndTime().getTime(),
-                                r.isCancelled(),
-                                r
-                        ),
-                                new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, count, new Insets(30,30,0,30)).getGBC());
+                                        r.getRoom().getName(),
+                                        String.format("%d:%02d-%d:%02d", r.getStartTime().getHours(), r.getStartTime().getMinutes(), r.getEndTime().getHours(), r.getEndTime().getMinutes()),
+                                        String.format("%d %s %d", r.getStartTime().getDate(), r.getStartTime().toLocalDate().getMonth().toString(), r.getStartTime().getYear()),
+                                        System.currentTimeMillis() >= r.getEndTime().getTime(),
+                                        r.isCancelled(),
+                                        r
+                                ),
+                                new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, count, new Insets(30, 30, 0, 30)).getGBC());
                         count++;
-                        if (r.isCancelled()){
+                        if (r.isCancelled()) {
                             cRes.add(r);
                         }
                         rsvNum = res.size();
@@ -90,8 +92,9 @@ public class HistoryRightPanel extends CardView {
                 return null;
 
             }
+
             @Override
-            protected void done(){
+            protected void done() {
                 MainContentView.glassPane.setVisible(false);
                 MainContentView.glassPane.setEnabled(false);
             }

@@ -6,7 +6,6 @@ import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashSet;

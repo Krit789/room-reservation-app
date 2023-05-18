@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
+import javax.swing.border.EmptyBorder;
 
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
@@ -40,8 +41,9 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
 
     public ReservationHistoryBox(String name, String time, String date, boolean isComplete, boolean isCancelled, Reservation reservation) {
         super(30, 40, Color.white);
-        this.setLayout(new BorderLayout());
-        this.reservation = reservation;
+        setBorder(new EmptyBorder(10, 25, 10, 35));
+        setLayout(new BorderLayout());
+        reservation = reservation;
         setPreferredSize(new Dimension(this.getBounds().width, 190));
 
         feedBackBtn = new ButtonGradient("Feedback", new Color(59, 151, 88));
@@ -65,7 +67,7 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
 
         TransparentPanel iconPanel = new TransparentPanel();
         iconPanel.setLayout(new GridBagLayout());
-        iconPanel.add(icon, new GBCBuilder(GridBagConstraints.CENTER,1,0,0).getGBC());
+        iconPanel.add(icon, new GBCBuilder(GridBagConstraints.CENTER, 1, 0, 0).getGBC());
 
         add(iconPanel, BorderLayout.WEST);
 
@@ -79,13 +81,13 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
         dataPanel.add(dateLabel);
         add(dataPanel, BorderLayout.CENTER);
         if (isComplete) {
-            operationPanel.add(feedBackBtn, new GBCBuilder(GridBagConstraints.CENTER,1,0,0).getGBC());
+            operationPanel.add(feedBackBtn, new GBCBuilder(GridBagConstraints.CENTER, 1, 0, 0).getGBC());
         } else {
-            if (isCancelled){
+            if (isCancelled) {
                 cancelBtn.setText("Cancelled");
                 cancelBtn.setEnabled(false);
             }
-            operationPanel.add(cancelBtn, new GBCBuilder(GridBagConstraints.CENTER,1,0,0, new Insets(0, 0, 0,10)).getGBC());
+            operationPanel.add(cancelBtn, new GBCBuilder(GridBagConstraints.CENTER, 1, 0, 0, new Insets(0, 0, 0, 10)).getGBC());
         }
 
         this.add(operationPanel, BorderLayout.EAST);
@@ -124,8 +126,8 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
 
     }
 
-    private void cancelReservaion(int resId){
-        SwingWorker<?,?> worker = new SwingWorker<Object, Object>() {
+    private void cancelReservaion(int resId) {
+        SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
             @Override
             protected Object doInBackground() throws Exception {
                 try {
@@ -162,14 +164,14 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
             MainContentView.glassPane.setText("");
             MainContentView.glassPane.setVisible(true);
             MainContentView.glassPane.setEnabled(true);
-            int option = JOptionPane.showOptionDialog(findWindow(this),"<html><p>Are you sure that you want to cancel this reservation? This action cannot be undone!</p></html>", "Cancel", JOptionPane.NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+            int option = JOptionPane.showOptionDialog(findWindow(this), "<html><p>Are you sure that you want to cancel this reservation? This action cannot be undone!</p></html>", "Cancel", JOptionPane.NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
-            if(option == 0) {
+            if (option == 0) {
                 MainContentView.glassPane.setVisible(false);
                 MainContentView.glassPane.setEnabled(false);
                 cancelReservaion(reservation.getId());
                 JOptionPane.showConfirmDialog(findWindow(this), "Reservation Canceled", "Success", 0);
-            }else {
+            } else {
                 MainContentView.glassPane.setVisible(false);
                 MainContentView.glassPane.setEnabled(false);
             }
