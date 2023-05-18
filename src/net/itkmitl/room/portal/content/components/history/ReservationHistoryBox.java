@@ -1,12 +1,6 @@
 package net.itkmitl.room.portal.content.components.history;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Window;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serial;
@@ -25,7 +19,9 @@ import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
 import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.ButtonGradient;
+import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
+import net.itkmitl.room.portal.components.TransparentPanel;
 import net.itkmitl.room.portal.content.MainContentView;
 import net.itkmitl.room.portal.content.components.dashboard.BoxIcon;
 
@@ -44,10 +40,11 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
 
     public ReservationHistoryBox(String name, String time, String date, boolean isComplete, boolean isCancelled, Reservation reservation) {
         super(30, 40, Color.white);
+        this.setLayout(new BorderLayout());
         this.reservation = reservation;
         setPreferredSize(new Dimension(this.getBounds().width, 190));
 
-        feedBackBtn = new ButtonGradient("FeedBack", new Color(59, 151, 88));
+        feedBackBtn = new ButtonGradient("Feedback", new Color(59, 151, 88));
         feedBackBtn.setActionCommand("Feedback");
         feedBackBtn.addActionListener(this);
 
@@ -63,24 +60,35 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
         timeLabel.setFont(new Font("Cousine", Font.PLAIN, 18));
         dataPanel = new JPanel(new GridLayout(1, 5));
         dataPanel.setOpaque(false);
+
         icon = new BoxIcon(FewFile.getImage("icons/round-table.png"));
 
-        add(icon, BorderLayout.WEST);
+        TransparentPanel iconPanel = new TransparentPanel();
+        iconPanel.setLayout(new GridBagLayout());
+        iconPanel.add(icon, new GBCBuilder(GridBagConstraints.CENTER,1,0,0).getGBC());
+
+        add(iconPanel, BorderLayout.WEST);
+
+        TransparentPanel operationPanel = new TransparentPanel();
+        operationPanel.setLayout(new GridBagLayout());
+
         dataPanel.add(nameLabel);
-        dataPanel.add(Box.createHorizontalStrut((this.getBounds().width - (icon.getWidth() + nameLabel.getWidth() + timeLabel.getWidth() + dateLabel.getWidth() + feedBackBtn.getWidth())) / 4));
+//        dataPanel.add(Box.createHorizontalStrut((this.getBounds().width - (icon.getWidth() + nameLabel.getWidth() + timeLabel.getWidth() + dateLabel.getWidth() + feedBackBtn.getWidth())) / 4));
         dataPanel.add(timeLabel);
 //        dataPanel.add(Box.createHorizontalStrut((this.getBounds().width - (icon.getWidth() + nameLabel.getWidth() + timeLabel.getWidth() + dateLabel.getWidth() + feedBackBtn.getWidth())) / 4));
         dataPanel.add(dateLabel);
         add(dataPanel, BorderLayout.CENTER);
         if (isComplete) {
-            add(feedBackBtn, BorderLayout.EAST);
+            operationPanel.add(feedBackBtn, new GBCBuilder(GridBagConstraints.CENTER,1,0,0).getGBC());
         } else {
             if (isCancelled){
                 cancelBtn.setText("Cancelled");
                 cancelBtn.setEnabled(false);
             }
-            add(cancelBtn, BorderLayout.EAST);
+            operationPanel.add(cancelBtn, new GBCBuilder(GridBagConstraints.CENTER,1,0,0, new Insets(0, 0, 0,10)).getGBC());
         }
+
+        this.add(operationPanel, BorderLayout.EAST);
     }
 
     public static Window findWindow(Component c) {

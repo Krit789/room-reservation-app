@@ -73,7 +73,7 @@ public class HistoryRightPanel extends CardView {
                                 r.isCancelled(),
                                 r
                         ),
-                                new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, count, new Insets(15,0,0,0)).getGBC());
+                                new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, count, new Insets(30,30,0,30)).getGBC());
                         count++;
                         if (r.isCancelled()){
                             cRes.add(r);
