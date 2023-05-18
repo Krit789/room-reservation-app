@@ -15,6 +15,7 @@ public class LeftSelectorBox extends JButton {
         super(name);
         boxID = ID;
         this.setFont(new Font("Cousine", Font.BOLD, 20));
+        this.setBackground(new Color(44, 102, 188));
         this.setForeground(Color.WHITE);
         this.setOpaque(false);
         this.setContentAreaFilled(false);

@@ -32,8 +32,8 @@ public class LeftSelectorPanel extends JPanel {
                 new Dimension(534, (int) this.getBounds().getSize().getHeight())
         );
         this.setOpaque(false);
-        parentCategory = new JLabel("Building");
-        parentCategory.setFont(new Font("Cousine", Font.BOLD, 18));
+        parentCategory = new JLabel("<HTML><U>Select a Building</U></HTML>");
+        parentCategory.setFont(new Font("Cousine", Font.BOLD, 25));
         parentCategory.setForeground(Color.WHITE);
         buttonPanel = new TransparentPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));

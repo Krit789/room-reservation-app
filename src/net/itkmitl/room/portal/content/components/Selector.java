@@ -34,7 +34,7 @@ public class Selector extends CardView {
         mainPanel.setOpaque(true);
         mainPanel.setBackground(Color.white);
 
-        header = new Header("Select a Building", "Enjoy seemless reservation experience");
+        header = new Header("Select a Room", "Enjoy seamless reservation experience");
         testLabel = new JLabel("Hi");
 
         SwingWorker<?, ?> worker = new SwingWorker<>() {

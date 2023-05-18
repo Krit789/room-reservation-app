@@ -13,15 +13,18 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import static net.itkmitl.room.portal.components.LeftSelectorPanel.finishedLoading;
 import static net.itkmitl.room.portal.content.components.dashboard.ReservationPanel.buttonBox;
 
 
-public class MainContentController extends Controller implements ActionListener {
+public class MainContentController extends Controller implements ActionListener, MouseListener {
     public static MainContentView view = null;
     private final AppStore store = AppStore.getAppStore();
     public static boolean running = false;
+    private LeftSelectorBox selectedBox;
 
     public MainContentController(MainContentView view) {
         MainContentController.view = view;
@@ -71,7 +74,10 @@ public class MainContentController extends Controller implements ActionListener 
             protected void done() {
                 for (int i = getView().getSelector().getSelectorPanel().leftBoxHolder.size() - 1; i >= 0; i--) {
                     getView().getSelector().getSelectorPanel().leftBoxHolder.get(i).addActionListener(getAction());
+                    getView().getSelector().getSelectorPanel().leftBoxHolder.get(i).addMouseListener(getMouse());
                 }
+                selectedBox = getView().getSelector().getSelectorPanel().leftBoxHolder.get(0);
+                selectedBox.setContentAreaFilled(true);
                 MainContentView.glassPane.setVisible(false);
                 MainContentView.glassPane.setEnabled(false);
             }
@@ -108,11 +114,16 @@ public class MainContentController extends Controller implements ActionListener 
 
         for (LeftSelectorBox box : this.getView().getSelector().getSelectorPanel().leftBoxHolder) {
             System.out.println(box.getText() + " " + name);
-            if (box.getText().equals(name)) {
+            if (box.getText().equals(name) & !box.equals(selectedBox)) {
                 box.setText("√ " + name);
+                selectedBox = box;
+                box.setContentAreaFilled(true);
+                box.revalidate();
             } else {
-                if (box.getText().startsWith("√ ")) {
+                if (!name.equals(selectedBox.getText()) & box.getText().startsWith("√ ") & !box.getText().equals(name)) {
                     box.setText(box.getText().substring(2, box.getText().length()));
+                    box.setContentAreaFilled(false);
+                    box.revalidate();
                 }
             }
         }
@@ -120,5 +131,44 @@ public class MainContentController extends Controller implements ActionListener 
 
     protected ActionListener getAction() {
         return this;
+    }
+    protected MouseListener getMouse() {
+        return this;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        for (LeftSelectorBox box : this.getView().getSelector().getSelectorPanel().leftBoxHolder) {
+//            System.out.println(box.getText() + " " + name);
+            if (e.getSource().equals(box) & !e.getSource().equals(selectedBox)) {
+                box.setContentAreaFilled(true);
+                box.revalidate();
+            }
+        }
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        for (LeftSelectorBox box : this.getView().getSelector().getSelectorPanel().leftBoxHolder) {
+            if (e.getSource().equals(box) & !e.getSource().equals(selectedBox)) {
+                box.setContentAreaFilled(false);
+                box.revalidate();
+            }
+        }
     }
 }
