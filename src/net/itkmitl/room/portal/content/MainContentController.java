@@ -113,9 +113,9 @@ public class MainContentController extends Controller implements ActionListener 
         for (LeftSelectorBox box : this.getView().getSelector().getSelectorPanel().leftBoxHolder) {
             System.out.println(box.getText() + " " + name);
             if (box.getText().equals(name)) {
-                box.setText("- " + name);
+                box.setText("√ " + name);
             } else {
-                if (box.getText().startsWith("- ")) {
+                if (box.getText().startsWith("√ ")) {
                     box.setText(box.getText().substring(2, box.getText().length()));
                 }
             }
