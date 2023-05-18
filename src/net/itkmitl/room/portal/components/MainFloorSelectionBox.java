@@ -22,6 +22,7 @@ public class MainFloorSelectionBox extends RoundedPanel {
         roomPanel = new TransparentPanel();
         roomPanel.setLayout(new GridBagLayout());
         roomHolder = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        roomHolder.getVerticalScrollBar().setUnitIncrement(16);
         roomHolder.setAlignmentY(JScrollPane.TOP_ALIGNMENT);
         roomHolder.setViewportView(roomPanel);
         roomHolder.getViewport().setOpaque(false);
