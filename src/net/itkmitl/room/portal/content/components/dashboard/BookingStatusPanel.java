@@ -55,13 +55,12 @@ public class BookingStatusPanel extends RoundedPanel {
         Collection<Room> roomUnavailable = FewRoom.getRoomByState(EnumRoomState.UNAVAILABLE);
         Collection<Room> roomMaintenance = FewRoom.getRoomByState(EnumRoomState.MAINTENANCE);
 
-        int allOfRoom = roomAvailable.size() + roomUnavailable.size() + roomMaintenance.size();
-        int roomAvailableNum = (roomAvailable.size() * 100) * 100;
-        int roomUnavailableNum = (roomUnavailable.size() + roomMaintenance.size() * 100) * 100;
+        int roomAvailableNum = (roomAvailable.size());
+        int roomUnavailableNum = (roomUnavailable.size() + roomMaintenance.size());
 
         DefaultPieDataset dataset = new DefaultPieDataset();
         dataset.setValue("Available Room", roomAvailableNum);
-        dataset.setValue("Full", roomUnavailableNum);
+        dataset.setValue("Maintenance", roomUnavailableNum);
 
         JFreeChart chart;
         chart = ChartFactory.createPieChart(
@@ -97,7 +96,7 @@ public class BookingStatusPanel extends RoundedPanel {
         PiePlot plot = (PiePlot) chart.getPlot();
 
         plot.setSectionPaint("Available Room", new Color(90, 140, 206));
-        plot.setSectionPaint("Full", new Color(0x101442));
+        plot.setSectionPaint("Maintenance", new Color(0x101442));
 
         piechart = new JPanel();
         piechart.add(chartPanel);
