@@ -1,10 +1,9 @@
 package net.itkmitl.room.libs.peeranat.util;
 
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.net.URL;
-
-import javax.swing.ImageIcon;
 
 public class FewFile {
 
@@ -16,7 +15,7 @@ public class FewFile {
         }
         return null;
     }
-    
+
 
     public static Font getFont(String path) {
         try {
