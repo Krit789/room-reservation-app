@@ -84,6 +84,12 @@ public class EntryController extends Controller implements ActionListener, Compo
                     FewQuery db = LaewTaeDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
                     getView().registerPanel.getWarningLabel().setIcon(FewFile.getImage("icons/loading-32px.gif"));
+                    FontMetrics fm = getView().registerPanel.getWarningLabel().getFontMetrics(getView().registerPanel.getWarningLabel().getFont());
+                    int w = fm.stringWidth("0000");
+                    int h = fm.getHeight();
+                    Dimension size = new Dimension(w, h);
+                    getView().registerPanel.getWarningLabel().setMinimumSize(size);
+                    getView().registerPanel.getWarningLabel().setPreferredSize(size);
                     if (userRepository.getExactUserByEmail(reg.getEmail()) == null) {
                         myUser = new User();
                         myUser.setEmail(reg.getEmail());
@@ -118,9 +124,15 @@ public class EntryController extends Controller implements ActionListener, Compo
     private void userLogin(String email, String password) {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             @Override
-            protected Object doInBackground() throws Exception {
+            protected Object doInBackground() {
                 try {
                     getView().loginPanel.getWarningLabel().setIcon(FewFile.getImage("icons/loading-32px.gif"));
+                    FontMetrics fm = getView().loginPanel.getWarningLabel().getFontMetrics(getView().loginPanel.getWarningLabel().getFont());
+                    int w = fm.stringWidth("0000");
+                    int h = fm.getHeight();
+                    Dimension size = new Dimension(w, h);
+                    getView().loginPanel.getWarningLabel().setMinimumSize(size);
+                    getView().loginPanel.getWarningLabel().setPreferredSize(size);
                     FewQuery db = LaewTaeDB.getDB();
                     UserRepository userRepository = new UserRepository(db);
                     myUser = userRepository.getExactUserByEmail(email);
@@ -129,14 +141,14 @@ public class EntryController extends Controller implements ActionListener, Compo
                             store.dispatch("user", myUser);
                             changeFrame(getView(), new MainContentPortal());
                         } else {
-                            getView().loginPanel.getWarningLabel().setText("Invalid Password!");
+                            getView().loginPanel.getWarningLabel().setText("<html>Invalid Password!</html>");
                         }
                     } else {
-                        getView().loginPanel.getWarningLabel().setText("User not found!");
+                        getView().loginPanel.getWarningLabel().setText("<html>User not found!</html>");
                     }
                 } catch (Exception ex) {
                     getView().loginPanel.getWarningLabel().setIcon(null);
-                    getView().loginPanel.getWarningLabel().setText("Invalid Email and/or Password!");
+                    getView().loginPanel.getWarningLabel().setText("<html>Invalid Email and/or Password!</html>");
                     JOptionPane.showMessageDialog(BaseWindow.baseFrame, ProgramError.getStackTrace(ex), "Database Query Error", JOptionPane.ERROR_MESSAGE);
                 }
                 return null;
@@ -257,38 +269,10 @@ public class EntryController extends Controller implements ActionListener, Compo
             type = 1;
         }
         if (email.getText().length() < 5) {
-            switch (type) {
-                case 0: // Login
-//                    loginPanel.getWarningLabel().setText(" ");
-//                    loginPanel.getLoginButton().setEnabled(false);
-                    break;
-                case 1: // Registration
-//                    registerPanel.getWarningLabel().setText(" ");
-//                    registerPanel.getRegisterButton().setEnabled(false);
-            }
             return -2;
         } else if (!email.getText().matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
-            switch (type) {
-                case 0: // Login
-//                    loginPanel.getWarningLabel().setText("Invalid E-Mail!");
-//                    loginPanel.getLoginButton().setEnabled(false);
-                    break;
-                case 1: // Registration
-//                    registerPanel.getWarningLabel().setText("Invalid E-Mail!");
-//                    registerPanel.getRegisterButton().setEnabled(false);
-            }
             return -1;
         } else {
-            switch (type) {
-                case 0: // Login
-//                    loginPanel.getLoginButton().setEnabled(true);
-//                    loginPanel.getWarningLabel().setText(" ");
-                    break;
-                case 1: // Registration
-//                    registerPanel.getRegisterButton().setEnabled(true);
-//                    registerPanel.getWarningLabel().setText(" ");
-                    break;
-            }
             return 0;
         }
     }
@@ -306,19 +290,8 @@ public class EntryController extends Controller implements ActionListener, Compo
             type = 1;
         }
         if (String.valueOf(password.getPassword()).length() < 4) {
-            switch (type) {
-                case 0: // Login
-//                    loginPanel.getWarningLabel().setText("Password must be at least 4 character long");
-//                    loginPanel.getLoginButton().setEnabled(false);
-                    break;
-                case 1: // Registration
-//                    registerPanel.getWarningLabel().setText("Password must be at least 4 character long");
-//                    registerPanel.getRegisterButton().setEnabled(false);
-            }
             return -1;
         } else if (type == 1 && !String.valueOf(password.getPassword()).equals(String.valueOf(confirmPassword.getPassword()))) {
-//                    registerPanel.getWarningLabel().setText("Both Password and Confirm Password must be the same!");
-//                    registerPanel.getRegisterButton().setEnabled(false);
             return -2;
         } else {
             return 1;
@@ -347,6 +320,12 @@ public class EntryController extends Controller implements ActionListener, Compo
             }
             loginPanel.getWarningLabel().setText(outText);
             loginPanel.getLoginButton().setEnabled(enable);
+            FontMetrics fm = getView().loginPanel.getWarningLabel().getFontMetrics(getView().loginPanel.getWarningLabel().getFont());
+            int w = fm.stringWidth("0000");
+            int h = fm.getHeight();
+            Dimension size = new Dimension(w, h);
+            getView().loginPanel.getWarningLabel().setMinimumSize(size);
+            getView().loginPanel.getWarningLabel().setPreferredSize(size);
         } else if (currentCard.equals("Register")) {
             if (result1 == 0 && result2 == 1) {
                 enable = true;
@@ -369,6 +348,12 @@ public class EntryController extends Controller implements ActionListener, Compo
             }
             registerPanel.getWarningLabel().setText(outText);
             registerPanel.getRegisterButton().setEnabled(enable);
+            FontMetrics fm = getView().registerPanel.getWarningLabel().getFontMetrics(getView().registerPanel.getWarningLabel().getFont());
+            int w = fm.stringWidth("0000");
+            int h = fm.getHeight();
+            Dimension size = new Dimension(w, h);
+            getView().registerPanel.getWarningLabel().setMinimumSize(size);
+            getView().registerPanel.getWarningLabel().setPreferredSize(size);
         }
     }
 

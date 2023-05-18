@@ -46,6 +46,7 @@ public class RegisterPanel extends RoundedPanel {
         warningLabel = new JLabel(" ");
         warningLabel.setForeground(Color.red);
         warningLabel.setFont(new Font("Cousine", Font.BOLD, textSize));
+        warningLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         fieldPanel = new JPanel();
         fieldPanel.setLayout(new GridBagLayout());
