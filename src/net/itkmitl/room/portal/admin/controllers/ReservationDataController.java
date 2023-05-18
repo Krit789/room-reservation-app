@@ -3,6 +3,7 @@ package net.itkmitl.room.portal.admin.controllers;
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
@@ -251,7 +252,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
     }
 
     private void dataLoader() {
-        if ((boolean) data[0]) {
+        if (new FewSimpleValue(data[0]).asBoolean()) {
             Reservation myReservation = (Reservation) data[1];
             reservation = (Reservation) data[1];
             view.pageSubtitle.setText("Reservation records for Reservation ID " + myReservation.getId());

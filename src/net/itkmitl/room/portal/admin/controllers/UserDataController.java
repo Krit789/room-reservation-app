@@ -22,6 +22,7 @@ import javax.swing.event.InternalFrameListener;
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumUserRole;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
@@ -176,7 +177,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
     }
 
     private void dataLoader() {
-        if ((boolean) data[0]) {
+        if (new FewSimpleValue(data[0]).asBoolean()) {
             User myUser = (User) data[1];
             user = (User) data[1];
             view.pageSubtitle.setText("User records for User ID " + myUser.getId());

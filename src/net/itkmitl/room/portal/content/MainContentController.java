@@ -55,22 +55,20 @@ public class MainContentController extends Controller implements ActionListener 
 
         // History
         getView().getHistory().getLeftPanel().getBackButton().addActionListener(this);
-//        getView().getHistory().getLeftPanel().getSuccessBtn().addActionListener(this);
-//        getView().getHistory().getLeftPanel().getPendingBtn().addActionListener(this);
-//        getView().getHistory().getLeftPanel().getCanceledBtn().addActionListener(this);
 
-        SwingWorker<?, ?> worker = new SwingWorker() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             @Override
             protected Object doInBackground() throws Exception {
                 while (!finishedLoading) {
-                    Thread.onSpinWait();
+                    synchronized(this) {
+                        Thread.onSpinWait();
+                    }
                 }
                 return null;
             }
 
             @Override
             protected void done() {
-//                JOptionPane.showMessageDialog(null, "Finished Loading", "Notice", JOptionPane.INFORMATION_MESSAGE);
                 for (int i = getView().getSelector().getSelectorPanel().leftBoxHolder.size() - 1; i >= 0; i--) {
                     getView().getSelector().getSelectorPanel().leftBoxHolder.get(i).addActionListener(getAction());
                 }
@@ -92,8 +90,6 @@ public class MainContentController extends Controller implements ActionListener 
         if (e.getActionCommand().equals("History")) {
             getView().getHistory().getRightPanel().populate();
             this.changeCard("History");
-        } else if (e.getActionCommand().equals("Booking")) {
-            this.changeCard("Selector");
         } else if (e.getActionCommand().equals("Back to Dashboard")) {
             this.changeCard("Dashboard");
         } else if (e.getSource() instanceof LeftSelectorBox) {

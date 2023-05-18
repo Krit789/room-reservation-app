@@ -4,6 +4,7 @@ import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumRoomState;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
@@ -161,8 +162,6 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                     view.getFrame().dispose();
                 }
                 dlec.reloadData();
-//                DatabaseLoader dbl = new DatabaseLoader();
-//                dbl.databaseLoader(2, 99, "", true, dlec);
 
             }
         };
@@ -170,7 +169,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
     }
 
     private void dataLoader() {
-        if ((boolean) data[0]) {
+        if (new FewSimpleValue(data[0]).asBoolean()) {
             Room myUser = (Room) data[1];
             room = (Room) data[1];
             view.pageSubtitle.setText("Room records for Room ID " + myUser.getId());

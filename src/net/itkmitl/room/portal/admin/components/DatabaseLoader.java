@@ -3,6 +3,7 @@ package net.itkmitl.room.portal.admin.components;
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
 import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
 import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
@@ -177,7 +178,7 @@ public class DatabaseLoader implements InternalFrameListener {
 
             @Override
             protected void done() {
-                if ((table != null) && ((boolean) data[0])) {
+                if ((table != null) && (new FewSimpleValue(data[0]).asBoolean())) {
                     table.view.table.setModel(((DataListTableModel) data[1]).getDtm());
                     if (table instanceof DataListEditableController) {
                         ((DataListEditableController) table).view.reloadButton.setEnabled(true);
@@ -195,7 +196,7 @@ public class DatabaseLoader implements InternalFrameListener {
                     }
                     table.view.getFrame().requestFocus();
 
-                } else if ((table != null) && (!(boolean) data[0])) {
+                } else if ((table != null) && (!new FewSimpleValue(data[0]).asBoolean())) {
                     JOptionPane.showMessageDialog(BaseWindow.baseFrame, data[1].toString(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
                 } else {
                     spawnTableView(data);
@@ -208,7 +209,7 @@ public class DatabaseLoader implements InternalFrameListener {
     }
 
     public void spawnTableView(Object[] data) {
-        boolean dbReady = ((Boolean) data[0]);
+        boolean dbReady = (new FewSimpleValue(data[0]).asBoolean());
 
         if (dbReady) {
             if (editableTable) {

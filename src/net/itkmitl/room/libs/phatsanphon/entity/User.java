@@ -98,7 +98,7 @@ public class User extends Entity {
     }
 
     public void setCreatedOn(long createdOn) {
-        this.createdOn = new DateTime(createdOn * 1000);
+        this.createdOn = new DateTime(createdOn);
     }
 
     @Override

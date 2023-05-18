@@ -3,6 +3,7 @@ package net.itkmitl.room.portal.admin.controllers;
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
 import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
@@ -217,7 +218,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
     }
 
     private void dataLoader() {
-        if ((boolean) data[0]) {
+        if (new FewSimpleValue(data[0]).asBoolean()) {
             Feedback myFeedback = (Feedback) data[1];
             feedback = (Feedback) data[1];
             view.pageSubtitle.setText("Feedback records for Feedback ID " + myFeedback.getId());

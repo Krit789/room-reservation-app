@@ -7,17 +7,26 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.Serial;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
+import net.itkmitl.room.db.LaewTaeDB;
+import net.itkmitl.room.libs.peeranat.FewDB;
+import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
+import net.itkmitl.room.libs.phatsanphon.entity.Room;
+import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
+import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
+import net.itkmitl.room.portal.content.MainContentView;
+import net.itkmitl.room.portal.content.components.ReservationDialogController;
 
-public class WelcomePanel extends RoundedPanel {
+public class WelcomePanel extends RoundedPanel implements ActionListener {
     @Serial
     private static final long serialVersionUID = -4015833019658837000L;
     public ButtonGradient bookingButton;
@@ -81,9 +90,9 @@ public class WelcomePanel extends RoundedPanel {
         bookingButton.setSizeSpeed(40f);
         bookingButton.setColor1(new Color(39, 77, 191, 153));
         bookingButton.setColor2(new Color(45, 125, 216));
-        bookingButton.setText("Book Now!");
+        bookingButton.setText("Book Randomly Now!");
         bookingButton.setFont(new Font("Cousine", Font.BOLD, 18));
-        bookingButton.setActionCommand("Booking");
+        bookingButton.addActionListener(this);
 //        bookingButton.setPreferredSize(new Dimension(50, 50));
 
         this.setLayout(new GridBagLayout());
@@ -98,5 +107,37 @@ public class WelcomePanel extends RoundedPanel {
         this.setAlignmentX(CENTER_ALIGNMENT);
 
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(bookingButton)) {
+            bookRandomly();
+        }
+    }
+
+    private void bookRandomly() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
+            @Override
+            protected Object doInBackground() {
+                try {
+                    MainContentView.glassPane.setSpinnerVisibility(true);
+                    MainContentView.glassPane.setText("Randomly selecting room for you");
+                    MainContentView.glassPane.setVisible(true);
+                    MainContentView.glassPane.setEnabled(true);
+                    FewQuery db = LaewTaeDB.getDB();
+                    RoomRepository roomRepo = new RoomRepository(db);
+                    Room randomRoom = roomRepo.getRandomRoom();
+                    MainContentView.glassPane.setSpinnerVisibility(false);
+                    MainContentView.glassPane.setText("");
+                    ReservationDialogController rsvpd = new ReservationDialogController(null, randomRoom);
+                    rsvpd.view.setVisible(true);
+                } catch (Exception e) {
+
+                }
+                return null;
+            }
+        };
+        worker.execute();
     }
 }

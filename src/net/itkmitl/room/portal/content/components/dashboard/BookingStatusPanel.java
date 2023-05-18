@@ -19,6 +19,8 @@ import org.jfree.data.general.DefaultPieDataset;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.Serial;
 import java.util.Calendar;
 import java.util.Collection;
@@ -166,6 +168,7 @@ public class BookingStatusPanel extends RoundedPanel {
         this.add(panel, new GBCBuilder(GridBagConstraints.BOTH, 1, 1, 0, 4).getGBC());
 
     }
+
 }
 
 
