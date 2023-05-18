@@ -24,7 +24,7 @@ public class MainContentController extends Controller implements ActionListener,
     public static MainContentView view = null;
     private final AppStore store = AppStore.getAppStore();
     public static boolean running = false;
-    private LeftSelectorBox selectedBox;
+    private LeftSelectorBox selectedBox, chosenBox;
 
     public MainContentController(MainContentView view) {
         MainContentController.view = view;
@@ -107,7 +107,7 @@ public class MainContentController extends Controller implements ActionListener,
             this.changeCard("Selector");
         } else if (e.getActionCommand().equals("Back to Dashboard")) {
             this.changeCard("Dashboard");
-        } else if (e.getSource() instanceof LeftSelectorBox) {
+        } else if (e.getSource() instanceof LeftSelectorBox & !e.getSource().equals(selectedBox)) {
             this.changeBuildingCard(e.getActionCommand());
         }
     }
@@ -120,16 +120,15 @@ public class MainContentController extends Controller implements ActionListener,
     protected void changeBuildingCard(String name) {
         CardLayout cl = (CardLayout) (this.getView().getSelector().cardsOfBuildingsFloorPanel.getLayout());
         cl.show(this.getView().getSelector().cardsOfBuildingsFloorPanel, name);
-
         for (LeftSelectorBox box : this.getView().getSelector().getSelectorPanel().leftBoxHolder) {
             System.out.println(box.getText() + " " + name);
             if (box.getText().equals(name) & !box.equals(selectedBox)) {
                 box.setText("√ " + name);
-                selectedBox = box;
                 box.setContentAreaFilled(true);
                 box.revalidate();
+                selectedBox = box;
             } else {
-                if (!name.equals(selectedBox.getText()) & box.getText().startsWith("√ ") & !box.getText().equals(name)) {
+                if (box.getText().startsWith("√ ") & !box.getText().equals(name)) {
                     box.setText(box.getText().substring(2, box.getText().length()));
                     box.setContentAreaFilled(false);
                     box.revalidate();
