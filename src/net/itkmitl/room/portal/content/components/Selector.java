@@ -75,6 +75,7 @@ public class Selector extends CardView {
                     // Horizontal Floor List
                     JPanel floorPanel = new JPanel(new GridBagLayout());
                     JScrollPane floorScrollPane = new JScrollPane(floorPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+                    floorScrollPane.getHorizontalScrollBar().setUnitIncrement(16);
                     floorScrollPane.setOpaque(false);
                     floorScrollPane.setBorder(null);
                     int floorCount = 0;

@@ -77,7 +77,7 @@ public class ReservationDialog extends JDialog {
 
         dateLabel = new JLabel("Select Date");
         segmentLabel = new JLabel("Available Segment");
-        lengthLabel = new JLabel("Length");
+        lengthLabel = new JLabel("Duration");
         hourLabel = new JLabel("Hour(s)");
         reasonLabel = new JLabel("Reason");
 
@@ -103,7 +103,7 @@ public class ReservationDialog extends JDialog {
         segmentBox = new JComboBox<>();
         segmentBox.setBorder(border);
         lengthSpinner = new JSpinner();
-        snm = new SpinnerNumberModel(1, 1, 3, 0.5);
+        snm = new SpinnerNumberModel(1, 0.5, 3, 0.5);
         lengthSpinner.setModel(snm);
         lengthSpinner.setBorder(border);
         lengthSpinner.setEditor(new JSpinner.DefaultEditor(lengthSpinner));
