@@ -1,36 +1,14 @@
 package net.itkmitl.room.portal.admin.views;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.JTextField;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.portal.components.GBCBuilder;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+
 public class RoomDataView {
     private final String[] stateList = new String[]{"Available", "Unavailable", "Maintenance"};
-    public JPanel dataPanel;
-    public JButton saveButton, cancelButton;
-    public JLabel pageTitle, pageSubtitle;
-    public JTextField idField, nameField, floorField, buildingField;
-    public JSpinner capacitySpinner, openTimeHourField, openTimeMinuteField, closeTimeHourField, closeTimeMinuteField;
-    public JComboBox<?> stateSelect;
     private final JInternalFrame frame;
     private final JPanel dataPanelPad;
     private final JPanel titlePanel;
@@ -44,6 +22,12 @@ public class RoomDataView {
     private final JLabel openTimeLabel;
     private final JLabel closeTimeLabel;
     private final JLabel stateLabel;
+    public JPanel dataPanel;
+    public JButton saveButton, cancelButton;
+    public JLabel pageTitle, pageSubtitle;
+    public JTextField idField, nameField, floorField, buildingField;
+    public JSpinner capacitySpinner, openTimeHourField, openTimeMinuteField, closeTimeHourField, closeTimeMinuteField;
+    public JComboBox<?> stateSelect;
 
     public RoomDataView() {
         frame = new JInternalFrame("Room Data", false, true, false, true);

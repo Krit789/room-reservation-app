@@ -39,9 +39,9 @@ public class Selector extends CardView {
 
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             @Override
-            protected Object doInBackground(){
+            protected Object doInBackground() {
                 while (!RoomLoader.done) {
-                    synchronized(this) {
+                    synchronized (this) {
                         Thread.onSpinWait();
                     }
                 }

@@ -1,28 +1,13 @@
 package net.itkmitl.room.portal.admin.views;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import net.itkmitl.room.libs.peeranat.util.FewFile;
+import net.itkmitl.room.portal.components.GBCBuilder;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-
-import net.itkmitl.room.libs.peeranat.util.FewFile;
-import net.itkmitl.room.portal.components.GBCBuilder;
+import java.awt.*;
 
 public class DataListTableView {
     public final JLabel pageTitle, pageSubtitle;

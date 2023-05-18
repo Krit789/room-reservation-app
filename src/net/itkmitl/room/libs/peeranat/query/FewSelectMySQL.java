@@ -7,11 +7,10 @@ import java.util.Map;
 
 public class FewSelectMySQL implements FewMySQLBuilder {
 
-    private String table;
     private final ArrayList<String> selects;
     private final ArrayList<FewMySQLWhere> wheres;
     private final Map<String, FewMySQLOrder> orderBy;
-
+    private String table;
     private int limit;
     private int offset;
 

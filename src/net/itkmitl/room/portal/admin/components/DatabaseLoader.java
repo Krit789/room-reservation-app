@@ -62,8 +62,8 @@ public class DatabaseLoader implements InternalFrameListener {
     public void databaseLoader(int whichTable, int type, String searchQuery, boolean editableTable, DataListTableController table) {
         this.editableTable = editableTable;
         SwingWorker<?, ?> worker = new SwingWorker<>() {
-            Object[] data;
             final LoadingDialog ld = new LoadingDialog();
+            Object[] data;
 
             @Override
             protected String doInBackground() throws Exception {

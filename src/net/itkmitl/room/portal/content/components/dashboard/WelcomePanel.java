@@ -1,24 +1,9 @@
 package net.itkmitl.room.portal.content.components.dashboard;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.Serial;
-
-import javax.swing.*;
-
 import net.itkmitl.room.db.LaewTaeDB;
-import net.itkmitl.room.libs.peeranat.FewDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
-import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.GBCBuilder;
@@ -26,20 +11,26 @@ import net.itkmitl.room.portal.components.RoundedPanel;
 import net.itkmitl.room.portal.content.MainContentView;
 import net.itkmitl.room.portal.content.components.ReservationDialogController;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.Serial;
+
 public class WelcomePanel extends RoundedPanel implements ActionListener {
     @Serial
     private static final long serialVersionUID = -4015833019658837000L;
-    public ButtonGradient bookingButton;
     private final JLabel t1;
     private final JLabel t2;
     private final JLabel t3;
+    private final JPanel txt;
+    private final BoxIcon welcomeIcon;
+    public ButtonGradient bookingButton;
     private JLabel rightLabel;
     private JPanel p1, p2, p3;
     private JPanel leftPanel;
     private JPanel rightPanel;
-    private final JPanel txt;
     private JPanel iconPanel;
-    private final BoxIcon welcomeIcon;
 
     public WelcomePanel() {
         super();

@@ -7,10 +7,9 @@ import java.util.Map.Entry;
 
 public class FewUpdateMySQL implements FewMySQLBuilder {
 
-    private String table;
     private final Map<String, Object> toUpdate;
     private final ArrayList<FewMySQLWhere> wheres;
-
+    private String table;
     private int limit;
 
     public FewUpdateMySQL() {

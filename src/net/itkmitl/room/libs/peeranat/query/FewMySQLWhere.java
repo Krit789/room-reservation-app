@@ -2,10 +2,10 @@ package net.itkmitl.room.libs.peeranat.query;
 
 public class FewMySQLWhere {
 
-    private FewMySQLCompare compare;
     private final FewMySQLOperator operator;
     private final String column;
     private final Object value;
+    private FewMySQLCompare compare;
 
     public FewMySQLWhere(String column, FewMySQLCompare compare, Object value, FewMySQLOperator operator) {
         this.column = column;

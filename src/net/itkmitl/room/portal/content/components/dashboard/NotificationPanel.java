@@ -1,19 +1,5 @@
 package net.itkmitl.room.portal.content.components.dashboard;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.io.Serial;
-
-import javax.swing.Box;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingWorker;
-
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
@@ -25,11 +11,15 @@ import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
 import net.itkmitl.room.portal.components.TransparentPanel;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.Serial;
+
 public class NotificationPanel extends RoundedPanel {
     @Serial
     private static final long serialVersionUID = 4305337873118944635L;
-    public JLabel notificationTextLabel, calendarIcon;
     private final JPanel panelPanel;
+    public JLabel notificationTextLabel, calendarIcon;
 
     public NotificationPanel() {
         super();

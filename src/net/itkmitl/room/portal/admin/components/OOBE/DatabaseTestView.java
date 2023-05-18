@@ -1,28 +1,20 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagLayout;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.libs.peeranat.util.FewFile;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 public class DatabaseTestView extends JPanel {
     /**
      *
      */
     private static final long serialVersionUID = 2479869772958246586L;
+    private final JPanel topPanel;
     public JLabel title, description, connectionLabel, credentialLabel, databaseLabel, userTableLabel, roomTableLabel, reservationTableLabel, feedbackTableLabel, tableIndexLabel, tableRelationshipLabel, yesLabel, noLabel;
     public JScrollPane resultPane;
     protected JPanel resultPanel;
-    private final JPanel topPanel;
 
     public DatabaseTestView() {
         this.setLayout(new BorderLayout());

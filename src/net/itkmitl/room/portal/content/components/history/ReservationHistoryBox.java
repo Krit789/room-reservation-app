@@ -1,24 +1,10 @@
 package net.itkmitl.room.portal.content.components.history;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.Serial;
-
-import javax.swing.Box;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingWorker;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
 import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
-import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.RoundedPanel;
@@ -26,15 +12,22 @@ import net.itkmitl.room.portal.components.TransparentPanel;
 import net.itkmitl.room.portal.content.MainContentView;
 import net.itkmitl.room.portal.content.components.dashboard.BoxIcon;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.Serial;
+
 public class ReservationHistoryBox extends RoundedPanel implements ActionListener {
     @Serial
     private static final long serialVersionUID = -4015833019658837000L;
-    public ButtonGradient feedBackBtn, cancelBtn;
     private final JLabel timeLabel;
     private final JLabel dateLabel;
     private final JLabel nameLabel;
     private final JPanel dataPanel;
     private final BoxIcon icon;
+    public ButtonGradient feedBackBtn, cancelBtn;
     private FeedBackDialogue feedBackPage;
     private boolean dialogOpen;
     private Reservation reservation;

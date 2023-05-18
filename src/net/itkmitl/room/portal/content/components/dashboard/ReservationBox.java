@@ -1,21 +1,15 @@
 package net.itkmitl.room.portal.content.components.dashboard;
 
-import static net.itkmitl.room.portal.content.components.dashboard.ReservationPanel.buttonBox;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
-import java.io.Serial;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.RoundedPanel;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.io.Serial;
+
+import static net.itkmitl.room.portal.content.components.dashboard.ReservationPanel.buttonBox;
 
 public class ReservationBox extends RoundedPanel {
     public static final int iconWidth = 140, iconHeight = 140;

@@ -26,8 +26,8 @@ public class EntryController extends Controller implements ActionListener, Compo
     private final EntryView view;
     private final LoginPanel loginPanel;
     private final RegisterPanel registerPanel;
-    private User myUser;
     private final AppStore store = AppStore.getAppStore();
+    private User myUser;
     private String currentCard = "Login";
 
     public EntryController(EntryView view) {

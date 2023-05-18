@@ -8,7 +8,8 @@ public class UIConfig {
     public static void setLookAndFeel() {
         setLookAndFeel("Laew Tae Hong");
     }
-    public static void setLookAndFeel(String text){
+
+    public static void setLookAndFeel(String text) {
         try {
             System.setProperty("apple.laf.useScreenMenuBar", "true");
             System.setProperty("apple.awt.application.name", text);

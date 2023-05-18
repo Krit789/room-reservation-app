@@ -15,10 +15,10 @@ public class BetterJPasswordField extends JPasswordField implements MouseListene
      *
      */
     private static final long serialVersionUID = 7347697827946283962L;
+    private final Color activeBorderColor = new Color(94, 135, 197);
     private Color normalBgColor = Color.WHITE;
     private Color hoverBgColor = new Color(246, 246, 246);
     private Color borderColor = Color.LIGHT_GRAY;
-    private final Color activeBorderColor = new Color(94, 135, 197);
     private String placeholderText;
     private Boolean selected;
 

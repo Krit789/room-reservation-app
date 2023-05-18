@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
 import java.util.Enumeration;
 
 public class DataSearchController implements ActionListener, DocumentListener {
-    protected DataSearchView view;
     private final DataSearchModel model;
     private final DatabaseLoader dbl;
+    protected DataSearchView view;
 
     public DataSearchController() {
         this(new DataSearchModel());

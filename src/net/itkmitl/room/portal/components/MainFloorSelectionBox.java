@@ -5,9 +5,9 @@ import java.awt.*;
 
 public class MainFloorSelectionBox extends RoundedPanel {
     private static final long serialVersionUID = 3939071942263200950L;
+    private final JLabel nameLabel;
     public JScrollPane roomHolder;
     public TransparentPanel roomPanel, namePanel;
-    private final JLabel nameLabel;
 
     public MainFloorSelectionBox(String name) {
         super(30, 40, new Color(16, 52, 105), new Color(120, 164, 205));

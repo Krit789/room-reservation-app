@@ -305,7 +305,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
         int otherValue = (int) view.closeTimeHourField.getValue();
         int otherValue2 = (int) view.closeTimeMinuteField.getValue();
 
-        if (e.getSource().equals(view.openTimeHourField)){
+        if (e.getSource().equals(view.openTimeHourField)) {
             SpinnerNumberModel startModel = (SpinnerNumberModel) view.openTimeHourField.getModel();
             startModel.setMaximum(otherValue);
             if ((int) view.openTimeHourField.getValue() > otherValue)
@@ -317,7 +317,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                 startModel.setValue(view.openTimeHourField.getValue());
 
         } else if (e.getSource().equals(view.openTimeMinuteField)) {
-            if (value == otherValue){
+            if (value == otherValue) {
                 SpinnerNumberModel endModel = (SpinnerNumberModel) view.openTimeMinuteField.getModel();
                 endModel.setMaximum(otherValue2);
             } else {

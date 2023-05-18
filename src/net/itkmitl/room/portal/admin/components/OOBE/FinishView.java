@@ -11,12 +11,12 @@ public class FinishView extends JPanel {
      *
      */
     private static final long serialVersionUID = -629579596973815711L;
-    public JTextField firstPassWordField;
     private final JLabel title;
     private final JLabel description;
     private final JLabel firstPasswordDisplay;
     private final JPanel titlePanel;
     private final JPanel firstAccountPanel;
+    public JTextField firstPassWordField;
 
     public FinishView() {
         this.setLayout(new BorderLayout());

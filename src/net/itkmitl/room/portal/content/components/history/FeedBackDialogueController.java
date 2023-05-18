@@ -5,7 +5,6 @@ import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
 import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
 import net.itkmitl.room.libs.phatsanphon.repository.FeedbackRepository;
-import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
 import net.itkmitl.room.portal.content.MainContentView;
 
 import javax.swing.*;
@@ -15,8 +14,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class FeedBackDialogueController implements ActionListener, WindowListener {
-    public FeedBackDialogue view;
     private final Reservation reservation;
+    public FeedBackDialogue view;
     private double score;
 
     public FeedBackDialogueController(JFrame parent, Reservation reservation) {
@@ -55,8 +54,8 @@ public class FeedBackDialogueController implements ActionListener, WindowListene
         MainContentView.glassPane.setEnabled(false);
     }
 
-    private void submitFeedback(int resId, double rating, String comment){
-        SwingWorker<?,?> worker = new SwingWorker<Object, Object>() {
+    private void submitFeedback(int resId, double rating, String comment) {
+        SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
             @Override
             protected Object doInBackground() throws Exception {
                 try {

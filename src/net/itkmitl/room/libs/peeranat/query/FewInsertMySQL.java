@@ -5,8 +5,8 @@ import java.util.Map;
 
 public class FewInsertMySQL implements FewMySQLBuilder {
 
-    private String table;
     private final Map<String, Object> inserts;
+    private String table;
 
     public FewInsertMySQL() {
         this.inserts = new HashMap<>();

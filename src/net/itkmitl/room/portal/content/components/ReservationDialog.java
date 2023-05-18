@@ -1,46 +1,20 @@
 package net.itkmitl.room.portal.content.components;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.time.LocalDate;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSpinner;
-import javax.swing.JTextArea;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.components.DatePickerSettings;
-
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.components.GBCBuilder;
 
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.time.LocalDate;
+
 public class ReservationDialog extends JDialog {
     private final Font regular = new Font("Sansserif", Font.PLAIN, 16);
-    public JLabel segmentLoadingLabel;
-    public JButton okButton, cancelButton;
-    public DatePicker reservationDatePicker;
-    public JComboBox<ReservableEntity> segmentBox;
-    public JSpinner lengthSpinner;
-    public SpinnerNumberModel snm;
-    public JTextArea reasonTextArea;
     private final JPanel titlePanel;
     private final JPanel selectionPanel;
     private final JPanel buttonPanel;
@@ -54,6 +28,13 @@ public class ReservationDialog extends JDialog {
     private final JLabel hourLabel;
     private final JLabel reasonLabel;
     private final JScrollPane reasonPane;
+    public JLabel segmentLoadingLabel;
+    public JButton okButton, cancelButton;
+    public DatePicker reservationDatePicker;
+    public JComboBox<ReservableEntity> segmentBox;
+    public JSpinner lengthSpinner;
+    public SpinnerNumberModel snm;
+    public JTextArea reasonTextArea;
 
     public ReservationDialog(JFrame parent, Room room) {
         super(parent, "Select Time", true);

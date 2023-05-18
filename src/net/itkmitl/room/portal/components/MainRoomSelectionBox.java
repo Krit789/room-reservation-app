@@ -18,8 +18,8 @@ public class MainRoomSelectionBox extends RoundedPanel implements ActionListener
      */
     private static final long serialVersionUID = 3939071942263200950L;
     public static boolean dialogOpen;
-    public JButton name;
     private final Room boxRoom;
+    public JButton name;
     //key is floor, Value is arraylist of room in floor
 //    private J
 

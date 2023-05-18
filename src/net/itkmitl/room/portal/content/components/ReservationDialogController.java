@@ -1,26 +1,7 @@
 package net.itkmitl.room.portal.content.components;
 
-import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.SwingWorker;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
-
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
@@ -32,9 +13,18 @@ import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
 import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.content.MainContentView;
 
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
+
 public class ReservationDialogController implements ActionListener, DateChangeListener, WindowListener, ChangeListener, ItemListener {
-    public ReservationDialog view;
     private final Room myRoom;
+    public ReservationDialog view;
     private ArrayList<Reservation> resList;
     private ArrayList<ReservableEntity> availableTime;
     private DateTime virtualReservationStart;
@@ -51,6 +41,11 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
         view.reservationDatePicker.addDateChangeListener(this);
         view.lengthSpinner.addChangeListener(this);
         view.segmentBox.addItemListener(this);
+    }
+
+    public static void disableGlassPane() {
+        MainContentView.glassPane.setVisible(false);
+        MainContentView.glassPane.setEnabled(false);
     }
 
     public void dataFetch() {
@@ -125,7 +120,6 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
         return availableTimes;
     }
 
-
     public boolean checkAvailableTime(ArrayList<Reservation> resList, DateTime timeToCheck, double hourAhead, Room room) {
 
         HashMap<Long, Reservation> resTimeMap = new HashMap<>();
@@ -160,7 +154,6 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
         return unavailable;
     }
 
-
     private void updateReservationSegment() {
         view.okButton.setEnabled(false);
         view.segmentLoadingLabel.setIcon(FewFile.getImage("icons/loading-16px.gif"));
@@ -187,11 +180,6 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
     @Override
     public void dateChanged(DateChangeEvent event) {
         updateReservationSegment();
-    }
-
-    public static void disableGlassPane() {
-        MainContentView.glassPane.setVisible(false);
-        MainContentView.glassPane.setEnabled(false);
     }
 
     @Override
@@ -282,7 +270,7 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
     }
 
     private void validateTime() {
-        if (view.segmentBox.getSelectedItem() != null){
+        if (view.segmentBox.getSelectedItem() != null) {
             DateTime myTime = ((ReservableEntity) Objects.requireNonNull(view.segmentBox.getSelectedItem())).begin;
             if (checkAvailableTime(resList, new DateTime(myTime.getTime()), ((Number) view.lengthSpinner.getValue()).doubleValue(), myRoom)) {
                 view.okButton.setEnabled(false);

@@ -10,13 +10,9 @@ import net.itkmitl.room.portal.CardView;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.TransparentPanel;
-import net.itkmitl.room.portal.content.MainContentController;
-import net.itkmitl.room.portal.content.MainContentPortal;
 import net.itkmitl.room.portal.content.MainContentView;
-import net.itkmitl.room.portal.content.components.History;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.Serial;
 import java.util.ArrayList;
@@ -26,10 +22,10 @@ public class HistoryRightPanel extends CardView {
     private static final long serialVersionUID = -4015833019658837000L;
     public JScrollPane historyHolder;
     public TransparentPanel reservationHistoryPanel;
-    private JLabel text;
-    private ReservationHistoryBox boxes;
     public int rsvNum, cancelledRsvNum;
     public HistoryLeftPanel leftPanel;
+    private JLabel text;
+    private ReservationHistoryBox boxes;
 
     public HistoryRightPanel(HistoryLeftPanel leftPanel) {
         this.leftPanel = leftPanel;

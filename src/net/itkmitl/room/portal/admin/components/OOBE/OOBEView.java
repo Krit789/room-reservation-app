@@ -1,30 +1,21 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Image;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-import javax.swing.border.MatteBorder;
-
 import net.itkmitl.room.libs.peeranat.util.FewFile;
+
+import javax.swing.*;
+import javax.swing.border.MatteBorder;
+import java.awt.*;
+import java.util.ArrayList;
 
 public class OOBEView {
     public static String[] PANEL = {"Panel1", "Panel2", "Panel3", "Panel4"};
+    private final JFrame frame;
+    private final JPanel buttonPanel;
     public JPanel contentPanel;
     public JButton backButton, nextButton, cancelButton;
     public DatabaseSetupPanelView dbsp;
     public DatabaseTestView dbt;
     public FinishView fn;
-    private final JFrame frame;
-    private final JPanel buttonPanel;
 
     public OOBEView() {
         frame = new JFrame("LTH Setup");

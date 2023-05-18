@@ -6,10 +6,8 @@ import net.itkmitl.room.portal.Controller;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.AboutDialog;
 import net.itkmitl.room.portal.components.LeftSelectorBox;
-import net.itkmitl.room.portal.components.MainRoomSelectionBox;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,8 +20,8 @@ import static net.itkmitl.room.portal.content.components.dashboard.ReservationPa
 
 public class MainContentController extends Controller implements ActionListener, MouseListener {
     public static MainContentView view = null;
-    private final AppStore store = AppStore.getAppStore();
     public static boolean running = false;
+    private final AppStore store = AppStore.getAppStore();
     private LeftSelectorBox selectedBox, chosenBox;
 
     public MainContentController(MainContentView view) {
@@ -63,7 +61,7 @@ public class MainContentController extends Controller implements ActionListener,
             @Override
             protected Object doInBackground() throws Exception {
                 while (!finishedLoading) {
-                    synchronized(this) {
+                    synchronized (this) {
                         Thread.onSpinWait();
                     }
                 }
@@ -139,6 +137,7 @@ public class MainContentController extends Controller implements ActionListener,
     protected ActionListener getAction() {
         return this;
     }
+
     protected MouseListener getMouse() {
         return this;
     }

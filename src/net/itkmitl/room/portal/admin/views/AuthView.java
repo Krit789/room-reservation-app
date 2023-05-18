@@ -1,35 +1,23 @@
 package net.itkmitl.room.portal.admin.views;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Image;
-import java.awt.Insets;
-import java.util.ArrayList;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.portal.components.GBCBuilder;
 
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.util.ArrayList;
+
 public class AuthView {
-    public JButton loginButton, cancelButton;
-    public JLabel alertLabel, bannerLabel;
-    public JTextField loginField;
-    public JPasswordField passwordField;
     private final JFrame frame;
     private final JPanel loginPanel;
     private final JPanel buttonPanel;
     private final JLabel userLabel;
     private final JLabel passwordLabel;
+    public JButton loginButton, cancelButton;
+    public JLabel alertLabel, bannerLabel;
+    public JTextField loginField;
+    public JPasswordField passwordField;
 
     public AuthView() {
         frame = new JFrame("Laew Tae Hong Authentication");

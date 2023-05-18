@@ -15,10 +15,10 @@ public class BetterJTextField extends JTextField implements MouseListener, Focus
      *
      */
     private static final long serialVersionUID = 7749724868234541103L;
+    private final Color activeBorderColor = new Color(94, 135, 197);
     private Color normalBgColor = Color.WHITE;
     private Color hoverBgColor = new Color(246, 246, 246);
     private Color borderColor = Color.LIGHT_GRAY;
-    private final Color activeBorderColor = new Color(94, 135, 197);
     private String placeholderText;
     private Boolean selected;
 

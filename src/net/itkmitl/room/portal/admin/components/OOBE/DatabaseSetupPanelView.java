@@ -11,9 +11,6 @@ public class DatabaseSetupPanelView extends JPanel {
      *
      */
     private static final long serialVersionUID = -7942736605197573612L;
-    protected JTextField dbAddressTextField, dbNameTextField, dbUserTextField;
-    protected JPasswordField dbPasswordField;
-    protected JSpinner dbPortSpinner;
     private final JLabel title;
     private final JLabel description;
     private final JLabel dbAddressLabel;
@@ -25,6 +22,9 @@ public class DatabaseSetupPanelView extends JPanel {
     private final JPanel dbCredPanel;
     private final JPanel dbConnectionPanel;
     private final JPanel topPanel;
+    protected JTextField dbAddressTextField, dbNameTextField, dbUserTextField;
+    protected JPasswordField dbPasswordField;
+    protected JSpinner dbPortSpinner;
 
     public DatabaseSetupPanelView() {
         this.setLayout(new BorderLayout());

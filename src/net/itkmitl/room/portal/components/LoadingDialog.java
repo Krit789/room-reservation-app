@@ -1,15 +1,10 @@
 package net.itkmitl.room.portal.components;
 
-import java.awt.Dialog;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.portal.admin.BaseWindow;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class LoadingDialog {
     public final JDialog dialog;

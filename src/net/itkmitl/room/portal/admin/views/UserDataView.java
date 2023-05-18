@@ -1,37 +1,15 @@
 package net.itkmitl.room.portal.admin.views;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.portal.components.GBCBuilder;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 public class UserDataView {
     private final String[] roleList = new String[]{"User", "Staff", "Admin"};
     private final String[] activeList = new String[]{"Active", "Inactive"};
-    public JPanel dataPanel;
-    public JButton saveButton, cancelButton, resetPasswordButton;
-    public JLabel pageTitle, pageSubtitle;
-    public JLabel passwordLabel;
-    public JTextField idField, firstNameField, lastNameField, telnumField, createdOnField, emailField;
-    public JComboBox<String> roleSelect, activeSelect;
-    public JPasswordField passwordField;
     private final JInternalFrame frame;
     private final JPanel dataPanelPad;
     private final JPanel titlePanel;
@@ -44,6 +22,13 @@ public class UserDataView {
     private final JLabel createdOnLabel;
     private final JLabel roleLabel;
     private final JLabel emailLabel;
+    public JPanel dataPanel;
+    public JButton saveButton, cancelButton, resetPasswordButton;
+    public JLabel pageTitle, pageSubtitle;
+    public JLabel passwordLabel;
+    public JTextField idField, firstNameField, lastNameField, telnumField, createdOnField, emailField;
+    public JComboBox<String> roleSelect, activeSelect;
+    public JPasswordField passwordField;
 
     public UserDataView() {
         frame = new JInternalFrame("User Data", false, true, false, true);

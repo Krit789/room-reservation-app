@@ -1,31 +1,5 @@
 package net.itkmitl.room.portal.content.components.dashboard;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.SwingWorker;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
@@ -38,18 +12,27 @@ import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.content.MainContentController;
 import net.itkmitl.room.portal.content.components.ReservationDialogController;
 
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 public class ProfileEditor extends JDialog implements ActionListener, WindowListener {
     private final JPanel dataPanelPad, titlePanel, buttonPanel;
-    public JPanel dataPanel;
-    public JButton saveButton, cancelButton, resetPasswordButton;
-    public JLabel pageTitle, pageSubtitle;
-    private JLabel firstNameLabel, lastNameLabel, telnumLabel, createdOnLabel, emailLabel;
-    public JLabel passwordLabel;
-    public JTextField firstNameField, lastNameField, telnumField, createdOnField, emailField;
-    public JPasswordField oldPasswordField;
     private final Font labelFont = new Font("Sansserif", Font.PLAIN, 16);
     private final User myUser;
     private final Border border = BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(44, 84, 144));
+    public JPanel dataPanel;
+    public JButton saveButton, cancelButton, resetPasswordButton;
+    public JLabel pageTitle, pageSubtitle;
+    public JLabel passwordLabel;
+    public JTextField firstNameField, lastNameField, telnumField, createdOnField, emailField;
+    public JPasswordField oldPasswordField;
+    private JLabel firstNameLabel, lastNameLabel, telnumLabel, createdOnLabel, emailLabel;
 
     public ProfileEditor(User myUser) {
         super(MainContentController.view, "Profile Editor", false);
@@ -164,6 +147,7 @@ public class ProfileEditor extends JDialog implements ActionListener, WindowList
 
             SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
                 boolean success = false;
+
                 @Override
                 protected Object doInBackground() {
                     try {

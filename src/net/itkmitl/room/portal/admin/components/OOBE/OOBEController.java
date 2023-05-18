@@ -1,27 +1,7 @@
 package net.itkmitl.room.portal.admin.components.OOBE;
 
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.sql.SQLSyntaxErrorException;
-import java.util.UUID;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.UIManager;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.mysql.cj.jdbc.exceptions.CommunicationsException;
-
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.enums.EnumDBSchema;
 import net.itkmitl.room.enums.EnumUserRole;
@@ -35,6 +15,16 @@ import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.GBCBuilder;
+
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.sql.SQLSyntaxErrorException;
+import java.util.UUID;
 
 public class OOBEController implements ActionListener, DocumentListener {
     OOBEView view;
@@ -54,22 +44,6 @@ public class OOBEController implements ActionListener, DocumentListener {
         } else {
             initialize();
         }
-    }
-
-    public void initialize(){
-        view = new OOBEView();
-        view.nextButton.addActionListener(this);
-        view.backButton.addActionListener(this);
-        view.cancelButton.addActionListener(this);
-        view.backButton.setEnabled(false);
-
-        view.dbsp.dbUserTextField.getDocument().addDocumentListener(this);
-        view.dbsp.dbPasswordField.getDocument().addDocumentListener(this);
-        view.dbsp.dbNameTextField.getDocument().addDocumentListener(this);
-        view.dbsp.dbAddressTextField.getDocument().addDocumentListener(this);
-
-        CardLayout c = (CardLayout) view.contentPanel.getLayout();
-        c.show(view.contentPanel, OOBEView.PANEL[currentPage]);
     }
 
     public static void main(String[] args) {
@@ -92,6 +66,22 @@ public class OOBEController implements ActionListener, DocumentListener {
             }
         });
 
+    }
+
+    public void initialize() {
+        view = new OOBEView();
+        view.nextButton.addActionListener(this);
+        view.backButton.addActionListener(this);
+        view.cancelButton.addActionListener(this);
+        view.backButton.setEnabled(false);
+
+        view.dbsp.dbUserTextField.getDocument().addDocumentListener(this);
+        view.dbsp.dbPasswordField.getDocument().addDocumentListener(this);
+        view.dbsp.dbNameTextField.getDocument().addDocumentListener(this);
+        view.dbsp.dbAddressTextField.getDocument().addDocumentListener(this);
+
+        CardLayout c = (CardLayout) view.contentPanel.getLayout();
+        c.show(view.contentPanel, OOBEView.PANEL[currentPage]);
     }
 
     private void initializeDatabase() {
@@ -151,7 +141,7 @@ public class OOBEController implements ActionListener, DocumentListener {
                     view.dbt.setDescription("We have established connection with your database, but there was a SQL error if you have previously use Laew Tae Hong before you can ignore and continue.");
                     JOptionPane.showMessageDialog(view.getFrame(), ex.getMessage(), "Warning", JOptionPane.WARNING_MESSAGE);
                     view.nextButton.setEnabled(true);
-                }  catch (Exception ex) {
+                } catch (Exception ex) {
                     view.dbt.setDescription("We have ran into a fatal error.");
                     JOptionPane.showMessageDialog(view.getFrame(), ex.getMessage(), "Fatal Error", JOptionPane.WARNING_MESSAGE);
                     ex.printStackTrace();
@@ -190,7 +180,7 @@ public class OOBEController implements ActionListener, DocumentListener {
                     } else {
                         view.fn.firstPassWordField.setText("Admin Already Exist");
                         view.fn.firstPassWordField.setFont(new Font("SansSerif", Font.PLAIN, 16));
-                        view.fn.firstPassWordField.setForeground(new Color(255, 0,0));
+                        view.fn.firstPassWordField.setForeground(new Color(255, 0, 0));
                     }
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(view.getFrame(), ex.getMessage(), "Database Query Error", JOptionPane.ERROR_MESSAGE);

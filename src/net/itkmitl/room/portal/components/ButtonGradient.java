@@ -25,18 +25,22 @@ public class ButtonGradient extends JButton {
     private float pressedSize;
     private float sizeSpeed = 6f;
     private float alphaPressed = 0.5f;
+
     // ..............Constructor..............
     public ButtonGradient() {
         this(null);
     }
+
     public ButtonGradient(String text, Color color) {
         this(text, color, color);
     }
+
     public ButtonGradient(String text, Color color1, Color color2) {
         this(text);
         this.color1 = color1;
         this.color2 = color2;
     }
+
     public ButtonGradient(String text) {
         super(text);
         setContentAreaFilled(false);

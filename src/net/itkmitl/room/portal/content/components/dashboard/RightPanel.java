@@ -1,21 +1,5 @@
 package net.itkmitl.room.portal.content.components.dashboard;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.Serial;
-
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
@@ -23,12 +7,18 @@ import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.content.MainContentView;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.Serial;
+
 public class RightPanel extends JPanel implements ActionListener {
     @Serial
     private static final long serialVersionUID = 3515411566688472487L;
-    private AppStore store = AppStore.getAppStore();
     public JLabel nameLabel;
     public BookingStatusPanel bookingPanel;
+    private AppStore store = AppStore.getAppStore();
     private JPanel namePanel;
     private JButton editProfile;
 
@@ -77,7 +67,7 @@ public class RightPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(editProfile)){
+        if (e.getSource().equals(editProfile)) {
             MainContentView.glassPane.setText("");
             MainContentView.glassPane.setSpinnerVisibility(false);
             MainContentView.glassPane.setVisible(true);

@@ -15,7 +15,7 @@ public class HistoryLeftPanel extends RoundedPanel {
     private final JPanel btnPanel;
     private final JPanel southPanel;
     public JLabel totalRsvLabel, totalRsv, cancelledRsvLabel, cancelledRsv, title;
-//    private final HistoryLeftButton successBtn;
+    //    private final HistoryLeftButton successBtn;
 //    private final HistoryLeftButton pendingBtn;
 //    private final HistoryLeftButton canceledBtn;
     private ButtonGradient backButton;
@@ -36,7 +36,7 @@ public class HistoryLeftPanel extends RoundedPanel {
         totalRsvLabel.setFont(new Font("Cousine", Font.PLAIN, 20));
         totalRsv = new JLabel("-", SwingConstants.CENTER);
         totalRsv.setFont(new Font("Cousine", Font.BOLD, 48));
-        cancelledRsvLabel = new  JLabel("Total Cancelled", SwingConstants.CENTER);
+        cancelledRsvLabel = new JLabel("Total Cancelled", SwingConstants.CENTER);
         cancelledRsvLabel.setFont(new Font("Cousine", Font.PLAIN, 20));
         cancelledRsv = new JLabel("-", SwingConstants.CENTER);
         cancelledRsv.setFont(new Font("Cousine", Font.BOLD, 48));
@@ -77,10 +77,11 @@ public class HistoryLeftPanel extends RoundedPanel {
         southPanel.add(backButton);
         southPanel.setBorder(new EmptyBorder(10, 20, 10, 10));
     }
-    public void setNum(int rsv, int cRsv){
-            totalRsv.setText(String.valueOf(rsv));
-            cancelledRsv.setText(String.valueOf(cRsv));
-            revalidate();
+
+    public void setNum(int rsv, int cRsv) {
+        totalRsv.setText(String.valueOf(rsv));
+        cancelledRsv.setText(String.valueOf(cRsv));
+        revalidate();
     }
 //    public HistoryLeftButton getSuccessBtn() {
 //        return successBtn;

@@ -1,7 +1,6 @@
 package net.itkmitl.room.portal.content.components.history;
 
 import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
-import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.components.GBCBuilder;
 
 import javax.swing.*;
@@ -10,10 +9,6 @@ import java.awt.*;
 
 public class FeedBackDialogue extends JDialog {
     private final Font regular = new Font("Sansserif", Font.PLAIN, 16);
-    public JRadioButton rating00, rating05, rating10, rating15, rating20, rating25, rating30, rating35, rating40, rating45, rating50;
-    public ButtonGroup ratingGroup;
-    public JButton submitBtn, cancelBtn;
-    public JTextArea feedbackTextArea;
     private final JLabel pageTitle;
     private final JLabel pageSubtitle;
     private final JLabel feedbackLabel;
@@ -23,6 +18,10 @@ public class FeedBackDialogue extends JDialog {
     private final JPanel centerPanel;
     private final JPanel buttonPanel;
     private final JScrollPane feedbackPane;
+    public JRadioButton rating00, rating05, rating10, rating15, rating20, rating25, rating30, rating35, rating40, rating45, rating50;
+    public ButtonGroup ratingGroup;
+    public JButton submitBtn, cancelBtn;
+    public JTextArea feedbackTextArea;
 
     public FeedBackDialogue(JFrame parent, Reservation reservation) {
         super(parent, "Reservation Feedback", true);

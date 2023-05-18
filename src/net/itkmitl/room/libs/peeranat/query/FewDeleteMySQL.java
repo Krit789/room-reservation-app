@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class FewDeleteMySQL implements FewMySQLBuilder {
 
-    private String table;
     private final ArrayList<FewMySQLWhere> wheres;
+    private String table;
     private int limit;
 
     public FewDeleteMySQL() {
