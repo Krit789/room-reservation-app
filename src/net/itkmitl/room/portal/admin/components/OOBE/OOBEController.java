@@ -173,19 +173,25 @@ public class OOBEController implements ActionListener, DocumentListener {
                     view.fn.firstPassWordField.setForeground(new Color(115, 115, 115));
                     FewQuery db = LaewTaeDB.getDB();
                     UserRepository myUser = new UserRepository(db);
-                    User admin = new User();
-                    final String uuid = UUID.randomUUID().toString().replace("-", "");
-                    admin.setPasswordHash(FewPassword.getSalt(uuid));
-                    admin.setFirstname("Laew Tae");
-                    admin.setLastname("Hong");
-                    admin.setRole(EnumUserRole.ADMIN);
-                    admin.setEmail("admin@lth.org");
-                    admin.setActive(true);
-                    admin.setTelephoneNumber("0999999999");
-                    myUser.createUser(admin);
-                    view.fn.firstPassWordField.setText(uuid);
-                    view.fn.firstPassWordField.setFont(new Font("SansSerif", Font.PLAIN, 16));
-                    view.fn.firstPassWordField.setForeground(new Color(0, 0, 0));
+                    if (myUser.getExactUserByEmail("admin@lth.org") == null) {
+                        User admin = new User();
+                        final String uuid = UUID.randomUUID().toString().replace("-", "");
+                        admin.setPasswordHash(FewPassword.getSalt(uuid));
+                        admin.setFirstname("Laew Tae");
+                        admin.setLastname("Hong");
+                        admin.setRole(EnumUserRole.ADMIN);
+                        admin.setEmail("admin@lth.org");
+                        admin.setActive(true);
+                        admin.setTelephoneNumber("0999999999");
+                        myUser.createUser(admin);
+                        view.fn.firstPassWordField.setText(uuid);
+                        view.fn.firstPassWordField.setFont(new Font("SansSerif", Font.PLAIN, 16));
+                        view.fn.firstPassWordField.setForeground(new Color(0, 0, 0));
+                    } else {
+                        view.fn.firstPassWordField.setText("Admin Already Exist");
+                        view.fn.firstPassWordField.setFont(new Font("SansSerif", Font.PLAIN, 16));
+                        view.fn.firstPassWordField.setForeground(new Color(255, 0,0));
+                    }
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(view.getFrame(), ex.getMessage(), "Database Query Error", JOptionPane.ERROR_MESSAGE);
                 }
