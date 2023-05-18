@@ -10,6 +10,10 @@ import net.itkmitl.room.portal.CardView;
 import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.GBCBuilder;
 import net.itkmitl.room.portal.components.TransparentPanel;
+import net.itkmitl.room.portal.content.MainContentController;
+import net.itkmitl.room.portal.content.MainContentPortal;
+import net.itkmitl.room.portal.content.MainContentView;
+import net.itkmitl.room.portal.content.components.History;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,19 +27,14 @@ public class HistoryRightPanel extends CardView {
     public TransparentPanel reservationHistoryPanel;
     private JLabel text;
     private ReservationHistoryBox boxes;
+    public int rsvNum, cancelledRsvNum;
+    public HistoryLeftPanel leftPanel;
 
-    public HistoryRightPanel() {
+    public HistoryRightPanel(HistoryLeftPanel leftPanel) {
+        this.leftPanel = leftPanel;
         setLayout(new BorderLayout());
         reservationHistoryPanel = new TransparentPanel();
         reservationHistoryPanel.setLayout(new GridBagLayout());
-//        boxes = new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true);
-//        reservationHistoryPanel = new TransparentPanel();
-//        reservationHistoryPanel.setLayout(new GridBagLayout());
-//        reservationHistoryPanel.add(boxes, new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.25, 0, 0, new Insets(10, 20, 0, 20)).getGBC());
-//        reservationHistoryPanel.add(
-//                new ReservationHistoryBox("TestRoom2", "12:30-16:30", "21 Dec 2023", false),
-//                new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0.25, 0, 1, new Insets(10, 20, 0, 20)).getGBC()
-//        );
 
         historyHolder = new JScrollPane(reservationHistoryPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         historyHolder.getVerticalScrollBar().setUnitIncrement(16);
@@ -44,26 +43,26 @@ public class HistoryRightPanel extends CardView {
         historyHolder.getViewport().setOpaque(false);
         historyHolder.setBorder(null);
         add(historyHolder);
-        getReservationList();
-
-
-        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true, false, null), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 0, new Insets(15,0,0,0)).getGBC());
-//        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", false), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 1).getGBC());
-//        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 2).getGBC());
-//        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 3).getGBC());
-//        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 4).getGBC());
-//        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 5).getGBC());
-//        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true), new GBCBuilder(GridBagConstraints.HORIZONTAL, 0, 0, 6).getGBC());
+//        reservationHistoryPanel.add(new ReservationHistoryBox("TestRoom1", "12:30-16:30", "21 Jan 2023", true, false, null), new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, 0, new Insets(15,0,0,0)).getGBC());
     }
 
+    public void populate(){
+        reservationHistoryPanel.removeAll();
+        getReservationList();
+    }
     private void getReservationList() {
         SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
             @Override
-            protected Object doInBackground() throws Exception {
+            protected Object doInBackground(){
                 try {
+                    MainContentView.glassPane.setText("Loading History");
+                    MainContentView.glassPane.setSpinnerVisibility(true);
+                    MainContentView.glassPane.setVisible(true);
+                    MainContentView.glassPane.setEnabled(true);
                     FewQuery db = LaewTaeDB.getDB();
                     ReservationRepository reservationRepository = new ReservationRepository(db);
                     ArrayList<Reservation> res = reservationRepository.getReservationsByUserId(((User) AppStore.getAppStore().select("user")).getId());
+                    ArrayList<Reservation> cRes = new ArrayList<>();
                     int count = 1;
                     for (Reservation r : res) {
                         reservationHistoryPanel.add(new ReservationHistoryBox(
@@ -76,6 +75,12 @@ public class HistoryRightPanel extends CardView {
                         ),
                                 new GBCBuilder(GridBagConstraints.HORIZONTAL, 1, 0, count, new Insets(15,0,0,0)).getGBC());
                         count++;
+                        if (r.isCancelled()){
+                            cRes.add(r);
+                        }
+                        rsvNum = res.size();
+                        cancelledRsvNum = cRes.size();
+                        leftPanel.setNum(rsvNum, cancelledRsvNum);
                         reservationHistoryPanel.revalidate();
                     }
 
@@ -83,6 +88,12 @@ public class HistoryRightPanel extends CardView {
                     JOptionPane.showMessageDialog(BaseWindow.baseFrame, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
                 return null;
+
+            }
+            @Override
+            protected void done(){
+                MainContentView.glassPane.setVisible(false);
+                MainContentView.glassPane.setEnabled(false);
             }
         };
         worker.execute();

@@ -53,9 +53,9 @@ public class MainContentController extends Controller implements ActionListener 
 
         // History
         getView().getHistory().getLeftPanel().getBackButton().addActionListener(this);
-        getView().getHistory().getLeftPanel().getSuccessBtn().addActionListener(this);
-        getView().getHistory().getLeftPanel().getPendingBtn().addActionListener(this);
-        getView().getHistory().getLeftPanel().getCanceledBtn().addActionListener(this);
+//        getView().getHistory().getLeftPanel().getSuccessBtn().addActionListener(this);
+//        getView().getHistory().getLeftPanel().getPendingBtn().addActionListener(this);
+//        getView().getHistory().getLeftPanel().getCanceledBtn().addActionListener(this);
 
         SwingWorker<?, ?> worker = new SwingWorker() {
             @Override
@@ -88,6 +88,7 @@ public class MainContentController extends Controller implements ActionListener 
             new AboutDialog(this.getView());
         }
         if (e.getActionCommand().equals("History")) {
+            getView().getHistory().getRightPanel().populate();
             this.changeCard("History");
         } else if (e.getActionCommand().equals("Booking")) {
             this.changeCard("Selector");

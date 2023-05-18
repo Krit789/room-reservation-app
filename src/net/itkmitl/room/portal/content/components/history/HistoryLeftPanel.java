@@ -14,9 +14,10 @@ public class HistoryLeftPanel extends RoundedPanel {
     private static final long serialVersionUID = -4015833019658837000L;
     private final JPanel btnPanel;
     private final JPanel southPanel;
-    private final HistoryLeftButton successBtn;
-    private final HistoryLeftButton pendingBtn;
-    private final HistoryLeftButton canceledBtn;
+    public JLabel totalRsvLabel, totalRsv, cancelledRsvLabel, cancelledRsv, title;
+//    private final HistoryLeftButton successBtn;
+//    private final HistoryLeftButton pendingBtn;
+//    private final HistoryLeftButton canceledBtn;
     private ButtonGradient backButton;
 
     public HistoryLeftPanel() {
@@ -27,9 +28,21 @@ public class HistoryLeftPanel extends RoundedPanel {
         southPanel = new TransparentPanel();
         southPanel.setLayout(new FlowLayout());
 
-        successBtn = new HistoryLeftButton("resource/content/history/checkmark.png", "Success");
-        pendingBtn = new HistoryLeftButton("resource/content/history/loading.png", "Pending");
-        canceledBtn = new HistoryLeftButton("resource/content/history/cancelled.png", "Cancelled");
+        title = new JLabel("Reservation Stats", SwingConstants.CENTER);
+        title.setFont(new Font("Cousine", Font.BOLD, 29));
+
+        totalRsvLabel = new JLabel("Total Reservation", SwingConstants.CENTER);
+        totalRsvLabel.setFont(new Font("Cousine", Font.BOLD, 20));
+        totalRsv = new JLabel("Processing...", SwingConstants.CENTER);
+        totalRsv.setFont(new Font("Cousine", Font.BOLD, 15));
+        cancelledRsvLabel = new  JLabel("Total Cancelled", SwingConstants.CENTER);
+        cancelledRsvLabel.setFont(new Font("Cousine", Font.BOLD, 20));
+        cancelledRsv = new JLabel("Processing...", SwingConstants.CENTER);
+        cancelledRsv.setFont(new Font("Cousine", Font.BOLD, 15));
+
+//        successBtn = new HistoryLeftButton("resource/content/history/checkmark.png", "Success");
+//        pendingBtn = new HistoryLeftButton("resource/content/history/loading.png", "Pending");
+//        canceledBtn = new HistoryLeftButton("resource/content/history/cancelled.png", "Cancelled");
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -37,16 +50,22 @@ public class HistoryLeftPanel extends RoundedPanel {
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 1.0;
         constraints.anchor = GridBagConstraints.NORTHWEST;
-
+//
         btnPanel.setPreferredSize(new Dimension(350, getHeight()));
         btnPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-        btnPanel.add(successBtn, constraints);
-        btnPanel.add(pendingBtn, constraints);
-        btnPanel.add(canceledBtn, constraints);
+        btnPanel.add(totalRsvLabel, constraints);
+        btnPanel.add(totalRsv, constraints);
+        btnPanel.add(Box.createVerticalStrut(20), constraints);
+        btnPanel.add(cancelledRsvLabel, constraints);
+        btnPanel.add(cancelledRsv, constraints);
+//        btnPanel.add(successBtn, constraints);
+//        btnPanel.add(pendingBtn, constraints);
+//        btnPanel.add(canceledBtn, constraints);
 
         southPanel();
 
-        add(btnPanel);
+        add(title, BorderLayout.NORTH);
+        add(btnPanel, BorderLayout.CENTER);
         add(southPanel, BorderLayout.SOUTH);
     }
 
@@ -57,18 +76,22 @@ public class HistoryLeftPanel extends RoundedPanel {
         southPanel.add(backButton);
         southPanel.setBorder(new EmptyBorder(10, 20, 10, 10));
     }
-
-    public HistoryLeftButton getSuccessBtn() {
-        return successBtn;
+    public void setNum(int rsv, int cRsv){
+            totalRsv.setText(String.valueOf(rsv));
+            cancelledRsv.setText(String.valueOf(cRsv));
+            revalidate();
     }
-
-    public HistoryLeftButton getPendingBtn() {
-        return pendingBtn;
-    }
-
-    public HistoryLeftButton getCanceledBtn() {
-        return canceledBtn;
-    }
+//    public HistoryLeftButton getSuccessBtn() {
+//        return successBtn;
+//    }
+//
+//    public HistoryLeftButton getPendingBtn() {
+//        return pendingBtn;
+//    }
+//
+//    public HistoryLeftButton getCanceledBtn() {
+//        return canceledBtn;
+//    }
 
     public ButtonGradient getBackButton() {
         return backButton;
