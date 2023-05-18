@@ -43,7 +43,7 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
         super(30, 40, Color.white);
         setBorder(new EmptyBorder(10, 25, 10, 35));
         setLayout(new BorderLayout());
-        reservation = reservation;
+        this.reservation = reservation;
         setPreferredSize(new Dimension(this.getBounds().width, 190));
 
         feedBackBtn = new ButtonGradient("Feedback", new Color(59, 151, 88));
