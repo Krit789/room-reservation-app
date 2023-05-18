@@ -10,6 +10,7 @@ public class LeftSelectorBox extends JButton {
     private static final long serialVersionUID = -3861775095110257593L;
     public int boxID;
     public String type = "Select Box ";
+    public boolean selected = false;
 
     public LeftSelectorBox(String name, int ID) {
         super(name);
