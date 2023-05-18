@@ -8,11 +8,11 @@ import java.awt.*;
 
 public class History extends CardView {
     public HistoryLeftPanel leftPanel;
-    public HistoryRightPanel rightPanel;
+    private HistoryRightPanel rightPanel;
 
     public History() {
         leftPanel = new HistoryLeftPanel();
-        rightPanel = new HistoryRightPanel();
+        rightPanel = new HistoryRightPanel(leftPanel);
         add(leftPanel, BorderLayout.WEST);
         add(rightPanel);
     }
@@ -20,5 +20,9 @@ public class History extends CardView {
     // Getter
     public HistoryLeftPanel getLeftPanel() {
         return leftPanel;
+    }
+
+    public HistoryRightPanel getRightPanel() {
+        return rightPanel;
     }
 }
