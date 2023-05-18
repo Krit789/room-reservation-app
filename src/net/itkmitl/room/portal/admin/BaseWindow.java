@@ -128,9 +128,9 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
 
         // Adding Sub menu to menu items
         menuBar.add(fileMenu);
-        fileMenu.add(fileMenuItem1);
-        fileMenu.add(fileMenuItem2);
-        fileMenu.add(new JSeparator());
+//        fileMenu.add(fileMenuItem1);
+//        fileMenu.add(fileMenuItem2);
+//        fileMenu.add(new JSeparator());
         fileMenu.add(fileMenuItem3);
 
         menuBar.add(optionMenu);
