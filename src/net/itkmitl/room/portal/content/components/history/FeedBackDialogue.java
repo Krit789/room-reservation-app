@@ -1,5 +1,7 @@
 package net.itkmitl.room.portal.content.components.history;
 
+import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
+import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.portal.components.GBCBuilder;
 
 import javax.swing.*;
@@ -22,8 +24,8 @@ public class FeedBackDialogue extends JDialog {
     private final JPanel buttonPanel;
     private final JScrollPane feedbackPane;
 
-    public FeedBackDialogue(JFrame parent/*, Room room*/) {
-        super(parent, "Select Time", true);
+    public FeedBackDialogue(JFrame parent, Reservation reservation) {
+        super(parent, "Reservation Feedback", true);
         setBackground(Color.white);
         titlePanel = new JPanel();
         titlePanel.setBackground(Color.white);

@@ -18,8 +18,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingWorker;
 
+import net.itkmitl.room.db.LaewTaeDB;
+import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
-import net.itkmitl.room.libs.phatsanphon.entity.Room;
+import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
+import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
+import net.itkmitl.room.portal.admin.BaseWindow;
 import net.itkmitl.room.portal.components.ButtonGradient;
 import net.itkmitl.room.portal.components.RoundedPanel;
 import net.itkmitl.room.portal.content.MainContentView;
@@ -36,12 +40,12 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
     private final BoxIcon icon;
     private FeedBackDialogue feedBackPage;
     private boolean dialogOpen;
-    private Room room;
+    private Reservation reservation;
 
-    public ReservationHistoryBox(String name, String time, String date, boolean isComplete, Room room) {
+    public ReservationHistoryBox(String name, String time, String date, boolean isComplete, boolean isCancelled, Reservation reservation) {
         super(30, 40, Color.white);
-        this.room = room;
-        setPreferredSize(new Dimension(1250, 190));
+        this.reservation = reservation;
+        setPreferredSize(new Dimension(this.getBounds().width, 190));
 
         feedBackBtn = new ButtonGradient("FeedBack", new Color(59, 151, 88));
         feedBackBtn.setActionCommand("Feedback");
@@ -52,27 +56,29 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
         cancelBtn.addActionListener(this);
 
         nameLabel = new JLabel(name);
-        nameLabel.setFont(new Font("Cousine", Font.BOLD, 25));
+        nameLabel.setFont(new Font("Cousine", Font.BOLD, 23));
         dateLabel = new JLabel(date);
-        dateLabel.setFont(new Font("Cousine", Font.PLAIN, 20));
+        dateLabel.setFont(new Font("Cousine", Font.PLAIN, 18));
         timeLabel = new JLabel(time);
-        timeLabel.setFont(new Font("Cousine", Font.PLAIN, 20));
+        timeLabel.setFont(new Font("Cousine", Font.PLAIN, 18));
         dataPanel = new JPanel(new GridLayout(1, 5));
         dataPanel.setOpaque(false);
         icon = new BoxIcon(FewFile.getImage("icons/round-table.png"));
 
         add(icon, BorderLayout.WEST);
-        add(Box.createHorizontalStrut(15));
         dataPanel.add(nameLabel);
-        dataPanel.add(Box.createHorizontalStrut(5));
+        dataPanel.add(Box.createHorizontalStrut((this.getBounds().width - (icon.getWidth() + nameLabel.getWidth() + timeLabel.getWidth() + dateLabel.getWidth() + feedBackBtn.getWidth())) / 4));
         dataPanel.add(timeLabel);
-        dataPanel.add(Box.createHorizontalStrut(5));
+//        dataPanel.add(Box.createHorizontalStrut((this.getBounds().width - (icon.getWidth() + nameLabel.getWidth() + timeLabel.getWidth() + dateLabel.getWidth() + feedBackBtn.getWidth())) / 4));
         dataPanel.add(dateLabel);
         add(dataPanel, BorderLayout.CENTER);
-        add(Box.createHorizontalStrut(15));
         if (isComplete) {
             add(feedBackBtn, BorderLayout.EAST);
         } else {
+            if (isCancelled){
+                cancelBtn.setText("Cancelled");
+                cancelBtn.setEnabled(false);
+            }
             add(cancelBtn, BorderLayout.EAST);
         }
     }
@@ -91,7 +97,7 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
         SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
             @Override
             protected Object doInBackground() throws Exception {
-                FeedBackDialogueController rsvpd = new FeedBackDialogueController(null, room);
+                FeedBackDialogueController rsvpd = new FeedBackDialogueController(null, reservation);
                 MainContentView.glassPane.setSpinnerVisibility(false);
                 MainContentView.glassPane.setText("");
                 MainContentView.glassPane.setVisible(true);
@@ -110,6 +116,31 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
 
     }
 
+    private void cancelReservaion(int resId){
+        SwingWorker<?,?> worker = new SwingWorker<Object, Object>() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                try {
+                    cancelBtn.setText("Processing...");
+                    cancelBtn.setEnabled(false);
+                    FewQuery db = LaewTaeDB.getDB();
+                    ReservationRepository reservationRepository = new ReservationRepository(db);
+                    Reservation toBeCancelled = reservationRepository.getReservationById(reservation.getId());
+                    toBeCancelled.setCancelled(true);
+                    reservationRepository.updateReservation(toBeCancelled);
+                    cancelBtn.setText("Cancelled");
+                    cancelBtn.setEnabled(false);
+                } catch (Exception ex) {
+                    cancelBtn.setText("Cancel");
+                    cancelBtn.setEnabled(true);
+                    JOptionPane.showConfirmDialog(null, ex.getMessage(), "Something went wrong", JOptionPane.ERROR_MESSAGE);
+                }
+                return null;
+            }
+        };
+        worker.execute();
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Feedback")) {
@@ -118,8 +149,22 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
                 dialogOpen = true;
             }
         } else if (e.getActionCommand().equals("Cancel")) {
-            JOptionPane.showConfirmDialog(findWindow(this), "Cancellation Successful", "", JOptionPane.CLOSED_OPTION);
+            String[] options = new String[]{"OK", "Cancel"};
+            MainContentView.glassPane.setSpinnerVisibility(false);
+            MainContentView.glassPane.setText("");
+            MainContentView.glassPane.setVisible(true);
+            MainContentView.glassPane.setEnabled(true);
+            int option = JOptionPane.showOptionDialog(findWindow(this),"<html><p>Are you sure that you want to cancel this reservation? This action cannot be undone!</p></html>", "Cancel", JOptionPane.NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
 
+            if(option == 0) {
+                MainContentView.glassPane.setVisible(false);
+                MainContentView.glassPane.setEnabled(false);
+                cancelReservaion(reservation.getId());
+                JOptionPane.showConfirmDialog(findWindow(this), "Reservation Canceled", "Success", 0);
+            }else {
+                MainContentView.glassPane.setVisible(false);
+                MainContentView.glassPane.setEnabled(false);
+            }
         }
     }
 }
