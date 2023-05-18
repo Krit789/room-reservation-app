@@ -145,8 +145,8 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
             for (int i = 0; i < (int) (hourAhead * 2); i++) {
                 if (ttc.getDate() == virtualReservationStart.getDate() && ttc.getTime() >= virtualReservationStart.getTime() && ttc.getTime() < virtualReservationEnd.getTime()) {
                     unavailable = true;
-                    System.out.println("Checked: " + ttc + " " + " Result: " + unavailable + " ResID: " + r.getId());
-                    System.out.println((ttc.getTime() >= virtualReservationStart.getTime()) + " " + (ttc.getTime() <= virtualReservationEnd.getTime()));
+//                    System.out.println("Checked: " + ttc + " " + " Result: " + unavailable + " ResID: " + r.getId());
+//                    System.out.println((ttc.getTime() >= virtualReservationStart.getTime()) + " " + (ttc.getTime() <= virtualReservationEnd.getTime()));
                 }
                 long addedTime = 1800L * 1000;
                 ttc.setTime(ttc.getTime() + addedTime);
@@ -156,8 +156,8 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
         if (timeToCheck.getHours() < room.getOpenTime().getHours() || timeToCheck.getHours() > room.getCloseTime().getHours() || (timeToCheck.getHours() == room.getCloseTime().getHours() && timeToCheck.getMinutes() > room.getCloseTime().getMinutes())) {
             unavailable = true;
         }
-        System.out.println((timeToCheck.getHours() + " < " + room.getOpenTime().getHours()) + " || " + timeToCheck.getHours() + " > " + room.getCloseTime().getHours() + " || (" + timeToCheck.getHours() + " == " + room.getCloseTime().getHours() + " && " + timeToCheck.getMinutes() + " > " + room.getCloseTime().getMinutes() + ")");
-        System.out.println((timeToCheck.getHours() < room.getOpenTime().getHours()) + " || " + (timeToCheck.getHours() > room.getCloseTime().getHours()) + " || (" + (timeToCheck.getHours() == room.getCloseTime().getHours()) + " && " + (timeToCheck.getMinutes() > room.getCloseTime().getMinutes()) + ")");
+//        System.out.println((timeToCheck.getHours() + " < " + room.getOpenTime().getHours()) + " || " + timeToCheck.getHours() + " > " + room.getCloseTime().getHours() + " || (" + timeToCheck.getHours() + " == " + room.getCloseTime().getHours() + " && " + timeToCheck.getMinutes() + " > " + room.getCloseTime().getMinutes() + ")");
+//        System.out.println((timeToCheck.getHours() < room.getOpenTime().getHours()) + " || " + (timeToCheck.getHours() > room.getCloseTime().getHours()) + " || (" + (timeToCheck.getHours() == room.getCloseTime().getHours()) + " && " + (timeToCheck.getMinutes() > room.getCloseTime().getMinutes()) + ")");
 
         return unavailable;
     }
@@ -244,7 +244,7 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
                     DateTime endTime = new DateTime(segment.begin.getTime() + (1800L * 1000L * Double.valueOf(2 * ((Number) view.lengthSpinner.getValue()).doubleValue()).longValue()));
                     myRsvp.setEndTime(endTime);
                     myRsvp.setUser(((User) AppStore.getAppStore().select("user")));
-                    System.out.println(myRsvp.getUser().getId() + " " + myRsvp.getUser().getFirstname());
+//                    System.out.println(myRsvp.getUser().getId() + " " + myRsvp.getUser().getFirstname());
                     myRsvp.setRoom(myRoom);
                     myRsvp.setReason(view.reasonTextArea.getText());
                     rsvprp.createReservation(myRsvp);

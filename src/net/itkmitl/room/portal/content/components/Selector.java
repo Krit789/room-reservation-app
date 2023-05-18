@@ -35,21 +35,21 @@ public class Selector extends CardView {
         mainPanel.setBackground(Color.white);
 
         header = new Header("Select a Building", "Enjoy seemless reservation experience");
-
         testLabel = new JLabel("Hi");
 
-        SwingWorker worker = new SwingWorker() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             @Override
-            protected Object doInBackground() throws Exception {
+            protected Object doInBackground(){
                 while (!RoomLoader.done) {
-                    Thread.onSpinWait();
+                    synchronized(this) {
+                        Thread.onSpinWait();
+                    }
                 }
                 return null;
             }
 
             @Override
             protected void done() {
-//                System.out.println("Done with room data!");
                 populateList();
             }
         };
@@ -64,7 +64,7 @@ public class Selector extends CardView {
     }
 
     public void populateList() {
-        SwingWorker worker = new SwingWorker() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             @Override
             protected Object doInBackground() throws Exception {
                 for (HashMap.Entry<String, HashMap<String, Floor>> row : RoomLoader.floorList.entrySet()) {
