@@ -85,9 +85,13 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
         } else {
             if (isCancelled) {
                 cancelBtn.setText("Cancelled");
+                cancelBtn.setColor1(Color.gray);
+                cancelBtn.setColor2(Color.gray);
                 cancelBtn.setEnabled(false);
+                operationPanel.add(cancelBtn, new GBCBuilder(GridBagConstraints.CENTER, 1, 0, 0).getGBC());
+            } else {
+                operationPanel.add(cancelBtn, new GBCBuilder(GridBagConstraints.CENTER, 1, 0, 0, new Insets(0, 0, 0, 10)).getGBC());
             }
-            operationPanel.add(cancelBtn, new GBCBuilder(GridBagConstraints.CENTER, 1, 0, 0, new Insets(0, 0, 0, 10)).getGBC());
         }
 
         this.add(operationPanel, BorderLayout.EAST);

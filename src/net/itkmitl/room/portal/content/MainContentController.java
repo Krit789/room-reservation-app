@@ -121,7 +121,6 @@ public class MainContentController extends Controller implements ActionListener,
         CardLayout cl = (CardLayout) (this.getView().getSelector().cardsOfBuildingsFloorPanel.getLayout());
         cl.show(this.getView().getSelector().cardsOfBuildingsFloorPanel, name);
         for (LeftSelectorBox box : this.getView().getSelector().getSelectorPanel().leftBoxHolder) {
-            System.out.println(box.getText() + " " + name);
             if (box.getText().equals(name) & !box.equals(selectedBox)) {
                 box.setText("√ " + name);
                 box.setContentAreaFilled(true);
@@ -162,7 +161,6 @@ public class MainContentController extends Controller implements ActionListener,
     @Override
     public void mouseEntered(MouseEvent e) {
         for (LeftSelectorBox box : this.getView().getSelector().getSelectorPanel().leftBoxHolder) {
-//            System.out.println(box.getText() + " " + name);
             if (e.getSource().equals(box) & !e.getSource().equals(selectedBox)) {
                 box.setContentAreaFilled(true);
                 box.revalidate();

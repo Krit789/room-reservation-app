@@ -23,6 +23,7 @@ public class HistoryLeftPanel extends RoundedPanel {
     public HistoryLeftPanel() {
         super(40, 40);
         setLayout(new BorderLayout());
+        setBorder(new EmptyBorder(30, 30, 30, 30));
         btnPanel = new TransparentPanel();
         btnPanel.setLayout(new GridBagLayout());
         southPanel = new TransparentPanel();
@@ -32,13 +33,13 @@ public class HistoryLeftPanel extends RoundedPanel {
         title.setFont(new Font("Cousine", Font.BOLD, 29));
 
         totalRsvLabel = new JLabel("Total Reservation", SwingConstants.CENTER);
-        totalRsvLabel.setFont(new Font("Cousine", Font.BOLD, 20));
-        totalRsv = new JLabel("Processing...", SwingConstants.CENTER);
-        totalRsv.setFont(new Font("Cousine", Font.BOLD, 15));
+        totalRsvLabel.setFont(new Font("Cousine", Font.PLAIN, 20));
+        totalRsv = new JLabel("-", SwingConstants.CENTER);
+        totalRsv.setFont(new Font("Cousine", Font.BOLD, 48));
         cancelledRsvLabel = new  JLabel("Total Cancelled", SwingConstants.CENTER);
-        cancelledRsvLabel.setFont(new Font("Cousine", Font.BOLD, 20));
-        cancelledRsv = new JLabel("Processing...", SwingConstants.CENTER);
-        cancelledRsv.setFont(new Font("Cousine", Font.BOLD, 15));
+        cancelledRsvLabel.setFont(new Font("Cousine", Font.PLAIN, 20));
+        cancelledRsv = new JLabel("-", SwingConstants.CENTER);
+        cancelledRsv.setFont(new Font("Cousine", Font.BOLD, 48));
 
 //        successBtn = new HistoryLeftButton("resource/content/history/checkmark.png", "Success");
 //        pendingBtn = new HistoryLeftButton("resource/content/history/loading.png", "Pending");

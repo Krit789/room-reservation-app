@@ -72,8 +72,6 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
             @Override
             protected void done() {
                 updateReservationSegment();
-                view.segmentBox.setEnabled(true);
-                view.okButton.setEnabled(true);
             }
         };
         worker.execute();
@@ -180,6 +178,7 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
             view.segmentBox.setEnabled(true);
             view.segmentLoadingLabel.setIcon(FewFile.getImage("icons/yes-16px.png"));
             view.segmentLoadingLabel.setToolTipText("Fetch Successful");
+            view.segmentBox.setEnabled(true);
             view.okButton.setEnabled(true);
         }
         validateTime();
@@ -283,13 +282,18 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
     }
 
     private void validateTime() {
-        DateTime myTime = ((ReservableEntity) Objects.requireNonNull(view.segmentBox.getSelectedItem())).begin;
-        if (checkAvailableTime(resList, new DateTime(myTime.getTime()), ((Number) view.lengthSpinner.getValue()).doubleValue(), myRoom)) {
+        if (view.segmentBox.getSelectedItem() != null){
+            DateTime myTime = ((ReservableEntity) Objects.requireNonNull(view.segmentBox.getSelectedItem())).begin;
+            if (checkAvailableTime(resList, new DateTime(myTime.getTime()), ((Number) view.lengthSpinner.getValue()).doubleValue(), myRoom)) {
+                view.okButton.setEnabled(false);
+                view.lengthSpinner.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(255, 50, 100)));
+            } else {
+                view.okButton.setEnabled(true);
+                view.lengthSpinner.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(44, 84, 144)));
+            }
+        } else {
             view.okButton.setEnabled(false);
             view.lengthSpinner.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(255, 50, 100)));
-        } else {
-            view.okButton.setEnabled(true);
-            view.lengthSpinner.setBorder(BorderFactory.createMatteBorder(0, 0, 2, 0, new Color(44, 84, 144)));
         }
     }
 

@@ -162,7 +162,7 @@ public class PreferenceWindowView {
 
 
         settingTab.add("Database", databasePanel);
-        settingTab.add("Client", instancePanel);
+//        settingTab.add("Client", instancePanel);
         frame.add(settingTab, BorderLayout.CENTER);
 
         frame.add(frameButtonPanel, BorderLayout.SOUTH);
