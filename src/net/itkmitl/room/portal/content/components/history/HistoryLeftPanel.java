@@ -15,9 +15,6 @@ public class HistoryLeftPanel extends RoundedPanel {
     private final JPanel btnPanel;
     private final JPanel southPanel;
     public JLabel totalRsvLabel, totalRsv, cancelledRsvLabel, cancelledRsv, title;
-    //    private final HistoryLeftButton successBtn;
-//    private final HistoryLeftButton pendingBtn;
-//    private final HistoryLeftButton canceledBtn;
     private ButtonGradient backButton;
 
     public HistoryLeftPanel() {
@@ -56,9 +53,6 @@ public class HistoryLeftPanel extends RoundedPanel {
         btnPanel.add(Box.createVerticalStrut(20), constraints);
         btnPanel.add(cancelledRsvLabel, constraints);
         btnPanel.add(cancelledRsv, constraints);
-//        btnPanel.add(successBtn, constraints);
-//        btnPanel.add(pendingBtn, constraints);
-//        btnPanel.add(canceledBtn, constraints);
 
         southPanel();
 
@@ -80,17 +74,6 @@ public class HistoryLeftPanel extends RoundedPanel {
         cancelledRsv.setText(String.valueOf(cRsv));
         revalidate();
     }
-//    public HistoryLeftButton getSuccessBtn() {
-//        return successBtn;
-//    }
-//
-//    public HistoryLeftButton getPendingBtn() {
-//        return pendingBtn;
-//    }
-//
-//    public HistoryLeftButton getCanceledBtn() {
-//        return canceledBtn;
-//    }
 
     public ButtonGradient getBackButton() {
         return backButton;

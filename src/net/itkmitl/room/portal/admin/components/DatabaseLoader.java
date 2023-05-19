@@ -4,6 +4,7 @@ import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
+import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
 import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
@@ -89,9 +90,18 @@ public class DatabaseLoader implements InternalFrameListener {
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (User Table)");
                             model.setPageSubtitle(users_list.size() + " records was retrieved from database.");
-                            dtm = new DefaultTableModel(null, new String[]{"ID", "First Name", "Last Name", "Active", "Phone Number", "E-Mail", "Role", "Created On", "Staff"});
+                            dtm = new DefaultTableModel(null, new String[]{"ID", "First Name", "Last Name", "Active", "Phone Number", "E-Mail", "Role", "Created On", "Staff"}){
+                                @Override
+                                public Class<?> getColumnClass(int column) {
+                                    switch(column) {
+                                        case 0: return Integer.class;
+                                        case 8: return ImageIcon.class;
+                                        default: return Object.class;
+                                    }
+                                }
+                            };
                             for (User u : users_list) {
-                                dtm.addRow(new Object[]{u.getId(), u.getFirstname(), u.getLastname(), u.isActive(), u.getTelephoneNumber(), u.getEmail(), u.getRole(), u.getCreatedOn(), u.isStaff()});
+                                dtm.addRow(new Object[]{u.getId(), u.getFirstname(), u.getLastname(), u.isActive(), u.getTelephoneNumber(), u.getEmail(), u.getRole(), u.getCreatedOn(), u.isStaff() ? FewFile.getImage("icons/yes-16px.png"): null});
                             }
                             model.setDtm(dtm);
                             data = new Object[]{Boolean.valueOf(true), model};
@@ -132,9 +142,18 @@ public class DatabaseLoader implements InternalFrameListener {
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (Reservation Table)");
                             model.setPageSubtitle(reservations_list.size() + " records was retrieved from database.");
-                            dtm = new DefaultTableModel(null, new String[]{"ID", "Room Name", "Room Location", "Reserver", "Reason", "Start Time", "End Time", "Reserved At", "Cancelled"});
+                            dtm = new DefaultTableModel(null, new String[]{"ID", "Room Name", "Room Location", "Reserver", "Start Time", "End Time", "Reserved At", "Cancelled"}){
+                                @Override
+                                public Class<?> getColumnClass(int column) {
+                                    switch(column) {
+                                        case 0: return Integer.class;
+                                        case 7: return ImageIcon.class;
+                                        default: return Object.class;
+                                    }
+                                }
+                            };
                             for (Reservation u : reservations_list) {
-                                dtm.addRow(new Object[]{u.getId(), u.getRoom().getName(), u.getRoom().getBuilding(), u.getUser().getFirstname() + " " + u.getUser().getLastname(), u.getReason(), u.getStartTime(), u.getEndTime(), u.getReservationTime(), u.isCancelled()});
+                                dtm.addRow(new Object[]{u.getId(), u.getRoom().getName(), u.getRoom().getBuilding(), u.getUser().getFirstname() + " " + u.getUser().getLastname(), u.getStartTime(), u.getEndTime(), u.getReservationTime(), u.isCancelled() ? FewFile.getImage("icons/yes-16px.png"): null});
                             }
                             model.setDtm(dtm);
                             data = new Object[]{Boolean.valueOf(true), model};
@@ -153,9 +172,9 @@ public class DatabaseLoader implements InternalFrameListener {
                             }
                             BaseWindow.statusLabel.setText("Loading data from Database (Feedback Table)");
                             model.setPageSubtitle(feedbacks_list.size() + " records was retrieved from database.");
-                            dtm = new DefaultTableModel(null, new String[]{"ID", "Comment", "Rating", "Created On", "Room", "User"});
+                            dtm = new DefaultTableModel(null, new String[]{"ID", "Rating", "Created On", "Room", "User"});
                             for (Feedback u : feedbacks_list) {
-                                dtm.addRow(new Object[]{u.getId(), u.getComment(), u.getRating(), u.getCreatedOn(), u.getRoom().getName(), u.getUser().getFirstname() + " " + u.getUser().getLastname()});
+                                dtm.addRow(new Object[]{u.getId(), u.getRating(), u.getCreatedOn(), u.getRoom().getName(), u.getUser().getFirstname() + " " + u.getUser().getLastname()});
                             }
                             model.setDtm(dtm);
                             data = new Object[]{Boolean.valueOf(true), model};
