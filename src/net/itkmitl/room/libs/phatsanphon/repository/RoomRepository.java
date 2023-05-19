@@ -1,5 +1,6 @@
 package net.itkmitl.room.libs.phatsanphon.repository;
 
+import net.itkmitl.room.enums.EnumRoomState;
 import net.itkmitl.room.libs.peeranat.query.*;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.enums.RoomQuery;
@@ -23,8 +24,12 @@ public class RoomRepository extends Repository<Room> {
         ArrayList<Room> rooms = this.getRooms();
 
         int rando = (int) Math.round((Math.random() * (rooms.size() - 1)));
-
-        return rooms.get(rando);
+        while (true) {
+            if (rooms.get(rando).getState().equals(EnumRoomState.MAINTENANCE)) {
+                return rooms.get(rando);
+            }
+            rando = (int) Math.round((Math.random() * (rooms.size() - 1)));
+        }
     }
 
     public ArrayList<Room> getRooms(int limit) throws Exception {
