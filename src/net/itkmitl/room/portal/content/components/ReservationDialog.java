@@ -116,6 +116,7 @@ public class ReservationDialog extends JDialog {
 
         reasonTextArea = new JTextArea();
         reasonTextArea.setRows(4);
+        reasonTextArea.setFont(new Font("TH SarabunPSK", Font.BOLD, 18));
         reasonPane = new JScrollPane(reasonTextArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         selectionPanel.add(reasonLabel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 6, new Insets(5, 15, 0, 15)).setAnchor(GridBagConstraints.WEST));

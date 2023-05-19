@@ -91,6 +91,8 @@ public class FeedBackDialogue extends JDialog {
 
         feedbackTextArea = new JTextArea();
         feedbackTextArea.setRows(4);
+        feedbackTextArea.setFont(new Font("TH SarabunPSK", Font.BOLD, 18));
+
         feedbackPane = new JScrollPane(feedbackTextArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         centerPanel.add(ratingLabel, new GBCBuilder(GridBagConstraints.NONE, 1, 0, 0, new Insets(5, 15, 0, 15)).setAnchor(GridBagConstraints.WEST));

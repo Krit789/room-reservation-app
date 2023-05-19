@@ -44,9 +44,13 @@ public abstract class View extends JFrame {
             Font cousineBold = FewFile.getFont("fonts/Cousine-Bold.ttf");
             cousineBold = cousineBold.deriveFont(16f);
 
+            Font sarabun = FewFile.getFont("fonts/THSarabun.ttf");
+            sarabun = sarabun.deriveFont(16f);
+
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(cousine);
             ge.registerFont(cousineBold);
+            ge.registerFont(sarabun);
         } catch (Exception e) {
             System.out.println("UIConfig.java: " + e.getMessage());
         }

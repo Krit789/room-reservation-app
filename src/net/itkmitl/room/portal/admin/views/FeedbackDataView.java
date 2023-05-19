@@ -80,6 +80,7 @@ public class FeedbackDataView {
         commentField = new JTextArea("");
         commentField.setRows(3);
         commentField.setLineWrap(true);
+        commentField.setFont(new Font("TH SarabunPSK", Font.BOLD, 18));
         commentScrollPane = new JScrollPane(commentField, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         dataPanel.add(commentLabel, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.1, 0, 4, new Insets(0, 10, 5, 5)).getGBC());
         dataPanel.add(commentScrollPane, new GBCBuilder(GridBagConstraints.HORIZONTAL, 0.9, 1, 4, new Insets(0, 0, 5, 10)).setColumnSpan(1, 3));
