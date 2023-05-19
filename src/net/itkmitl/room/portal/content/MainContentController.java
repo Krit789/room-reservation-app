@@ -126,7 +126,7 @@ public class MainContentController extends Controller implements ActionListener,
                 selectedBox = box;
             } else {
                 if (box.getText().startsWith("√ ") & !box.getText().equals(name)) {
-                    box.setText(box.getText().substring(2, box.getText().length()));
+                    box.setText(box.getText().substring(2));
                     box.setContentAreaFilled(false);
                     box.revalidate();
                 }

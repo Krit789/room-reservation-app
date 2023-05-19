@@ -56,7 +56,7 @@ public class ReservationDialog extends JDialog {
 
         add(titlePanel, BorderLayout.NORTH);
 
-        dateLabel = new JLabel("Select Date");
+        dateLabel = new JLabel("Date");
         segmentLabel = new JLabel("Available Segment");
         lengthLabel = new JLabel("Duration");
         hourLabel = new JLabel("Hour(s)");

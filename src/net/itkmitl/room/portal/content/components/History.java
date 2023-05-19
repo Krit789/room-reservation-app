@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class History extends CardView {
     public HistoryLeftPanel leftPanel;
-    private HistoryRightPanel rightPanel;
+    private final HistoryRightPanel rightPanel;
 
     public History() {
         leftPanel = new HistoryLeftPanel();

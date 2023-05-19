@@ -64,7 +64,7 @@ public class HistoryRightPanel extends CardView {
                     int count = 1;
                     for (Reservation r : res) {
                         reservationHistoryPanel.add(new ReservationHistoryBox(
-                                        r.getRoom().getName(),
+                                        String.format("<html><p><b>%s<b><br>Floor %s,%s</p></html>", r.getRoom().getName(), r.getRoom().getFloor(), r.getRoom().getBuilding()),
                                         String.format("%d:%02d-%d:%02d", r.getStartTime().getHours(), r.getStartTime().getMinutes(), r.getEndTime().getHours(), r.getEndTime().getMinutes()),
                                         String.format("%d %s %d", r.getStartTime().getDate(), r.getStartTime().toLocalDate().getMonth().toString(), r.getStartTime().getYear()),
                                         System.currentTimeMillis() >= r.getEndTime().getTime(),

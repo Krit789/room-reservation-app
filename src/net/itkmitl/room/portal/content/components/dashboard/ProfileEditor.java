@@ -32,7 +32,11 @@ public class ProfileEditor extends JDialog implements ActionListener, WindowList
     public JLabel passwordLabel;
     public JTextField firstNameField, lastNameField, telnumField, createdOnField, emailField;
     public JPasswordField oldPasswordField;
-    private JLabel firstNameLabel, lastNameLabel, telnumLabel, createdOnLabel, emailLabel;
+    private final JLabel firstNameLabel;
+    private final JLabel lastNameLabel;
+    private final JLabel telnumLabel;
+    private final JLabel createdOnLabel;
+    private final JLabel emailLabel;
 
     public ProfileEditor(User myUser) {
         super(MainContentController.view, "Profile Editor", false);

@@ -30,7 +30,7 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
     public ButtonGradient feedBackBtn, cancelBtn;
     private FeedBackDialogue feedBackPage;
     private boolean dialogOpen;
-    private Reservation reservation;
+    private final Reservation reservation;
 
     public ReservationHistoryBox(String name, String time, String date, boolean isComplete, boolean isCancelled, Reservation reservation) {
         super(30, 40, Color.white);
@@ -68,12 +68,10 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
         operationPanel.setLayout(new GridBagLayout());
 
         dataPanel.add(nameLabel);
-//        dataPanel.add(Box.createHorizontalStrut((this.getBounds().width - (icon.getWidth() + nameLabel.getWidth() + timeLabel.getWidth() + dateLabel.getWidth() + feedBackBtn.getWidth())) / 4));
         dataPanel.add(timeLabel);
-//        dataPanel.add(Box.createHorizontalStrut((this.getBounds().width - (icon.getWidth() + nameLabel.getWidth() + timeLabel.getWidth() + dateLabel.getWidth() + feedBackBtn.getWidth())) / 4));
         dataPanel.add(dateLabel);
         add(dataPanel, BorderLayout.CENTER);
-        if (isComplete) {
+        if (isComplete && !isCancelled) {
             operationPanel.add(feedBackBtn, new GBCBuilder(GridBagConstraints.CENTER, 1, 0, 0).getGBC());
         } else {
             if (isCancelled) {

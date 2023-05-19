@@ -41,9 +41,6 @@ public class HistoryLeftPanel extends RoundedPanel {
         cancelledRsv = new JLabel("-", SwingConstants.CENTER);
         cancelledRsv.setFont(new Font("Cousine", Font.BOLD, 48));
 
-//        successBtn = new HistoryLeftButton("resource/content/history/checkmark.png", "Success");
-//        pendingBtn = new HistoryLeftButton("resource/content/history/loading.png", "Pending");
-//        canceledBtn = new HistoryLeftButton("resource/content/history/cancelled.png", "Cancelled");
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;

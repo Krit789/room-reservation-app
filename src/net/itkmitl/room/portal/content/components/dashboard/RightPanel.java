@@ -18,9 +18,9 @@ public class RightPanel extends JPanel implements ActionListener {
     private static final long serialVersionUID = 3515411566688472487L;
     public JLabel nameLabel;
     public BookingStatusPanel bookingPanel;
-    private AppStore store = AppStore.getAppStore();
-    private JPanel namePanel;
-    private JButton editProfile;
+    private final AppStore store = AppStore.getAppStore();
+    private final JPanel namePanel;
+    private final JButton editProfile;
 
     public RightPanel() {
         super();
