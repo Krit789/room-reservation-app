@@ -4,6 +4,7 @@ import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
+import net.itkmitl.room.libs.phatsanphon.entity.Entity;
 import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
@@ -25,16 +26,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class FeedbackDataController implements ActionListener, InternalFrameListener, ChangeListener {
+public class FeedbackDataController implements ActionListener, InternalFrameListener, ChangeListener, SuperDataManger {
     public final FeedbackDataView view;
     private final int mode;
     private final ArrayList<UserComboBoxModel> userArrayList = new ArrayList<>();
     private final ArrayList<RoomComboBoxModel> roomArrayList = new ArrayList<>();
-    private final DataListEditableController dlec;
+    private final DataTable dlec;
     private Feedback feedback;
     private Object[] data;
 
-    public FeedbackDataController(int mode, int feedbackID, DataListEditableController dlec) {
+    public FeedbackDataController(int mode, int feedbackID, DataTable dlec) {
         this.mode = mode;
         this.dlec = dlec;
         view = new FeedbackDataView();
@@ -80,6 +81,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
 
     }
 
+    @Override
     public void databaseLoader(int reservationID) {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
@@ -127,7 +129,8 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
         worker.execute();
     }
 
-    public void databaseCommiter(Feedback feedback, int mode) {
+    @Override
+    public void databaseCommiter(Entity feedback, int mode) {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
 
@@ -141,15 +144,15 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                     FeedbackRepository myFeedback = new FeedbackRepository(db);
                     switch (mode) {
                         case 0: // Update
-                            myFeedback.updateFeedback(feedback);
+                            myFeedback.updateFeedback((Feedback) feedback);
                             data = new Object[]{true, myFeedback};
                             break;
                         case 1: // Delete
-                            myFeedback.deleteFeedbackById(feedback.getId());
+                            myFeedback.deleteFeedbackById(((Feedback) feedback).getId());
                             data = new Object[]{true, myFeedback};
                             break;
                         case 2: // Create
-                            myFeedback.createFeedback(feedback);
+                            myFeedback.createFeedback((Feedback) feedback);
                             data = new Object[]{true, myFeedback};
                             break;
                     }
@@ -175,6 +178,7 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
         worker.execute();
     }
 
+    @Override
     public void dataPopulator() {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
@@ -217,7 +221,8 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
         worker.execute();
     }
 
-    private void dataLoader() {
+    @Override
+    public void dataLoader() {
         if (new FewSimpleValue(data[0]).asBoolean()) {
             Feedback myFeedback = (Feedback) data[1];
             feedback = (Feedback) data[1];
@@ -296,31 +301,25 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
         try {
             BaseWindow.windowMenu.remove(BaseWindow.windowList.get(e.getInternalFrame()));
             BaseWindow.windowList.remove(e.getInternalFrame());
-            // System.out.println("Removal Success: " + e.getInternalFrame().getTitle() + " " + e.getInternalFrame().getClass().getCanonicalName() + " " + this.getClass().getSimpleName());
         } catch (Exception ex) {
             System.out.println("Removal Failure: " + e.getInternalFrame().getTitle() + " " + e.getSource().toString() + " " + e.getInternalFrame().getClass().getCanonicalName() + " " + this.getClass().getSimpleName());
-//            ex.printStackTrace();
         }
     }
 
     @Override
     public void internalFrameIconified(InternalFrameEvent e) {
-
     }
 
     @Override
     public void internalFrameDeiconified(InternalFrameEvent e) {
-
     }
 
     @Override
     public void internalFrameActivated(InternalFrameEvent e) {
-
     }
 
     @Override
     public void internalFrameDeactivated(InternalFrameEvent e) {
-
     }
 
     @Override

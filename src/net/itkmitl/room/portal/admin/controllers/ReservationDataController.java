@@ -5,6 +5,7 @@ import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
+import net.itkmitl.room.libs.phatsanphon.entity.Entity;
 import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
@@ -31,16 +32,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
-public class ReservationDataController implements ActionListener, InternalFrameListener, ItemListener, ChangeListener {
+public class ReservationDataController implements ActionListener, InternalFrameListener, ItemListener, ChangeListener, SuperDataManger {
     public final ReservationDataView view;
     private final int mode;
     private final ArrayList<UserComboBoxModel> userArrayList = new ArrayList<>();
     private final ArrayList<RoomComboBoxModel> roomArrayList = new ArrayList<>();
-    private final DataListEditableController dlec;
+    private final DataTable dlec;
     private Reservation reservation;
     private Object[] data;
 
-    public ReservationDataController(int mode, int reservationID, DataListEditableController dlec) {
+    public ReservationDataController(int mode, int reservationID, DataTable dlec) {
         this.mode = mode;
         this.dlec = dlec;
         view = new ReservationDataView();
@@ -96,6 +97,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
 
     }
 
+    @Override
     public void databaseLoader(int reservationID) {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
@@ -145,7 +147,8 @@ public class ReservationDataController implements ActionListener, InternalFrameL
         worker.execute();
     }
 
-    public void databaseCommiter(Reservation reservation, int mode) {
+    @Override
+    public void databaseCommiter(Entity reservation, int mode) {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
 
@@ -160,7 +163,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                     switch (mode) {
                         case 0: // Update
                             try {
-                                myReservation.updateReservation(reservation);
+                                myReservation.updateReservation((Reservation) reservation);
                                 data = new Object[]{true, myReservation};
                             } catch (Exception ex) {
                                 errorMessage = ProgramError.getStackTrace(ex);
@@ -169,7 +172,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                             break;
                         case 1: // Delete
                             try {
-                                myReservation.deleteReservationById(reservation.getId());
+                                myReservation.deleteReservationById(((Reservation) reservation).getId());
                                 data = new Object[]{true, myReservation};
                             } catch (Exception ex) {
                                 errorMessage = ProgramError.getStackTrace(ex);
@@ -178,7 +181,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
                             break;
                         case 2: // Create
                             try {
-                                myReservation.createReservation(reservation);
+                                myReservation.createReservation((Reservation) reservation);
                                 data = new Object[]{true, myReservation};
                             } catch (Exception ex) {
                                 errorMessage = ProgramError.getStackTrace(ex);
@@ -206,6 +209,7 @@ public class ReservationDataController implements ActionListener, InternalFrameL
         worker.execute();
     }
 
+    @Override
     public void dataPopulator() {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
@@ -251,7 +255,8 @@ public class ReservationDataController implements ActionListener, InternalFrameL
         worker.execute();
     }
 
-    private void dataLoader() {
+    @Override
+    public void dataLoader() {
         if (new FewSimpleValue(data[0]).asBoolean()) {
             Reservation myReservation = (Reservation) data[1];
             reservation = (Reservation) data[1];

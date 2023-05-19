@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyVetoException;
 
-public class DataListTableController implements ListSelectionListener, InternalFrameListener, ActionListener {
+public class DataListTableController implements ListSelectionListener, InternalFrameListener, ActionListener, DataTable {
     public DataListTableView view;
     public DataListTableModel model;
     private int whichTable = 0;
@@ -40,6 +40,7 @@ public class DataListTableController implements ListSelectionListener, InternalF
         }
     }
 
+    @Override
     public void reloadData() {
         DatabaseLoader dbl = new DatabaseLoader();
         // Search Model
@@ -133,7 +134,7 @@ public class DataListTableController implements ListSelectionListener, InternalF
     public void internalFrameDeactivated(InternalFrameEvent e) {
     }
 
-    public void spawnUserDataEditor(int mode, int userID, DataListEditableController dlec) throws Exception {
+    public void spawnUserDataEditor(int mode, int userID, DataTable dlec) throws Exception {
         UserDataController udc = new UserDataController(mode, userID, dlec);
         if (mode != 3) {
             UserDataView view = udc.view;
@@ -159,7 +160,7 @@ public class DataListTableController implements ListSelectionListener, InternalF
         }
     }
 
-    public void spawnRoomDataEditor(int mode, int roomID, DataListEditableController dlec) {
+    public void spawnRoomDataEditor(int mode, int roomID, DataTable dlec) {
         RoomDataController rdc = new RoomDataController(mode, roomID, dlec);
         if (mode != 3) {
             RoomDataView view = rdc.view;
@@ -185,7 +186,7 @@ public class DataListTableController implements ListSelectionListener, InternalF
         }
     }
 
-    public void spawnReservationDataEditor(int mode, int reservationID, DataListEditableController dlec) {
+    public void spawnReservationDataEditor(int mode, int reservationID, DataTable dlec) {
         ReservationDataController rdc = new ReservationDataController(mode, reservationID, dlec);
         if (mode != 3) {
             ReservationDataView view = rdc.view;
@@ -212,7 +213,7 @@ public class DataListTableController implements ListSelectionListener, InternalF
         }
     }
 
-    public void spawnFeedbackDataEditor(int mode, int feedbackID, DataListEditableController dlec) {
+    public void spawnFeedbackDataEditor(int mode, int feedbackID, DataTable dlec) {
         FeedbackDataController fdc = new FeedbackDataController(mode, feedbackID, dlec);
         if (mode != 3) {
             FeedbackDataView view = fdc.view;

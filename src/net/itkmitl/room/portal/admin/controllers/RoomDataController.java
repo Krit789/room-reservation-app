@@ -6,6 +6,7 @@ import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
+import net.itkmitl.room.libs.phatsanphon.entity.Entity;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
@@ -21,14 +22,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
 
-public class RoomDataController implements ActionListener, InternalFrameListener, ChangeListener {
+public class RoomDataController implements ActionListener, InternalFrameListener, ChangeListener, DataManager {
     RoomDataView view;
     Room room;
     Object[] data;
     int mode;
-    DataListEditableController dlec;
+    DataTable dlec;
 
-    public RoomDataController(int mode, int roomID, DataListEditableController dlec) {
+    public RoomDataController(int mode, int roomID, DataTable dlec) {
         this.mode = mode;
         this.dlec = dlec;
         try {
@@ -76,6 +77,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
 
     }
 
+    @Override
     public void databaseLoader(int roomID) {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
@@ -106,7 +108,8 @@ public class RoomDataController implements ActionListener, InternalFrameListener
         worker.execute();
     }
 
-    public void databaseCommiter(Room room, int mode) {
+    @Override
+    public void databaseCommiter(Entity room, int mode) {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
 
@@ -121,7 +124,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                     switch (mode) {
                         case 0: // Update
                             try {
-                                myRoom.updateRoom(room);
+                                myRoom.updateRoom((Room) room);
                                 data = new Object[]{true, myRoom};
                             } catch (Exception ex) {
                                 errorMessage = ProgramError.getStackTrace(ex);
@@ -130,7 +133,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                             break;
                         case 1: // Delete
                             try {
-                                myRoom.deleteRoomById(room.getId());
+                                myRoom.deleteRoomById(((Room) room).getId());
                                 data = new Object[]{true, myRoom};
                             } catch (Exception ex) {
                                 errorMessage = ProgramError.getStackTrace(ex);
@@ -139,7 +142,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
                             break;
                         case 2: // Create
                             try {
-                                myRoom.createRoom(room);
+                                myRoom.createRoom((Room) room);
                                 data = new Object[]{true, myRoom};
                             } catch (Exception ex) {
                                 errorMessage = ProgramError.getStackTrace(ex);
@@ -168,7 +171,8 @@ public class RoomDataController implements ActionListener, InternalFrameListener
         worker.execute();
     }
 
-    private void dataLoader() {
+    @Override
+    public void dataLoader() {
         if (new FewSimpleValue(data[0]).asBoolean()) {
             Room myUser = (Room) data[1];
             room = (Room) data[1];

@@ -9,7 +9,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import java.awt.event.ActionEvent;
 
-public class DataListEditableController extends DataListTableController {
+public class DataListEditableController extends DataListTableController implements DataTable {
     public DataListEditableView view;
 
     public DataListEditableController() {

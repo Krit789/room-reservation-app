@@ -6,6 +6,7 @@ import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
+import net.itkmitl.room.libs.phatsanphon.entity.Entity;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
@@ -21,14 +22,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserDataController implements ActionListener, InternalFrameListener {
+public class UserDataController implements ActionListener, InternalFrameListener, DataManager {
     UserDataView view;
     User user;
     Object[] data;
     int mode;
-    DataListEditableController dlec;
+    DataTable dlec;
 
-    public UserDataController(int mode, int userID, DataListEditableController dlec) throws Exception {
+    public UserDataController(int mode, int userID, DataTable dlec) throws Exception {
         this.mode = mode;
         this.dlec = dlec;
         view = new UserDataView();
@@ -75,6 +76,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
 
     }
 
+    @Override
     public void databaseLoader(int userID) {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
@@ -105,7 +107,8 @@ public class UserDataController implements ActionListener, InternalFrameListener
         worker.execute();
     }
 
-    public void databaseCommiter(User user, int mode) {
+    @Override
+    public void databaseCommiter(Entity user, int mode) {
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             final LoadingDialog ld = new LoadingDialog();
 
@@ -119,7 +122,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
                 switch (mode) {
                     case 0: // Update
                         try {
-                            myUser.updateUser(user);
+                            myUser.updateUser((User) user);
                             data = new Object[]{true, myUser};
                         } catch (Exception ex) {
                             errorMessage = ex.getMessage();
@@ -128,7 +131,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
                         break;
                     case 1: // Delete
                         try {
-                            myUser.deleteUserById(user.getId());
+                            myUser.deleteUserById(((User) user).getId());
                             data = new Object[]{true, myUser};
                         } catch (Exception ex) {
                             errorMessage = ex.getMessage();
@@ -137,7 +140,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
                         break;
                     case 2: // Create
                         try {
-                            myUser.createUser(user);
+                            myUser.createUser((User) user);
                             data = new Object[]{true, myUser};
                         } catch (Exception ex) {
                             errorMessage = ex.getMessage();
@@ -157,15 +160,13 @@ public class UserDataController implements ActionListener, InternalFrameListener
                     view.getFrame().dispose();
                 }
                 dlec.reloadData();
-//                DatabaseLoader dbl = new DatabaseLoader();
-//                dbl.databaseLoader(1, 99, "", true, dlec);
-
             }
         };
         worker.execute();
     }
 
-    private void dataLoader() {
+    @Override
+    public void dataLoader() {
         if (new FewSimpleValue(data[0]).asBoolean()) {
             User myUser = (User) data[1];
             user = (User) data[1];
