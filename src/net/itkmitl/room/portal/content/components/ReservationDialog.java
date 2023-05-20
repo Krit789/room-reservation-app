@@ -76,11 +76,14 @@ public class ReservationDialog extends JDialog {
         datePickerSettings1.setEnableYearMenu(false);
         datePickerSettings1.setAllowEmptyDates(false);
         datePickerSettings1.setEnableMonthMenu(false);
+        datePickerSettings1.setColor(DatePickerSettings.DateArea.TextMonthAndYearMenuLabels, new Color(0, 0, 0));
+        datePickerSettings1.setColor(DatePickerSettings.DateArea.TextClearLabel, new Color(0, 0, 0));
+        datePickerSettings1.setColor(DatePickerSettings.DateArea.TextTodayLabel, new Color(0, 0, 0));
         reservationDatePicker.getComponentToggleCalendarButton().setIcon(FewFile.getImage("icons/calendar-16px.png"));
         reservationDatePicker.getComponentToggleCalendarButton().setText("");
         reservationDatePicker.getComponentDateTextField().setBorder(border);
         reservationDatePicker.setDateToToday();
-
+        SwingUtilities.updateComponentTreeUI(reservationDatePicker);
         segmentBox = new JComboBox<>();
         segmentBox.setBorder(border);
         lengthSpinner = new JSpinner();

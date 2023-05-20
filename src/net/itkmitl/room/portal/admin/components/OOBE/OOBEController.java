@@ -11,6 +11,7 @@ import net.itkmitl.room.libs.peeranat.config.FewConfig;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
+import net.itkmitl.room.libs.phatsanphon.UIConfig;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 import net.itkmitl.room.portal.admin.BaseWindow;
@@ -47,18 +48,7 @@ public class OOBEController implements ActionListener, DocumentListener {
     }
 
     public static void main(String[] args) {
-        try {
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("apple.awt.application.name", "Laew Tae Hong");
-            System.setProperty("apple.awt.application.appearance", "system");
-            try {
-                UIManager.setLookAndFeel(new FlatMacLightLaf());
-            } catch (Exception ignored) {
-                UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-            }
-        } catch (Exception ignored) {
-        }
-
+        UIConfig.setLookAndFeel();
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
