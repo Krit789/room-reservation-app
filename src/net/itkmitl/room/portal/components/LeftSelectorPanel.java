@@ -2,6 +2,7 @@ package net.itkmitl.room.portal.components;
 
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.phatsanphon.entity.Cache;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 
@@ -64,10 +65,10 @@ public class LeftSelectorPanel extends JPanel {
             @Override
             protected Object doInBackground() throws Exception {
                 try {
-                    FewQuery db = LaewTaeDB.getDB();
-                    RoomRepository roomRepository = new RoomRepository(db);
+//                    FewQuery db = LaewTaeDB.getDB();
+//                    RoomRepository roomRepository = new RoomRepository(db);
                     try {
-                        ArrayList<Room> roomsList = roomRepository.getRooms();
+                        ArrayList<Room> roomsList = Cache.getRooms();
                         for (Room room : roomsList) {
                             buildingList.add(room.getBuilding());
                         }
@@ -111,9 +112,9 @@ public class LeftSelectorPanel extends JPanel {
         this.add(backButton, new GBCBuilder(GridBagConstraints.BOTH, 1, 0.1, 0, 2).getGBC());
     }
 
-    public void getBuilding(RoomRepository roomRepository) {
+    public void getBuilding() {
         try {
-            ArrayList<Room> roomsList = roomRepository.getRooms();
+            ArrayList<Room> roomsList = Cache.getRooms();
             for (Room room : roomsList) {
                 buildingList.add(room.getBuilding());
             }

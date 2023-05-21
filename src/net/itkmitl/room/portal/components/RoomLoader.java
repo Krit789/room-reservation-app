@@ -3,6 +3,7 @@ package net.itkmitl.room.portal.components;
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
+import net.itkmitl.room.libs.phatsanphon.entity.Cache;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.portal.components.entity.Floor;
@@ -29,8 +30,8 @@ public class RoomLoader {
             @Override
             protected Object doInBackground() {
                 try {
-                    FewQuery db = LaewTaeDB.getDB();
-                    roomList = new RoomRepository(db).getRooms();
+//                    FewQuery db = LaewTaeDB.getDB();
+                    roomList = Cache.getRooms();
                     for (Room room : roomList) {
                         if (buildingList.containsKey(room.getBuilding())) {
                             buildingList.get(room.getBuilding()).add(room);

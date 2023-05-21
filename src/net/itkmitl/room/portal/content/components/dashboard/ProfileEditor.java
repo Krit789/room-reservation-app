@@ -173,6 +173,7 @@ public class ProfileEditor extends JDialog implements ActionListener, WindowList
                             myUser.setEmail(emailField.getText());
                             ur.updateUser(myUser);
                             AppStore.getAppStore().dispatch("user", myUser);
+                            RightPanel.setName(((User) AppStore.getAppStore().select("user")));
                             success = true;
                         } else {
                             success = false;

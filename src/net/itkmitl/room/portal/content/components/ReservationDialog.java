@@ -82,7 +82,6 @@ public class ReservationDialog extends JDialog {
         reservationDatePicker.getComponentToggleCalendarButton().setIcon(FewFile.getImage("icons/calendar-16px.png"));
         reservationDatePicker.getComponentToggleCalendarButton().setText("");
         reservationDatePicker.getComponentDateTextField().setBorder(border);
-        reservationDatePicker.setDateToToday();
         SwingUtilities.updateComponentTreeUI(reservationDatePicker);
         segmentBox = new JComboBox<>();
         segmentBox.setBorder(border);

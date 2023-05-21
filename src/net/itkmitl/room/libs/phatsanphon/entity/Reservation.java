@@ -51,7 +51,7 @@ public class Reservation extends Entity {
     }
 
     public void setUser(int userId) throws Exception {
-        User user = new UserRepository(this.getDB()).getUserById(userId);
+        User user = Cache.getUser(userId);
         this.setUser(user);
     }
 
@@ -64,7 +64,7 @@ public class Reservation extends Entity {
     }
 
     public void setRoom(int roomId) throws Exception {
-        Room room = new RoomRepository(this.getDB()).getRoomById(roomId);
+        Room room = Cache.getRoom(roomId);
         this.setRoom(room);
     }
 

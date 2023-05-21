@@ -4,10 +4,7 @@ import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
-import net.itkmitl.room.libs.phatsanphon.entity.Entity;
-import net.itkmitl.room.libs.phatsanphon.entity.Feedback;
-import net.itkmitl.room.libs.phatsanphon.entity.Room;
-import net.itkmitl.room.libs.phatsanphon.entity.User;
+import net.itkmitl.room.libs.phatsanphon.entity.*;
 import net.itkmitl.room.libs.phatsanphon.repository.FeedbackRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
@@ -188,11 +185,8 @@ public class FeedbackDataController implements ActionListener, InternalFrameList
                 ld.dialog.setVisible(true);
                 BaseWindow.progressBar.setIndeterminate(true);
                 try {
-                    FewQuery db = LaewTaeDB.getDB();
-                    UserRepository userRepository = new UserRepository(db);
-                    RoomRepository roomRepository = new RoomRepository(db);
-                    ArrayList<User> userList = userRepository.getUsers();
-                    ArrayList<Room> roomList = roomRepository.getRooms();
+                    ArrayList<User> userList = Cache.getUsers();
+                    ArrayList<Room> roomList = Cache.getRooms();
                     for (User u : userList) {
                         userArrayList.add(new UserComboBoxModel(u));
                     }

@@ -6,6 +6,7 @@ import net.itkmitl.room.libs.jarukrit.ProgramError;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
 import net.itkmitl.room.libs.phatsanphon.date.DateTime;
+import net.itkmitl.room.libs.phatsanphon.entity.Cache;
 import net.itkmitl.room.libs.phatsanphon.entity.Entity;
 import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
@@ -159,6 +160,7 @@ public class RoomDataController implements ActionListener, InternalFrameListener
 
             @Override
             protected void done() {
+                Cache.purgeRoomCache();
                 ld.dialog.dispose();
                 BaseWindow.progressBar.setIndeterminate(false);
                 if (mode != 1) {

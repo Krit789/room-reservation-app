@@ -6,6 +6,7 @@ import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.peeranat.simplevalue.FewSimpleValue;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.peeranat.util.FewPassword;
+import net.itkmitl.room.libs.phatsanphon.entity.Cache;
 import net.itkmitl.room.libs.phatsanphon.entity.Entity;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
@@ -154,6 +155,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
 
             @Override
             protected void done() {
+                Cache.purgeUserCache();
                 ld.dialog.dispose();
                 BaseWindow.progressBar.setIndeterminate(false);
                 if (mode != 1) {
@@ -261,7 +263,7 @@ public class UserDataController implements ActionListener, InternalFrameListener
             panel.add(passwordField, BorderLayout.CENTER);
             String[] options = new String[]{"OK", "Cancel"};
             int option = JOptionPane.showOptionDialog(BaseWindow.baseFrame, panel, "Reset Password", JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE, FewFile.getImage("icons/key-32px.png"), options, options[0]);
-            if (option == 0 && !passwordField.getPassword().equals("")) // pressing OK button
+            if (option == 0 && !String.valueOf(passwordField.getPassword()).equals("")) // pressing OK button
             {
                 user.setPasswordHash(FewPassword.getSalt(new String(passwordField.getPassword())));
             }

@@ -3,6 +3,7 @@ package net.itkmitl.room.portal.content.components.history;
 import net.itkmitl.room.db.LaewTaeDB;
 import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.entity.Reservation;
+import net.itkmitl.room.libs.phatsanphon.entity.Room;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
 import net.itkmitl.room.libs.store.AppStore;
@@ -63,6 +64,15 @@ public class HistoryRightPanel extends CardView {
                     ArrayList<Reservation> cRes = new ArrayList<>();
                     int count = 1;
                     for (Reservation r : res) {
+
+                        if (r.getRoom() == null) {
+                            Room nonExistentRoom = new Room();
+                            nonExistentRoom.setName("Deleted Room");
+                            nonExistentRoom.setFloor("-");
+                            nonExistentRoom.setBuilding("-");
+                            r.setRoom(nonExistentRoom);
+                        }
+
                         reservationHistoryPanel.add(new ReservationHistoryBox(
                                         String.format("<html><p><b>%s<b><br>Floor %s,%s</p></html>", r.getRoom().getName(), r.getRoom().getFloor(), r.getRoom().getBuilding()),
                                         String.format("%d:%02d-%d:%02d", r.getStartTime().getHours(), r.getStartTime().getMinutes(), r.getEndTime().getHours(), r.getEndTime().getMinutes()),

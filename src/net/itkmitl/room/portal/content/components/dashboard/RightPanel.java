@@ -16,7 +16,7 @@ import java.io.Serial;
 public class RightPanel extends JPanel implements ActionListener {
     @Serial
     private static final long serialVersionUID = 3515411566688472487L;
-    public JLabel nameLabel;
+    public static JLabel nameLabel;
     public BookingStatusPanel bookingPanel;
     private final AppStore store = AppStore.getAppStore();
     private final JPanel namePanel;
@@ -24,8 +24,6 @@ public class RightPanel extends JPanel implements ActionListener {
 
     public RightPanel() {
         super();
-
-        User user = (User) store.select("user");
 
         this.setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
@@ -39,8 +37,20 @@ public class RightPanel extends JPanel implements ActionListener {
         editProfile.setIcon(FewFile.getImage("icons/pencil-16px.png"));
         editProfile.addActionListener(this);
 
-//        System.out.println(user.getFirstname());
-        String word = "";
+        nameLabel = new JLabel();
+        nameLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+        setName((User) store.select("user"));
+        namePanel.add(nameLabel, new GBCBuilder(GridBagConstraints.CENTER, 0.99, 1, 0, 0, new Insets(0, 0, 25, 0)).getGBC());
+        namePanel.add(editProfile, new GBCBuilder(GridBagConstraints.NONE, 0.01, 1, 1, 0, new Insets(0, 5, 25, 0)).getGBC());
+        namePanel.setBackground(Color.white);
+        bookingPanel = new BookingStatusPanel();
+
+        this.add(namePanel, BorderLayout.NORTH);
+        this.add(bookingPanel, BorderLayout.CENTER);
+    }
+
+    public static void setName(User user){
+        String word;
         DateTime dt = new DateTime(System.currentTimeMillis());
         if (dt.getHours() >= 0 && dt.getHours() < 6) {
             word = "Good Early Morning, ";
@@ -53,18 +63,8 @@ public class RightPanel extends JPanel implements ActionListener {
         } else {
             word = "Hello, ";
         }
-        nameLabel = new JLabel(word + user.getFirstname() + " " + user.getLastname());
-        nameLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
-
-        namePanel.add(nameLabel, new GBCBuilder(GridBagConstraints.CENTER, 0.99, 1, 0, 0, new Insets(0, 0, 25, 0)).getGBC());
-        namePanel.add(editProfile, new GBCBuilder(GridBagConstraints.NONE, 0.01, 1, 1, 0, new Insets(0, 5, 25, 0)).getGBC());
-        namePanel.setBackground(Color.white);
-        bookingPanel = new BookingStatusPanel();
-
-        this.add(namePanel, BorderLayout.NORTH);
-        this.add(bookingPanel, BorderLayout.CENTER);
+        nameLabel.setText(word + user.getFirstname() + " " + user.getLastname());
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(editProfile)) {
