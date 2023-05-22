@@ -5,6 +5,7 @@ import net.itkmitl.room.libs.peeranat.query.FewQuery;
 import net.itkmitl.room.libs.phatsanphon.repository.RoomRepository;
 import net.itkmitl.room.libs.phatsanphon.repository.UserRepository;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -124,9 +125,18 @@ public class Cache {
         userCache = null;
     }
 
-    public static void purgeCache() {
+    public static void purgeCache(){
         roomCache = null;
         userCache = null;
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
+            @Override
+            protected Object doInBackground() throws Exception {
+                getUsers();
+                getRooms();
+                return null;
+            }
+        };
+        worker.execute();
     }
 
     private static FewQuery getDB() {

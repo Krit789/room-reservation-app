@@ -135,6 +135,7 @@ public class ProfileEditor extends JDialog implements ActionListener, WindowList
 
         dataPanelPad.add(dataPanel, BorderLayout.CENTER);
 
+        getRootPane().setDefaultButton(saveButton);
         add(dataPanelPad, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
         pack();

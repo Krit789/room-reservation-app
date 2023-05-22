@@ -50,7 +50,7 @@ public class HistoryRightPanel extends CardView {
     }
 
     private void getReservationList() {
-        SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             @Override
             protected Object doInBackground() {
                 try {
@@ -64,7 +64,6 @@ public class HistoryRightPanel extends CardView {
                     ArrayList<Reservation> cRes = new ArrayList<>();
                     int count = 1;
                     for (Reservation r : res) {
-
                         if (r.getRoom() == null) {
                             Room nonExistentRoom = new Room();
                             nonExistentRoom.setName("Deleted Room");

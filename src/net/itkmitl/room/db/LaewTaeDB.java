@@ -12,8 +12,8 @@ public class LaewTaeDB {
         if (fq == null){
             fq = new FewQuery(FewDB.getConnection(ConfigManager.getConnectionConfig()));
         }
-
         if (!fq.connection.isValid(0)){
+            System.out.println("Invalid Connection! reconnecting");
             fq = null;
             fq = new FewQuery(FewDB.getConnection(ConfigManager.getConnectionConfig()));
         }

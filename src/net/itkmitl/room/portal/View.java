@@ -1,6 +1,7 @@
 package net.itkmitl.room.portal;
 
 import net.itkmitl.room.libs.peeranat.util.FewFile;
+import net.itkmitl.room.libs.phatsanphon.entity.Cache;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.account.components.OutPane;
@@ -22,7 +23,7 @@ public abstract class View extends JFrame {
     public OutPane outerPane;
     public JMenuBar menuBar;
     public JMenu fileMenu, optionMenu, helpMenu;
-    public JMenuItem fileMenuItem3;
+    public JMenuItem fileMenuItem2, fileMenuItem3;
     public JMenuItem optionMenuItem1, helpMenuItem1;
     public Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private ArrayList<Image> multiIcon;
@@ -65,6 +66,18 @@ public abstract class View extends JFrame {
         optionMenu = new JMenu("Option");
 
         // 'File' Menu Components declaration
+        fileMenuItem2 = new JMenuItem("Flush Cache");
+        fileMenuItem2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Cache.purgeCache();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
         fileMenuItem3 = new JMenuItem("Exit");
         fileMenuItem3.addActionListener(new ActionListener() {
             @Override
@@ -80,6 +93,8 @@ public abstract class View extends JFrame {
 
         // Adding Sub menu to menu items
         menuBar.add(fileMenu);
+        fileMenu.add(fileMenuItem2);
+        fileMenu.add(new JSeparator());
         fileMenu.add(fileMenuItem3);
 
         if ((store.select("user") != null) && (((User) store.select("user")).getRole().getLevel() > 10)) {

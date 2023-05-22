@@ -3,6 +3,7 @@ package net.itkmitl.room.portal.admin;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import net.itkmitl.room.libs.peeranat.util.FewFile;
 import net.itkmitl.room.libs.phatsanphon.UIConfig;
+import net.itkmitl.room.libs.phatsanphon.entity.Cache;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.account.EntryPortal;
@@ -41,7 +42,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
     private final JPanel statusBar;
     private final JMenuBar menuBar;
     private final JMenu fileMenu, optionMenu, helpMenu;
-    private final JMenuItem fileMenuItem1, fileMenuItem2, fileMenuItem3;
+    private final JMenuItem fileMenuItem1, fileMenuItem3;
     private final JMenuItem optionMenuItem3, optionMenuItem4;
     private final JMenuItem windowMenuItem2, windowMenuItem3;
     private final JCheckBoxMenuItem windowCheckBoxMenuItem1;
@@ -76,8 +77,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         helpMenu = new JMenu("Help");
 
         // 'File' Menu Components declaration
-        fileMenuItem1 = new JMenuItem("Status");
-        fileMenuItem2 = new JMenuItem("View Logs");
+        fileMenuItem1 = new JMenuItem("Flush Cache");
         fileMenuItem3 = new JMenuItem("Exit");
         fileMenuItem3.addActionListener(this);
         // 'Options' Menu Components declaration
@@ -105,16 +105,13 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
 
         // Adding Sub menu to menu items
         menuBar.add(fileMenu);
-//        fileMenu.add(fileMenuItem1);
-//        fileMenu.add(fileMenuItem2);
-//        fileMenu.add(new JSeparator());
+        fileMenu.add(fileMenuItem1);
+        fileMenu.add(new JSeparator());
         fileMenu.add(fileMenuItem3);
 
         menuBar.add(optionMenu);
         optionMenu.add(optionMenuItem4);
         optionMenu.add(new JSeparator());
-//        optionMenu.add(optionMenuItem1);
-//        optionMenu.add(optionMenuItem2);
         optionMenu.add(optionMenuItem3);
 
         menuBar.add(windowMenu);
@@ -248,7 +245,7 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
         return view[0];
     }
 
-    private PreferenceWindowView spawnPreferenceView(PreferenceWindowView[] view) {
+    private void spawnPreferenceView(PreferenceWindowView[] view) {
         Dimension desktopSize = desktop.getSize();
         Dimension jInternalFrameSize = view[0].getFrame().getSize();
         view[0].getFrame().setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
@@ -268,12 +265,17 @@ public class BaseWindow extends ComponentAdapter implements ActionListener, Inte
 
         }
         view[0].getFrame().requestFocus();
-        return view[0];
     }
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(aboutMenuItem1)) {
             new AboutDialog(baseFrame);
+        } else if (e.getSource().equals(fileMenuItem1)) {
+            try {
+                Cache.purgeCache();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else if (e.getSource().equals(fileMenuItem3)) {
             baseFrame.dispose();
             System.exit(0);
