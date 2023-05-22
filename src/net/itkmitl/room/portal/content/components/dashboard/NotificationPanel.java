@@ -43,7 +43,7 @@ public class NotificationPanel extends RoundedPanel {
     }
 
     public static void updateLabel() {
-        SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             @Override
             protected Object doInBackground() {
                 try {

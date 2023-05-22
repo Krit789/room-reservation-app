@@ -1,5 +1,6 @@
 package net.itkmitl.room.portal.content;
 
+import net.itkmitl.room.libs.phatsanphon.entity.Cache;
 import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.Controller;
@@ -60,6 +61,7 @@ public class MainContentController extends Controller implements ActionListener,
         SwingWorker<?, ?> worker = new SwingWorker<>() {
             @Override
             protected Object doInBackground() throws Exception {
+                Cache.purgeCache();
                 while (!finishedLoading) {
                     synchronized (this) {
                         Thread.onSpinWait();
