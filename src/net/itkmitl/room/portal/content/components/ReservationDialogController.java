@@ -12,6 +12,7 @@ import net.itkmitl.room.libs.phatsanphon.entity.User;
 import net.itkmitl.room.libs.phatsanphon.repository.ReservationRepository;
 import net.itkmitl.room.libs.store.AppStore;
 import net.itkmitl.room.portal.content.MainContentView;
+import net.itkmitl.room.portal.content.components.dashboard.NotificationPanel;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -257,7 +258,7 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
             makeReservation((ReservableEntity) view.segmentBox.getSelectedItem());
             view.dispose();
             disableGlassPane();
-
+            NotificationPanel.updateLabel();
         } else if (e.getSource().equals(view.cancelButton)) {
             view.dispose();
             disableGlassPane();

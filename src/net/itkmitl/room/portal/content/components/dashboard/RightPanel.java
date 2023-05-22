@@ -64,6 +64,7 @@ public class RightPanel extends JPanel implements ActionListener {
             word = "Hello, ";
         }
         nameLabel.setText(word + user.getFirstname() + " " + user.getLastname());
+        nameLabel.revalidate();
     }
     @Override
     public void actionPerformed(ActionEvent e) {

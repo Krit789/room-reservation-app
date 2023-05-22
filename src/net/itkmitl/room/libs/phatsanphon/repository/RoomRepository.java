@@ -27,7 +27,7 @@ public class RoomRepository extends Repository<Room> {
         int rando = (int) Math.round((Math.random() * (rooms.size() - 1)));
         int count = 0;
         while (true) {
-            if (rooms.get(rando).getState().equals(EnumRoomState.MAINTENANCE)) {
+            if (rooms.get(rando).getState().equals(EnumRoomState.AVAILABLE)) {
                 return rooms.get(rando);
             }
             rando = (int) Math.round((Math.random() * (rooms.size() - 1)));

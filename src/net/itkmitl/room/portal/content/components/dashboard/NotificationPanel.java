@@ -19,7 +19,8 @@ public class NotificationPanel extends RoundedPanel {
     @Serial
     private static final long serialVersionUID = 4305337873118944635L;
     private final JPanel panelPanel;
-    public JLabel notificationTextLabel, calendarIcon;
+    public JLabel calendarIcon;
+    public static JLabel notificationTextLabel;
 
     public NotificationPanel() {
         super();
@@ -41,7 +42,7 @@ public class NotificationPanel extends RoundedPanel {
         updateLabel();
     }
 
-    private void updateLabel() {
+    public static void updateLabel() {
         SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
             @Override
             protected Object doInBackground() {
