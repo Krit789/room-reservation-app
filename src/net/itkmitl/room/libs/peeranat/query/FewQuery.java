@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class FewQuery {
 
-    private final Connection connection;
+    public final Connection connection;
     private final HashMap<String, FewSimpleValue> fields;
     private int queryCount;
     private ResultSet result;
