@@ -11,6 +11,7 @@ import net.itkmitl.room.portal.components.RoundedPanel;
 import net.itkmitl.room.portal.components.TransparentPanel;
 import net.itkmitl.room.portal.content.MainContentView;
 import net.itkmitl.room.portal.content.components.dashboard.BoxIcon;
+import net.itkmitl.room.portal.content.components.dashboard.NotificationPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -99,7 +100,7 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
     }
 
     public void openFeedbackDialog() {
-        SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             @Override
             protected Object doInBackground() throws Exception {
                 FeedBackDialogueController rsvpd = new FeedBackDialogueController(null, reservation);
@@ -121,7 +122,7 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
 
     }
 
-    private void cancelReservaion(int resId) {
+    private void cancelReservation() {
         SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
             @Override
             protected Object doInBackground() throws Exception {
@@ -137,6 +138,7 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
                     cancelBtn.setColor1(Color.gray);
                     cancelBtn.setColor2(Color.gray);
                     cancelBtn.setEnabled(false);
+                    NotificationPanel.updateLabel();
                 } catch (Exception ex) {
                     cancelBtn.setText("Cancel");
                     cancelBtn.setEnabled(true);
@@ -163,7 +165,7 @@ public class ReservationHistoryBox extends RoundedPanel implements ActionListene
             MainContentView.glassPane.setEnabled(true);
             int option = JOptionPane.showOptionDialog(findWindow(this), "<html><p>Are you sure that you want to cancel this reservation? This action cannot be undone!</p></html>", "Cancel", JOptionPane.NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
             if (option == 0) {
-                cancelReservaion(reservation.getId());
+                cancelReservation();
                 JOptionPane.showMessageDialog(findWindow(this), "Reservation Cancelled", "Success", JOptionPane.INFORMATION_MESSAGE);
             }
             MainContentView.glassPane.setVisible(false);
