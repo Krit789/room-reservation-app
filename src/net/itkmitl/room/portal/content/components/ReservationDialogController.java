@@ -50,13 +50,13 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
     }
 
     public void dataFetch() {
-        SwingWorker<?, ?> worker = new SwingWorker<Object, Object>() {
+        SwingWorker<?, ?> worker = new SwingWorker<>() {
             @Override
-            protected Object doInBackground() {
+            protected synchronized Object doInBackground() {
                 try {
                     FewQuery db = LaewTaeDB.getDB();
                     ReservationRepository rsvprp = new ReservationRepository(db);
-                    Long currentTime = System.currentTimeMillis();
+                    long currentTime = System.currentTimeMillis();
                     resList = rsvprp.getReservationsByRoomIdAndTimeRange(myRoom.getId(), currentTime - (86400L * 1000), (currentTime + (86400L * 1000 * 8)));
                     availableTime = getAvailableTimes(resList, myRoom, 7);
                 } catch (Exception ex) {
@@ -96,12 +96,9 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
             for (Reservation r : resTimeMap.values()) {
                 virtualReservationStart = r.getStartTime();
                 virtualReservationEnd = r.getEndTime();
-
-
                 if (currentTimeMilis.getDate() == r.getStartTime().getDate() && (currentTimeMilis.getTime() >= virtualReservationStart.getTime() && currentTimeMilis.getTime() < virtualReservationEnd.getTime())) {
                     unavailable = true;
                 }
-//                System.out.println(String.format("%s: %s %s", currentTimeMilis,currentTimeMilis.getTime() >= virtualReservationStart.getTime(), currentTimeMilis.getTime() < virtualReservationEnd.getTime()));
             }
             if (!unavailable &&
                     (currentTimeMilis.addMillis(1800L * 1000L).getHours() < room.getCloseTime().getHours() ||
@@ -113,9 +110,6 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
                             currentTimeMilis.getMinutes() >= room.getOpenTime().getMinutes()))) {
 
                 availableTimes.add(new ReservableEntity(new DateTime(currentTimeMilis.getTime()), new DateTime(currentTimeMilis.getTime() + 1800L * 1000L)));
-            } else if (unavailable) {
-//                System.out.println("Unavailable Time (" + room.getName() + ")" + currentTimeMilis + " : " + (currentTimeMilis.getTime() >= virtualReservationStart.getTime()) + " && " + (currentTimeMilis.getTime() <= virtualReservationEnd.getTime()));
-//                System.out.println("(" + currentTimeMilis.getTime()  + " >= " + virtualReservationStart.getTime() + ") && (" + currentTimeMilis.getTime() + " < " + virtualReservationEnd.getTime()+")");
             }
         }
         return availableTimes;
@@ -138,8 +132,6 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
             for (int i = 0; i < (int) (hourAhead * 2); i++) {
                 if (ttc.getDate() == virtualReservationStart.getDate() && ttc.getTime() >= virtualReservationStart.getTime() && ttc.getTime() < virtualReservationEnd.getTime()) {
                     unavailable = true;
-//                    System.out.println("Checked: " + ttc + " " + " Result: " + unavailable + " ResID: " + r.getId());
-//                    System.out.println((ttc.getTime() >= virtualReservationStart.getTime()) + " " + (ttc.getTime() <= virtualReservationEnd.getTime()));
                 }
                 long addedTime = 1800L * 1000;
                 ttc.setTime(ttc.getTime() + addedTime);
@@ -149,8 +141,6 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
         if (timeToCheck.getHours() < room.getOpenTime().getHours() || timeToCheck.getHours() > room.getCloseTime().getHours() || (timeToCheck.getHours() == room.getCloseTime().getHours() && timeToCheck.getMinutes() > room.getCloseTime().getMinutes())) {
             unavailable = true;
         }
-//        System.out.println((timeToCheck.getHours() + " < " + room.getOpenTime().getHours()) + " || " + timeToCheck.getHours() + " > " + room.getCloseTime().getHours() + " || (" + timeToCheck.getHours() + " == " + room.getCloseTime().getHours() + " && " + timeToCheck.getMinutes() + " > " + room.getCloseTime().getMinutes() + ")");
-//        System.out.println((timeToCheck.getHours() < room.getOpenTime().getHours()) + " || " + (timeToCheck.getHours() > room.getCloseTime().getHours()) + " || (" + (timeToCheck.getHours() == room.getCloseTime().getHours()) + " && " + (timeToCheck.getMinutes() > room.getCloseTime().getMinutes()) + ")");
 
         return unavailable;
     }
