@@ -58,6 +58,7 @@ public class NotificationPanel extends RoundedPanel {
                 } catch (Exception ex) {
                     notificationTextLabel.setText("ERROR: " + ex.getMessage());
                 }
+                notificationTextLabel.revalidate();
                 return null;
             }
         };

@@ -245,6 +245,7 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
 
             @Override
             protected void done() {
+                NotificationPanel.updateLabel();
                 JOptionPane.showMessageDialog(null, "Reservation Successful!", "Reservation", JOptionPane.INFORMATION_MESSAGE);
             }
 
@@ -258,7 +259,6 @@ public class ReservationDialogController implements ActionListener, DateChangeLi
             makeReservation((ReservableEntity) view.segmentBox.getSelectedItem());
             view.dispose();
             disableGlassPane();
-            NotificationPanel.updateLabel();
         } else if (e.getSource().equals(view.cancelButton)) {
             view.dispose();
             disableGlassPane();

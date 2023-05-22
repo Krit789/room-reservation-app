@@ -101,7 +101,7 @@ public class EntryController extends Controller implements ActionListener, Compo
                         userRepository.createUser(myUser);
 
                         //Search user by email
-                        myUser.setId(userRepository.getUserByEmail(reg.getEmail()).getId());
+                        myUser.setId(userRepository.getExactUserByEmail(reg.getEmail()).getId());
                         store.dispatch("user", myUser);
                         changeFrame(getView(), new MainContentPortal());
                     } else {
