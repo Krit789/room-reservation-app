@@ -99,6 +99,9 @@ public class EntryController extends Controller implements ActionListener, Compo
                         myUser.setTelephoneNumber(reg.getTelephone());
                         myUser.setRole(EnumUserRole.STUDENT);
                         userRepository.createUser(myUser);
+
+                        //Search user by email
+                        myUser.setId(userRepository.getUserByEmail(reg.getEmail()).getId());
                         store.dispatch("user", myUser);
                         changeFrame(getView(), new MainContentPortal());
                     } else {
