@@ -87,7 +87,7 @@ public class ReservationRepository extends Repository<Reservation> {
     }
 
     public Reservation getUpcomingReservationsByUserId(int userId) throws Exception {
-        return this.map(this.getQuery().unsafeQuery(String.format("SELECT * FROM `reservation` WHERE `user_id` = %d AND `end_time` > %s ORDER BY `start_time` ASC LIMIT 1;", userId, System.currentTimeMillis())));
+        return this.map(this.getQuery().unsafeQuery(String.format("SELECT * FROM `reservation` WHERE `user_id` = %d AND `is_cancelled` = 0 AND `end_time` > %s ORDER BY `start_time` ASC LIMIT 1;", userId, System.currentTimeMillis())));
     }
 
     /**
