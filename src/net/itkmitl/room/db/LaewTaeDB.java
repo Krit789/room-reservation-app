@@ -8,11 +8,11 @@ public class LaewTaeDB {
 
     private static FewQuery fq;
 
-    public static FewQuery getDB() throws Exception {
+    public synchronized static FewQuery getDB() throws Exception {
         if (fq == null){
             fq = new FewQuery(FewDB.getConnection(ConfigManager.getConnectionConfig()));
         }
-        if (!fq.connection.isValid(0)){
+        if (!fq.connection.isValid(0) || fq.connection.isClosed()){
             System.out.println("Invalid Connection! reconnecting");
             fq = null;
             fq = new FewQuery(FewDB.getConnection(ConfigManager.getConnectionConfig()));
@@ -20,7 +20,7 @@ public class LaewTaeDB {
         return fq;
     }
 
-    public static FewQuery getDBwithoutDB() throws Exception {
+    public synchronized static FewQuery getDBwithoutDB() throws Exception {
         return new FewQuery(FewDB.getConnectionWithoutDB(ConfigManager.getConnectionConfig()));
     }
 }
