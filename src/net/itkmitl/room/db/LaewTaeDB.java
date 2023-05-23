@@ -12,7 +12,7 @@ public class LaewTaeDB {
         if (fq == null) {
             fq = new FewQuery(FewDB.getConnection(ConfigManager.getConnectionConfig()));
         }
-        if (!fq.connection.isValid(0) || fq.connection.isClosed()) {
+        if (!fq.connection.isValid(5) || fq.connection.isClosed()) {
             fq.connection.close();
             System.out.println("Invalid/Closed Connection! Reconnecting...");
             fq = null;
