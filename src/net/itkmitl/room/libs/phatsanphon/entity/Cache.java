@@ -35,12 +35,12 @@ public class Cache {
     }
 
     public static synchronized User getUser(int id) throws Exception {
-        refreshDB();
         if (userCache != null) {
             User myUser = userCache.get(id);
             if (myUser == null || ((System.currentTimeMillis() / 1000L) - (userCacheFetchTime / 1000L)) > cacheTimeout) {
                 userCache = null;
                 userCache = new HashMap<>();
+                refreshDB();
                 for (User u : new UserRepository(Cache.getDB()).getUsers()) {
                     userCache.put(u.getId(), u);
                 }
@@ -48,6 +48,7 @@ public class Cache {
             }
         } else {
             userCache = new HashMap<>();
+            refreshDB();
             for (User u : new UserRepository(Cache.getDB()).getUsers()) {
                 userCache.put(u.getId(), u);
             }
@@ -57,11 +58,11 @@ public class Cache {
     }
 
     public static synchronized ArrayList<User> getUsers() throws Exception {
-        refreshDB();
         if (userCache != null) {
             if (((System.currentTimeMillis() / 1000L) - (userCacheFetchTime / 1000L)) > cacheTimeout) {
                 userCache = null;
                 userCache = new HashMap<>();
+                refreshDB();
                 for (User u : new UserRepository(Cache.getDB()).getUsers()) {
                     userCache.put(u.getId(), u);
                 }
@@ -69,6 +70,7 @@ public class Cache {
             }
         } else {
             userCache = new HashMap<>();
+            refreshDB();
             for (User u : new UserRepository(Cache.getDB()).getUsers()) {
                 userCache.put(u.getId(), u);
             }
@@ -78,12 +80,13 @@ public class Cache {
     }
 
     public static synchronized Room getRoom(int id) throws Exception {
-        refreshDB();
         if (roomCache != null) {
             Room myRoom = roomCache.get(id);
             if (myRoom == null || ((System.currentTimeMillis() / 1000L) - (roomCacheFetchTime / 1000L)) > cacheTimeout) {
+                refreshDB();
                 roomCache = null;
                 roomCache = new HashMap<>();
+                refreshDB();
                 for (Room r : new RoomRepository(Cache.getDB()).getRooms()) {
                     roomCache.put(r.getId(), r);
                 }
@@ -91,6 +94,7 @@ public class Cache {
             }
         } else {
             roomCache = new HashMap<>();
+            refreshDB();
             for (Room r : new RoomRepository(Cache.getDB()).getRooms()) {
                 roomCache.put(r.getId(), r);
             }
@@ -101,11 +105,11 @@ public class Cache {
     }
 
     public static synchronized ArrayList<Room> getRooms() throws Exception {
-        refreshDB();
         if (roomCache != null) {
             if (((System.currentTimeMillis() / 1000L) - (roomCacheFetchTime / 1000L)) > cacheTimeout) {
                 roomCache = null;
                 roomCache = new HashMap<>();
+                refreshDB();
                 for (Room r : new RoomRepository(Cache.getDB()).getRooms()) {
                     roomCache.put(r.getId(), r);
                 }
@@ -113,6 +117,7 @@ public class Cache {
             }
         } else {
             roomCache = new HashMap<>();
+            refreshDB();
             for (Room r : new RoomRepository(Cache.getDB()).getRooms()) {
                 roomCache.put(r.getId(), r);
             }
