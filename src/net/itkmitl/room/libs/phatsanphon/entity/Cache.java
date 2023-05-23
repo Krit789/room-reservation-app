@@ -83,7 +83,6 @@ public class Cache {
         if (roomCache != null) {
             Room myRoom = roomCache.get(id);
             if (myRoom == null || ((System.currentTimeMillis() / 1000L) - (roomCacheFetchTime / 1000L)) > cacheTimeout) {
-                refreshDB();
                 roomCache = null;
                 roomCache = new HashMap<>();
                 refreshDB();
