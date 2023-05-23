@@ -18,7 +18,7 @@ public class Cache {
     private static long userCacheFetchTime;
     private static long roomCacheFetchTime;
 
-    static {
+    private static void refreshDB(){
         try {
             db = LaewTaeDB.getDB();
         } catch (Exception e) {
@@ -35,6 +35,7 @@ public class Cache {
     }
 
     public static synchronized User getUser(int id) throws Exception {
+        refreshDB();
         if (userCache != null) {
             User myUser = userCache.get(id);
             if (myUser == null || ((System.currentTimeMillis() / 1000L) - (userCacheFetchTime / 1000L)) > cacheTimeout) {
@@ -56,6 +57,7 @@ public class Cache {
     }
 
     public static synchronized ArrayList<User> getUsers() throws Exception {
+        refreshDB();
         if (userCache != null) {
             if (((System.currentTimeMillis() / 1000L) - (userCacheFetchTime / 1000L)) > cacheTimeout) {
                 userCache = null;
@@ -76,6 +78,7 @@ public class Cache {
     }
 
     public static synchronized Room getRoom(int id) throws Exception {
+        refreshDB();
         if (roomCache != null) {
             Room myRoom = roomCache.get(id);
             if (myRoom == null || ((System.currentTimeMillis() / 1000L) - (roomCacheFetchTime / 1000L)) > cacheTimeout) {
@@ -98,6 +101,7 @@ public class Cache {
     }
 
     public static synchronized ArrayList<Room> getRooms() throws Exception {
+        refreshDB();
         if (roomCache != null) {
             if (((System.currentTimeMillis() / 1000L) - (roomCacheFetchTime / 1000L)) > cacheTimeout) {
                 roomCache = null;

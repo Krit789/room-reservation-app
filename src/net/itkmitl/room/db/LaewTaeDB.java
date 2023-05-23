@@ -9,11 +9,12 @@ public class LaewTaeDB {
     private static FewQuery fq;
 
     public synchronized static FewQuery getDB() throws Exception {
-        if (fq == null){
+        if (fq == null) {
             fq = new FewQuery(FewDB.getConnection(ConfigManager.getConnectionConfig()));
         }
-        if (!fq.connection.isValid(0) || fq.connection.isClosed()){
-            System.out.println("Invalid Connection! reconnecting");
+        if (!fq.connection.isValid(0) || fq.connection.isClosed()) {
+            fq.connection.close();
+            System.out.println("Invalid/Closed Connection! Reconnecting...");
             fq = null;
             fq = new FewQuery(FewDB.getConnection(ConfigManager.getConnectionConfig()));
         }

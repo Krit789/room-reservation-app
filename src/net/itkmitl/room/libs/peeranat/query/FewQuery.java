@@ -30,7 +30,6 @@ public class FewQuery {
                     PreparedStatement.RETURN_GENERATED_KEYS
             );
             statement.execute();
-//            System.out.println("SQL Executed: " + query.builder());
             this.affectedRows = statement.getUpdateCount();
             queryCount++;
 
